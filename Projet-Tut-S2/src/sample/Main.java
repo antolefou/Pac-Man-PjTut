@@ -16,17 +16,21 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Scanner;
 import java.io.*;
 import javafx.scene.paint.Color;
 
 public class Main extends Application {
-    public String[][] Map = new String[30][30];
+    public String[][] Map = new String[30][25];
 
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Pane root = new Pane();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
+        Pane root = loader.load();
+        Controller controller = loader.getController();
+        root.setOnKeyPressed(controller);
         Scene scene = new Scene(root, 25*25, 25*30);
 
         primaryStage.setTitle("Pac-Man");
@@ -35,7 +39,7 @@ public class Main extends Application {
 
         initialiseMap(1);
         afficheMap(root);
-
+        root.requestFocus();
     }
 
 
@@ -110,8 +114,6 @@ public class Main extends Application {
                 }
             }
         }
-
-
 
         Arc pac = new Arc();
         pac.setFill(Color.YELLOW);
