@@ -24,7 +24,6 @@ import javafx.scene.paint.Color;
 public class Main extends Application {
     public String[][] Map = new String[30][25];
 
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));

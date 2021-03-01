@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -13,6 +14,9 @@ import java.net.MalformedURLException;
 import java.util.Scanner;
 
 public class Map {
+
+    @FXML
+    Arc pac;
 
     public static String[][] initialiseMap2(int numeroNiveau) {
         String[][] Map = new String[30][25];
@@ -90,7 +94,10 @@ public class Map {
                 }
             }
         }
+        affichePac(root);
+    }
 
+    public static void affichePac(Pane root) {
         Arc pac = new Arc();
         pac.setFill(Color.YELLOW);
         pac.setRadiusX(10);
@@ -105,5 +112,9 @@ public class Map {
 
         pac.setLayoutX(200);
         pac.setLayoutY(200);
+    }
+
+    public static void avancePac(Pane root, Arc pac) {
+        pac.setLayoutX(pac.getLayoutX()+10);
     }
 }
