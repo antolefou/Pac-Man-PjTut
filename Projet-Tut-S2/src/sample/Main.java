@@ -16,6 +16,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.Scanner;
 import java.io.*;
@@ -31,11 +32,12 @@ public class Main extends Application {
         Controller controller = loader.getController();
         root.setOnKeyPressed(controller);
         Scene scene = new Scene(root, 25*25, 25*30);
-
+        // ne fonctionne pas !!!!    scene.getStylesheets().addAll("@/home/julien/Documents/Git/Pac-Man-PjTut/Projet-Tut-S2/src/Donnees/stylesheet");
         primaryStage.setTitle("Pac-Man");
         primaryStage.setScene(scene);
         primaryStage.show();
-
+        File fichier = new File("src/Donnees/stylesheet/style.css");
+        //primaryStage.getScene().getStylesheets().add(fichier.getPath());
         Map = sample.Map.initialiseMap2(1);
         sample.Map.afficheMap(root, Map);
         root.requestFocus();

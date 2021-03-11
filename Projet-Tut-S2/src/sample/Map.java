@@ -94,6 +94,14 @@ public class Map {
                 }
             }
         }
+        String localUrl = fileBonus.toURI().toURL().toString();
+        Image image = new Image(localUrl, false);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(25);
+        imageView.setFitHeight(25);
+        imageView.setLayoutX(25*25+100);
+        imageView.setLayoutY(100);
+        root.getChildren().addAll(imageView);
         affichePac(root);
     }
 
@@ -107,14 +115,10 @@ public class Map {
         pac.setLayoutX(50);
         pac.setLayoutY(50);
         pac.setType(ArcType.ROUND);
-        pac.setId("pacman");
+        pac.setId("pac");
         root.getChildren().add(pac);
 
         pac.setLayoutX(200);
         pac.setLayoutY(200);
-    }
-
-    public static void avancePac(Pane root, Arc pac) {
-        pac.setLayoutX(pac.getLayoutX()+10);
     }
 }
