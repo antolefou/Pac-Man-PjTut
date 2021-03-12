@@ -1,43 +1,54 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.application.Platform;
-import javafx.scene.layout.Pane;
-import javafx.scene.shape.Arc;
-
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 public class Controller implements EventHandler<KeyEvent> {
+    @FXML public sample.Pacman Pacman;
+    @FXML private sample.Map Map;
 
+    public double getBoardWidth() {
+        return Map.TAILLE_CASE * this.Map.getColumnCount();
+    }
 
+    public double getBoardHeight() {
+        return Map.TAILLE_CASE * this.Map.getRowCount();
+    }
 
-    @FXML private Arc pacman;
-    @FXML private Arc pac;
+    @Override
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
+
+        Map.initialiseMap(1);
+        Map.InitialiseCaseMap();
+        Map.AfficheMap();
+
         if (code == KeyCode.UP) {
-            pacman.setLayoutY(pacman.getLayoutY()-5);
             System.out.println("up");
+            Pacman.AvanceHaut();
         } else if (code == KeyCode.RIGHT) {
-            pacman.setLayoutX(pacman.getLayoutX()+5);
             System.out.println("right");
+            Pacman.AvanceDroite();
         } else if (code == KeyCode.DOWN) {
-            pacman.setLayoutY(pacman.getLayoutY()+5);
             System.out.println("down");
+            Pacman.AvanceBas();
         } else if (code == KeyCode.LEFT) {
-            pacman.setLayoutX(pacman.getLayoutX()-5);
             System.out.println("left");
+            Pacman.AvanceGauche();
         }
     }
 }

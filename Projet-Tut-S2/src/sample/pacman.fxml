@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import sample.Pacman?>
-<?import javafx.scene.control.Button?>
 <BorderPane fx:controller="sample.Controller" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <top>
         <BorderPane prefHeight="35" style="-fx-background-color: #0B5091; -fx-padding: 10px, 5px, 10px, 5px" >
@@ -16,9 +15,7 @@
     </top>
 
     <center>
-        <BorderPane prefHeight="100" style="-fx-background-color: #0B5091; -fx-padding: 10px, 5px, 10px, 5px" >
-            <Button fx:id="jouer" onAction="#changeScene" >Jouer</Button>
-        </BorderPane>
+        <Map fx:id="Map" rowCount="30" columnCount="25"/>
     </center>
     <bottom>
         <HBox prefHeight="35" style="-fx-padding: 10px, 5px, 10px, 5px; -fx-background-color: #F3B61D">
