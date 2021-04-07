@@ -19,8 +19,8 @@ public class Map extends Group {
     @FXML private int columnCount;
 
     private ValeurCase[][] grid;
-    public static ImageView[][] caseMap;
-    private Image imagePacmanHaute;
+    public ImageView[][] caseMap;
+    private Image imagePacmanHaut;
     private Image imagePacmanDroite;
     private Image imagePacmanBas;
     private Image imagePacmanGauche;
@@ -33,11 +33,12 @@ public class Map extends Group {
     private Image imageGomme;
     private Image imageSuperGomme;
 
+
     /**
      * Initialise les valeurs des images
      */
     public Map() {
-        this.imagePacmanHaute = new Image(getClass().getResourceAsStream("/Donnees/Image/pacmanUp.gif"));
+        this.imagePacmanHaut = new Image(getClass().getResourceAsStream("/Donnees/Image/pacmanUp.gif"));
         this.imagePacmanDroite = new Image(getClass().getResourceAsStream("/Donnees/Image/pacmanRight.gif"));
         this.imagePacmanBas = new Image(getClass().getResourceAsStream("/Donnees/Image/pacmanDown.gif"));
         this.imagePacmanGauche = new Image(getClass().getResourceAsStream("/Donnees/Image/pacmanLeft.gif"));
@@ -49,6 +50,11 @@ public class Map extends Group {
         this.imageMur = new Image(getClass().getResourceAsStream("/Donnees/Image/wall.png"));
         this.imageGomme = new Image(getClass().getResourceAsStream("/Donnees/Image/Gomme.png"));
         this.imageSuperGomme = new Image(getClass().getResourceAsStream("/Donnees/Image/SuperGomme.png"));
+
+        this.initialiseMap(1);
+        this.InitialiseCaseMap();
+        this.AfficheMap();
+        System.out.println("fknkefn");
     }
 
     /**
@@ -78,14 +84,18 @@ public class Map extends Group {
             Scanner sc = new Scanner(fichier);
             while(sc.hasNextLine()){
                 String ligne = sc.nextLine();
-                for (int i=0; i<25; i++) {
+                for (int i=0; i<this.columnCount; i++) {
                     //Map[compteur][i] = String.valueOf(ligne.charAt(i));
-                    if (String.valueOf(ligne.charAt(i)).equals("M")) {
-                        this.grid[compteur][i] = ValeurCase.MUR;
-                    } else if (String.valueOf(ligne.charAt(i)).equals("G")) {
-                        this.grid[compteur][i] = ValeurCase.GOMME;
-                    } else if (String.valueOf(ligne.charAt(i)).equals("S")) {
-                        this.grid[compteur][i] = ValeurCase.SUPERGOMME;
+                    switch (String.valueOf(ligne.charAt(i))) {
+                        case "M":
+                            this.grid[compteur][i] = ValeurCase.MUR;
+                            break;
+                        case "G":
+                            this.grid[compteur][i] = ValeurCase.GOMME;
+                            break;
+                        case "S":
+                            this.grid[compteur][i] = ValeurCase.SUPERGOMME;
+                            break;
                     }
                 }
                 compteur ++;
@@ -111,6 +121,10 @@ public class Map extends Group {
             }
         }
     }
+
+
+
+
     public int getRowCount() {
         return this.rowCount;
     }
@@ -125,4 +139,5 @@ public class Map extends Group {
         this.columnCount = columnCount;
         this.InitialiseCaseMap();
     }
+
 }

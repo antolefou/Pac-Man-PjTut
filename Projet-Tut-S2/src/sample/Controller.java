@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ import javafx.application.Platform;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -38,17 +40,56 @@ public class Controller implements EventHandler<KeyEvent> {
         Map.AfficheMap();
 
         if (code == KeyCode.UP) {
-            System.out.println("up");
             Pacman.AvanceHaut();
         } else if (code == KeyCode.RIGHT) {
-            System.out.println("right");
             Pacman.AvanceDroite();
         } else if (code == KeyCode.DOWN) {
-            System.out.println("down");
             Pacman.AvanceBas();
         } else if (code == KeyCode.LEFT) {
-            System.out.println("left");
             Pacman.AvanceGauche();
         }
+    }
+
+
+    @FXML
+    public void switchToSceneJouer(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("pacman.fxml"));
+        Parent root = loader.load();
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        primaryStage.setTitle("Pac-Man");
+        Controller controller = loader.getController();
+        root.setOnKeyPressed(controller);
+        double sceneWidth = controller.getBoardWidth() + 20.0;
+        double sceneHeight = controller.getBoardHeight() + 100.0;
+        primaryStage.setScene(new Scene(root));
+        primaryStage.sizeToScene();
+        primaryStage.show();
+        root.requestFocus();
+    }
+    @FXML
+    public void switchToSceneMenu(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
+        Parent root = loader.load();
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        primaryStage.setTitle("Pac-Man");
+        Controller controller = loader.getController();
+        root.setOnKeyPressed(controller);
+        primaryStage.setScene(new Scene(root));
+        primaryStage.sizeToScene();
+        primaryStage.show();
+        root.requestFocus();
+    }
+    @FXML
+    public void switchToSceneScore(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("score.fxml"));
+        Parent root = loader.load();
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        primaryStage.setTitle("Pac-Man");
+        Controller controller = loader.getController();
+        root.setOnKeyPressed(controller);
+        primaryStage.setScene(new Scene(root));
+        primaryStage.sizeToScene();
+        primaryStage.show();
+        root.requestFocus();
     }
 }
