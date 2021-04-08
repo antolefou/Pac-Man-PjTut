@@ -1,0 +1,31 @@
+
+<?import javafx.scene.layout.AnchorPane?><?import sample.Map?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import sample.Pacman?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.Button?>
+<BorderPane fx:controller="sample.Controller" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <BorderPane prefHeight="35" style="-fx-background-color: #0B5091; -fx-padding: 10px, 5px, 10px, 5px" >
+            <left><Label fx:id="scoreLabel" style="-fx-font-size: 150%; -fx-text-fill: white" /></left>
+            <center><Label fx:id="gameOverLabel" style="-fx-font-size: 150%; -fx-text-fill: white" /></center>
+            <right><Label fx:id="levelLabel" style="-fx-font-size: 150%; -fx-text-fill: white"/></right>
+        </BorderPane>
+    </top>
+        <center>
+            <Pane maxHeight="600" maxWidth="500">
+                <Map fx:id="Map" rowCount="30" columnCount="25"/>
+                <Pacman fx:id="Pacman"/>
+            </Pane>
+        </center>
+    <bottom>
+        <HBox prefHeight="35" style="-fx-padding: 10px, 5px, 10px, 5px; -fx-background-color: #F3B61D">
+            <Button onAction="#switchToSceneMenu" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white;">Menu</Button>
+            <Label style="-fx-font-size: 140%; -fx-text-fill: white" text="|" />
+            <Button onAction="" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white;">Pause</Button>
+        </HBox>
+    </bottom>
+</BorderPane>
