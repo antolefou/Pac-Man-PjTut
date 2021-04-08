@@ -18,7 +18,7 @@
         <BorderPane maxHeight="600" maxWidth="500" minHeight="600" minWidth="500" style="-fx-border-width: 10px 5px 5px 10px; -fx-border-color: #F3B61D">
             <top>
 
-                <Label style="-fx-text-fill: white; -fx-text-alignment: center">Nous tenons à remercier tout le monde</Label>
+                <Label style="-fx-text-fill: white; -fx-text-alignment: center">Le jeu que vous jouez est le fruit d'une collaboration</Label>
 
             </top>
 
@@ -27,9 +27,7 @@
 
     <bottom>
         <HBox prefHeight="35" style="-fx-padding: 10px, 5px, 10px, 5px; -fx-background-color: #F3B61D">
-            <Button onAction="#switchToSceneCredits" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white; -fx-font-weight: bold">Credits</Button>
-            <Label style="-fx-font-size: 140%; -fx-text-fill: white" text="|" />
-            <Button onAction="#switchToSceneScore" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white;">Meilleur score</Button>
+            <Button onAction="#switchToScenePropos" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white; -fx-font-weight: bold">À propos</Button>
             <Label style="-fx-font-size: 140%; -fx-text-fill: white" text="|" />
             <Button onAction="#switchToSceneMenu" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white;">Menu</Button>
             <Label style="-fx-font-size: 140%; -fx-text-fill: white" text="|" />

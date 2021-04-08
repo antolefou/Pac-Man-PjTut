@@ -30,9 +30,13 @@
 
     <bottom>
         <HBox prefHeight="35" style="-fx-padding: 10px, 5px, 10px, 5px; -fx-background-color: #F3B61D">
+            <Button onAction="#switchToSceneScore" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white; -fx-font-weight: bold">Meilleur score</Button>
+            <Label style="-fx-font-size: 140%; -fx-text-fill: white" text="|" />
+            <Button onAction="#switchToSceneCredits" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white;">Credits</Button>
+            <Label style="-fx-font-size: 140%; -fx-text-fill: white" text="|" />
             <Button onAction="#switchToSceneMenu" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white;">Menu</Button>
             <Label style="-fx-font-size: 140%; -fx-text-fill: white" text="|" />
-            <Button style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white;">À propos</Button>
+            <Button onAction="#switchToScenePropos" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white;">À propos</Button>
         </HBox>
     </bottom>
 </BorderPane>
