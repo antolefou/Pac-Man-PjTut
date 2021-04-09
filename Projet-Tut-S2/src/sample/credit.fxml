@@ -27,12 +27,15 @@
 
     <bottom>
         <HBox prefHeight="35" style="-fx-padding: 10px, 5px, 10px, 5px; -fx-background-color: #F3B61D">
-            <Button onAction="#switchToSceneCredits" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white; -fx-font-weight: bold">Credits</Button>
+            <Button onAction="#switchToSceneMenu" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white;">Menu</Button>
             <Label style="-fx-font-size: 140%; -fx-text-fill: white" text="|" />
             <Button onAction="#switchToSceneScore" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white;">Meilleur score</Button>
             <Label style="-fx-font-size: 140%; -fx-text-fill: white" text="|" />
-            <Button onAction="#switchToSceneMenu" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white;">Menu</Button>
+            <Button onAction="#switchToSceneCredits" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white; -fx-font-weight: bold">Credits</Button>
             <Label style="-fx-font-size: 140%; -fx-text-fill: white" text="|" />
+            <Button onAction="#switchToScenePropos" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white;">À propos</Button>
+            <Label style="-fx-font-size: 140%; -fx-text-fill: white" text="|" />
+
 
 
         </HBox>
