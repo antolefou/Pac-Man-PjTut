@@ -10,11 +10,11 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Pacman extends Group {
-    private Image imagePacmanHaut;
-    private Image imagePacmanDroite;
-    private Image imagePacmanBas;
-    private Image imagePacmanGauche;
-    private ImageView imageView;
+    public Image imagePacmanHaut;
+    public Image imagePacmanDroite;
+    public Image imagePacmanBas;
+    public Image imagePacmanGauche;
+    public ImageView imageView;
     private int velocity = 2;
 
     public Pacman() {
@@ -38,6 +38,7 @@ public class Pacman extends Group {
     public void AvanceDroite() {
         this.imageView.setImage(this.imagePacmanDroite);
         this.imageView.setX(this.imageView.getX() + this.velocity);
+        System.out.println(this.imageView.getX() + this.velocity);
     }
 
     public void AvanceBas() {

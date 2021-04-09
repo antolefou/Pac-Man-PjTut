@@ -78,7 +78,8 @@ public class Map extends Group {
     }
     public void initialiseMap(int numeroNiveau) {
         this.grid = new ValeurCase[this.rowCount][this.columnCount];
-        File fichier = new File("/home/julien/Documents/Git/Pac-Man-PjTut/Projet-Tut-S2/src/Donnees/Level/Niveau" +  numeroNiveau + ".txt");
+        String pwd = System.getProperty("user.dir");
+        File fichier = new File(pwd + "/src/Donnees/Level/Niveau" +  numeroNiveau + ".txt");
         try {
             int compteur = 0;
             Scanner sc = new Scanner(fichier);
