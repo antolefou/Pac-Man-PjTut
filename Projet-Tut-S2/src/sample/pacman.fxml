@@ -25,7 +25,9 @@
         <HBox prefHeight="35" style="-fx-padding: 10px, 5px, 10px, 5px; -fx-background-color: #F3B61D">
             <Button onAction="#switchToSceneMenu" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white;">Menu</Button>
             <Label style="-fx-font-size: 140%; -fx-text-fill: white" text="|" />
+            <!--
             <Button onAction="" style="-fx-background-color: transparent; -fx-cursor: OPEN_HAND; -fx-text-fill: white;">Pause</Button>
+            -->
         </HBox>
     </bottom>
 </BorderPane>
