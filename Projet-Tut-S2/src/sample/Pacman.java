@@ -17,6 +17,7 @@ public class Pacman extends Group {
     public Image imagePacmanGauche;
     public ImageView imageView;
     private int velocity = 2;
+    public int velocityThread = 30;
 
     public Pacman() {
 

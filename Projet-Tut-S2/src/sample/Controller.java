@@ -15,7 +15,8 @@ import java.io.IOException;
 
 public class Controller implements EventHandler<KeyEvent> {
     @FXML public sample.Pacman pacman;
-    @FXML private sample.Map map;
+    @FXML public sample.Map map;
+    public Deplacement deplacement;
 
     public double getBoardWidth() {
         return Map.TAILLE_CASE * this.map.getColumnCount();
@@ -29,20 +30,38 @@ public class Controller implements EventHandler<KeyEvent> {
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
         if (pacman != null && map != null) {
+            if (deplacement == null) {
+                System.out.println("deplacement null");
+                 deplacement = new Deplacement(map, pacman);
+                 deplacement.start();
+            }
+
+            if (code == KeyCode.UP) {
+                deplacement.deplacementFutur = Deplacement.Deplacements.HAUT;
+            } else if (code == KeyCode.RIGHT) {
+                deplacement.deplacementFutur = Deplacement.Deplacements.DROITE;
+            } else if (code == KeyCode.DOWN) {
+                deplacement.deplacementFutur = Deplacement.Deplacements.BAS;
+            } else if (code == KeyCode.LEFT) {
+                deplacement.deplacementFutur = Deplacement.Deplacements.GAUCHE;
+            }
+        }
+        /*
+        if (pacman != null && map != null) {
             if (code == KeyCode.UP) {
                 if (peutAvancerVerticale(-1))
                     pacman.avanceHaut();
             } else if (code == KeyCode.RIGHT) {
                 if (peutAvancerHorizontalement(1))
-                pacman.avanceDroite();
+                    pacman.avanceDroite();
             } else if (code == KeyCode.DOWN) {
                 if (peutAvancerVerticale(1))
                     pacman.avanceBas();
             } else if (code == KeyCode.LEFT) {
                 if (peutAvancerHorizontalement(-1))
-                pacman.avanceGauche();
+                    pacman.avanceGauche();
             }
-        }
+        }*/
     }
     private boolean peutAvancerVerticale(int i) {
         double pacmanX = pacman.getPacmanX();
