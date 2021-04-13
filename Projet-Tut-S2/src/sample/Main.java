@@ -16,8 +16,6 @@ public class Main extends Application {
         primaryStage.setTitle("Pac-Man");
         Controller controller = loader.getController();
         root.setOnKeyPressed(controller);
-        //double sceneWidth = controller.getBoardWidth() + 20.0;
-        //double sceneHeight = controller.getBoardHeight() + 100.0;
         primaryStage.setScene(new Scene(root));
         primaryStage.sizeToScene();
         primaryStage.show();

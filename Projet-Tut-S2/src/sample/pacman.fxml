@@ -17,8 +17,8 @@
     </top>
         <center>
             <Pane maxHeight="600" maxWidth="500">
-                <Map fx:id="Map" rowCount="30" columnCount="25"/>
-                <Pacman fx:id="Pacman"/>
+                <Map fx:id="map"/>
+                <Pacman fx:id="pacman"/>
             </Pane>
         </center>
     <bottom>
