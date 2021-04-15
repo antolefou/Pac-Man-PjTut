@@ -37,6 +37,16 @@ public class Map extends Group {
      * Initialise les valeurs des images
      */
     public Map() {
+        this.initImage();
+        this.initialiseMap(1);
+        this.afficheMap();
+    }
+
+
+    /**
+     * Initialise les images
+     */
+    public void initImage(){
         this.imagePacmanHaut = new Image(getClass().getResourceAsStream("/Donnees/Image/pacmanUp.gif"));
         this.imagePacmanDroite = new Image(getClass().getResourceAsStream("/Donnees/Image/pacmanRight.gif"));
         this.imagePacmanBas = new Image(getClass().getResourceAsStream("/Donnees/Image/pacmanDown.gif"));
@@ -49,11 +59,12 @@ public class Map extends Group {
         this.imageMur = new Image(getClass().getResourceAsStream("/Donnees/Image/wall.png"));
         this.imageGomme = new Image(getClass().getResourceAsStream("/Donnees/Image/Gomme.png"));
         this.imageSuperGomme = new Image(getClass().getResourceAsStream("/Donnees/Image/SuperGomme.png"));
-
-        this.initialiseMap(1);
-        this.afficheMap();
     }
 
+
+    /**
+     * Attribue une image à une coordoné en fonction de la lettre dans le fichier .txt
+     */
     public void initialiseMap(int numeroNiveau) {
         this.grid = new ValeurCase[this.rowCount][this.columnCount];
         String pwd = System.getProperty("user.dir");

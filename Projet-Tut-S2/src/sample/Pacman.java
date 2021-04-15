@@ -19,16 +19,21 @@ public class Pacman extends Group {
     private int velocity = 2;
     public int velocityThread = 30;
 
+    /**
+     * définit les images de pac man en fonction de sa direction et l'affiche
+     */
     public Pacman() {
-
         this.imagePacmanHaut = new Image(getClass().getResourceAsStream("/Donnees/Image/pacmanUp.gif"));
         this.imagePacmanDroite = new Image(getClass().getResourceAsStream("/Donnees/Image/pacmanRight.gif"));
         this.imagePacmanBas = new Image(getClass().getResourceAsStream("/Donnees/Image/pacmanDown.gif"));
         this.imagePacmanGauche = new Image(getClass().getResourceAsStream("/Donnees/Image/pacmanLeft.gif"));
         affichePacman();
     }
-    public void affichePacman() {
 
+    /**
+     * affiche un pac man orienté vers la gauche
+     */
+    public void affichePacman() {
         imageView = new ImageView(this.imagePacmanGauche);
         imageView.setX(101);
         imageView.setY(101);
@@ -41,9 +46,7 @@ public class Pacman extends Group {
         this.imageView.setImage(this.imagePacmanDroite);
         this.imageView.setX(this.imageView.getX() + this.velocity);
         System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
-
     }
-
     public void avanceBas() {
         this.imageView.setImage(this.imagePacmanBas);
         this.imageView.setY(this.imageView.getY() + this.velocity);

@@ -1,6 +1,8 @@
 package sample;
 
 public class Deplacement extends Thread {
+
+//  --------------- Variables --------------
     private boolean enGame;
     Map map;
     Pacman pacman;
@@ -9,6 +11,7 @@ public class Deplacement extends Thread {
     public Deplacements deplacementFutur;
 
 
+//    -------------- fonctions --------------
     public Deplacement(Map map, Pacman pacman) {
         this.map = map;
         this.pacman = pacman;
@@ -79,6 +82,12 @@ public class Deplacement extends Thread {
             }
         }
     }
+
+
+
+    /**
+     * vérifie si pac man peut avancer verticalement
+     */
     private boolean peutAvancerVerticale(int i) {
         double pacmanX = pacman.getPacmanX();
         double pacmanY = pacman.getPacmanY();
@@ -89,6 +98,10 @@ public class Deplacement extends Thread {
         }
         return false;
     }
+
+    /**
+     * vérifie si pac man peut avancer horizontalement
+     */
     private boolean peutAvancerHorizontalement(int i) {
         double pacmanX = pacman.getPacmanX();
         double pacmanY = pacman.getPacmanY();
