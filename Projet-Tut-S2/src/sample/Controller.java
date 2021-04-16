@@ -14,36 +14,39 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Controller implements EventHandler<KeyEvent> {
-    @FXML public sample.Pacman Pacman;
-    @FXML private sample.Map Map;
+    @FXML public sample.Pacman pacman;
+    @FXML public sample.Map map;
+    public Deplacement deplacement;
 
     public double getBoardWidth() {
-        return Map.TAILLE_CASE * this.Map.getColumnCount();
+        return Map.TAILLE_CASE * this.map.getColumnCount();
     }
 
     public double getBoardHeight() {
-        return Map.TAILLE_CASE * this.Map.getRowCount();
+        return Map.TAILLE_CASE * this.map.getRowCount();
     }
 
     @Override
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
+        if (pacman != null && map != null) {
+            if (deplacement == null) {
+                System.out.println("deplacement null");
+                 deplacement = new Deplacement(map, pacman);
+                 deplacement.start();
+            }
 
-        Map.initialiseMap(1);
-        Map.InitialiseCaseMap();
-        Map.AfficheMap();
-
-        if (code == KeyCode.UP) {
-            Pacman.AvanceHaut();
-        } else if (code == KeyCode.RIGHT) {
-            Pacman.AvanceDroite();
-        } else if (code == KeyCode.DOWN) {
-            Pacman.AvanceBas();
-        } else if (code == KeyCode.LEFT) {
-            Pacman.AvanceGauche();
+            if (code == KeyCode.UP) {
+                deplacement.deplacementFutur = Deplacement.Deplacements.HAUT;
+            } else if (code == KeyCode.RIGHT) {
+                deplacement.deplacementFutur = Deplacement.Deplacements.DROITE;
+            } else if (code == KeyCode.DOWN) {
+                deplacement.deplacementFutur = Deplacement.Deplacements.BAS;
+            } else if (code == KeyCode.LEFT) {
+                deplacement.deplacementFutur = Deplacement.Deplacements.GAUCHE;
+            }
         }
     }
-
 
     @FXML
     public void switchToSceneJouer(ActionEvent event) throws IOException {
@@ -60,6 +63,7 @@ public class Controller implements EventHandler<KeyEvent> {
         primaryStage.show();
         root.requestFocus();
     }
+
     @FXML
     public void switchToSceneMenu(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
@@ -73,6 +77,7 @@ public class Controller implements EventHandler<KeyEvent> {
         primaryStage.show();
         root.requestFocus();
     }
+
     @FXML
     public void switchToSceneScore(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("score.fxml"));
@@ -86,6 +91,7 @@ public class Controller implements EventHandler<KeyEvent> {
         primaryStage.show();
         root.requestFocus();
     }
+
     @FXML
     public void switchToSceneCredits(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("credit.fxml"));
@@ -99,6 +105,7 @@ public class Controller implements EventHandler<KeyEvent> {
         primaryStage.show();
         root.requestFocus();
     }
+
     @FXML
     public void switchToScenePropos(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("propos.fxml"));
@@ -112,6 +119,4 @@ public class Controller implements EventHandler<KeyEvent> {
         primaryStage.show();
         root.requestFocus();
     }
-
-
 }
