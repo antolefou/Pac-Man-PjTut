@@ -1,0 +1,11 @@
+.boutonMenu {
+    -fx-text-fill: white;
+    -fx-font-size: 25;
+    -fx-background-color: none;
+}
+
+.boutonScore {
+    -fx-text-fill: white;
+    -fx-font-size: 25;
+    -fx-background-color: none;
+}
