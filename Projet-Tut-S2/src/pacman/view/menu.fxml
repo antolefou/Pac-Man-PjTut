@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+<BorderPane prefHeight="400.0" prefWidth="620.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controller.ControllerMenu">
+<center>
+    <Pane maxHeight="600.0" maxWidth="500" minHeight="600" minWidth="500" prefWidth="500.0">
+         <ImageView fx:id="pacman_logo" fitHeight="354.0" fitWidth="537.0" layoutX="-18.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../ressources/image/pacman_logo.png" />
+            </image>
+         </ImageView>
+
+        <Button fx:id="jouer" onAction="#switchToScene" layoutX="201.0" layoutY="276.0" onMouseExited="#enlever_fleche1" onMouseMoved="#affiche_fleche1" styleClass="boutonMenu" text="Jouer" />
+        <Button fx:id="option" onAction="#switchToScene" layoutX="201.0" layoutY="336.0" onMouseExited="#enlever_fleche2" onMouseMoved="#affiche_fleche2" styleClass="boutonMenu" text="Options" />
+        <Button fx:id="score" onAction="#switchToScene" layoutX="201.0" layoutY="396.0" onMouseExited="#enlever_fleche3" onMouseMoved="#affiche_fleche3" styleClass="boutonMenu" text="Scores" />
+        <Button fx:id="credit"  onAction="#switchToScene" layoutX="201.0" layoutY="456.0" onMouseExited="#enlever_fleche4" onMouseMoved="#affiche_fleche4" styleClass="boutonMenu" text="Crédit" />
+        <Button  onAction="#quitter" layoutX="201.0" layoutY="516.0" onMouseExited="#enlever_fleche5" onMouseMoved="#affiche_fleche5" styleClass="boutonMenu" text="Quitter" />
+
+
+         <ImageView fx:id="fleche1" fitHeight="37.0" fitWidth="65.0" layoutX="136.0" layoutY="282.0" pickOnBounds="true" preserveRatio="true" />
+         <ImageView fx:id="fleche2" fitHeight="37.0" fitWidth="65.0" layoutX="136.0" layoutY="342.0" pickOnBounds="true" preserveRatio="true" />
+         <ImageView fx:id="fleche3" fitHeight="37.0" fitWidth="65.0" layoutX="136.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true" />
+         <ImageView fx:id="fleche4" fitHeight="37.0" fitWidth="65.0" layoutX="136.0" layoutY="462.0" pickOnBounds="true" preserveRatio="true" />
+         <ImageView fx:id="fleche5" fitHeight="37.0" fitWidth="65.0" layoutX="136.0" layoutY="522.0" pickOnBounds="true" preserveRatio="true" />
+    </Pane>
+</center>
+</BorderPane>
