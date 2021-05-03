@@ -11,26 +11,15 @@ import pacman.controller.Controller;
 import pacman.model.Model;
 
 import java.io.IOException;
+import java.util.Objects;
 
-/**
- * Created by fp on 26.02.17.
- */
+
 public class View extends StackPane {
     private final Model model;
-    private final Controller controller;
 
-    public View(Model model, Controller controller) throws IOException {
+    public View(Model model) throws IOException {
         this.model = model;
-        this.controller = controller;
+        this.getChildren().add(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("menu.fxml"))));
 
-        this.getChildren().add(FXMLLoader.load(getClass().getResource( "menu.fxml" )));
-
-        //CirclePane circleView = new CirclePane(model.getCircleModel(), controller.getCircleController());
-        //this.getChildren().add(circleView);
-        //createListners();
-    }
-
-    private void createListners() {
-        this.setOnMouseMoved(e -> controller.getCircleController().mousePosChanged(e));
     }
 }

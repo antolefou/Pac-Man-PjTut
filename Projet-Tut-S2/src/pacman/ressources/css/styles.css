@@ -2,6 +2,7 @@
     -fx-text-fill: white;
     -fx-font-size: 25;
     -fx-background-color: none;
+    -fx-cursor: hand;
 }
 
 .boutonScore {

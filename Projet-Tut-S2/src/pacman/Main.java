@@ -7,7 +7,6 @@ import javafx.stage.Stage;
 import pacman.model.Model;
 import pacman.controller.Controller;
 import pacman.view.View;
-import pacman.view.MenuView;
 
 
 public class Main extends Application {
@@ -17,8 +16,7 @@ public class Main extends Application {
 
     public void start(Stage primaryStage) throws Exception {
         Model model = new Model();
-        Controller controller = new Controller(primaryStage, model);
-        View view = new View(model, controller);
+        View view = new View(model);
 
         Scene scene = new Scene(view);
         primaryStage.setTitle("Pacman");

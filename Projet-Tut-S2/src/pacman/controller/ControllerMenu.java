@@ -1,5 +1,6 @@
 package pacman.controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,17 +10,20 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
+import pacman.model.Model;
+import pacman.view.View;
 import java.io.IOException;
+import java.net.URL;
+import java.util.*;
 
-public class ControllerMenu {
+public class ControllerMenu extends Controller{
     @FXML ImageView fleche1;
     @FXML ImageView fleche2;
     @FXML ImageView fleche3;
     @FXML ImageView fleche4;
     @FXML ImageView fleche5;
+
 
 
     public void affiche_fleche1(MouseEvent mouseEvent) {
@@ -62,18 +66,8 @@ public class ControllerMenu {
         fleche5.setImage(null);
     }
 
-    @FXML
-    public void switchToSceneScore(ActionEvent event) throws IOException {
-        System.out.println("changement de scene");
-
-        /*                     NE FONCTIONNE PAS
-        Parent root = FXMLLoader.load(((Node) event.getSource()).getClass().getResource( "menu.fxml" ));
-        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        primaryStage.setScene(new Scene(root));
-        primaryStage.sizeToScene();
-        primaryStage.show();
-        root.requestFocus();*/
-
-
+    public void quitter(ActionEvent actionEvent) {
+        Platform.exit();
+        System.exit(0);
     }
 }
