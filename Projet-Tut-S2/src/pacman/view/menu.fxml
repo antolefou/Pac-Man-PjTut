@@ -16,7 +16,7 @@
          </ImageView>
 
         <Button fx:id="jouer" onAction="#switchToScene" layoutX="201.0" layoutY="276.0" onMouseExited="#enlever_fleche1" onMouseMoved="#affiche_fleche1" styleClass="boutonMenu" text="Jouer" />
-        <Button fx:id="gameOver" onAction="#switchToScene" layoutX="201.0" layoutY="336.0" onMouseExited="#enlever_fleche2" onMouseMoved="#affiche_fleche2" styleClass="boutonMenu" text="Options" />
+        <Button fx:id="option" onAction="#switchToScene" layoutX="201.0" layoutY="336.0" onMouseExited="#enlever_fleche2" onMouseMoved="#affiche_fleche2" styleClass="boutonMenu" text="Options" />
         <Button fx:id="score" onAction="#switchToScene" layoutX="201.0" layoutY="396.0" onMouseExited="#enlever_fleche3" onMouseMoved="#affiche_fleche3" styleClass="boutonMenu" text="Scores" />
         <Button fx:id="credit"  onAction="#switchToScene" layoutX="201.0" layoutY="456.0" onMouseExited="#enlever_fleche4" onMouseMoved="#affiche_fleche4" styleClass="boutonMenu" text="Crédit" />
         <Button  onAction="#quitter" layoutX="201.0" layoutY="516.0" onMouseExited="#enlever_fleche5" onMouseMoved="#affiche_fleche5" styleClass="boutonMenu" text="Quitter" />
