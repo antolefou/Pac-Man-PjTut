@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class MapGenerator {
 
     public int[][] map = new int[13][30];
-    public int[][] mapfinal = new int[25][30];
+    public String[][] mapfinal = new String[25][30];
     public ArrayList<Integer> constructorX = new ArrayList<Integer>();
     public ArrayList<Integer> constructorY = new ArrayList<Integer>();
     public ArrayList<String> constructorDir = new ArrayList<String>();
@@ -74,20 +74,16 @@ public class MapGenerator {
         for (int i=0; i<mapfinal[0].length; i++) {
             for (int j=0; j<mapfinal.length; j++) {
                 switch(mapfinal[j][i]) {
-                    case 0:
-                        // Pas défini 41
-                        System.out.print("\033[44m \033[0m");
-                        break;
-                    case 1:
+                    case "M":
                         // Mur 44
                         System.out.print("\033[44m \033[0m");
                         break;
-                    case 2:
-                        // Chemin
+                    case "G":
+                        // Gomme
                         System.out.print("\033[40m \033[0m");
                         break;
-                    case 3:
-                        // Chemin
+                    case "Autre":
+                        // Pas encore defini
                         System.out.print("\033[47m \033[0m");
                         break;
                     default:
@@ -337,15 +333,18 @@ public class MapGenerator {
         for (int i=0; i<map.length; i++) {
             for (int j=0; j<map[0].length; j++) {
                 if (map[i][j] == 0 || map[i][j] == 1) {
-                    mapfinal[i][j] = 1;
-                    mapfinal[mapfinal.length-i-1][j] =  1;
+                    mapfinal[i][j] = "M";
+                    mapfinal[mapfinal.length-i-1][j] =  "M";
                 } else if (map[i][j] == 2) {
-                    mapfinal[i][j] = 2;
-                    mapfinal[mapfinal.length-i-1][j] =  2;
+                    mapfinal[i][j] = "G";
+                    mapfinal[mapfinal.length-i-1][j] =  "G";
+                } else {
+                    mapfinal[i][j] = "M";
+                    mapfinal[mapfinal.length-i-1][j] =  "M";
                 }
             }
         }
-        mapfinal[12][13] = 2;
+        mapfinal[12][13] = "G";
     }
 
     private void amelioreMap() {
@@ -395,7 +394,7 @@ public class MapGenerator {
 
 
 
-    public int[][] getMap() {
-        return this.map;
+    public String[][] getMap() {
+        return this.mapfinal;
     }
 }

@@ -14,9 +14,10 @@ public class Map extends Group {
 
     public enum ValeurCase { VIDE, GOMME, SUPERGOMME, MUR}
 
-    private int rowCount = 30;
-    private int columnCount = 25;
+    private int nbCaseX = 25;
+    private int nbCaseY = 30;
 
+    public String[][] mapGeneree;
     public ValeurCase[][] grid;
     public ImageView[][] caseMap;
     public Image imagePacmanHaut;
@@ -56,16 +57,18 @@ public class Map extends Group {
         this.imageSuperGomme = new Image(getClass().getResourceAsStream("/pacman/ressources/image/SuperGomme.png"));
         this.imageFond = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Fond.png"));
 
-
+/*
         this.initialiseMap(1);
         this.afficheMap();
-        /*
+        */
         MapGenerator map = new MapGenerator();
-        map.getMap();*/
+        mapGeneree = map.getMap();
+        initialiseMapGeneree();
+        afficheMap();
     }
 
     public void initialiseMap(int numeroNiveau) {
-        this.grid = new ValeurCase[this.rowCount][this.columnCount];
+        this.grid = new ValeurCase[this.nbCaseX][this.nbCaseY];
         String pwd = System.getProperty("user.dir");
         File fichier = new File(pwd + "/src/pacman/ressources/level(temporaire/niveau1.txt");
         try {
@@ -73,7 +76,7 @@ public class Map extends Group {
             Scanner sc = new Scanner(fichier);
             while(sc.hasNextLine()){
                 String ligne = sc.nextLine();
-                for (int i=0; i<this.columnCount; i++) {
+                for (int i=0; i<this.nbCaseX; i++) {
                     //Map[compteur][i] = String.valueOf(ligne.charAt(i));
                     switch (String.valueOf(ligne.charAt(i))) {
                         case "M":
@@ -94,35 +97,48 @@ public class Map extends Group {
         }
     }
 
-    /**
-     * Construit une grilles d'Imageview
-     */
-    public void afficheMap() {
-        this.caseMap = new ImageView[this.rowCount][this.columnCount];
-        for (int row = 0; row < this.rowCount; row++) {
-            for (int column = 0; column < this.columnCount; column++) {
-                this.caseMap[row][column] = new ImageView();
-                this.caseMap[row][column].setX((double)column * TAILLE_CASE);
-                this.caseMap[row][column].setY((double)row * TAILLE_CASE);
-                this.caseMap[row][column].setFitWidth(TAILLE_CASE);
-                this.caseMap[row][column].setFitHeight(TAILLE_CASE);
-                //affichage de la map
-                if (this.grid[row][column] == ValeurCase.MUR) {
-                    this.caseMap[row][column].setImage(this.imageMur);
-                } else if (this.grid[row][column] == ValeurCase.GOMME) {
-                    this.caseMap[row][column].setImage(this.imageGomme);
-                } else if (this.grid[row][column] == ValeurCase.SUPERGOMME) {
-                    this.caseMap[row][column].setImage(this.imageSuperGomme);
+    private void initialiseMapGeneree() {
+        grid = new ValeurCase[this.nbCaseX][this.nbCaseY];
+        for (int i=0; i<25; i++) {
+            for (int j=0; j<30; j++) {
+                System.out.println(mapGeneree[i][j]);
+                switch (mapGeneree[i][j]) {
+                    case "M":
+                        this.grid[i][j] = ValeurCase.MUR;
+                        break;
+                    case "G":
+                        this.grid[i][j] = ValeurCase.GOMME;
+                        break;
+                    case "S":
+                        this.grid[i][j] = ValeurCase.SUPERGOMME;
+                        break;
                 }
-                this.getChildren().add(this.caseMap[row][column]);
             }
         }
     }
 
-    public double getColumnCount() {
-        return this.columnCount;
-    }
-    public double getRowCount() {
-        return this.rowCount;
+    /**
+     * Construit une grilles d'Imageview
+     */
+    public void afficheMap() {
+        this.caseMap = new ImageView[this.nbCaseX][this.nbCaseY];
+        for (int i = 0; i < this.nbCaseX; i++) {
+            for (int j = 0; j < this.nbCaseY; j++) {
+                this.caseMap[i][j] = new ImageView();
+                this.caseMap[i][j].setX((double)i * TAILLE_CASE);
+                this.caseMap[i][j].setY((double)j * TAILLE_CASE);
+                this.caseMap[i][j].setFitWidth(TAILLE_CASE);
+                this.caseMap[i][j].setFitHeight(TAILLE_CASE);
+                //affichage de la map
+                if (this.grid[i][j] == ValeurCase.MUR) {
+                    this.caseMap[i][j].setImage(this.imageMur);
+                } else if (this.grid[i][j] == ValeurCase.GOMME) {
+                    this.caseMap[i][j].setImage(this.imageGomme);
+                } else if (this.grid[i][j] == ValeurCase.SUPERGOMME) {
+                    this.caseMap[i][j].setImage(this.imageSuperGomme);
+                }
+                this.getChildren().add(this.caseMap[i][j]);
+            }
+        }
     }
 }
