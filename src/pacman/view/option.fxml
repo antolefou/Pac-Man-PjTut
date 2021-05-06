@@ -7,22 +7,22 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.control.*?>
 
-<BorderPane prefHeight="400.0" prefWidth="620.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controller.ControllerOption">
+<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controller.ControllerOption">
     <center>
-        <Pane maxHeight="600.0" maxWidth="500" minHeight="600" minWidth="500" prefWidth="500.0" style="-fx-background-color: black;">
-         <ImageView fitHeight="360.0" fitWidth="310.0" layoutX="260.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+        <Pane maxHeight="600.0" maxWidth="800" minHeight="600" minWidth="500" prefWidth="500.0" style="-fx-background-color: black;">
+         <ImageView fitHeight="360.0" fitWidth="310.0" layoutX="450.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../ressources/image/fantome_nom.png" />
             </image>
          </ImageView>
-         <ImageView fitHeight="232.0" fitWidth="328.0" layoutX="-86.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="232.0" fitWidth="328.0" layoutX="10.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../ressources/image/Deplacement.png" />
             </image>
          </ImageView>
-         <Button fx:id="menu" layoutX="-31.0" layoutY="27.0" mnemonicParsing="false" onAction="#switchToScene" style="-fx-background-color: black;" styleClass="boutonMenu">
+         <Button fx:id="menu" layoutX="0" layoutY="12.0" mnemonicParsing="false" onAction="#switchToScene" style="-fx-background-color: black;" styleClass="boutonMenu">
             <graphic>
-               <ImageView  fitHeight="45.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@../ressources/image/BoutonMenu.png" />
                   </image>
