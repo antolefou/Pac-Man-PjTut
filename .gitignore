@@ -1,4 +1,8 @@
 /.idea/
 Pac-Man-PjTut.iml
+<<<<<<< HEAD
 src/pacman/controller/ControllerMusic.java
+=======
+/out/
+>>>>>>> 7f309b79bc8850d6d3d17f1e6fa356484a989686
 out/
