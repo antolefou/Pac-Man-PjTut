@@ -36,6 +36,10 @@ public class Map extends Group {
 
     /**
      * Initialise les valeurs des images
+     * map code:
+     *      M  -> mur
+     *      G  -> gomme
+     *      S  -> super gomme
      */
     public Map() {
         this.imagePacmanHaut = new Image(getClass().getResourceAsStream("/pacman/ressources/image/pacmanUp.gif"));
@@ -52,14 +56,18 @@ public class Map extends Group {
         this.imageSuperGomme = new Image(getClass().getResourceAsStream("/pacman/ressources/image/SuperGomme.png"));
         this.imageFond = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Fond.png"));
 
+
         this.initialiseMap(1);
         this.afficheMap();
+        /*
+        MapGenerator map = new MapGenerator();
+        map.getMap();*/
     }
 
     public void initialiseMap(int numeroNiveau) {
         this.grid = new ValeurCase[this.rowCount][this.columnCount];
         String pwd = System.getProperty("user.dir");
-        File fichier = new File(pwd + "/src/Donnees/Level/Niveau" +  numeroNiveau + ".txt");
+        File fichier = new File(pwd + "/src/pacman/ressources/level(temporaire/niveau1.txt");
         try {
             int compteur = 0;
             Scanner sc = new Scanner(fichier);
