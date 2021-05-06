@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="620.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controller.ControllerScore">
+<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controller.ControllerScore">
    <top>
-      <Pane maxHeight="600.0" maxWidth="500" minHeight="600" minWidth="800.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+      <Pane maxHeight="600.0" maxWidth="800" minHeight="600" minWidth="800.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="143.0" fitWidth="463.0" layoutX="169.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="pacman_logo" fitHeight="354.0" fitWidth="537.0" layoutX="131.5" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../ressources/image/pacman_logo.png" />
                </image>
@@ -27,7 +27,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="301.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="300.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../ressources/image/Meilleurs_Scores.png" />
                </image>
