@@ -16,27 +16,25 @@ public class MapGenerator {
         initMap();
         creerTeleportateur();
         creerCarreMilieu();
-
         creerConstructeur();
         initConstruction();
         while(constructorX.size() != 0)
             construction();
+        creerMapFinal();
 		/*construction();
 		construction();
 		construction();
 		construction();
 		construction();
-		construction();*/
+		construction();
 
         affiche();
-
-        creerMapFinal();
 
         afficheFinal();
         afficheTab();
         System.out.println(constructorX);
         System.out.println(constructorY);
-        System.out.println(constructorDir);
+        System.out.println(constructorDir);*/
     }
 
 
@@ -57,8 +55,8 @@ public class MapGenerator {
                         System.out.print("\033[40m \033[0m");
                         break;
                     case 3:
-                        // rien pour le moment
-                        //System.out.print("\033[47m \033[0m");
+                        // interdit
+                        System.out.print("\033[47m \033[0m");
                         break;
                     default:
                         // Default
@@ -70,7 +68,7 @@ public class MapGenerator {
         }
         System.out.println("");
     }
-    private void afficheFinal() {
+    public void afficheFinal() {
         for (int i=0; i<mapfinal[0].length; i++) {
             for (int j=0; j<mapfinal.length; j++) {
                 switch(mapfinal[j][i]) {
@@ -84,11 +82,11 @@ public class MapGenerator {
                         break;
                     case "Autre":
                         // Pas encore defini
-                        System.out.print("\033[47m \033[0m");
+                        System.out.print("\033[46m \033[0m");
                         break;
                     default:
                         // Default
-                        System.out.print("\033[44m \033[0m");
+                        System.out.print("\033[47m \033[0m");
 
                 }
             }
@@ -162,8 +160,8 @@ public class MapGenerator {
         map[10][15] =  1;
         map[11][15] =  1;
         map[12][15] =  1;
-        map[11][14] = 2;
-        map[12][14] = 2;
+        map[11][14] = 3;
+        map[12][14] = 3;
     }
 
 
@@ -338,13 +336,16 @@ public class MapGenerator {
                 } else if (map[i][j] == 2) {
                     mapfinal[i][j] = "G";
                     mapfinal[mapfinal.length-i-1][j] =  "G";
+                } else if (map[i][j] == 3) {
+                    mapfinal[i][j] = "I";
+                    mapfinal[mapfinal.length-i-1][j] =  "I";
                 } else {
                     mapfinal[i][j] = "M";
                     mapfinal[mapfinal.length-i-1][j] =  "M";
                 }
             }
         }
-        mapfinal[12][13] = "G";
+        mapfinal[12][13] = "I";
     }
 
     private void amelioreMap() {
@@ -387,9 +388,28 @@ public class MapGenerator {
         }
     }
 
-
-    public void initObjet() {
-
+    /**
+     * Ajoute les objets à la map
+     */
+    public void initObjet(int nbSuperGomme, int nbBoost) {
+        int x,y;
+        while (nbSuperGomme != 0 || nbBoost != 0) {
+            if (nbSuperGomme != 0) {
+                x = (int) (Math.random() * (24+1));
+                y = (int) (Math.random() * (28-1+1) + 1);
+                if (mapfinal[x][y].equals("G")) {
+                    mapfinal[x][y] = "S";
+                    nbSuperGomme--;
+                }
+            } else if (nbBoost != 0) {
+                x = (int) (Math.random() * (24+1));
+                y = (int) (Math.random() * (28-1+1) + 1);
+                if (mapfinal[x][y].equals("G")) {
+                    mapfinal[x][y] = "B";
+                    nbBoost--;
+                }
+            }
+        }
     }
 
 

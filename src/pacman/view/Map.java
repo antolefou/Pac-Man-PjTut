@@ -12,10 +12,12 @@ import java.util.Scanner;
 public class Map extends Group {
     public final static double TAILLE_CASE = 20.0;
 
-    public enum ValeurCase { VIDE, GOMME, SUPERGOMME, MUR}
+    public enum ValeurCase { VIDE, GOMME, SUPERGOMME, MUR, BOOST, INTERDIT}
 
     private int nbCaseX = 25;
     private int nbCaseY = 30;
+
+    public MapGenerator mapGenerator;
 
     public String[][] mapGeneree;
     public ValeurCase[][] grid;
@@ -33,6 +35,7 @@ public class Map extends Group {
     public Image imageGomme;
     public Image imageSuperGomme;
     public Image imageFond;
+    public Image imageBoost;
 
 
     /**
@@ -56,52 +59,19 @@ public class Map extends Group {
         this.imageGomme = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Gomme.png"));
         this.imageSuperGomme = new Image(getClass().getResourceAsStream("/pacman/ressources/image/SuperGomme.png"));
         this.imageFond = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Fond.png"));
+        this.imageBoost = new Image(getClass().getResourceAsStream("/pacman/ressources/image/boost.png"));
 
-/*
-        this.initialiseMap(1);
-        this.afficheMap();
-        */
-        MapGenerator map = new MapGenerator();
-        mapGeneree = map.getMap();
+        mapGenerator = new MapGenerator();
+        mapGenerator.initObjet(5, 3);
+        mapGeneree = mapGenerator.getMap();
         initialiseMapGeneree();
         afficheMap();
-    }
-
-    public void initialiseMap(int numeroNiveau) {
-        this.grid = new ValeurCase[this.nbCaseX][this.nbCaseY];
-        String pwd = System.getProperty("user.dir");
-        File fichier = new File(pwd + "/src/pacman/ressources/level(temporaire/niveau1.txt");
-        try {
-            int compteur = 0;
-            Scanner sc = new Scanner(fichier);
-            while(sc.hasNextLine()){
-                String ligne = sc.nextLine();
-                for (int i=0; i<this.nbCaseX; i++) {
-                    //Map[compteur][i] = String.valueOf(ligne.charAt(i));
-                    switch (String.valueOf(ligne.charAt(i))) {
-                        case "M":
-                            this.grid[compteur][i] = ValeurCase.MUR;
-                            break;
-                        case "G":
-                            this.grid[compteur][i] = ValeurCase.GOMME;
-                            break;
-                        case "S":
-                            this.grid[compteur][i] = ValeurCase.SUPERGOMME;
-                            break;
-                    }
-                }
-                compteur ++;
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("FICHIER NON TROUVÉ");
-        }
     }
 
     private void initialiseMapGeneree() {
         grid = new ValeurCase[this.nbCaseX][this.nbCaseY];
         for (int i=0; i<25; i++) {
             for (int j=0; j<30; j++) {
-                System.out.println(mapGeneree[i][j]);
                 switch (mapGeneree[i][j]) {
                     case "M":
                         this.grid[i][j] = ValeurCase.MUR;
@@ -111,6 +81,12 @@ public class Map extends Group {
                         break;
                     case "S":
                         this.grid[i][j] = ValeurCase.SUPERGOMME;
+                        break;
+                    case "I":
+                        this.grid[i][j] = ValeurCase.INTERDIT;
+                        break;
+                    case "B":
+                        this.grid[i][j] = ValeurCase.BOOST;
                         break;
                 }
             }
@@ -136,6 +112,10 @@ public class Map extends Group {
                     this.caseMap[i][j].setImage(this.imageGomme);
                 } else if (this.grid[i][j] == ValeurCase.SUPERGOMME) {
                     this.caseMap[i][j].setImage(this.imageSuperGomme);
+                } else if (this.grid[i][j] == ValeurCase.INTERDIT) {
+                    this.caseMap[i][j].setImage(this.imageFond);
+                } else if (this.grid[i][j] == ValeurCase.BOOST) {
+                    this.caseMap[i][j].setImage(this.imageBoost);
                 }
                 this.getChildren().add(this.caseMap[i][j]);
             }

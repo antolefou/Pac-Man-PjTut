@@ -19,7 +19,8 @@
 
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.BorderPane?>
-<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controller.ControllerJouer">
+<?import pacman.view.Pacman?>
+<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" onKeyPressed="#handle" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controller.ControllerJouer">
     <left>
         <VBox prefHeight="600.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171">
             <children>
@@ -86,6 +87,7 @@
     <right>
         <Pane maxHeight="600" maxWidth="500">
             <Map fx:id="map"/>
+            <Pacman fx:id="pacman"/>
         </Pane>
     </right>
 </BorderPane>
