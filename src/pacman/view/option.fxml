@@ -20,7 +20,7 @@
                <Image url="@../ressources/image/Deplacement.png" />
             </image>
          </ImageView>
-         <Button fx:id="menu" layoutX="-31.0" layoutY="27.0" mnemonicParsing="false" onAction="#switchToScene" style="-fx-background-color: black;">
+         <Button fx:id="menu" layoutX="-31.0" layoutY="27.0" mnemonicParsing="false" onAction="#switchToScene" style="-fx-background-color: black;" styleClass="boutonMenu">
             <graphic>
                <ImageView  fitHeight="45.0" fitWidth="189.0" pickOnBounds="true" preserveRatio="true">
                   <image>

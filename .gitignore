@@ -1,4 +1,4 @@
 /.idea/
 Pac-Man-PjTut.iml
-Projet-Tut-S2/.idea/
-Projet-Tut-S2/out/
+src/pacman/controller/ControllerMusic.java
+out/
