@@ -101,14 +101,10 @@ public class Deplacement extends Thread {
         }
     }
     private boolean peutAvancerVerticalement(int i) { //haut -> -1 bas -> 1
-        System.out.println("avance verticalement " + i);
         double pacmanX = pacman.getPacmanX();
         double pacmanY = pacman.getPacmanY();
         if (pacmanX % 20 == 1) {
-            System.out.println(map.grid[((int)pacmanX/20)+i][(int)pacmanY/20]);
-            System.out.println(((int)(pacmanX/20))+i);
-            System.out.println((int)pacmanY/20);
-            if ((pacmanY % 20 != 1) || (map.grid[((int)pacmanX/20)][((int)pacmanY/20)+i] != Map.ValeurCase.MUR)) {
+            if ((pacmanY % 20 != 1) || ((map.grid[((int)pacmanX/20)][((int)pacmanY/20)+i] != Map.ValeurCase.MUR) && (map.grid[((int)pacmanX/20)][((int)pacmanY/20)+i] != Map.ValeurCase.INTERDIT))) {
                 return true;
             }
         }
@@ -118,8 +114,6 @@ public class Deplacement extends Thread {
         double pacmanX = pacman.getPacmanX();
         double pacmanY = pacman.getPacmanY();
         if (pacmanY % 20 == 1) {
-            System.out.println("pb    " + (((int)pacmanX/20)+i));
-            System.out.println("pb    " + ((int)pacmanY/20));
             if (((pacmanX % 20 != 1) || (map.grid[((((int)pacmanX/20)+i)+24)%24][((int)pacmanY/20)] != Map.ValeurCase.MUR))) {
                 return true;
             }
