@@ -20,8 +20,8 @@ public class View extends StackPane {
     public View(Model model) throws IOException {
         this.model = model;
         this.getChildren().add(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("menu.fxml"))));
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
-        Parent root = loader.load();
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
+//        Parent root = loader.load();
 
 
     }

@@ -13,6 +13,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import pacman.model.Model;
 import pacman.view.View;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -24,7 +30,9 @@ public class ControllerMenu extends Controller{
     @FXML ImageView fleche4;
     @FXML ImageView fleche5;
 
-
+    public ControllerMenu() {
+        clip = playSound("src/pacman/ressources/music/pacman_beginning.wav", true);
+    }
 
     public void affiche_fleche1(MouseEvent mouseEvent) {
         Image image = new Image(getClass().getResourceAsStream("/pacman/ressources/image/pacman_fleche.png"));
@@ -70,4 +78,6 @@ public class ControllerMenu extends Controller{
         Platform.exit();
         System.exit(0);
     }
+
+
 }

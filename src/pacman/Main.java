@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.stage.WindowEvent;
 
+import pacman.controller.ControllerMenu;
 import pacman.model.Model;
 import pacman.controller.Controller;
 import pacman.view.View;

@@ -22,6 +22,10 @@ public class ControllerJouer extends Controller  implements EventHandler<KeyEven
     @FXML public pacman.view.Map map;
     public Deplacement deplacement;
 
+    public ControllerJouer() {
+        clip = playSound("src/pacman/ressources/music/pacman_chomp.wav", true);
+    }
+
     @Override
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();

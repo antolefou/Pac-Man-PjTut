@@ -44,14 +44,13 @@ public class Pacman extends Group {
         if (this.imageView.getX() == 501)
             this.imageView.setX(1);
         this.imageView.setX(this.imageView.getX() + this.velocity);
-        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
+//        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
 
     }
-
     public void avanceBas() {
         this.imageView.setImage(this.imagePacmanBas);
         this.imageView.setY(this.imageView.getY() + this.velocity);
-        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
+//        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
     }
     public void avanceGauche() {
         this.imageView.setImage(this.imagePacmanGauche);
@@ -59,12 +58,12 @@ public class Pacman extends Group {
         if (this.imageView.getX() == 1)
             this.imageView.setX(501);
         this.imageView.setX(this.imageView.getX() - this.velocity);
-        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
+//        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
     }
     public void avanceHaut() {
         this.imageView.setImage(this.imagePacmanHaut);
         this.imageView.setY(this.imageView.getY() - this.velocity);
-        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
+//        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
     }
 
     public void setMap(Map map) {
