@@ -93,6 +93,7 @@ public class MapGenerator {
             System.out.println("");
         }
     }
+
     private void afficheTab() {
         for (int i=0; i<mapfinal[0].length; i++) {
             for (int j=0; j<mapfinal.length; j++) {

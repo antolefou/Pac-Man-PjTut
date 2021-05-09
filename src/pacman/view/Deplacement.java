@@ -86,9 +86,15 @@ public class Deplacement extends Thread {
                 }
                 double pacmanX = pacman.getPacmanX();
                 double pacmanY = pacman.getPacmanY();
-                /*  BUG pour le moment */
+                // début de code interragit Pac man
+                
                 if (pacmanX % 20 == 1 && pacmanY%20 == 1) {
                     if (map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] == Map.ValeurCase.GOMME) {
+                        map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] = Map.ValeurCase.VIDE;
+                        map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(map.imageFond);
+                        pacman.score += 10;
+                    }
+                    if (map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] == Map.ValeurCase.SUPERGOMME) {
                         map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] = Map.ValeurCase.VIDE;
                         map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(map.imageFond);
                         pacman.score += 10;
