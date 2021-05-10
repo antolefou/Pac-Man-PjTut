@@ -1,7 +1,8 @@
-Julien,10000000
-Julien,9000000
-Yohann,400
-Pratric,399
-Noé,11
-Célia,10
-Thibaud,-10
+nom3,10
+nom5,20
+nom6,20
+nom7,30
+nom2,50
+nom50,51
+nom1,1000
+nom8,6000

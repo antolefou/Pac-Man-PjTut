@@ -21,6 +21,7 @@ public class ControllerJouer extends Controller  implements EventHandler<KeyEven
     @FXML public pacman.view.Pacman pacman;
     @FXML public pacman.view.Map map;
     public Deplacement deplacement;
+    //public Label meilleurscore;
 
     public ControllerJouer() {
         clip = playSound("src/pacman/ressources/music/pacman_chomp.wav", true);

@@ -62,8 +62,8 @@
                                     <Image url="@../ressources/image/texteMeilleurScore.png"/>
                                 </image>
                             </ImageView>
-                            <Label graphicTextGap="5.0" layoutY="9.0" prefHeight="10.0" prefWidth="46.0" text="1000"
-                                   textFill="#faff00">
+                            <Label fx:id="meilleurscore"  graphicTextGap="5.0" layoutY="9.0" prefHeight="10.0" prefWidth="46.0" text="000"
+                                   textFill="#faff00" >
                                 <font>
                                     <Font name="utkal medium" size="18.0"/>
                                 </font>
