@@ -22,7 +22,7 @@ public class MapGenerator {
 
         while(constructorX.size() != 0) construction();
 //        affiche();
-//        affineMap();
+        affineMap();
 //        affiche();
         creerMapFinal();
 		/*construction();
@@ -163,9 +163,11 @@ public class MapGenerator {
         map[10][12] =  2;
         map[11][12] =  2;
         map[12][12] =  2;
+        map[9][12] = 2;
         map[9][13] = 2;
         map[9][14] = 2;
         map[9][15] = 2;
+        map[9][16] = 2;
         map[10][16] = 2;
         map[11][16] = 2;
         map[12][16] = 2;
@@ -375,7 +377,7 @@ public class MapGenerator {
                 for (int j = 0; j < map[0].length - 1; j++) {
                     k = 0;
                     // amélioration horizontale
-                    while (k+j<this.map[0].length && k <5){
+                    while (k+j<this.map[0].length-1 && k <5){
 
                         // cas 00 et 010
                         if (k<2 && map[i][j+k]==0 ) k = this.map[0].length;
@@ -398,7 +400,8 @@ public class MapGenerator {
 
                     k = 0;
                     // amélioration vertical
-                    while (k+i<this.map.length && k <12){
+                    while (k+i<this.map.length-1 && k <15){
+                        System.out.println("K+i : " + k + " + "+ i);
                         // cas 00 et 010
                         if (k<2 && map[i+k][j]==0 ) k = this.map.length;
 
@@ -439,6 +442,17 @@ public class MapGenerator {
                 )
                 ||
                 (
+                    this.map[y][x-1]       > 0
+                    && this.map[y-1][x-1]  > 0      // 110
+                    && this.map[y-1][x]    > 0      // 1X0
+                    && this.map[y-1][x+1] == 0      // 000
+                    && this.map[y][x+1]   == 0
+                    && this.map[y+1][x+1] == 0
+                    && this.map[y+1][x]   == 0
+                    && this.map[y+1][x-1] == 0
+                )
+                ||
+                (
                     this.map[y][x+1] > 0
                     && this.map[y-1][x-1] > 0       // 111
                     && this.map[y-1][x] > 0         // NX1
@@ -462,7 +476,17 @@ public class MapGenerator {
                     && this.map[y+1][x] == 0    //    N0N
                 )
                 ||
-
+                (
+                        this.map[y][x-1]       > 0
+                        && this.map[y-1][x-1]  > 0      // 110
+                        && this.map[y-1][x]    > 0      // 1X0
+                        && this.map[y-1][x+1] == 0      // 000
+                        && this.map[y][x+1]   == 0
+                        && this.map[y+1][x+1] == 0
+                        && this.map[y+1][x]   == 0
+                        && this.map[y+1][x-1] == 0
+                )
+                ||
                 (
                     this.map[y-1][x] > 0
                     && this.map[y-1][x-1] > 0       // 11N
