@@ -33,10 +33,6 @@ public class ControllerScore extends Controller {
     public ControllerScore(){
     }
 
-    @FXML
-    public void actualiserScores(KeyEvent keyEvent) throws IOException {
-        initialize();
-    }
 
     @FXML
     public void initialize() throws IOException {

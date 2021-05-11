@@ -110,7 +110,7 @@ public class Deplacement extends Thread {
         double pacmanX = pacman.getPacmanX();
         double pacmanY = pacman.getPacmanY();
         if (pacmanX % 20 == 1) {
-            if ((pacmanY % 20 != 1) || ((map.grid[((int)pacmanX/20)][((int)pacmanY/20)+i] != Map.ValeurCase.MUR) && (map.grid[((int)pacmanX/20)][((int)pacmanY/20)+i] != Map.ValeurCase.INTERDIT))) {
+            if ((pacmanY % 20 != 1) || ((map.grid[((int)pacmanX/20)%25][(((int)pacmanY/20)+i)%30] != Map.ValeurCase.MUR) && (map.grid[((int)pacmanX/20)][((int)pacmanY/20)+i] != Map.ValeurCase.INTERDIT))) {
                 return true;
             }
         }

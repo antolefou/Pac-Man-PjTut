@@ -54,7 +54,7 @@ public class Pacman extends Group {
     }
     public void avanceGauche() {
         this.imageView.setImage(this.imagePacmanGauche);
-        System.out.println("pacman pos x " +this.imageView.getX());
+//        System.out.println("pacman pos x " +this.imageView.getX());
         if (this.imageView.getX() == 1)
             this.imageView.setX(501);
         this.imageView.setX(this.imageView.getX() - this.velocity);
