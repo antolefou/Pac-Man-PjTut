@@ -23,6 +23,7 @@ public class ControllerJouer extends Controller  implements EventHandler<KeyEven
     @FXML public pacman.view.Map map;
     public Deplacement deplacement;
     @FXML public Label meilleurscore;
+    @FXML public Label affichageScore = new Label();
 
     public ControllerJouer() {
         clip = playSound("src/pacman/ressources/music/pacman_chomp.wav", true);
@@ -30,6 +31,7 @@ public class ControllerJouer extends Controller  implements EventHandler<KeyEven
 
     @FXML
     public void initialize() throws IOException {
+        affichageScore.setText(String.valueOf(pacman.score));
         ScoreModel scoreModel = new ScoreModel();
         scoreModel.lectureFichierTxt();
         scoreModel.triScores();
@@ -39,6 +41,7 @@ public class ControllerJouer extends Controller  implements EventHandler<KeyEven
     }
     @Override
     public void handle(KeyEvent keyEvent) {
+        affichageScore.setText(String.valueOf(pacman.score));
         KeyCode code = keyEvent.getCode();
         if (pacman != null && map != null) {
             if (deplacement == null) {
