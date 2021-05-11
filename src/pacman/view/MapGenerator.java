@@ -18,8 +18,12 @@ public class MapGenerator {
         creerCarreMilieu();
         creerConstructeur();
         initConstruction();
-        while(constructorX.size() != 0)
-            construction();
+
+
+        while(constructorX.size() != 0) construction();
+//        affiche();
+        affineMap();
+//        affiche();
         creerMapFinal();
 		/*construction();
 		construction();
@@ -37,6 +41,17 @@ public class MapGenerator {
         System.out.println(constructorDir);*/
     }
 
+
+    private void afficheMapPasFini(){
+        for (int i=0; i<map.length-1; i++) {
+            for (int j = 0; j < map[0].length - 1; j++) {
+                System.out.print("|"+this.map[i][j]);
+            }
+            System.out.println();
+            System.out.println("-------------------------------");
+        }
+        System.out.println();
+    }
 
     private void affiche() {
         for (int i=0; i<map[0].length; i++) {
@@ -349,7 +364,133 @@ public class MapGenerator {
         mapfinal[12][13] = "I";
     }
 
+
+    private void affineMap(){
+        int k ;
+        int emplacemenHorizontal;
+        int emplacemenVertical;
+        for (int m = 0 ; m<3 ;m++){
+//            affiche();
+            for (int i=0; i<map.length-1; i++) {
+                for (int j = 0; j < map[0].length - 1; j++) {
+                    k = 0;
+                    // amélioration horizontale
+                    while (k+j<this.map[0].length && k <5){
+
+                        // cas 00 et 010
+                        if (k<2 && map[i][j+k]==0 ) k = this.map[0].length;
+
+                        // cas 0110 et supérieur
+                        else if (k>=2 && map[i][j+k]==0) {
+                            for (int l = k ; l > 1 ; l--){
+                                emplacemenHorizontal = j + l;
+                                if (estRemplacableHorizontalement(i,emplacemenHorizontal)) {
+                                    this.map[i][emplacemenHorizontal] = 0;
+                                }
+                                else break;
+                            }
+
+                            k = this.map[0].length;
+                        }
+
+                        k++;
+                    }
+
+                    k = 0;
+                    // amélioration vertical
+                    while (k+i<this.map.length && k <12){
+                        // cas 00 et 010
+                        if (k<2 && map[i+k][j]==0 ) k = this.map.length;
+
+                            // cas 0110 et 01110
+                        else if (k>=2 && map[i+k][j]==0) {
+                            for (int l = k ; l > 1 ; l--){
+                                emplacemenVertical = i+l;
+                                if (estRemplacableVerticalement(emplacemenVertical,j)) {
+                                    this.map[emplacemenVertical][j] = 0;
+                                }
+                                else break;
+                            }
+                            k = this.map.length;
+                        }
+                        k++;
+                    }
+                }
+            }
+
+        }
+        creerCarreMilieu();
+    }
+
+    private boolean estRemplacableVerticalement(int y , int x){
+        return (
+                (
+                    this.map[y-1][x] > 0
+                    && this.map[y+1][x] == 0    //cas:N1N
+                    && this.map[y][x+1] == 0    //    0X0
+                    && this.map[y][x-1] == 0    //    N0N
+                )
+                ||
+                (
+                    this.map[y][x-1] > 0
+                    && this.map[y-1][x-1] > 0       // 111
+                    && this.map[y-1][x] > 0         // 1XN
+                    && this.map[y-1][x+1] > 0       // NNN
+                )
+                ||
+                (
+                    this.map[y][x+1] > 0
+                    && this.map[y-1][x-1] > 0       // 111
+                    && this.map[y-1][x] > 0         // NX1
+                    && this.map[y-1][x+1] > 0       // NNN
+                )
+                ||
+                (
+                    this.map[y-1][x-1] > 0          // 111
+                    && this.map[y-1][x] > 0         // NXN
+                    && this.map[y-1][x+1] > 0       // NNN
+                )
+        );
+    }
+
+    private boolean estRemplacableHorizontalement(int y , int x){
+        return (
+                (
+                    this.map[y][x-1] > 0
+                    && this.map[y][x+1] == 0    //cas:N0N
+                    && this.map[y-1][x] == 0    //    1X0
+                    && this.map[y+1][x] == 0    //    N0N
+                )
+                ||
+
+                (
+                    this.map[y-1][x] > 0
+                    && this.map[y-1][x-1] > 0       // 11N
+                    && this.map[y][x-1] > 0         // 1XN
+                    && this.map[y+1][x-1] > 0       // 1NN
+                )
+                ||
+
+                (
+                    this.map[y+1][x] > 0
+                    && this.map[y-1][x-1] > 0       // 1NN
+                    && this.map[y][x-1] > 0         // 1XN
+                    && this.map[y+1][x-1] > 0       // 11N
+                )
+                ||
+
+                (
+                    this.map[y-1][x-1] > 0          // 1NN
+                    && this.map[y][x-1] > 0         // 1XN
+                    && this.map[y+1][x-1] > 0       // 1NN
+                )
+        );
+    }
+
     private void amelioreMap() {
+
+
+
         for (int i=0; i<map.length-3; i++) {
             for (int j=0; j<map[0].length-2; j++) {
                 if (map[i][j] == 2 && map[i+1][j] == 2
