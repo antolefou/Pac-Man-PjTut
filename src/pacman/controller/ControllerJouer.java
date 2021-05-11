@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import pacman.model.ScoreModel;
 import pacman.view.Deplacement;
 
 import java.awt.*;
@@ -21,12 +22,21 @@ public class ControllerJouer extends Controller  implements EventHandler<KeyEven
     @FXML public pacman.view.Pacman pacman;
     @FXML public pacman.view.Map map;
     public Deplacement deplacement;
-    //public Label meilleurscore;
+    @FXML public Label meilleurscore;
 
     public ControllerJouer() {
         clip = playSound("src/pacman/ressources/music/pacman_chomp.wav", true);
     }
 
+    @FXML
+    public void initialize() throws IOException {
+        ScoreModel scoreModel = new ScoreModel();
+        scoreModel.lectureFichierTxt();
+        scoreModel.triScores();
+        scoreModel.reecritureFichierTxt();
+        int MS = scoreModel.getMeilleurScore();
+        meilleurscore.setText(String.valueOf(MS));
+    }
     @Override
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
