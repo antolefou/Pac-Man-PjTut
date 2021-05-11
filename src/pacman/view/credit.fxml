@@ -13,7 +13,7 @@
                 <graphic>
                     <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                            <Image url="@../ressources/image/BoutonMenu.png" />
+                            <Image url="@../ressources/image/Commun_scenes/BoutonMenu.png" />
                         </image>
                     </ImageView>
                 </graphic>
@@ -21,7 +21,7 @@
 
             <ImageView fx:id="pacman_logo" fitHeight="354.0" fitWidth="537.0" layoutX="131.5" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                 <image>
-                    <Image url="@../ressources/image/pacman_logo.png" />
+                    <Image url="@../ressources/image/Commun_scenes/pacman_logo.png" />
                 </image>
             </ImageView>
             <ImageView fx:id="credit" fitHeight="30.0" fitWidth="100.0" layoutX="350.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">

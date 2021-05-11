@@ -16,21 +16,21 @@
          <children>
             <ImageView fx:id="pacman_logo" fitHeight="354.0" fitWidth="537.0" layoutX="131.5" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../ressources/image/pacman_logo.png" />
+                  <Image url="@../ressources/image/Commun_scenes/pacman_logo.png" />
                </image>
             </ImageView>
             <Button fx:id="menu" contentDisplay="CENTER" layoutY="12.0" mnemonicParsing="false" onAction="#switchToScene" prefHeight="73.0" prefWidth="181.0" style="-fx-background-color: none;" styleClass="boutonScore" textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../ressources/image/BoutonMenu.png" />
+                        <Image url="@../ressources/image/Commun_scenes/BoutonMenu.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="300.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../ressources/image/Meilleurs_Scores.png" />
+                  <Image url="@../ressources/image/Ecran_scores/Meilleurs_Scores.png" />
                </image>
             </ImageView>
             <Group layoutX="227.0" layoutY="224.0" />

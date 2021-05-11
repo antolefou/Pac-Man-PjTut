@@ -1,13 +1,8 @@
 package pacman.view;
 
-import javafx.fxml.FXML;
 import javafx.scene.Group;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class Pacman extends Group {
     public Map map;
@@ -24,10 +19,10 @@ public class Pacman extends Group {
 
     public Pacman() {
 
-        this.imagePacmanHaut = new Image(getClass().getResourceAsStream("/pacman/ressources/image/pacmanUp.gif"));
-        this.imagePacmanDroite = new Image(getClass().getResourceAsStream("/pacman/ressources/image/pacmanRight.gif"));
-        this.imagePacmanBas = new Image(getClass().getResourceAsStream("/pacman/ressources/image/pacmanDown.gif"));
-        this.imagePacmanGauche = new Image(getClass().getResourceAsStream("/pacman/ressources/image/pacmanLeft.gif"));
+        this.imagePacmanHaut = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanUp.gif"));
+        this.imagePacmanDroite = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanRight.gif"));
+        this.imagePacmanBas = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanDown.gif"));
+        this.imagePacmanGauche = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanLeft.gif"));
         affichePacman();
     }
     public void affichePacman() {
