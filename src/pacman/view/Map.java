@@ -121,4 +121,45 @@ public class Map extends Group {
             }
         }
     }
+
+    /**
+     * Construit une grilles d'Imageview
+     */
+    public void miseAJourMap() {
+        for (int i = 0; i < this.nbCaseX; i++) {
+            for (int j = 0; j < this.nbCaseY; j++) {
+                //affichage de la map
+                if (this.grid[i][j] == ValeurCase.MUR) {
+                    this.caseMap[i][j].setImage(this.imageMur);
+                } else if (this.grid[i][j] == ValeurCase.GOMME) {
+                    this.caseMap[i][j].setImage(this.imageGomme);
+                } else if (this.grid[i][j] == ValeurCase.SUPERGOMME) {
+                    this.caseMap[i][j].setImage(this.imageSuperGomme);
+                } else if (this.grid[i][j] == ValeurCase.INTERDIT) {
+                    this.caseMap[i][j].setImage(this.imageFond);
+                } else if (this.grid[i][j] == ValeurCase.BOOST) {
+                    this.caseMap[i][j].setImage(this.imageBoost);
+                }
+            }
+        }
+    }
+
+    public boolean aGagne() {
+        for (int i = 0; i < this.nbCaseX; i++) {
+            for (int j = 0; j < this.nbCaseY; j++) {
+                if (grid[i][j] != ValeurCase.INTERDIT &&  grid[i][j] != ValeurCase.MUR &&  grid[i][j] != ValeurCase.VIDE) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void recommence() {
+        mapGenerator = new MapGenerator();
+        mapGenerator.initObjet(5, 3);
+        mapGeneree = mapGenerator.getMap();
+        initialiseMapGeneree();
+        miseAJourMap();
+    }
 }

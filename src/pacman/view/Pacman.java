@@ -16,7 +16,7 @@ public class Pacman extends Group {
     public Image imagePacmanBas;
     public Image imagePacmanGauche;
     public ImageView imageView;
-    private int velocity = 2;
+    private int velocity = 10;
     public int velocityThread = 30;
     public int score = 0;
     public int nbVie = 3;
@@ -77,4 +77,8 @@ public class Pacman extends Group {
         return this.imageView.getY();
     }
 
+    public void initPosition() {
+        imageView.setX(241);
+        imageView.setY(321);
+    }
 }

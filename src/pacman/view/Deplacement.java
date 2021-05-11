@@ -31,6 +31,10 @@ public class Deplacement extends Thread {
     public void run() {
         boolean peutAvancer;
         while (pacman.enVie) {
+            if (map.aGagne()) {
+                map.recommence();
+                pacman.initPosition();
+            }
             peutAvancer = false;
             try {
                 if (deplacementFutur != Deplacements.AUCUN) {
@@ -93,8 +97,11 @@ public class Deplacement extends Thread {
                         map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] = Map.ValeurCase.VIDE;
                         map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(map.imageFond);
                         pacman.score += 10;
-                    }
-                    if (map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] == Map.ValeurCase.SUPERGOMME) {
+                    } else if (map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] == Map.ValeurCase.SUPERGOMME) {
+                        map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] = Map.ValeurCase.VIDE;
+                        map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(map.imageFond);
+                        pacman.score += 10;
+                    } else if (map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] == Map.ValeurCase.BOOST) {
                         map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] = Map.ValeurCase.VIDE;
                         map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(map.imageFond);
                         pacman.score += 10;
