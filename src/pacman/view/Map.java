@@ -140,6 +140,7 @@ public class Map extends Group {
                 }
             }
         }
+        this.caseMap[12][13].setImage(this.imageMurFantome);
     }
 
     public boolean aGagne() {
