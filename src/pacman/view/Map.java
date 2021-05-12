@@ -31,6 +31,7 @@ public class Map extends Group {
     public Image imageSuperGomme;
     public Image imageFond;
     public Image imageBoost;
+    public Image imageMurFantome;
 
 
     /**
@@ -55,6 +56,7 @@ public class Map extends Group {
         this.imageSuperGomme = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/SuperGomme.png"));
         this.imageFond = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/Fond.png"));
         this.imageBoost = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/boost.png"));
+        this.imageMurFantome = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/murFantome.png"));
 
         mapGenerator = new MapGenerator();
         mapGenerator.initObjet(5, 3);
@@ -115,6 +117,7 @@ public class Map extends Group {
                 this.getChildren().add(this.caseMap[i][j]);
             }
         }
+        this.caseMap[12][13].setImage(this.imageMurFantome);
     }
 
     /**

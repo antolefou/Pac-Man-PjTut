@@ -34,6 +34,7 @@ public class Deplacement extends Thread {
     public void run() {
         boolean peutAvancer;
         while (pacman.enVie) {
+            updateScore();
             if (map.aGagne()) {
                 map.recommence();
                 pacman.initPosition();
@@ -101,21 +102,21 @@ public class Deplacement extends Thread {
                         map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] = Map.ValeurCase.VIDE;
                         map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(map.imageFond);
                         pacman.score += 10;
-                        updateScore();
-
                     } else if (map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] == Map.ValeurCase.SUPERGOMME) {
                         map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] = Map.ValeurCase.VIDE;
                         map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(map.imageFond);
-                        pacman.score += 10;
-                        updateScore();
+                        pacman.score += 100;
+                        pacman.initSuperPacGomme();
+                        // il faudra réduire la vitesse des fantomes et les mettre mangeables
                     } else if (map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] == Map.ValeurCase.BOOST) {
                         map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] = Map.ValeurCase.VIDE;
                         map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(map.imageFond);
-                        pacman.score += 10;
-                        updateScore();
+                        pacman.score += 200;
+                        pacman.initPowerBoost();
                     }
                 }
-                sleep(pacman.velocityThread);
+                pacman.stopPower();
+                sleep(pacman.sleepThread);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -150,4 +151,5 @@ public class Deplacement extends Thread {
         });
         scoreThread.start();
     }
+
 }
