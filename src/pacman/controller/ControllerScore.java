@@ -30,46 +30,31 @@ public class ControllerScore extends Controller {
 
     ScoreModel scoreModel = new ScoreModel();
 
-    public ControllerScore(){
+    public ControllerScore() {
     }
 
 
     @FXML
     public void initialize() throws IOException {
 
-        scoreModel.lectureFichierTxt();
-        scoreModel.triScores();
-        scoreModel.reecritureFichierTxt();
+        scoreModel.lectureTxt();
+        scoreModel.triTab();
+        scoreModel.reecritureTxt();
 
         //Affichage des 5 meilleurs scores
-        Labscore1.setText(String.valueOf(scoreModel.tab[scoreModel.tab.length - 1][1]));
-        Labscore2.setText(String.valueOf(scoreModel.tab[scoreModel.tab.length - 2][1]));
-        Labscore3.setText(String.valueOf(scoreModel.tab[scoreModel.tab.length - 3][1]));
-        Labscore4.setText(String.valueOf(scoreModel.tab[scoreModel.tab.length - 4][1]));
-        Labscore5.setText(String.valueOf(scoreModel.tab[scoreModel.tab.length - 5][1]));
+        Labscore1.setText(String.valueOf(scoreModel.tab[0][1]));
+        Labscore2.setText(String.valueOf(scoreModel.tab[1][1]));
+        Labscore3.setText(String.valueOf(scoreModel.tab[2][1]));
+        Labscore4.setText(String.valueOf(scoreModel.tab[3][1]));
+        Labscore5.setText(String.valueOf(scoreModel.tab[4][1]));
 
-        Nom1.setText(String.valueOf(scoreModel.tab[scoreModel.tab.length - 1][0]));
-        Nom2.setText(String.valueOf(scoreModel.tab[scoreModel.tab.length - 2][0]));
-        Nom3.setText(String.valueOf(scoreModel.tab[scoreModel.tab.length - 3][0]));
-        Nom4.setText(String.valueOf(scoreModel.tab[scoreModel.tab.length - 4][0]));
-        Nom5.setText(String.valueOf(scoreModel.tab[scoreModel.tab.length - 5][0]));
+        Nom1.setText(String.valueOf(scoreModel.tab[0][0]));
+        Nom2.setText(String.valueOf(scoreModel.tab[1][0]));
+        Nom3.setText(String.valueOf(scoreModel.tab[2][0]));
+        Nom4.setText(String.valueOf(scoreModel.tab[3][0]));
+        Nom5.setText(String.valueOf(scoreModel.tab[4][0]));
 
     }
-
-    //à mettre dans ControlJouer
-    /*
-    @FXML
-    public void affichMS() throws IOException {
-        meilleurscore = new Label();
-        ScoreModel scoreModel = new ScoreModel();
-        scoreModel.lectureFichierTxt();
-        scoreModel.triScores();
-        scoreModel.reecritureFichierTxt();
-        scoreModel.getMeilleurScore();
-        meilleurscore.setText(String.valueOf(scoreModel.getMeilleurScore()));
-    }
-     */
-
 }
 
 

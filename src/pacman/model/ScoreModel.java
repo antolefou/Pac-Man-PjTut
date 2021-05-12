@@ -1,83 +1,74 @@
 package pacman.model;
 
+import pacman.controller.ControllerJouer;
+import pacman.view.Pacman;
+
 import java.io.*;
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class ScoreModel {
 
-    public int MeilleurScore;
-    private int ScoreActuel;
-
-    private int score;
-    private String nom;
-
-    private int n;
-    private String[] ligne;
-
     public Object[][] tab;
+    public int meilleurScore;
+    public int scoreActuel;
 
 
-    //Compter nombre de ligne du fichier txt et l'attribuer à n
-    public void compterNombrelignes() throws FileNotFoundException {
-        String FILENAME = "src/pacman/model/Score.txt";
-        try (BufferedReader bufferedreader = new BufferedReader(new FileReader(FILENAME))) {
-            String strCurrentLine;
-            while ((strCurrentLine = bufferedreader.readLine()) != null) {
-                n++;
-            }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
-
-    //Lire fichier fxml + séparer le nom et le score
-    public void lectureFichierTxt() throws IOException {
-
-        compterNombrelignes();
+    public void lectureTxt() {
         try {
             FileInputStream file = new FileInputStream("src/pacman/model/Score.txt");
             Scanner scanner = new Scanner(file);
 
-            //System.out.println("Nombre ligne fichier : " + n);
-            tab = new Object[n][2];
+            tab = new Object[5][2];
 
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < 5; i++) {
                 String txt = scanner.nextLine();
-                ligne = txt.split(",", 2);
-                nom = ligne[0];
-                score = Integer.parseInt(ligne[1]);
+                String[] ligne = txt.split(",", 2);
+
+                String nom = ligne[0];
+                int score = Integer.parseInt(ligne[1]);
+
                 tab[i][0] = nom;
                 tab[i][1] = score;
+
             }
-            scanner.close();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    private class AlphaComparator implements java.util.Comparator {
-        public int compare(Object o1, Object o2) {
-            return ((Integer) ((Object[]) o1)[1]).compareTo((Integer) ((Object[]) o2)[1]);
+    public void triTab() {
+        int t = 0;
+        String n;
+        boolean p;
+
+        do {
+            p = false;
+            for (int i = 0; i < tab.length - 1; i++) {
+                if ((int) tab[i][1] < (int) tab[i + 1][1]) {
+                    t = (int) tab[i][1];
+                    n = (String) tab[i][0];
+                    tab[i][1] = tab[i + 1][1];
+                    tab[i][0] = tab[i+1][0];
+                    tab[i + 1][1] = t;
+                    tab[i+1][0] = n;
+                    p = true;
+                }
+            }
+        } while (p);
+
+        for (int i = 0; i< tab.length;i++){
+            System.out.println("Tableau trié : " + tab[i][0] + " : " + tab[i][1] );
         }
     }
 
-    //Trier les différents scores dans l'ordre décroissant
-    public void triScores() {
-        Arrays.sort(tab, new AlphaComparator());
+    /*public void TriScore(){
+        Pacman pac = new Pacman();
+        scoreActuel = pac.score;
     }
+     */
 
-
-    //Une fois le score trié, meilleur score = dernière position dans le tableau
-    public int  getMeilleurScore() {
-        MeilleurScore = (int) tab[tab.length - 1][1];
-        return MeilleurScore;
-
-    }
-
-    //Réecrire les différents scores et noms dans le fichier txt
-    public void reecritureFichierTxt() throws IOException {
+    public void reecritureTxt() throws IOException {
 
         try {
             FileWriter fw = new FileWriter("src/pacman/model/Score.txt");
@@ -89,24 +80,15 @@ public class ScoreModel {
                 bw.write(String.valueOf(tab[i][1]));
                 bw.newLine();
             }
-
             bw.close();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-
         }
     }
 
-    public Object[][] getTab() {
-        return tab;
+    public int getMeilleurScore() {
+        meilleurScore = (int) tab[0][1];
+        return meilleurScore;
     }
-
-    /*public void afficheTab(){
-        for (int i =0; i<tab.length;i++)
-            System.out.println(tab[i][0] + " : " + tab[i][1]);
-    }
-     */
-
-
 }

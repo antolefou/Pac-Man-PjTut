@@ -33,12 +33,13 @@ public class ControllerJouer extends Controller  implements EventHandler<KeyEven
     public void initialize() throws IOException {
         affichageScore.setText(String.valueOf(pacman.score));
         ScoreModel scoreModel = new ScoreModel();
-        scoreModel.lectureFichierTxt();
-        scoreModel.triScores();
-        scoreModel.reecritureFichierTxt();
+        scoreModel.lectureTxt();
+        scoreModel.triTab();
+        scoreModel.reecritureTxt();
         int MS = scoreModel.getMeilleurScore();
         meilleurscore.setText(String.valueOf(MS));
     }
+
     @Override
     public void handle(KeyEvent keyEvent) {
         affichageScore.setText(String.valueOf(pacman.score));

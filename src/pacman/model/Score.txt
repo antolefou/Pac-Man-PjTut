@@ -1,9 +1,5 @@
-nom3,10
-nom5,20
-nom6,20
-nom7,30
-nom2,50
-nom50,51
-nom1,1000
-nom8,6000
-nom10,100000
+Nom6,200
+Nom2,50
+Nom5,30
+Nom2,20
+Nom3,10
