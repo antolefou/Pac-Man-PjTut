@@ -401,7 +401,6 @@ public class MapGenerator {
                     k = 0;
                     // amélioration vertical
                     while (k+i<this.map.length-1 && k <15){
-                        System.out.println("K+i : " + k + " + "+ i);
                         // cas 00 et 010
                         if (k<2 && map[i+k][j]==0 ) k = this.map.length;
 

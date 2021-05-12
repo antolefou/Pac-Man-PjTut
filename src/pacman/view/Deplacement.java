@@ -1,10 +1,12 @@
 package pacman.view;
 
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import pacman.controller.Controller;
 import pacman.controller.ControllerJouer;
+
 
 public class Deplacement extends Thread {
     private boolean enGame;
@@ -12,7 +14,8 @@ public class Deplacement extends Thread {
     Pacman pacman;
     //Fantome fantome1;
     //Fantome fantome2;
-    Controller controller;
+    ControllerJouer controller;
+    Thread scoreThread;
     Label scoreLabel;
     public enum Deplacements { AUCUN, HAUT, DROITE, BAS, GAUCHE}
     public Deplacements deplacementActuel;
@@ -90,21 +93,26 @@ public class Deplacement extends Thread {
                 }
                 double pacmanX = pacman.getPacmanX();
                 double pacmanY = pacman.getPacmanY();
-                // début de code interragit Pac man
-                
+
+
+                // ---------------------------- interractions de pacman ------------------------
                 if (pacmanX % 20 == 1 && pacmanY%20 == 1) {
                     if (map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] == Map.ValeurCase.GOMME) {
                         map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] = Map.ValeurCase.VIDE;
                         map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(map.imageFond);
                         pacman.score += 10;
+                        updateScore();
+
                     } else if (map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] == Map.ValeurCase.SUPERGOMME) {
                         map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] = Map.ValeurCase.VIDE;
                         map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(map.imageFond);
                         pacman.score += 10;
+                        updateScore();
                     } else if (map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] == Map.ValeurCase.BOOST) {
                         map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] = Map.ValeurCase.VIDE;
                         map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(map.imageFond);
                         pacman.score += 10;
+                        updateScore();
                     }
                 }
                 sleep(pacman.velocityThread);
@@ -132,5 +140,14 @@ public class Deplacement extends Thread {
             }
         }
         return false;
+    }
+
+    public void updateScore(){
+        scoreThread = new Thread(()->{
+            Platform.runLater(()->{
+                controller.affichageScore.setText(String.valueOf(pacman.score));
+            });
+        });
+        scoreThread.start();
     }
 }
