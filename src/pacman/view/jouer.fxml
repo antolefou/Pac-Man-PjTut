@@ -87,7 +87,7 @@
         <Pane maxHeight="600" maxWidth="500">
             <Map fx:id="map"/>
             <Pacman fx:id="pacman"/>
-            <FantomeGroup fx:id="fantomegroup"/>
+            <FantomeGroup fx:id="fantomeGroup"/>
         </Pane>
     </right>
 </BorderPane>

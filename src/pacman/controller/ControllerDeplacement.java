@@ -2,17 +2,18 @@ package pacman.controller;
 
 
 import javafx.application.Platform;
+import javafx.scene.Group;
 import javafx.scene.control.Label;
+import pacman.model.FantomeGroup;
 import pacman.model.Map;
 import pacman.model.Pacman;
-
+import pacman.model.FantomeGroup;
 
 public class ControllerDeplacement extends Thread {
     private boolean enGame;
     Map map;
     Pacman pacman;
-    //Fantome fantome1;
-    //Fantome fantome2;
+    FantomeGroup fantomeGroup;
     ControllerJouer controller;
     Thread scoreThread;
     Label scoreLabel;
@@ -21,9 +22,10 @@ public class ControllerDeplacement extends Thread {
     public Deplacements deplacementFutur;
 
 
-    public ControllerDeplacement(Map map, Pacman pacman, ControllerJouer controller) {
+    public ControllerDeplacement(Map map, Pacman pacman, FantomeGroup fantomeGroup, ControllerJouer controller) {
         this.map = map;
         this.pacman = pacman;
+        this.fantomeGroup = fantomeGroup;
         this.controller = controller;
         enGame = true;
         deplacementActuel = Deplacements.DROITE;
@@ -106,6 +108,7 @@ public class ControllerDeplacement extends Thread {
                         map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(map.imageFond);
                         pacman.score += 100;
                         pacman.initSuperPacGomme();
+                        fantomeGroup.setFantomeVulnerable();
                         // il faudra réduire la vitesse des fantomes et les mettre mangeables
                     } else if (map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] == Map.ValeurCase.BOOST) {
                         map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] = Map.ValeurCase.VIDE;
@@ -115,6 +118,7 @@ public class ControllerDeplacement extends Thread {
                     }
                 }
                 pacman.stopPower();
+                fantomeGroup.stopVulnerabilite();
                 sleep(pacman.sleepThread);
             } catch (InterruptedException e) {
                 e.printStackTrace();

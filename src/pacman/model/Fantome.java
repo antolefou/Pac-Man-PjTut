@@ -5,26 +5,32 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Fantome extends Group {
+
     int numFantome;
-    private final Image imageFantome;
-    public Map map;
+    public Image imageFantome;
+    public Image imageFantomeVulnerable;
     public ImageView imageView;
-    private int velocity = 2;
+
     private int initPosX;
     private int initPosY;
 
-    public Fantome(int numFantome) {
+    private FantomeGroup fantomeGroup;
+
+
+    public Fantome(int numFantome, FantomeGroup fantomeGroup) {
         this.numFantome = numFantome;
+        this.fantomeGroup = fantomeGroup;
         this.imageFantome = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost" + numFantome + ".gif"));
+        this.imageFantomeVulnerable = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghost.gif"));
         initFantome();
     }
 
     // rajouter par Antoine
-    public Fantome(int numFantome, Image imageFantome) {
-        this.numFantome = numFantome;
-        this.imageFantome = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost" + imageFantome));
-        initFantome();
-    }
+//    public Fantome(int numFantome, Image imageFantome) {
+//        this.numFantome = numFantome;
+//        this.imageFantome = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost" + imageFantome));
+//        initFantome();
+//    }
 
     private void initFantome() {
         switch (numFantome) {
@@ -53,19 +59,19 @@ public class Fantome extends Group {
     }
 
     public void avanceDroite() {
-        this.imageView.setX(this.imageView.getX() + this.velocity);
+        this.imageView.setX(this.imageView.getX() + fantomeGroup.velocity);
         System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
     }
     public void avanceBas() {
-        this.imageView.setY(this.imageView.getY() + this.velocity);
+        this.imageView.setY(this.imageView.getY() + fantomeGroup.velocity);
         System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
     }
     public void avanceGauche() {
-        this.imageView.setX(this.imageView.getX() - this.velocity);
+        this.imageView.setX(this.imageView.getX() - fantomeGroup.velocity);
         System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
     }
     public void avanceHaut() {
-        this.imageView.setY(this.imageView.getY() - this.velocity);
+        this.imageView.setY(this.imageView.getY() - fantomeGroup.velocity);
         System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
     }
 

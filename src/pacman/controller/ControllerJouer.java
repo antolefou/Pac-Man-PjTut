@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import pacman.model.FantomeGroup;
 import pacman.model.Map;
 import pacman.model.Pacman;
 import pacman.model.ScoreModel;
@@ -18,6 +19,7 @@ public class ControllerJouer extends Controller  implements EventHandler<KeyEven
     public ControllerDeplacement deplacement;
     @FXML public Label meilleurscore;
     @FXML public Label affichageScore;
+    @FXML public FantomeGroup fantomeGroup;
 
     public ControllerJouer() {
         modelMusic.music("chomp", true);
@@ -41,7 +43,7 @@ public class ControllerJouer extends Controller  implements EventHandler<KeyEven
         if (pacman != null && map != null) {
             if (deplacement == null) {
                 System.out.println("deplacement null");
-                deplacement = new ControllerDeplacement(map, pacman, this);
+                deplacement = new ControllerDeplacement(map, pacman, fantomeGroup, this);
                 map.mapGenerator.afficheFinal();
                 deplacement.start();
             }
