@@ -20,7 +20,7 @@ public class ControllerJouer extends Controller  implements EventHandler<KeyEven
     @FXML public Label affichageScore;
 
     public ControllerJouer() {
-        clip = playSound("src/pacman/ressources/music/pacman_chomp.wav", true);
+        modelMusic.music("chomp", true);
     }
 
     @FXML

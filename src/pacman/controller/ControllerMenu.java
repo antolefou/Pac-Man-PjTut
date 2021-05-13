@@ -15,7 +15,7 @@ public class ControllerMenu extends Controller{
     @FXML ImageView fleche5;
 
     public ControllerMenu() {
-        clip = playSound("src/pacman/ressources/music/pacman_beginning.wav", true);
+
     }
 
     public void affiche_fleche1(MouseEvent mouseEvent) {

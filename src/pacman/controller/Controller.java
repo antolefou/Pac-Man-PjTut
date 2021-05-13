@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import pacman.model.ModelMusic;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -18,17 +19,18 @@ import java.util.Objects;
 
 
 public class Controller {
+ModelMusic modelMusic;
 
-    public Clip clip;
 
     public Controller() {
-
+        modelMusic = new ModelMusic();
+        modelMusic.music("theme", true);
     }
 
 
     @FXML
     public void switchToScene(ActionEvent event) throws IOException {
-        stopSound();
+        modelMusic.stopAllMusic();
         System.out.println(((Node) event.getSource()).getId());
         Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/"+ ((Node) event.getSource()).getId() +".fxml")));
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -39,25 +41,5 @@ public class Controller {
     }
 
 
-    public void stopSound() {
-        if (clip != null)
-            clip.stop();
-    }
 
-    public Clip playSound(String path, boolean loop) {
-        File musicFile = new File(path);
-        try {
-            if(!musicFile.exists())
-                throw new FileNotFoundException();
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicFile);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInput);
-            clip.start();
-            if(loop)
-                clip.loop(Clip.LOOP_CONTINUOUSLY);
-            return clip;
-        } catch (Exception e){
-            return null;
-        }
-    }
 }
