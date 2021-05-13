@@ -31,7 +31,7 @@ ModelMusic modelMusic;
     @FXML
     public void switchToScene(ActionEvent event) throws IOException {
         modelMusic.stopAllMusic();
-        System.out.println(((Node) event.getSource()).getId());
+//        System.out.println(((Node) event.getSource()).getId());
         Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/"+ ((Node) event.getSource()).getId() +".fxml")));
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         primaryStage.setScene(new Scene(scoreView));

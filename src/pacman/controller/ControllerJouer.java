@@ -42,9 +42,8 @@ public class ControllerJouer extends Controller  implements EventHandler<KeyEven
         KeyCode code = keyEvent.getCode();
         if (pacman != null && map != null) {
             if (deplacement == null) {
-                System.out.println("deplacement null");
+//                System.out.println("deplacement null");
                 deplacement = new ControllerDeplacement(map, pacman, fantomeGroup, this);
-                map.mapGenerator.afficheFinal();
                 deplacement.start();
             }
             if (code == KeyCode.UP) {

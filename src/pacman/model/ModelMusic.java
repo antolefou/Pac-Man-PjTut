@@ -21,9 +21,9 @@ public class ModelMusic {
         mediaPlayerHashMap.put("eatghost", new MediaPlayer(new Media("file://" + System.getProperty("user.dir") + "/src/pacman/ressources/music/pacman_eatghost.wav")));
         mediaPlayerHashMap.put("extrapac", new MediaPlayer(new Media("file://" + System.getProperty("user.dir") + "/src/pacman/ressources/music/pacman_extrapac.wav")));
 
-        for (String i : mediaPlayerHashMap.keySet()) {
-            System.out.println(mediaPlayerHashMap.get(i));
-        }
+//        for (String i : mediaPlayerHashMap.keySet()) {
+//            System.out.println(mediaPlayerHashMap.get(i));
+//        }
     }
 
 

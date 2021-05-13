@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 
 public class Fantome extends Group {
 
+    public Map map;
     int numFantome;
     public Image imageFantome;
     public Image imageFantomeVulnerable;
@@ -60,24 +61,24 @@ public class Fantome extends Group {
 
     public void avanceDroite() {
         this.imageView.setX(this.imageView.getX() + fantomeGroup.velocity);
-        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
+//        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
     }
     public void avanceBas() {
         this.imageView.setY(this.imageView.getY() + fantomeGroup.velocity);
-        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
+//        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
     }
     public void avanceGauche() {
         this.imageView.setX(this.imageView.getX() - fantomeGroup.velocity);
-        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
+//        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
     }
     public void avanceHaut() {
         this.imageView.setY(this.imageView.getY() - fantomeGroup.velocity);
-        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
+//        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
     }
 
     public boolean peutAvancerHorizontalement(Map map, int i) {
         if (this.imageView.getY() % 20 == 1) {
-            if ((this.imageView.getX() % 20 != 1) || (map.grid[(int)this.imageView.getY()/20][((int)this.imageView.getX()/20)+i] != Map.ValeurCase.MUR)) {
+            if ((this.imageView.getX() % 20 != 1) || (map.grid[((int)this.imageView.getX()/20)+i][(int)this.imageView.getY()/20] != Map.ValeurCase.MUR)) {
                 return true;
             }
         }
@@ -85,7 +86,7 @@ public class Fantome extends Group {
     }
     public boolean peutAvancerVerticalement(Map map, int i) {
         if (this.imageView.getX() % 20 == 1) {
-            if ((this.imageView.getY() % 20 != 1) || (map.grid[((int)this.imageView.getY()/20)+i][(int)this.imageView.getX()/20] != Map.ValeurCase.MUR)) {
+            if ((this.imageView.getY() % 20 != 1) || (map.grid[(int)this.imageView.getX()/20][((int)this.imageView.getY()/20)+i] != Map.ValeurCase.MUR)) {
                 return true;
             }
         }

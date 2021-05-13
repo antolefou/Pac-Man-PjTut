@@ -5,6 +5,8 @@ import pacman.model.Fantome;
 
 public class FantomeGroup extends Group {
 
+    public Map map;
+
     public Fantome[] fantomes;
     public boolean vulnerable;
     public long debutVulnerabilite;
@@ -38,6 +40,13 @@ public class FantomeGroup extends Group {
                     fantomes[i].imageView.setImage(fantomes[i].imageFantome);
                 }
             }
+        }
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
+        for (int i=0; i<4; i++) {
+            fantomes[i].map = map;
         }
     }
 }

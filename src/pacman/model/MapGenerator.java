@@ -21,9 +21,9 @@ public class MapGenerator {
 
 
         while(constructorX.size() != 0) construction();
-        affiche();
+        //affiche();
         affineMap();
-        affiche();
+        //affiche();
         creerMapFinal();
 		/*construction();
 		construction();
@@ -83,31 +83,31 @@ public class MapGenerator {
         }
         System.out.println("");
     }
-    public void afficheFinal() {
-        for (int i=0; i<mapfinal[0].length; i++) {
-            for (int j=0; j<mapfinal.length; j++) {
-                switch(mapfinal[j][i]) {
-                    case "M":
-                        // Mur 44
-                        System.out.print("\033[44m \033[0m");
-                        break;
-                    case "G":
-                        // Gomme
-                        System.out.print("\033[40m \033[0m");
-                        break;
-                    case "Autre":
-                        // Pas encore defini
-                        System.out.print("\033[46m \033[0m");
-                        break;
-                    default:
-                        // Default
-                        System.out.print("\033[47m \033[0m");
-
-                }
-            }
-            System.out.println("");
-        }
-    }
+//    public void afficheFinal() {
+//        for (int i=0; i<mapfinal[0].length; i++) {
+//            for (int j=0; j<mapfinal.length; j++) {
+//                switch(mapfinal[j][i]) {
+//                    case "M":
+//                        // Mur 44
+//                        System.out.print("\033[44m \033[0m");
+//                        break;
+//                    case "G":
+//                        // Gomme
+//                        System.out.print("\033[40m \033[0m");
+//                        break;
+//                    case "Autre":
+//                        // Pas encore defini
+//                        System.out.print("\033[46m \033[0m");
+//                        break;
+//                    default:
+//                        // Default
+//                        System.out.print("\033[47m \033[0m");
+//
+//                }
+//            }
+//            System.out.println("");
+//        }
+//    }
 
     private void afficheTab() {
         for (int i=0; i<mapfinal[0].length; i++) {
@@ -407,9 +407,9 @@ public class MapGenerator {
                             for (int l = k ; l > 1 ; l--){
                                 emplacemenVertical = i+l;
                                 if (estRemplacableVerticalement(emplacemenVertical,j)) {
-                                    System.out.println("X : " + i + " | Y : "+ j);
-                                    System.out.println("emplacement Y placé : " + emplacemenVertical);
-                                    System.out.println("___________________________________");
+//                                    System.out.println("X : " + i + " | Y : "+ j);
+//                                    System.out.println("emplacement Y placé : " + emplacemenVertical);
+//                                    System.out.println("___________________________________");
                                     this.map[emplacemenVertical][j] = 0;
                                 }
                                 else break;

@@ -21,7 +21,6 @@ public class ControllerDeplacement extends Thread {
     public Deplacements deplacementActuel;
     public Deplacements deplacementFutur;
 
-
     public ControllerDeplacement(Map map, Pacman pacman, FantomeGroup fantomeGroup, ControllerJouer controller) {
         this.map = map;
         this.pacman = pacman;
@@ -39,6 +38,7 @@ public class ControllerDeplacement extends Thread {
             if (map.aGagne()) {
                 map.recommence();
                 pacman.initPosition();
+                fantomeGroup.setMap(map);
             }
             peutAvancer = false;
             try {
@@ -119,6 +119,20 @@ public class ControllerDeplacement extends Thread {
                 }
                 pacman.stopPower();
                 fantomeGroup.stopVulnerabilite();
+
+                // ---------------------------- Interractions des fantomes ----------------------------
+                // les fantomes vont le plus haut à droite
+                for (int i=0; i<4; i++){
+                    if (fantomeGroup.fantomes[i].peutAvancerVerticalement(map, -1))
+                        fantomeGroup.fantomes[i].avanceHaut();
+                    else if (fantomeGroup.fantomes[i].peutAvancerHorizontalement(map, 1))
+                        fantomeGroup.fantomes[i].avanceDroite();
+                    else if (fantomeGroup.fantomes[i].peutAvancerVerticalement(map, 1))
+                        fantomeGroup.fantomes[i].avanceBas();
+                    else if (fantomeGroup.fantomes[i].peutAvancerHorizontalement(map, -1))
+                        fantomeGroup.fantomes[i].avanceGauche();
+                }
+                // ------------------------------------ fin -------------------------
                 sleep(pacman.sleepThread);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -154,5 +168,4 @@ public class ControllerDeplacement extends Thread {
         });
         scoreThread.start();
     }
-
 }
