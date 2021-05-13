@@ -153,7 +153,9 @@ public class ControllerDeplacement extends Thread {
         double pacmanX = pacman.getPacmanX();
         double pacmanY = pacman.getPacmanY();
         if (pacmanY % 20 == 1) {
-            if (((pacmanX % 20 != 1) || (map.grid[((((int)pacmanX/20)+i)+24)%24][((int)pacmanY/20)] != Map.ValeurCase.MUR))) {
+            System.out.println("x " + ((((int)pacmanX/20)+i)+24)%24);
+            System.out.println("y " + ((int)pacmanY/20));
+            if (((pacmanX % 20 != 1) || (map.grid[((((int)pacmanX/20)+i)+25)%25][((int)pacmanY/20)] != Map.ValeurCase.MUR))) {
                 return true;
             }
         }
