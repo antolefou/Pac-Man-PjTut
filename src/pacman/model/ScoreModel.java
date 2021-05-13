@@ -1,8 +1,5 @@
 package pacman.model;
 
-import pacman.controller.ControllerJouer;
-import pacman.view.Pacman;
-
 import java.io.*;
 import java.util.Scanner;
 
@@ -58,7 +55,7 @@ public class ScoreModel {
         } while (p);
 
         for (int i = 0; i< tab.length;i++){
-            System.out.println("Tableau trié : " + tab[i][0] + " : " + tab[i][1] );
+//            System.out.println("Tableau trié : " + tab[i][0] + " : " + tab[i][1] );
         }
     }
 

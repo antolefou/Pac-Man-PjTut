@@ -1,6 +1,7 @@
-package pacman.view;
+package pacman.model;
 
 import javafx.scene.Group;
+import pacman.model.Fantome;
 
 public class FantomeGroup extends Group {
 

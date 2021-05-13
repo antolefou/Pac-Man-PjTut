@@ -1,27 +1,21 @@
 package pacman.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
+import pacman.model.Map;
+import pacman.model.Pacman;
 import pacman.model.ScoreModel;
-import pacman.view.Deplacement;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class ControllerJouer extends Controller  implements EventHandler<KeyEvent> {
 
-    @FXML public pacman.view.Pacman pacman;
-    @FXML public pacman.view.Map map;
-    public Deplacement deplacement;
+    @FXML public Pacman pacman;
+    @FXML public Map map;
+    public ControllerDeplacement deplacement;
     @FXML public Label meilleurscore;
     @FXML public Label affichageScore;
 
@@ -47,18 +41,18 @@ public class ControllerJouer extends Controller  implements EventHandler<KeyEven
         if (pacman != null && map != null) {
             if (deplacement == null) {
                 System.out.println("deplacement null");
-                deplacement = new Deplacement(map, pacman, this);
+                deplacement = new ControllerDeplacement(map, pacman, this);
                 map.mapGenerator.afficheFinal();
                 deplacement.start();
             }
             if (code == KeyCode.UP) {
-                deplacement.deplacementFutur = Deplacement.Deplacements.HAUT;
+                deplacement.deplacementFutur = ControllerDeplacement.Deplacements.HAUT;
             } else if (code == KeyCode.RIGHT) {
-                deplacement.deplacementFutur = Deplacement.Deplacements.DROITE;
+                deplacement.deplacementFutur = ControllerDeplacement.Deplacements.DROITE;
             } else if (code == KeyCode.DOWN) {
-                deplacement.deplacementFutur = Deplacement.Deplacements.BAS;
+                deplacement.deplacementFutur = ControllerDeplacement.Deplacements.BAS;
             } else if (code == KeyCode.LEFT) {
-                deplacement.deplacementFutur = Deplacement.Deplacements.GAUCHE;
+                deplacement.deplacementFutur = ControllerDeplacement.Deplacements.GAUCHE;
             }
         }
     }

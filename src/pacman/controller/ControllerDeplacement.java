@@ -1,14 +1,13 @@
-package pacman.view;
+package pacman.controller;
 
 
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import pacman.controller.Controller;
-import pacman.controller.ControllerJouer;
+import pacman.model.Map;
+import pacman.model.Pacman;
 
 
-public class Deplacement extends Thread {
+public class ControllerDeplacement extends Thread {
     private boolean enGame;
     Map map;
     Pacman pacman;
@@ -22,7 +21,7 @@ public class Deplacement extends Thread {
     public Deplacements deplacementFutur;
 
 
-    public Deplacement(Map map, Pacman pacman, ControllerJouer controller) {
+    public ControllerDeplacement(Map map, Pacman pacman, ControllerJouer controller) {
         this.map = map;
         this.pacman = pacman;
         this.controller = controller;

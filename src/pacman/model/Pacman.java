@@ -1,9 +1,9 @@
-package pacman.view;
+package pacman.model;
 
-import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import pacman.model.Map;
 
 public class Pacman extends Group {
     // image pacman

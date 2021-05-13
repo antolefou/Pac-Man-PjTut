@@ -14,11 +14,11 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.control.Button?>
-<?import pacman.view.Map ?>
+<?import pacman.model.Map ?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import pacman.view.Pacman?>
-<?import pacman.view.FantomeGroup?>
+<?import pacman.model.Pacman?>
+<?import pacman.model.FantomeGroup?>
 
 <BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" onKeyPressed="#handle" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controller.ControllerJouer">
     <left>

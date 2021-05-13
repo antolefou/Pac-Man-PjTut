@@ -1,4 +1,4 @@
-package pacman.view;
+package pacman.model;
 
 import java.util.* ;
 import java.util.ArrayList;
@@ -21,9 +21,9 @@ public class MapGenerator {
 
 
         while(constructorX.size() != 0) construction();
-//        affiche();
+        affiche();
         affineMap();
-//        affiche();
+        affiche();
         creerMapFinal();
 		/*construction();
 		construction();
@@ -377,7 +377,7 @@ public class MapGenerator {
                 for (int j = 0; j < map[0].length - 1; j++) {
                     k = 0;
                     // amélioration horizontale
-                    while (k+j<this.map[0].length-1 && k <5){
+                    while (k+j<this.map[0].length-1 ){
 
                         // cas 00 et 010
                         if (k<2 && map[i][j+k]==0 ) k = this.map[0].length;
@@ -391,8 +391,6 @@ public class MapGenerator {
                                 }
                                 else break;
                             }
-
-                            k = this.map[0].length;
                         }
 
                         k++;
@@ -400,7 +398,7 @@ public class MapGenerator {
 
                     k = 0;
                     // amélioration vertical
-                    while (k+i<this.map.length-1 && k <15){
+                    while (k+i<this.map.length-1){
                         // cas 00 et 010
                         if (k<2 && map[i+k][j]==0 ) k = this.map.length;
 
@@ -409,11 +407,13 @@ public class MapGenerator {
                             for (int l = k ; l > 1 ; l--){
                                 emplacemenVertical = i+l;
                                 if (estRemplacableVerticalement(emplacemenVertical,j)) {
+                                    System.out.println("X : " + i + " | Y : "+ j);
+                                    System.out.println("emplacement Y placé : " + emplacemenVertical);
+                                    System.out.println("___________________________________");
                                     this.map[emplacemenVertical][j] = 0;
                                 }
                                 else break;
                             }
-                            k = this.map.length;
                         }
                         k++;
                     }
@@ -431,6 +431,15 @@ public class MapGenerator {
                     && this.map[y+1][x] == 0    //cas:N1N
                     && this.map[y][x+1] == 0    //    0X0
                     && this.map[y][x-1] == 0    //    N0N
+                )
+
+                ||
+
+                (
+                        this.map[y+1][x] > 0
+                                && this.map[y-1][x-1] > 0       // 1NN
+                                && this.map[y][x-1] > 0         // 1XN
+                                && this.map[y+1][x-1] > 0       // 11N
                 )
                 ||
                 (

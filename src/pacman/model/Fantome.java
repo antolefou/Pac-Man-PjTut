@@ -1,4 +1,4 @@
-package pacman.view;
+package pacman.model;
 
 import javafx.scene.Group;
 import javafx.scene.image.Image;
@@ -16,6 +16,13 @@ public class Fantome extends Group {
     public Fantome(int numFantome) {
         this.numFantome = numFantome;
         this.imageFantome = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost" + numFantome + ".gif"));
+        initFantome();
+    }
+
+    // rajouter par Antoine
+    public Fantome(int numFantome, Image imageFantome) {
+        this.numFantome = numFantome;
+        this.imageFantome = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost" + imageFantome));
         initFantome();
     }
 
