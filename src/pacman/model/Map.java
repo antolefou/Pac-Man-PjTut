@@ -3,6 +3,10 @@ package pacman.model;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.jgrapht.Graph;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
 
 public class Map extends Group {
     public final static double TAILLE_CASE = 20.0;
@@ -32,6 +36,8 @@ public class Map extends Group {
     public Image imageFond;
     public Image imageBoost;
     public Image imageMurFantome;
+    public Graph<String, DefaultEdge> g;
+    public String[][] grilleGraph;
 
 
     /**
@@ -62,6 +68,7 @@ public class Map extends Group {
         mapGenerator.initObjet(5, 3);
         mapGeneree = mapGenerator.getMap();
         initialiseMapGeneree();
+        initGraph();
         afficheMap();
     }
 
@@ -90,6 +97,39 @@ public class Map extends Group {
         }
     }
 
+    public void initGraph(){
+        // Création du Graph
+        this.g = new SimpleGraph<>(DefaultEdge.class);
+        this.grilleGraph = new String[25][30];
+        for (int i=0; i<25; i++) {
+            for (int j=0; j<30; j++) {
+                if (grid[i][j] != ValeurCase.MUR) {
+                    grilleGraph[i][j] = i+"/"+j;
+                    g.addVertex(grilleGraph[i][j]);
+                }else{
+                    grilleGraph[i][j] = "Mur"+i+"/"+j;
+                    g.addVertex(grilleGraph[i][j]);
+                }
+            }
+        }
+        for (int i=0; i<25; i++) {
+            for (int j=0; j<30; j++) {
+                if (grilleGraph[i][j].equals(i + "/" + j) && grilleGraph[(i + 1) % 25][j].equals((i + 1) % 25 + "/" + j)) {
+                    g.addEdge(grilleGraph[i][j], grilleGraph[((i+1)%25)][j]);
+                }
+                if (grilleGraph[i][j].equals(i + "/" + j) && grilleGraph[i][(j + 1) % 30].equals(i + "/" + (j + 1) % 30)) {
+                    g.addEdge(grilleGraph[i][j], grilleGraph[i][(j+1)%30]);
+                }
+            }
+        }
+        /*
+        System.out.println(g.toString());
+        // @example:toString:end
+        System.out.println();
+        // Fin de création du Graph
+        System.out.println((DijkstraShortestPath.findPathBetween(g, grilleGraph[1][1] , grilleGraph[23][28] )));
+         */
+    }
     /**
      * Construit une grilles d'Imageview
      */
@@ -160,5 +200,6 @@ public class Map extends Group {
         mapGeneree = mapGenerator.getMap();
         initialiseMapGeneree();
         miseAJourMap();
+        initGraph();
     }
 }
