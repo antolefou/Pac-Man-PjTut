@@ -21,73 +21,77 @@
 <?import pacman.model.FantomeGroup?>
 
 <BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" onKeyPressed="#handle" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controller.ControllerJouer">
-    <left>
-        <VBox prefHeight="600.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171">
-            <children>
-                <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: black;" VBox.vgrow="ALWAYS">
-                    <Group layoutX="14.0" layoutY="330.0">
-                        <children>
-                            <Label fx:id="affichageScore" graphicTextGap="5.0" layoutX="1.0" layoutY="9.0" prefHeight="10.0" prefWidth="46.0" textFill="#faff00" text="0">
-                                <font>
-                                    <Font name="utkal medium" size="18.0"/>
-                                </font>
-                            </Label>
-                            <ImageView fitHeight="30.0" fitWidth="130.0" preserveRatio="true">
+    <center>
+        <BorderPane maxHeight="600.0" maxWidth="800" minHeight="600" minWidth="800" prefWidth="800.0">
+            <left>
+                <VBox prefHeight="600.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171">
+                    <children>
+                        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: black;" VBox.vgrow="ALWAYS">
+                            <Group layoutX="14.0" layoutY="330.0">
+                                <children>
+                                    <Label fx:id="affichageScore" graphicTextGap="5.0" layoutX="1.0" layoutY="9.0" prefHeight="10.0" prefWidth="46.0" textFill="#faff00" text="0">
+                                        <font>
+                                            <Font name="utkal medium" size="18.0"/>
+                                        </font>
+                                    </Label>
+                                    <ImageView fitHeight="30.0" fitWidth="130.0" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../ressources/image/Ecran_jouer/scoresvie/texteScore.png"/>
+                                        </image>
+                                    </ImageView>
+                                </children>
+                            </Group>
+                            <Button fx:id="menu" layoutX="12.0" layoutY="14.0" mnemonicParsing="false"
+                                    style="-fx-background-color: black;" onAction="#switchToScene" styleClass="boutonMenu">
+                                <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../ressources/image/Commun_scenes/BoutonMenu.png"/>
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <ImageView fitHeight="65.0" fitWidth="69.0" layoutX="230.0" layoutY="520.0" preserveRatio="true">
                                 <image>
-                                    <Image url="@../ressources/image/Ecran_jouer/scoresvie/texteScore.png"/>
+                                    <Image url="@../ressources/image/Ecran_jouer/scoresvie/pac_thumbs.png"/>
                                 </image>
                             </ImageView>
-                        </children>
-                    </Group>
-                    <Button fx:id="menu" layoutX="12.0" layoutY="14.0" mnemonicParsing="false"
-                            style="-fx-background-color: black;" onAction="#switchToScene" styleClass="boutonMenu">
-                        <graphic>
-                            <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                            <Group layoutX="15.0" layoutY="230.0">
+                                <children>
+                                    <ImageView fitHeight="45.0" fitWidth="150.0" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../ressources/image/Ecran_jouer/scoresvie/texteMeilleurScore.png"/>
+                                        </image>
+                                    </ImageView>
+                                    <Label fx:id="meilleurscore"  graphicTextGap="5.0" layoutY="9.0" prefHeight="10.0" prefWidth="200.0" text="000"
+                                           textFill="#faff00" >
+                                        <font>
+                                            <Font name="utkal medium" size="18.0"/>
+                                        </font>
+                                    </Label>
+                                </children>
+                            </Group>
+                            <ImageView fitHeight="28.0" fitWidth="69.0" layoutX="15.0" layoutY="430.0" preserveRatio="true">
                                 <image>
-                                    <Image url="@../ressources/image/Commun_scenes/BoutonMenu.png"/>
+                                    <Image url="@../ressources/image/Ecran_jouer/scoresvie/Vie.png"/>
                                 </image>
                             </ImageView>
-                        </graphic>
-                    </Button>
-                    <ImageView fitHeight="65.0" fitWidth="69.0" layoutX="230.0" layoutY="520.0" preserveRatio="true">
-                        <image>
-                            <Image url="@../ressources/image/Ecran_jouer/scoresvie/pac_thumbs.png"/>
-                        </image>
-                    </ImageView>
-                    <Group layoutX="15.0" layoutY="230.0">
-                        <children>
-                            <ImageView fitHeight="45.0" fitWidth="150.0" preserveRatio="true">
+                            <ImageView fitHeight="102.0" fitWidth="253.0" layoutX="30.0" layoutY="85.0" preserveRatio="true">
                                 <image>
-                                    <Image url="@../ressources/image/Ecran_jouer/scoresvie/texteMeilleurScore.png"/>
+                                    <Image url="@../ressources/image/Commun_scenes/pacman_logo.png" />
                                 </image>
                             </ImageView>
-                            <Label fx:id="meilleurscore"  graphicTextGap="5.0" layoutY="9.0" prefHeight="10.0" prefWidth="200.0" text="000"
-                                   textFill="#faff00" >
-                                <font>
-                                    <Font name="utkal medium" size="18.0"/>
-                                </font>
-                            </Label>
-                        </children>
-                    </Group>
-                    <ImageView fitHeight="28.0" fitWidth="69.0" layoutX="15.0" layoutY="430.0" preserveRatio="true">
-                        <image>
-                            <Image url="@../ressources/image/Ecran_jouer/scoresvie/Vie.png"/>
-                        </image>
-                    </ImageView>
-                    <ImageView fitHeight="102.0" fitWidth="253.0" layoutX="30.0" layoutY="85.0" preserveRatio="true">
-                        <image>
-                            <Image url="@../ressources/image/Commun_scenes/pacman_logo.png" />
-                        </image>
-                    </ImageView>
-                </AnchorPane>
-            </children>
-        </VBox>
-    </left>
-    <right>
-        <Pane maxHeight="600" maxWidth="500">
-            <Map fx:id="map"/>
-            <FantomeGroup fx:id="fantomeGroup"/>
-            <Pacman fx:id="pacman"/>
-        </Pane>
-    </right>
+                        </AnchorPane>
+                    </children>
+                </VBox>
+            </left>
+            <right>
+                <Pane maxHeight="600" maxWidth="500">
+                    <Map fx:id="map"/>
+                    <FantomeGroup fx:id="fantomeGroup"/>
+                    <Pacman fx:id="pacman"/>
+                </Pane>
+            </right>
+        </BorderPane>
+    </center>
 </BorderPane>

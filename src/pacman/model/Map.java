@@ -25,15 +25,9 @@ public class Map extends Group {
     public Image imagePacmanDroite;
     public Image imagePacmanBas;
     public Image imagePacmanGauche;
-    public Image imageFantome1;
-    public Image imageFantome2;
-    public Image imageFantome3;
-    public Image imageFantome4;
-    public Image imageFantomeBleu;
     public Image imageMur;
     public Image imageGomme;
     public Image imageSuperGomme;
-    public Image imageFond;
     public Image imageBoost;
     public Image imageMurFantome;
     public Graph<String, DefaultEdge> g;
@@ -51,16 +45,10 @@ public class Map extends Group {
         this.imagePacmanHaut = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanUp.gif"));
         this.imagePacmanDroite = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanRight.gif"));
         this.imagePacmanBas = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanDown.gif"));
-        this.imagePacmanGauche = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanLeft.gif"));
-        this.imageFantome1 = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost1.gif"));
-        this.imageFantome2 = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost2.gif"));
-        this.imageFantome3 = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost2.gif"));
-        this.imageFantome4 = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost2.gif"));
-        this.imageFantomeBleu = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghost.gif"));
+        this.imagePacmanGauche = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanLeft.gif"));;
         this.imageMur = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/wall.png"));
         this.imageGomme = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/Gomme.png"));
         this.imageSuperGomme = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/SuperGomme.png"));
-        this.imageFond = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/Fond.png"));
         this.imageBoost = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/boost.png"));
         this.imageMurFantome = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/murFantome.png"));
 
@@ -150,7 +138,7 @@ public class Map extends Group {
                 } else if (this.grid[i][j] == ValeurCase.SUPERGOMME) {
                     this.caseMap[i][j].setImage(this.imageSuperGomme);
                 } else if (this.grid[i][j] == ValeurCase.INTERDIT) {
-                    this.caseMap[i][j].setImage(this.imageFond);
+                    this.caseMap[i][j].setImage(null);
                 } else if (this.grid[i][j] == ValeurCase.BOOST) {
                     this.caseMap[i][j].setImage(this.imageBoost);
                 }
@@ -174,7 +162,7 @@ public class Map extends Group {
                 } else if (this.grid[i][j] == ValeurCase.SUPERGOMME) {
                     this.caseMap[i][j].setImage(this.imageSuperGomme);
                 } else if (this.grid[i][j] == ValeurCase.INTERDIT) {
-                    this.caseMap[i][j].setImage(this.imageFond);
+                    this.caseMap[i][j].setImage(null);
                 } else if (this.grid[i][j] == ValeurCase.BOOST) {
                     this.caseMap[i][j].setImage(this.imageBoost);
                 }

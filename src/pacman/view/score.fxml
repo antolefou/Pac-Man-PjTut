@@ -11,127 +11,131 @@
 
 
 <BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controller.ControllerScore">
-   <top>
-      <Pane maxHeight="600.0" maxWidth="800" minHeight="600" minWidth="800.0" prefWidth="800.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fx:id="pacman_logo" fitHeight="354.0" fitWidth="537.0" layoutX="131.5" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../ressources/image/Commun_scenes/pacman_logo.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="menu" contentDisplay="CENTER" layoutY="12.0" mnemonicParsing="false" onAction="#switchToScene" prefHeight="73.0" prefWidth="181.0" style="-fx-background-color: none;" styleClass="boutonScore" textAlignment="CENTER">
-               <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+   <center>
+        <BorderPane maxHeight="600.0" maxWidth="800" minHeight="600" minWidth="800" prefWidth="800.0">
+         <top>
+            <Pane maxHeight="600.0" maxWidth="800" minHeight="600" minWidth="800.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="pacman_logo" fitHeight="354.0" fitWidth="537.0" layoutX="131.5" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../ressources/image/Commun_scenes/BoutonMenu.png" />
+                        <Image url="@../ressources/image/Commun_scenes/pacman_logo.png" />
                      </image>
                   </ImageView>
-               </graphic>
-            </Button>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="300.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../ressources/image/Ecran_scores/Meilleurs_Scores.png" />
-               </image>
-            </ImageView>
-            <Group layoutX="227.0" layoutY="224.0" />
+                  <Button fx:id="menu" contentDisplay="CENTER" layoutY="12.0" mnemonicParsing="false" onAction="#switchToScene" prefHeight="73.0" prefWidth="181.0" style="-fx-background-color: none;" styleClass="boutonScore" textAlignment="CENTER">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../ressources/image/Commun_scenes/BoutonMenu.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="300.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../ressources/image/Ecran_scores/Meilleurs_Scores.png" />
+                     </image>
+                  </ImageView>
+                  <Group layoutX="227.0" layoutY="224.0" />
 
-            <Label contentDisplay="CENTER" layoutX="508.0" layoutY="234.0" prefHeight="34.0" prefWidth="78.0" text="Nom" textFill="#f575e8">
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
-            <Label contentDisplay="CENTER" layoutX="301.0" layoutY="234.0" prefHeight="30.0" prefWidth="110.0" text="Scores" textFill="#fc73f0">
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
+                  <Label contentDisplay="CENTER" layoutX="508.0" layoutY="234.0" prefHeight="34.0" prefWidth="78.0" text="Nom" textFill="#f575e8">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
+                  <Label contentDisplay="CENTER" layoutX="301.0" layoutY="234.0" prefHeight="30.0" prefWidth="110.0" text="Scores" textFill="#fc73f0">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
 
-            <Label fx:id="Labscore1" contentDisplay="CENTER" layoutX="301.0" layoutY="300.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#cd0101" >
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
-            <Label fx:id="Nom1" contentDisplay="CENTER" layoutX="508.0" layoutY="300.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#cd0101" >
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
-            <Label contentDisplay="CENTER" layoutX="128.0" layoutY="300.0" prefHeight="34.0" prefWidth="78.0" text="#1" textFill="#cd0101">
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
+                  <Label fx:id="Labscore1" contentDisplay="CENTER" layoutX="301.0" layoutY="300.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#cd0101" >
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Nom1" contentDisplay="CENTER" layoutX="508.0" layoutY="300.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#cd0101" >
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
+                  <Label contentDisplay="CENTER" layoutX="128.0" layoutY="300.0" prefHeight="34.0" prefWidth="78.0" text="#1" textFill="#cd0101">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
 
-            <Label contentDisplay="CENTER" layoutX="128.0" layoutY="340.0" prefHeight="34.0" prefWidth="78.0" text="#2" textFill="#eee314">
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
-            <Label fx:id="Nom2" contentDisplay="CENTER" layoutX="508.0" layoutY="340.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#eee314" >
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
-            <Label fx:id="Labscore2" contentDisplay="CENTER" layoutX="301.0" layoutY="340.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#eee314" >
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
+                  <Label contentDisplay="CENTER" layoutX="128.0" layoutY="340.0" prefHeight="34.0" prefWidth="78.0" text="#2" textFill="#eee314">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Nom2" contentDisplay="CENTER" layoutX="508.0" layoutY="340.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#eee314" >
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Labscore2" contentDisplay="CENTER" layoutX="301.0" layoutY="340.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#eee314" >
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
 
-            <Label contentDisplay="CENTER" layoutX="128.0" layoutY="380.0" prefHeight="34.0" prefWidth="78.0" text="#3" textFill="#27e127">
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
-            <Label fx:id="Nom3" contentDisplay="CENTER" layoutX="508.0" layoutY="380.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#27e127" >
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
-            <Label fx:id="Labscore3" contentDisplay="CENTER" layoutX="301.0" layoutY="380.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#27e127" >
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
+                  <Label contentDisplay="CENTER" layoutX="128.0" layoutY="380.0" prefHeight="34.0" prefWidth="78.0" text="#3" textFill="#27e127">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Nom3" contentDisplay="CENTER" layoutX="508.0" layoutY="380.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#27e127" >
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Labscore3" contentDisplay="CENTER" layoutX="301.0" layoutY="380.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#27e127" >
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
 
-            <Label contentDisplay="CENTER" layoutX="130.0" layoutY="420.0" prefHeight="34.0" prefWidth="78.0" text="#4" textFill="#18b1d3">
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
-            <Label fx:id="Nom4" contentDisplay="CENTER" layoutX="508.0" layoutY="420.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#18b1d3" >
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
-            <Label fx:id="Labscore4" contentDisplay="CENTER" layoutX="301.0" layoutY="420.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#18b1d3" >
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
+                  <Label contentDisplay="CENTER" layoutX="130.0" layoutY="420.0" prefHeight="34.0" prefWidth="78.0" text="#4" textFill="#18b1d3">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Nom4" contentDisplay="CENTER" layoutX="508.0" layoutY="420.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#18b1d3" >
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Labscore4" contentDisplay="CENTER" layoutX="301.0" layoutY="420.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#18b1d3" >
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
 
-            <Label contentDisplay="CENTER" layoutX="128.0" layoutY="460.0" prefHeight="34.0" prefWidth="78.0" text="#5" textFill="#3621d7">
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
-            <Label fx:id="Nom5" contentDisplay="CENTER" layoutX="508.0" layoutY="460.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#3621d7" >
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
-            <Label fx:id="Labscore5" contentDisplay="CENTER" layoutX="301.0" layoutY="460.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#3621d7" >
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
+                  <Label contentDisplay="CENTER" layoutX="128.0" layoutY="460.0" prefHeight="34.0" prefWidth="78.0" text="#5" textFill="#3621d7">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Nom5" contentDisplay="CENTER" layoutX="508.0" layoutY="460.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#3621d7" >
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Labscore5" contentDisplay="CENTER" layoutX="301.0" layoutY="460.0" prefHeight="30.0" prefWidth="200.0" text="" textFill="#3621d7" >
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
 
-            <Label contentDisplay="CENTER" layoutX="128.0" layoutY="234.0" prefHeight="39.0" prefWidth="91.0" text="Rang" textFill="#f575e8">
-               <font>
-                  <Font size="31.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-   </top>
+                  <Label contentDisplay="CENTER" layoutX="128.0" layoutY="234.0" prefHeight="39.0" prefWidth="91.0" text="Rang" textFill="#f575e8">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </top>
+        </BorderPane>
+   </center>
 </BorderPane>

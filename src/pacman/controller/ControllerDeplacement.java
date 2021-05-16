@@ -101,18 +101,18 @@ public class ControllerDeplacement extends Thread {
                 if (pacmanX % 20 == 1 && pacmanY%20 == 1) {
                     if (map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] == Map.ValeurCase.GOMME) {
                         map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] = Map.ValeurCase.VIDE;
-                        map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(map.imageFond);
+                        map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(null);
                         pacman.score += 10;
                     } else if (map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] == Map.ValeurCase.SUPERGOMME) {
                         map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] = Map.ValeurCase.VIDE;
-                        map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(map.imageFond);
+                        map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(null);
                         pacman.score += 100;
                         pacman.initSuperPacGomme();
                         fantomeGroup.setFantomeVulnerable();
                         // il faudra réduire la vitesse des fantomes et les mettre mangeables
                     } else if (map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] == Map.ValeurCase.BOOST) {
                         map.grid[(((int)pacmanX/20)+25)%25][(int)pacmanY/20] = Map.ValeurCase.VIDE;
-                        map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(map.imageFond);
+                        map.caseMap[(((int)pacmanX/20)+25)%25][(int)pacmanY/20].setImage(null);
                         pacman.score += 200;
                         pacman.initPowerBoost();
                     }
