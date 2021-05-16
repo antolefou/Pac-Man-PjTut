@@ -7,10 +7,7 @@ import pacman.model.Map;
 
 public class Pacman extends Group {
     // image pacman
-    public Image imagePacmanHaut;
-    public Image imagePacmanDroite;
-    public Image imagePacmanBas;
-    public Image imagePacmanGauche;
+    public Image imagePacman;
     public ImageView imageView;
 
     public int velocity = 2;
@@ -31,10 +28,7 @@ public class Pacman extends Group {
 
     public Pacman() {
         // mets les gifs de pacman
-        this.imagePacmanHaut = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanUp.gif"));
-        this.imagePacmanDroite = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanRight.gif"));
-        this.imagePacmanBas = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanDown.gif"));
-        this.imagePacmanGauche = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanLeft.gif"));
+        this.imagePacman = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanUp.gif"));
         affichePacman();
     }
 
@@ -43,7 +37,7 @@ public class Pacman extends Group {
      */
     public void affichePacman() {
         // ajoute les gifs au imageView puis l'ajoute à la scène
-        imageView = new ImageView(this.imagePacmanGauche);
+        imageView = new ImageView(this.imagePacman);
         imageView.setX(241);
         imageView.setY(321);
         imageView.setFitWidth(Map.TAILLE_CASE-2);
@@ -55,7 +49,8 @@ public class Pacman extends Group {
      * Avance pacman vers la droite. Un test doit être effectué au préalable pour voir si cela est possible
      */
     public void avanceDroite() {
-        this.imageView.setImage(this.imagePacmanDroite);
+        this.imageView.setRotate(180);
+        this.imageView.setRotate(90);
         if (this.imageView.getX() == 501)
             this.imageView.setX(1);
         this.imageView.setX(this.imageView.getX() + this.velocity);
@@ -65,7 +60,7 @@ public class Pacman extends Group {
      * Avance pacman vers le bas. Un test doit être effectué au préalable pour voir si cela est possible
      */
     public void avanceBas() {
-        this.imageView.setImage(this.imagePacmanBas);
+        this.imageView.setRotate(-180);
         this.imageView.setY(this.imageView.getY() + this.velocity);
 //        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
     }
@@ -73,7 +68,7 @@ public class Pacman extends Group {
      * Avance pacman vers la gauche. Un test doit être effectué au préalable pour voir si cela est possible
      */
     public void avanceGauche() {
-        this.imageView.setImage(this.imagePacmanGauche);
+        this.imageView.setRotate(-90);
 //        System.out.println("pacman pos x " +this.imageView.getX());
         if (this.imageView.getX() == 1)
             this.imageView.setX(501);
@@ -84,7 +79,7 @@ public class Pacman extends Group {
      * Avance pacman vers le haut. Un test doit être effectué au préalable pour voir si cela est possible
      */
     public void avanceHaut() {
-        this.imageView.setImage(this.imagePacmanHaut);
+        this.imageView.setRotate(0);
         this.imageView.setY(this.imageView.getY() - this.velocity);
 //        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
     }
