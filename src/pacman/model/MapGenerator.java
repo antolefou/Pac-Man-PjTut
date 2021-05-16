@@ -14,6 +14,7 @@ public class MapGenerator {
 
     public MapGenerator() {
         initMap();
+        this.afficheMapPasFini2();
         creerTeleportateur();
         creerCarreMilieu();
         creerConstructeur();
@@ -21,9 +22,10 @@ public class MapGenerator {
 
 
         while(constructorX.size() != 0) construction();
-        //affiche();
+//        affiche();
+//        this.afficheMapPasFini2();
         affineMap();
-        //affiche();
+//        affiche();
         creerMapFinal();
 		/*construction();
 		construction();
@@ -57,6 +59,36 @@ public class MapGenerator {
         for (int i=0; i<map[0].length; i++) {
             for (int j=0; j<map.length; j++) {
                 switch(map[j][i]) {
+                    case 0:
+                        // Pas défini
+                        System.out.print("\033[41m \033[0m");
+                        break;
+                    case 1:
+                        // Mur
+                        System.out.print("\033[44m \033[0m");
+                        break;
+                    case 2:
+                        // Chemin
+                        System.out.print("\033[40m \033[0m");
+                        break;
+                    case 3:
+                        // interdit
+                        System.out.print("\033[47m \033[0m");
+                        break;
+                    default:
+                        // Default
+                        System.out.print("\033[44m \033[0m");
+
+                }
+            }
+            System.out.println("");
+        }
+        System.out.println("");
+    }
+    private void affiche2() {
+        for (int i=0; i<map.length; i++) {
+            for (int j=0; j<map[0].length; j++) {
+                switch(map[i][j]) {
                     case 0:
                         // Pas défini
                         System.out.print("\033[41m \033[0m");
@@ -159,6 +191,7 @@ public class MapGenerator {
         }
 
     }
+
     private void creerCarreMilieu() {
         map[10][12] =  2;
         map[11][12] =  2;
@@ -419,9 +452,170 @@ public class MapGenerator {
                     }
                 }
             }
+            creerCarreMilieu();
 
         }
+    }
+
+    /**
+     * fonction qui ne marche pas pour le moment
+     */
+    private void affineMapV3(){
+        int k ;
+        int emplacemenHorizontalX;
+        int emplacemenVertical;
         creerCarreMilieu();
+        for (int m = 0 ; m<5 ;m++){
+//            this.afficheMapPasFini2();
+            affiche();
+//            System.out.println(map.length-1);
+//            System.out.println(map[0].length-1);
+
+            for (int i=1; i<map.length-1; i++) {
+                for (int j = 1; j < map[0].length - 1; j++) {
+                    k = 0;
+                    // amélioration horizontale
+                    while (k+i<this.map.length-1 ){
+
+                        // cas 00 et 010
+                        if (k<2 && map[i+k][j]==0 ) k = this.map.length;
+
+                        // cas 0110 et supérieur
+                        else if (map[i+k][j]==0) {
+                            for (int l = k ; l > 0 ; l--){
+                                emplacemenHorizontalX = i + l;
+//                                System.out.println("x : "+ emplacemenHorizontalX);
+                                if (estRemplacable(emplacemenHorizontalX,j)) {
+                                    this.map[emplacemenHorizontalX][j] = 0;
+                                }
+//                                else break;
+                            }
+                        }
+
+                        k++;
+                    }
+
+                    k = 0;
+                    // amélioration vertical
+                    while (k+j<this.map[0].length-1 ){
+                        // cas 00 et 010
+                        if (k<2 && map[i][j+k]==0 ) k = this.map[0].length;
+
+                            // cas 0110 et 01110
+                        else if (map[i][j+k]==0) {
+                            for (int l = k ; l > 0 ; l--){
+                                emplacemenVertical = j+l;
+                                if (estRemplacable(i,emplacemenVertical)) {
+//                                    System.out.println("X : " + i + " | Y : "+ j);
+//                                    System.out.println("emplacement Y placé : " + emplacemenVertical);
+//                                    System.out.println("___________________________________");
+                                    this.map[i][emplacemenVertical] = 0;
+                                }
+//                                else break;
+                            }
+                        }
+                        k++;
+                    }
+                }
+            }
+            creerCarreMilieu();
+
+        }
+    }
+
+    public boolean estRemplacable(int x , int y){
+        return (
+                // ---------------------- cul de sac ------------------
+                (
+                        this.map[x][y+1] < 2       //cas1:NNN
+                        && this.map[x+1][y] < 2    //     0X0
+                        && this.map[x-1][y] < 2    //     N0N
+                )
+
+                ||
+
+                (
+                        this.map[x][y-1] < 2       //cas2:N0N
+                        && this.map[x+1][y] < 2    //     0X0
+                        && this.map[x-1][y] < 2    //     NNN
+                )
+
+                ||
+
+                (
+                        this.map[x][y-1] < 2
+                        && this.map[x][y+1] < 2   //cas3:N0N
+                                                    //     0XN
+                        && this.map[x-1][y] < 2    //     N0N
+                )
+                ||
+
+                (
+                        this.map[x][y-1] < 2
+                        && this.map[x][y+1] < 2    //cas4:N0N
+                        && this.map[x+1][y] < 2    //     NX0
+                                                    //     N0N
+                )
+            // ------------------- coude
+                ||
+
+                (
+                        this.map[x+1][y] > 1            // cas 5:
+                        && this.map[x-1][y-1] > 1       // 111
+                        && this.map[x][y-1] > 1         // NX1
+                        && this.map[x+1][y-1] > 1       // NNN
+                )
+                ||
+                (
+                        this.map[x-1][y] > 1            // cas 6:
+                        && this.map[x-1][y-1] > 1       // 111
+                        && this.map[x][y-1] > 1         // 1XN
+                        && this.map[x+1][y-1] > 1       // NNN
+                )
+                ||
+                (
+                        this.map[x][y+1] > 1            // cas 7:
+                        && this.map[x-1][y-1] > 1       // 1NN
+                        && this.map[x-1][y] > 1         // 1XN
+                        && this.map[x-1][y+1] > 1       // 11N
+                )
+                ||
+                (
+                        this.map[x-1][y] > 1            // cas 8:
+                        && this.map[x-1][y-1] > 1       // 11N
+                        && this.map[x][y-1] > 1         // 1XN
+                        && this.map[x-1][y+1] > 1       // 1NN
+                )
+                ||
+
+                (
+                        this.map[x-1][y] > 1            // cas 9:
+                        && this.map[x-1][y+1] > 1       // NNN
+                        && this.map[x][y+1] > 1         // 1XN
+                        && this.map[x+1][y+1] > 1       // 111
+                )
+                ||
+                (
+                        this.map[x+1][y] > 1            // cas 10:
+                        && this.map[x-1][y+1] > 1       // NNN
+                        && this.map[x][y+1] > 1         // NX1
+                        && this.map[x+1][y+1] > 1       // 111
+                )
+                ||
+                (
+                        this.map[x][y-1] > 1            // cas 11:
+                        && this.map[x+1][y-1] > 1       // N11
+                        && this.map[x+1][y] > 1         // NX1
+                        && this.map[x+1][y+1] > 1       // NN1
+                )
+                ||
+                (
+                        this.map[x][y+1] > 1           // cas 12:
+                        && this.map[x+1][y-1] > 1      // NN1
+                        && this.map[x+1][y] > 1        // NX1
+                        && this.map[x+1][y+1] > 1      // N11
+                )
+        );
     }
 
     private boolean estRemplacableVerticalement(int y , int x){
@@ -436,10 +630,10 @@ public class MapGenerator {
                 ||
 
                 (
-                        this.map[y+1][x] > 0
-                                && this.map[y-1][x-1] > 0       // 1NN
-                                && this.map[y][x-1] > 0         // 1XN
-                                && this.map[y+1][x-1] > 0       // 11N
+                    this.map[y+1][x] > 0
+                    && this.map[y-1][x-1] > 0       // 1NN
+                    && this.map[y][x-1] > 0         // 1XN
+                    && this.map[y+1][x-1] > 0       // 11N
                 )
                 ||
                 (
@@ -521,8 +715,6 @@ public class MapGenerator {
 
     private void amelioreMap() {
 
-
-
         for (int i=0; i<map.length-3; i++) {
             for (int j=0; j<map[0].length-2; j++) {
                 if (map[i][j] == 2 && map[i+1][j] == 2
@@ -586,9 +778,19 @@ public class MapGenerator {
         }
     }
 
-
-
     public String[][] getMap() {
         return this.mapfinal;
     }
+
+    public void afficheMapPasFini2(){
+        for (int i=0; i<map.length-1; i++) {
+            for (int j=0; j<map[0].length-1; j++) {
+                System.out.print(this.map[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
+
+    }
+
 }

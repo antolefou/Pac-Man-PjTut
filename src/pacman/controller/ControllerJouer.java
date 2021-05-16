@@ -22,6 +22,7 @@ public class ControllerJouer extends Controller  implements EventHandler<KeyEven
     @FXML public FantomeGroup fantomeGroup;
 
     public ControllerJouer() {
+
         modelMusic.music("chomp", true);
     }
 

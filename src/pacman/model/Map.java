@@ -122,13 +122,13 @@ public class Map extends Group {
                 }
             }
         }
-        /*
-        System.out.println(g.toString());
-        // @example:toString:end
-        System.out.println();
-        // Fin de création du Graph
-        System.out.println((DijkstraShortestPath.findPathBetween(g, grilleGraph[1][1] , grilleGraph[23][28] )));
-         */
+
+//        System.out.println(g.toString());
+//        // @example:toString:end
+//        System.out.println();
+//        // Fin de création du Graph
+//        System.out.println((DijkstraShortestPath.findPathBetween(g, grilleGraph[1][1] , grilleGraph[23][28] )));
+
     }
     /**
      * Construit une grilles d'Imageview
