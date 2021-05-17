@@ -14,7 +14,7 @@ public class MapGenerator {
 
     public MapGenerator() {
         initMap();
-        this.afficheMapPasFini2();
+//        this.afficheMapPasFini2();
         creerTeleportateur();
         creerCarreMilieu();
         creerConstructeur();
@@ -503,7 +503,6 @@ public class MapGenerator {
         int[][] mapPourAffine = this.ajouteBordure2D();
 
         for (int m = 0 ; m<16 ;m++){
-            affiche();
             for (int i=1; i<mapPourAffine.length-1; i++) {
                 for (int j = 1; j < mapPourAffine[0].length - 1; j++) {
                     if (estRemplacable(mapPourAffine,i,j)) {
@@ -511,108 +510,11 @@ public class MapGenerator {
                     }
                 }
             }
-
             this.enleveBordure2D(mapPourAffine);
             creerCarreMilieu();
-
         }
-        System.out.println("--------------------------------------");
     }
 
-    private boolean estRemplacable(int x , int y){
-        return (
-                // ---------------------- cul de sac ------------------
-                (
-                        this.map[x][y+1] < 2       //cas1:NNN
-                        && this.map[x+1][y] < 2    //     0X0
-                        && this.map[x-1][y] < 2    //     N0N
-                )
-
-                ||
-
-                (
-                        this.map[x][y-1] < 2       //cas2:N0N
-                        && this.map[x+1][y] < 2    //     0X0
-                        && this.map[x-1][y] < 2    //     NNN
-                )
-
-                ||
-
-                (
-                        this.map[x][y-1] < 2
-                        && this.map[x][y+1] < 2   //cas3:N0N
-                                                    //     0XN
-                        && this.map[x-1][y] < 2    //     N0N
-                )
-                ||
-
-                (
-                        this.map[x][y-1] < 2
-                        && this.map[x][y+1] < 2    //cas4:N0N
-                        && this.map[x+1][y] < 2    //     NX0
-                                                    //     N0N
-                )
-            // ------------------- coude
-                ||
-
-                (
-                        this.map[x+1][y] > 1            // cas 5:
-                        && this.map[x-1][y-1] > 1       // 111
-                        && this.map[x][y-1] > 1         // NX1
-                        && this.map[x+1][y-1] > 1       // NNN
-                )
-                ||
-                (
-                        this.map[x-1][y] > 1            // cas 6:
-                        && this.map[x-1][y-1] > 1       // 111
-                        && this.map[x][y-1] > 1         // 1XN
-                        && this.map[x+1][y-1] > 1       // NNN
-                )
-                ||
-                (
-                        this.map[x][y+1] > 1            // cas 7:
-                        && this.map[x-1][y-1] > 1       // 1NN
-                        && this.map[x-1][y] > 1         // 1XN
-                        && this.map[x-1][y+1] > 1       // 11N
-                )
-                ||
-                (
-                        this.map[x-1][y] > 1            // cas 8:
-                        && this.map[x-1][y-1] > 1       // 11N
-                        && this.map[x][y-1] > 1         // 1XN
-                        && this.map[x-1][y+1] > 1       // 1NN
-                )
-                ||
-
-                (
-                        this.map[x-1][y] > 1            // cas 9:
-                        && this.map[x-1][y+1] > 1       // NNN
-                        && this.map[x][y+1] > 1         // 1XN
-                        && this.map[x+1][y+1] > 1       // 111
-                )
-                ||
-                (
-                        this.map[x+1][y] > 1            // cas 10:
-                        && this.map[x-1][y+1] > 1       // NNN
-                        && this.map[x][y+1] > 1         // NX1
-                        && this.map[x+1][y+1] > 1       // 111
-                )
-                ||
-                (
-                        this.map[x][y-1] > 1            // cas 11:
-                        && this.map[x+1][y-1] > 1       // N11
-                        && this.map[x+1][y] > 1         // NX1
-                        && this.map[x+1][y+1] > 1       // NN1
-                )
-                ||
-                (
-                        this.map[x][y+1] > 1           // cas 12:
-                        && this.map[x+1][y-1] > 1      // NN1
-                        && this.map[x+1][y] > 1        // NX1
-                        && this.map[x+1][y+1] > 1      // N11
-                )
-        );
-    }
     private boolean estRemplacable(int[][] mapAAffine,int x , int y){
         return (
                 // ---------------------- cul de sac ------------------
