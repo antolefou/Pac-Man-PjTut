@@ -24,7 +24,7 @@ public class MapGenerator {
         while(constructorX.size() != 0) construction();
 //        affiche();
 //        this.afficheMapPasFini2();
-        affineMap();
+        affineMapV4();
 //        affiche();
         creerMapFinal();
 		/*construction();
@@ -506,27 +506,10 @@ public class MapGenerator {
             affiche();
             for (int i=1; i<mapPourAffine.length-1; i++) {
                 for (int j = 1; j < mapPourAffine[0].length - 1; j++) {
-
                     if (estRemplacable(mapPourAffine,i,j)) {
                         mapPourAffine[i][j] = 0;
                     }
-
                 }
-
-//                    k = 0;
-//                    // amélioration vertical
-//                    while (k+j<mapPourAffine.length-1 ){
-//                        if (mapPourAffine[i][j+k]==0) {
-//                            for (int l = k ; l > 0 ; l--){
-//                                emplacemenVertical = j+l;
-//                                if (estRemplacable(mapPourAffine,i,emplacemenVertical)) {
-//                                    mapPourAffine[i][emplacemenVertical] = 0;
-//                                }
-//                            }
-//                        }
-//                        k++;
-//                    }
-//                }
             }
 
             this.enleveBordure2D(mapPourAffine);
@@ -669,58 +652,75 @@ public class MapGenerator {
                 (
                         mapAAffine[x+1][y] > 1            // cas 5:
                         && mapAAffine[x-1][y-1] > 1       // 111
-                        && mapAAffine[x][y-1] > 1         // NX1
-                        && mapAAffine[x+1][y-1] > 1       // NNN
+                        && mapAAffine[x][y-1] > 1         // 0X1
+                        && mapAAffine[x+1][y-1] > 1       // N0N
+                        && mapAAffine[x][y+1] < 2
+                        && mapAAffine[x-1][y] < 2
+
                 )
                 ||
                 (
                         mapAAffine[x-1][y] > 1            // cas 6:
                         && mapAAffine[x-1][y-1] > 1       // 111
-                        && mapAAffine[x][y-1] > 1         // 1XN
-                        && mapAAffine[x+1][y-1] > 1       // NNN
+                        && mapAAffine[x][y-1] > 1         // 1X0
+                        && mapAAffine[x+1][y-1] > 1       // N0N
+                        && mapAAffine[x][y+1] < 2
+                        && mapAAffine[x+1][y] < 2
                 )
                 ||
                 (
                         mapAAffine[x][y+1] > 1            // cas 7:
-                        && mapAAffine[x-1][y-1] > 1       // 1NN
-                        && mapAAffine[x-1][y] > 1         // 1XN
+                        && mapAAffine[x-1][y-1] > 1       // 10N
+                        && mapAAffine[x-1][y] > 1         // 1X0
                         && mapAAffine[x-1][y+1] > 1       // 11N
+                        && mapAAffine[x][y-1] < 2
+                        && mapAAffine[x+1][y] < 2
                 )
                 ||
                 (
                         mapAAffine[x-1][y] > 1            // cas 8:
                         && mapAAffine[x-1][y-1] > 1       // 11N
-                        && mapAAffine[x][y-1] > 1         // 1XN
-                        && mapAAffine[x-1][y+1] > 1       // 1NN
+                        && mapAAffine[x][y-1] > 1         // 1X0
+                        && mapAAffine[x-1][y+1] > 1       // 10N
+                        && mapAAffine[x][y+1] < 2
+                        && mapAAffine[x+1][y] < 2
                 )
                 ||
 
                 (
                         mapAAffine[x-1][y] > 1            // cas 9:
-                        && mapAAffine[x-1][y+1] > 1       // NNN
-                        && mapAAffine[x][y+1] > 1         // 1XN
+                        && mapAAffine[x-1][y+1] > 1       // N0N
+                        && mapAAffine[x][y+1] > 1         // 1X0
                         && mapAAffine[x+1][y+1] > 1       // 111
+                        && mapAAffine[x][y-1] < 2
+                        && mapAAffine[x+1][y] < 2
                 )
                 ||
                 (
                         mapAAffine[x+1][y] > 1            // cas 10:
-                        && mapAAffine[x-1][y+1] > 1       // NNN
-                        && mapAAffine[x][y+1] > 1         // NX1
+                        && mapAAffine[x-1][y+1] > 1       // N0N
+                        && mapAAffine[x][y+1] > 1         // 0X1
                         && mapAAffine[x+1][y+1] > 1       // 111
+                        && mapAAffine[x][y-1] < 2
+                        && mapAAffine[x-1][y] < 2
                 )
                 ||
                 (
                         mapAAffine[x][y-1] > 1            // cas 11:
                         && mapAAffine[x+1][y-1] > 1       // N11
-                        && mapAAffine[x+1][y] > 1         // NX1
-                        && mapAAffine[x+1][y+1] > 1       // NN1
+                        && mapAAffine[x+1][y] > 1         // 0X1
+                        && mapAAffine[x+1][y+1] > 1       // N01
+                        && mapAAffine[x][y+1] < 2
+                        && mapAAffine[x-1][y] < 2
                 )
                 ||
                 (
                         mapAAffine[x][y+1] > 1           // cas 12:
-                        && mapAAffine[x+1][y-1] > 1      // NN1
-                        && mapAAffine[x+1][y] > 1        // NX1
+                        && mapAAffine[x+1][y-1] > 1      // N01
+                        && mapAAffine[x+1][y] > 1        // 0X1
                         && mapAAffine[x+1][y+1] > 1      // N11
+                        && mapAAffine[x][y-1] < 2
+                        && mapAAffine[x-1][y] < 2
                 )
         );
     }

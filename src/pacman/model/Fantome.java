@@ -36,20 +36,20 @@ public class Fantome extends Group {
     private void initFantome() {
         switch (numFantome) {
             case 1:
-                initPosX = 240;
-                initPosY = 260;
+                initPosX = 241;
+                initPosY = 261;
                 break;
             case 2:
-                initPosX = 220;
-                initPosY = 280;
+                initPosX = 221;
+                initPosY = 281;
                 break;
             case 3:
-                initPosX = 240;
-                initPosY = 280;
+                initPosX = 241;
+                initPosY = 281;
                 break;
             case 4:
-                initPosX = 260;
-                initPosY = 280;
+                initPosX = 261;
+                initPosY = 281;
                 break;
         }
         imageView = new ImageView(this.imageFantome);
