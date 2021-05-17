@@ -61,6 +61,9 @@ public class Fantome extends Group {
 
     public void avanceDroite() {
         this.imageView.setX(this.imageView.getX() + fantomeGroup.velocity);
+        if(imageView.getX() == 501) {
+            imageView.setX(1);
+        }
 //        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
     }
     public void avanceBas() {
@@ -69,6 +72,9 @@ public class Fantome extends Group {
     }
     public void avanceGauche() {
         this.imageView.setX(this.imageView.getX() - fantomeGroup.velocity);
+        if(imageView.getX() == 1) {
+            imageView.setX(501);
+        }
 //        System.out.println("X:  " + this.imageView.getX() + "    Y:  " + this.imageView.getY());
     }
     public void avanceHaut() {
@@ -78,14 +84,14 @@ public class Fantome extends Group {
 
     public boolean peutAvancerHorizontalement(Map map, int i) {
         if (this.imageView.getY() % 20 == 1) {
-            if ((this.imageView.getX() % 20 != 1) || (map.grid[((int)this.imageView.getX()/20)+i][(int)this.imageView.getY()/20] != Map.ValeurCase.MUR)) {
+            if ((this.imageView.getX() % 20 != 1) || (map.grid[(((int)this.imageView.getX()/20)+i+25)%25][(int)this.imageView.getY()/20] != Map.ValeurCase.MUR)) {
                 return true;
             }
         }
         return false;
     }
     public boolean peutAvancerVerticalement(Map map, int i) {
-        if (this.imageView.getX() % 20 == 1) {
+        if (this.imageView.getX() % 20 == 1 && this.imageView.getX() > 1 && this.imageView.getX() < 500) {
             if ((this.imageView.getY() % 20 != 1) || (map.grid[(int)this.imageView.getX()/20][((int)this.imageView.getY()/20)+i] != Map.ValeurCase.MUR)) {
                 return true;
             }
