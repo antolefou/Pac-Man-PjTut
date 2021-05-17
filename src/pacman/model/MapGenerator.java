@@ -722,6 +722,42 @@ public class MapGenerator {
                         && mapAAffine[x][y-1] < 2
                         && mapAAffine[x-1][y] < 2
                 )
+        //---------------------- Encerclement
+
+                ||
+                (
+                        mapAAffine[x][y+1] > 1
+                        &&mapAAffine[x][y-1] > 1         // cas 13:
+                        && mapAAffine[x+1][y-1] > 1      // N11
+                        && mapAAffine[x+1][y] > 1        // NX1
+                        && mapAAffine[x+1][y+1] > 1      // N11
+                )
+                ||
+                (
+                        mapAAffine[x+1][y] > 1
+                        &&mapAAffine[x-1][y] > 1         // cas 14:
+                        && mapAAffine[x-1][y+1] > 1      // NNN
+                        && mapAAffine[x][y+1] > 1        // 1X1
+                        && mapAAffine[x+1][y+1] > 1      // 111
+                )
+                ||
+                (
+                        mapAAffine[x][y+1] > 1
+                        &&mapAAffine[x][y-1] > 1         // cas 15:
+                        && mapAAffine[x-1][y-1] > 1      // 11N
+                        && mapAAffine[x-1][y] > 1        // 1XN
+                        && mapAAffine[x-1][y+1] > 1      // 11N
+                )
+                ||
+                (
+                        mapAAffine[x-1][y] > 1
+                        &&mapAAffine[x+1][y] > 1         // cas 16:
+                        && mapAAffine[x-1][y-1] > 1      // 111
+                        && mapAAffine[x][y-1] > 1        // 1X1
+                        && mapAAffine[x+1][y-1] > 1      // NNN
+                )
+
+
         );
     }
 
