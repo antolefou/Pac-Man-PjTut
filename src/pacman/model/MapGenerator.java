@@ -24,7 +24,7 @@ public class MapGenerator {
         while(constructorX.size() != 0) construction();
 //        affiche();
 //        this.afficheMapPasFini2();
-        affineMapV4();
+        affineMap();
 //        affiche();
         creerMapFinal();
 		/*construction();
