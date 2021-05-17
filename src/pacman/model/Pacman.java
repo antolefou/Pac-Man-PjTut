@@ -13,7 +13,7 @@ public class Pacman extends Group {
     public int velocity = 2;
     public int sleepThread = 30;
     public int score = 0;
-    public int nbVie = 3;
+    public int nbVie = 5;
     // attribut pacman
     public boolean enVie = true;
     public boolean peutManger = false;

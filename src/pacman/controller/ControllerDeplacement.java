@@ -118,6 +118,7 @@ public class ControllerDeplacement extends Thread {
                         pacman.score += 100;
                         pacman.initSuperPacGomme();
                         fantomeGroup.setFantomeVulnerable();
+                        //Test si updateVie() marchait, c'est ok
                         // il faudra réduire la vitesse des fantomes et les mettre mangeables
                     } else if (map.grid[(((int) pacmanX / 20) + 25) % 25][(int) pacmanY / 20] == Map.ValeurCase.BOOST) {
                         map.grid[(((int) pacmanX / 20) + 25) % 25][(int) pacmanY / 20] = Map.ValeurCase.VIDE;
@@ -275,6 +276,15 @@ public class ControllerDeplacement extends Thread {
         scoreThread = new Thread(() -> {
             Platform.runLater(() -> {
                 controller.affichageScore.setText(String.valueOf(pacman.score));
+            });
+        });
+        scoreThread.start();
+    }
+
+    public void updateVie(){
+        scoreThread = new Thread(()->{
+            Platform.runLater(()->{
+                controller.viePac();
             });
         });
         scoreThread.start();
