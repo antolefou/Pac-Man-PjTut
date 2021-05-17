@@ -36,6 +36,7 @@ public class ModelMusic {
             //mediaPlayer.setRate(0.5);
             //mediaPlayer.setBalance(50);
             mediaPlayerHashMap.get(key).play();
+            mediaPlayerHashMap.get(key).setVolume(0.01);
 
         }
         catch (Exception e) {

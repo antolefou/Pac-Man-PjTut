@@ -24,7 +24,7 @@ public class MapGenerator {
         while(constructorX.size() != 0) construction();
 //        affiche();
 //        this.afficheMapPasFini2();
-        affineMap();
+        affineMapV4();
 //        affiche();
         creerMapFinal();
 		/*construction();
@@ -153,7 +153,7 @@ public class MapGenerator {
     private void initMap() {
         for (int i=0; i<map.length; i++) {
             for (int j=0; j<map[0].length; j++) {
-                if (i == 0 || i == 24 || j == 0 || j == 29 )
+                if (i == 0 || i == 13 || j == 0 || j == 29 )
                     map[i][j] = 1;
                 else
                     map[i][j] = 0;
@@ -457,73 +457,86 @@ public class MapGenerator {
         }
     }
 
-    /**
-     * fonction qui ne marche pas pour le moment
-     */
-    private void affineMapV3(){
-        int k ;
-        int emplacemenHorizontalX;
-        int emplacemenVertical;
-        creerCarreMilieu();
-        for (int m = 0 ; m<5 ;m++){
-//            this.afficheMapPasFini2();
-            affiche();
-//            System.out.println(map.length-1);
-//            System.out.println(map[0].length-1);
-
-            for (int i=1; i<map.length-1; i++) {
-                for (int j = 1; j < map[0].length - 1; j++) {
-                    k = 0;
-                    // amélioration horizontale
-                    while (k+i<this.map.length-1 ){
-
-                        // cas 00 et 010
-                        if (k<2 && map[i+k][j]==0 ) k = this.map.length;
-
-                        // cas 0110 et supérieur
-                        else if (map[i+k][j]==0) {
-                            for (int l = k ; l > 0 ; l--){
-                                emplacemenHorizontalX = i + l;
-//                                System.out.println("x : "+ emplacemenHorizontalX);
-                                if (estRemplacable(emplacemenHorizontalX,j)) {
-                                    this.map[emplacemenHorizontalX][j] = 0;
-                                }
-//                                else break;
-                            }
-                        }
-
-                        k++;
-                    }
-
-                    k = 0;
-                    // amélioration vertical
-                    while (k+j<this.map[0].length-1 ){
-                        // cas 00 et 010
-                        if (k<2 && map[i][j+k]==0 ) k = this.map[0].length;
-
-                            // cas 0110 et 01110
-                        else if (map[i][j+k]==0) {
-                            for (int l = k ; l > 0 ; l--){
-                                emplacemenVertical = j+l;
-                                if (estRemplacable(i,emplacemenVertical)) {
-//                                    System.out.println("X : " + i + " | Y : "+ j);
-//                                    System.out.println("emplacement Y placé : " + emplacemenVertical);
-//                                    System.out.println("___________________________________");
-                                    this.map[i][emplacemenVertical] = 0;
-                                }
-//                                else break;
-                            }
-                        }
-                        k++;
-                    }
-                }
+    private int[] ajouteBordure1D(){
+        int[] tabAReturn = new int[420]; // tableau [30][14]
+        int count = 0;
+        for (int i=0; i<30; i++) {
+            for (int j = 0; j < 13; j++) {
+                tabAReturn[count] = this.map[i][j];
+                count+=1;
             }
-            creerCarreMilieu();
+            tabAReturn[count] = 0; // position map[Y][14]
+            count+=1;
+        }
+        return tabAReturn;
+
+    }
+
+    private int[][] ajouteBordure2D(){
+        int[][] tabAReturn = new int[14][30]; // tableau
+
+        for (int i=0; i<13; i++) {
+            for (int j = 0; j < 30; j++) {
+                tabAReturn[i][j] = this.map[i][j];
+
+            }
+
+        }
+        for (int j = 0; j < 30; j++) {
+            tabAReturn[13][j] = 1;
+        }
+        return tabAReturn;
+    }
+
+    private void enleveBordure2D(int[][] tabAReturn){
+        for (int i=0; i<13; i++) {
+            for (int j = 0; j < 30; j++) {
+                this.map[i][j] = tabAReturn[i][j] ;
+            }
 
         }
     }
 
-    public boolean estRemplacable(int x , int y){
+    private void affineMapV4(){
+        this.affineMap();
+        creerCarreMilieu();
+        int[][] mapPourAffine = this.ajouteBordure2D();
+
+        for (int m = 0 ; m<16 ;m++){
+            affiche();
+            for (int i=1; i<mapPourAffine.length-1; i++) {
+                for (int j = 1; j < mapPourAffine[0].length - 1; j++) {
+
+                    if (estRemplacable(mapPourAffine,i,j)) {
+                        mapPourAffine[i][j] = 0;
+                    }
+
+                }
+
+//                    k = 0;
+//                    // amélioration vertical
+//                    while (k+j<mapPourAffine.length-1 ){
+//                        if (mapPourAffine[i][j+k]==0) {
+//                            for (int l = k ; l > 0 ; l--){
+//                                emplacemenVertical = j+l;
+//                                if (estRemplacable(mapPourAffine,i,emplacemenVertical)) {
+//                                    mapPourAffine[i][emplacemenVertical] = 0;
+//                                }
+//                            }
+//                        }
+//                        k++;
+//                    }
+//                }
+            }
+
+            this.enleveBordure2D(mapPourAffine);
+            creerCarreMilieu();
+
+        }
+        System.out.println("--------------------------------------");
+    }
+
+    private boolean estRemplacable(int x , int y){
         return (
                 // ---------------------- cul de sac ------------------
                 (
@@ -614,6 +627,100 @@ public class MapGenerator {
                         && this.map[x+1][y-1] > 1      // NN1
                         && this.map[x+1][y] > 1        // NX1
                         && this.map[x+1][y+1] > 1      // N11
+                )
+        );
+    }
+    private boolean estRemplacable(int[][] mapAAffine,int x , int y){
+        return (
+                // ---------------------- cul de sac ------------------
+                (
+                        mapAAffine[x][y+1] < 2       //cas1:NNN
+                        && mapAAffine[x+1][y] < 2    //     0X0
+                        && mapAAffine[x-1][y] < 2    //     N0N
+                )
+
+                ||
+
+                (
+                        mapAAffine[x][y-1] < 2       //cas2:N0N
+                        && mapAAffine[x+1][y] < 2    //     0X0
+                        && mapAAffine[x-1][y] < 2    //     NNN
+                )
+
+                ||
+
+                (
+                        mapAAffine[x][y-1] < 2
+                        && mapAAffine[x][y+1] < 2   //cas3:N0N
+                                                    //     0XN
+                        && mapAAffine[x-1][y] < 2    //     N0N
+                )
+                ||
+
+                (
+                        mapAAffine[x][y-1] < 2
+                        && mapAAffine[x][y+1] < 2    //cas4:N0N
+                        && mapAAffine[x+1][y] < 2    //     NX0
+                                                    //     N0N
+                )
+            // ------------------- coude
+                ||
+
+                (
+                        mapAAffine[x+1][y] > 1            // cas 5:
+                        && mapAAffine[x-1][y-1] > 1       // 111
+                        && mapAAffine[x][y-1] > 1         // NX1
+                        && mapAAffine[x+1][y-1] > 1       // NNN
+                )
+                ||
+                (
+                        mapAAffine[x-1][y] > 1            // cas 6:
+                        && mapAAffine[x-1][y-1] > 1       // 111
+                        && mapAAffine[x][y-1] > 1         // 1XN
+                        && mapAAffine[x+1][y-1] > 1       // NNN
+                )
+                ||
+                (
+                        mapAAffine[x][y+1] > 1            // cas 7:
+                        && mapAAffine[x-1][y-1] > 1       // 1NN
+                        && mapAAffine[x-1][y] > 1         // 1XN
+                        && mapAAffine[x-1][y+1] > 1       // 11N
+                )
+                ||
+                (
+                        mapAAffine[x-1][y] > 1            // cas 8:
+                        && mapAAffine[x-1][y-1] > 1       // 11N
+                        && mapAAffine[x][y-1] > 1         // 1XN
+                        && mapAAffine[x-1][y+1] > 1       // 1NN
+                )
+                ||
+
+                (
+                        mapAAffine[x-1][y] > 1            // cas 9:
+                        && mapAAffine[x-1][y+1] > 1       // NNN
+                        && mapAAffine[x][y+1] > 1         // 1XN
+                        && mapAAffine[x+1][y+1] > 1       // 111
+                )
+                ||
+                (
+                        mapAAffine[x+1][y] > 1            // cas 10:
+                        && mapAAffine[x-1][y+1] > 1       // NNN
+                        && mapAAffine[x][y+1] > 1         // NX1
+                        && mapAAffine[x+1][y+1] > 1       // 111
+                )
+                ||
+                (
+                        mapAAffine[x][y-1] > 1            // cas 11:
+                        && mapAAffine[x+1][y-1] > 1       // N11
+                        && mapAAffine[x+1][y] > 1         // NX1
+                        && mapAAffine[x+1][y+1] > 1       // NN1
+                )
+                ||
+                (
+                        mapAAffine[x][y+1] > 1           // cas 12:
+                        && mapAAffine[x+1][y-1] > 1      // NN1
+                        && mapAAffine[x+1][y] > 1        // NX1
+                        && mapAAffine[x+1][y+1] > 1      // N11
                 )
         );
     }
@@ -783,14 +890,13 @@ public class MapGenerator {
     }
 
     public void afficheMapPasFini2(){
-        for (int i=0; i<map.length-1; i++) {
-            for (int j=0; j<map[0].length-1; j++) {
+        for (int i=0; i<map.length; i++) {
+            for (int j=0; j<map[0].length; j++) {
                 System.out.print(this.map[i][j]);
             }
             System.out.println();
         }
         System.out.println();
-
     }
 
 }

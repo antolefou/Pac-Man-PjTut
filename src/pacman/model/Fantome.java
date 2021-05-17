@@ -36,27 +36,27 @@ public class Fantome extends Group {
     private void initFantome() {
         switch (numFantome) {
             case 1:
-                initPosX = 241;
-                initPosY = 261;
+                initPosX = 240;
+                initPosY = 260;
                 break;
             case 2:
-                initPosX = 221;
-                initPosY = 281;
+                initPosX = 220;
+                initPosY = 280;
                 break;
             case 3:
-                initPosX = 241;
-                initPosY = 281;
+                initPosX = 240;
+                initPosY = 280;
                 break;
             case 4:
-                initPosX = 261;
-                initPosY = 281;
+                initPosX = 260;
+                initPosY = 280;
                 break;
         }
         imageView = new ImageView(this.imageFantome);
         imageView.setX(initPosX);
         imageView.setY(initPosY);
-        imageView.setFitWidth(Map.TAILLE_CASE-2);
-        imageView.setFitHeight(Map.TAILLE_CASE-2);
+        imageView.setFitWidth(Map.TAILLE_CASE);
+        imageView.setFitHeight(Map.TAILLE_CASE);
     }
 
     public void avanceDroite() {
