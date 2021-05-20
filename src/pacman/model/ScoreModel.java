@@ -35,9 +35,15 @@ public class ScoreModel {
     }
 
     public void triTab() {
+        Pacman pac = new Pacman();
         int t = 0;
         String n;
         boolean p;
+
+        if (pac.nbVie == 0){
+            scoreActuel = pac.score;
+
+        }
 
         do {
             p = false;
@@ -59,11 +65,11 @@ public class ScoreModel {
         }
     }
 
-    /*public void TriScore(){
+    public void TriScore() {
         Pacman pac = new Pacman();
         scoreActuel = pac.score;
+
     }
-     */
 
     public void reecritureTxt() throws IOException {
 

@@ -20,6 +20,7 @@ import java.util.Objects;
 
 public class Controller {
 ModelMusic modelMusic;
+static Stage primaryStage ;
 
 
     public Controller() {
@@ -33,7 +34,7 @@ ModelMusic modelMusic;
         modelMusic.stopAllMusic();
 //        System.out.println(((Node) event.getSource()).getId());
         Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/"+ ((Node) event.getSource()).getId() +".fxml")));
-        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        if (primaryStage  == null) primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         primaryStage.setScene(new Scene(scoreView));
         primaryStage.sizeToScene();
         primaryStage.show();

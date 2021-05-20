@@ -1,16 +1,20 @@
 package pacman.controller;
 
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pacman.model.FantomeGroup;
 import pacman.model.Map;
@@ -50,17 +54,23 @@ public class ControllerJouer extends Controller  implements EventHandler<KeyEven
     }
 
     @FXML
-    public void viePac(){
-        ImageView tabVie[] = {vie1,vie2,vie3,vie4,vie5};
+    public void viePac() throws IOException {
+        ImageView[] tabVie = {vie1,vie2,vie3,vie4,vie5};
         ImageView vie;
 
         pacman.nbVie--;
         vie = tabVie[pacman.nbVie];
         vie.setImage(null);
 
+        if (pacman.nbVie == 0){
+            Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/gameOver.fxml")));
+            primaryStage.setScene(new Scene(scoreView));
+            primaryStage.sizeToScene();
+            primaryStage.show();
+            scoreView.requestFocus();
+        }
+
     }
-
-
 
     @Override
     public void handle(KeyEvent keyEvent) {

@@ -3,11 +3,14 @@ package pacman.controller;
 
 import javafx.application.Platform;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import pacman.model.*;
 import pacman.model.FantomeGroup;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class ControllerDeplacement extends Thread {
@@ -18,6 +21,7 @@ public class ControllerDeplacement extends Thread {
     ControllerJouer controller;
     Thread scoreThread;
     Label scoreLabel;
+
 
     public enum Deplacements {AUCUN, HAUT, DROITE, BAS, GAUCHE}
 
@@ -118,7 +122,6 @@ public class ControllerDeplacement extends Thread {
                         pacman.score += 100;
                         pacman.initSuperPacGomme();
                         fantomeGroup.setFantomeVulnerable();
-                        //Test si updateVie() marchait, c'est ok
                         // il faudra réduire la vitesse des fantomes et les mettre mangeables
                     } else if (map.grid[(((int) pacmanX / 20) + 25) % 25][(int) pacmanY / 20] == Map.ValeurCase.BOOST) {
                         map.grid[(((int) pacmanX / 20) + 25) % 25][(int) pacmanY / 20] = Map.ValeurCase.VIDE;
@@ -284,7 +287,11 @@ public class ControllerDeplacement extends Thread {
     public void updateVie(){
         scoreThread = new Thread(()->{
             Platform.runLater(()->{
-                controller.viePac();
+                try {
+                    controller.viePac();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             });
         });
         scoreThread.start();
