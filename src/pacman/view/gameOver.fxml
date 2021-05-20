@@ -16,21 +16,21 @@
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: black;"  VBox.vgrow="ALWAYS">
       <children>
 
-            <ImageView fitHeight="44.0" fitWidth="200.0" layoutX="248.0" layoutY="35.0">
+            <ImageView fitHeight="84.0" fitWidth="250.0" layoutX="320.0" layoutY="60.0">
                <image>
                   <Image url="@../ressources/image/Game_over_screen/GameOverTitre.png" />
                </image>
             </ImageView>
 
-            <ImageView fitHeight="101.0" fitWidth="337.0" layoutX="303.0" layoutY="135.0">
+            <ImageView fitHeight="105.0" fitWidth="350.0" layoutX="450.0" layoutY="250.0">
                <image>
                   <Image url="@../ressources/image/Game_over_screen/ImageGameOver.png" />
                </image>
             </ImageView>
 
-            <Button fx:id="jouer" layoutX="173.0" layoutY="278.0" mnemonicParsing="false" style="-fx-background-color: black;" onAction="#switchToScene">
+            <Button fx:id="jouer" layoutX="250.0" layoutY="500.0" mnemonicParsing="false" style="-fx-background-color: black;" onAction="#switchToScene">
                <graphic>
-                  <ImageView fitHeight="18.0" fitWidth="276.0">
+                  <ImageView fitHeight="18.0" fitWidth="286.0">
                      <image>
                         <Image url="@../ressources/image/Game_over_screen/rejouerBoutton.png" />
                      </image>
@@ -38,7 +38,7 @@
                </graphic>
             </Button>
 
-            <Button fx:id="menu" layoutX="212.0" layoutY="306.0" mnemonicParsing="false"  style="-fx-background-color: black;" onAction="#switchToScene">
+            <Button fx:id="menu" layoutX="295.0" layoutY="520.0" mnemonicParsing="false"  style="-fx-background-color: black;" onAction="#switchToScene">
                <graphic>
                   <ImageView fitHeight="11.0" fitWidth="199.0">
                      <image>
