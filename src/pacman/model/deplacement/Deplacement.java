@@ -14,14 +14,12 @@ public class Deplacement extends Group {
     private int posX;
     private int posY;
 
-    public int velocity = 1;
+    public final int VELOCITY = 1;
     public int velocityMultiplicator = 2;
 
     public enum deplacements {AUCUN, HAUT, DROITE, BAS, GAUCHE}
-    public deplacements deplacementPasse = deplacements.AUCUN;
-    public deplacements deplacementActuel = deplacements.AUCUN;
-    public deplacements deplacementFutur = deplacements.AUCUN;
 
+    public deplacements deplacementActuel = deplacements.AUCUN;
 
 
 
@@ -47,21 +45,21 @@ public class Deplacement extends Group {
 
 
     public void avanceHaut() {
-        this.posY -= this.velocity;
+        this.posY -= this.VELOCITY;
     }
 
     public void avanceDroite() {
         if (posX == 501) posX = 1;
-        this.posX += this.velocity;;
+        this.posX += this.VELOCITY;;
     }
 
     public void avanceBas() {
-        this.posY += this.velocity;;
+        this.posY += this.VELOCITY;;
     }
 
     public void avanceGauche() {
         if (posX == 1) posX = 501;
-        this.posX -= this.velocity;;
+        this.posX -= this.VELOCITY;;
     }
 
     public void affichage() {

@@ -17,6 +17,8 @@ public class Pacman extends Deplacement {
     private boolean powerSuperPacGomme;
     private long debutSuperPacGomme;
 
+    public deplacements deplacementFutur = deplacements.AUCUN;
+
 
     public Pacman() {
         super(241, 321);
