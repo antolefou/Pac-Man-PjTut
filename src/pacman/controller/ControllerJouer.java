@@ -40,6 +40,9 @@ public class ControllerJouer extends Controller  implements EventHandler<KeyEven
 
     public ControllerJouer() {
 
+        modelMusic.stopAllMusic();
+        modelMusic.music("theme", true);
+
         modelMusic.music("chomp", true);
     }
 

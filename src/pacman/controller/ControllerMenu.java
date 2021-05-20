@@ -15,7 +15,10 @@ public class ControllerMenu extends Controller{
     @FXML ImageView fleche5;
 
     public ControllerMenu() {
-
+        if (!modelMusic.isPlaying("menu")) {
+            modelMusic.stopAllMusic();
+            modelMusic.music("menu", true);
+        }
     }
 
     public void affiche_fleche1(MouseEvent mouseEvent) {

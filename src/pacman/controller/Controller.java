@@ -19,19 +19,19 @@ import java.util.Objects;
 
 
 public class Controller {
-ModelMusic modelMusic;
+static ModelMusic modelMusic;
 static Stage primaryStage ;
 
 
     public Controller() {
-        modelMusic = new ModelMusic();
-        modelMusic.music("theme", true);
+        if(Controller.modelMusic == null) {
+            Controller.modelMusic = new ModelMusic();
+        }
     }
 
 
     @FXML
     public void switchToScene(ActionEvent event) throws IOException {
-        modelMusic.stopAllMusic();
 //        System.out.println(((Node) event.getSource()).getId());
         Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/"+ ((Node) event.getSource()).getId() +".fxml")));
         if (primaryStage  == null) primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
