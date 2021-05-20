@@ -4,7 +4,6 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.jgrapht.Graph;
-import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
@@ -13,23 +12,21 @@ public class Map extends Group {
 
     public enum ValeurCase { VIDE, GOMME, SUPERGOMME, MUR, BOOST, INTERDIT}
 
-    private int nbCaseX = 25;
-    private int nbCaseY = 30;
+    private final int NB_CASE_X = 25;
+    private final int NB_CASE_Y = 30;
 
     public MapGenerator mapGenerator;
 
     public String[][] mapGeneree;
     public ValeurCase[][] grid;
     public ImageView[][] caseMap;
-    public Image imagePacmanHaut;
-    public Image imagePacmanDroite;
-    public Image imagePacmanBas;
-    public Image imagePacmanGauche;
+//    Images
     public Image imageMur;
     public Image imageGomme;
     public Image imageSuperGomme;
     public Image imageBoost;
     public Image imageMurFantome;
+//    Graphe
     public Graph<String, DefaultEdge> g;
     public String[][] grilleGraph;
 
@@ -42,10 +39,6 @@ public class Map extends Group {
      *      S  -> super gomme
      */
     public Map() {
-        this.imagePacmanHaut = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanUp.gif"));
-        this.imagePacmanDroite = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanRight.gif"));
-        this.imagePacmanBas = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanDown.gif"));
-        this.imagePacmanGauche = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanLeft.gif"));;
         this.imageMur = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/wall.png"));
         this.imageGomme = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/Gomme.png"));
         this.imageSuperGomme = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/SuperGomme.png"));
@@ -55,13 +48,15 @@ public class Map extends Group {
         mapGenerator = new MapGenerator();
         mapGenerator.initObjet(5, 3);
         mapGeneree = mapGenerator.getMap();
+//        Vide mapGeneree
+        mapGenerator = null;
         initialiseMapGeneree();
         initGraph();
         afficheMap();
     }
 
     private void initialiseMapGeneree() {
-        grid = new ValeurCase[this.nbCaseX][this.nbCaseY];
+        grid = new ValeurCase[this.NB_CASE_X][this.NB_CASE_Y];
         for (int i=0; i<25; i++) {
             for (int j=0; j<30; j++) {
                 switch (mapGeneree[i][j]) {
@@ -122,9 +117,9 @@ public class Map extends Group {
      * Construit une grilles d'Imageview
      */
     public void afficheMap() {
-        this.caseMap = new ImageView[this.nbCaseX][this.nbCaseY];
-        for (int i = 0; i < this.nbCaseX; i++) {
-            for (int j = 0; j < this.nbCaseY; j++) {
+        this.caseMap = new ImageView[this.NB_CASE_X][this.NB_CASE_Y];
+        for (int i = 0; i < this.NB_CASE_X; i++) {
+            for (int j = 0; j < this.NB_CASE_Y; j++) {
                 this.caseMap[i][j] = new ImageView();
                 this.caseMap[i][j].setX((double)i * TAILLE_CASE);
                 this.caseMap[i][j].setY((double)j * TAILLE_CASE);
@@ -152,8 +147,8 @@ public class Map extends Group {
      * Construit une grilles d'Imageview
      */
     public void miseAJourMap() {
-        for (int i = 0; i < this.nbCaseX; i++) {
-            for (int j = 0; j < this.nbCaseY; j++) {
+        for (int i = 0; i < this.NB_CASE_X; i++) {
+            for (int j = 0; j < this.NB_CASE_Y; j++) {
                 //affichage de la map
                 if (this.grid[i][j] == ValeurCase.MUR) {
                     this.caseMap[i][j].setImage(this.imageMur);
@@ -172,8 +167,8 @@ public class Map extends Group {
     }
 
     public boolean aGagne() {
-        for (int i = 0; i < this.nbCaseX; i++) {
-            for (int j = 0; j < this.nbCaseY; j++) {
+        for (int i = 0; i < this.NB_CASE_X; i++) {
+            for (int j = 0; j < this.NB_CASE_Y; j++) {
                 if (grid[i][j] != ValeurCase.INTERDIT &&  grid[i][j] != ValeurCase.MUR &&  grid[i][j] != ValeurCase.VIDE) {
                     return false;
                 }
@@ -182,9 +177,9 @@ public class Map extends Group {
         return true;
     }
 
-    public void recommence() {
+    public void recommence(int i) {
         mapGenerator = new MapGenerator();
-        mapGenerator.initObjet(5, 3);
+        mapGenerator.initObjet(5, 4);
         mapGeneree = mapGenerator.getMap();
         initialiseMapGeneree();
         miseAJourMap();

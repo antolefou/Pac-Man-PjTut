@@ -54,16 +54,10 @@ public class ScoreModel {
             }
         } while (p);
 
-        for (int i = 0; i< tab.length;i++){
+//        for (int i = 0; i< tab.length;i++){
 //            System.out.println("Tableau trié : " + tab[i][0] + " : " + tab[i][1] );
-        }
+//        }
     }
-
-    /*public void TriScore(){
-        Pacman pac = new Pacman();
-        scoreActuel = pac.score;
-    }
-     */
 
     public void reecritureTxt() throws IOException {
 

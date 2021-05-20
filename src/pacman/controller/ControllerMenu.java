@@ -14,12 +14,10 @@ public class ControllerMenu extends Controller{
     @FXML ImageView fleche4;
     @FXML ImageView fleche5;
 
-    public ControllerMenu() {
-
-    }
+    public ControllerMenu() {}
 
     public void affiche_fleche1(MouseEvent mouseEvent) {
-        Image image = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Accueil/pacman_fleche.png"));
+        Image image = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Menu/pacman_fleche.png"));
         fleche1.setImage(image);
     }
     public void enlever_fleche1(MouseEvent mouseEvent) {
@@ -27,7 +25,7 @@ public class ControllerMenu extends Controller{
     }
 
     public void affiche_fleche2(MouseEvent mouseEvent) {
-        Image image = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Accueil/pacman_fleche.png"));
+        Image image = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Menu/pacman_fleche.png"));
         fleche2.setImage(image);
     }
     public void enlever_fleche2(MouseEvent mouseEvent) {
@@ -35,7 +33,7 @@ public class ControllerMenu extends Controller{
     }
 
     public void affiche_fleche3(MouseEvent mouseEvent) {
-        Image image = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Accueil/pacman_fleche.png"));
+        Image image = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Menu/pacman_fleche.png"));
         fleche3.setImage(image);
     }
     public void enlever_fleche3(MouseEvent mouseEvent) {
@@ -43,7 +41,7 @@ public class ControllerMenu extends Controller{
     }
 
     public void affiche_fleche4(MouseEvent mouseEvent) {
-        Image image = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Accueil/pacman_fleche.png"));
+        Image image = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Menu/pacman_fleche.png"));
         fleche4.setImage(image);
     }
     public void enlever_fleche4(MouseEvent mouseEvent) {
@@ -51,7 +49,7 @@ public class ControllerMenu extends Controller{
     }
 
     public void affiche_fleche5(MouseEvent mouseEvent) {
-        Image image = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Accueil/pacman_fleche.png"));
+        Image image = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Menu/pacman_fleche.png"));
         fleche5.setImage(image);
     }
     public void enlever_fleche5(MouseEvent mouseEvent) {

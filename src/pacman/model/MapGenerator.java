@@ -14,7 +14,6 @@ public class MapGenerator {
 
     public MapGenerator() {
         initMap();
-//        this.afficheMapPasFini2();
         creerTeleportateur();
         creerCarreMilieu();
         creerConstructeur();
@@ -22,132 +21,8 @@ public class MapGenerator {
 
 
         while(constructorX.size() != 0) construction();
-//        affiche();
-//        this.afficheMapPasFini2();
         affineMapV4();
-//        affiche();
         creerMapFinal();
-		/*construction();
-		construction();
-		construction();
-		construction();
-		construction();
-		construction();
-
-        affiche();
-
-        afficheFinal();
-        afficheTab();
-        System.out.println(constructorX);
-        System.out.println(constructorY);
-        System.out.println(constructorDir);*/
-    }
-
-
-    private void afficheMapPasFini(){
-        for (int i=0; i<map.length-1; i++) {
-            for (int j = 0; j < map[0].length - 1; j++) {
-                System.out.print("|"+this.map[i][j]);
-            }
-            System.out.println();
-            System.out.println("-------------------------------");
-        }
-        System.out.println();
-    }
-
-    private void affiche() {
-        for (int i=0; i<map[0].length; i++) {
-            for (int j=0; j<map.length; j++) {
-                switch(map[j][i]) {
-                    case 0:
-                        // Pas défini
-                        System.out.print("\033[41m \033[0m");
-                        break;
-                    case 1:
-                        // Mur
-                        System.out.print("\033[44m \033[0m");
-                        break;
-                    case 2:
-                        // Chemin
-                        System.out.print("\033[40m \033[0m");
-                        break;
-                    case 3:
-                        // interdit
-                        System.out.print("\033[47m \033[0m");
-                        break;
-                    default:
-                        // Default
-                        System.out.print("\033[44m \033[0m");
-
-                }
-            }
-            System.out.println("");
-        }
-        System.out.println("");
-    }
-    private void affiche2() {
-        for (int i=0; i<map.length; i++) {
-            for (int j=0; j<map[0].length; j++) {
-                switch(map[i][j]) {
-                    case 0:
-                        // Pas défini
-                        System.out.print("\033[41m \033[0m");
-                        break;
-                    case 1:
-                        // Mur
-                        System.out.print("\033[44m \033[0m");
-                        break;
-                    case 2:
-                        // Chemin
-                        System.out.print("\033[40m \033[0m");
-                        break;
-                    case 3:
-                        // interdit
-                        System.out.print("\033[47m \033[0m");
-                        break;
-                    default:
-                        // Default
-                        System.out.print("\033[44m \033[0m");
-
-                }
-            }
-            System.out.println("");
-        }
-        System.out.println("");
-    }
-//    public void afficheFinal() {
-//        for (int i=0; i<mapfinal[0].length; i++) {
-//            for (int j=0; j<mapfinal.length; j++) {
-//                switch(mapfinal[j][i]) {
-//                    case "M":
-//                        // Mur 44
-//                        System.out.print("\033[44m \033[0m");
-//                        break;
-//                    case "G":
-//                        // Gomme
-//                        System.out.print("\033[40m \033[0m");
-//                        break;
-//                    case "Autre":
-//                        // Pas encore defini
-//                        System.out.print("\033[46m \033[0m");
-//                        break;
-//                    default:
-//                        // Default
-//                        System.out.print("\033[47m \033[0m");
-//
-//                }
-//            }
-//            System.out.println("");
-//        }
-//    }
-
-    private void afficheTab() {
-        for (int i=0; i<mapfinal[0].length; i++) {
-            for (int j=0; j<mapfinal.length; j++) {
-                System.out.print(mapfinal[j][i]);
-            }
-            System.out.println("");
-        }
     }
 
     private void initMap() {
@@ -457,21 +332,6 @@ public class MapGenerator {
         }
     }
 
-    private int[] ajouteBordure1D(){
-        int[] tabAReturn = new int[420]; // tableau [30][14]
-        int count = 0;
-        for (int i=0; i<30; i++) {
-            for (int j = 0; j < 13; j++) {
-                tabAReturn[count] = this.map[i][j];
-                count+=1;
-            }
-            tabAReturn[count] = 0; // position map[Y][14]
-            count+=1;
-        }
-        return tabAReturn;
-
-    }
-
     private int[][] ajouteBordure2D(){
         int[][] tabAReturn = new int[14][30]; // tableau
 
@@ -756,47 +616,6 @@ public class MapGenerator {
                     && this.map[y+1][x-1] > 0       // 1NN
                 )
         );
-    }
-
-    private void amelioreMap() {
-
-        for (int i=0; i<map.length-3; i++) {
-            for (int j=0; j<map[0].length-2; j++) {
-                if (map[i][j] == 2 && map[i+1][j] == 2
-                        && map[i+2][j] == 2 && map[i+3][j] == 2
-                        && map[i][j+1] == 2 && map[i+1][j+1] == 2
-                        && map[i+2][j+1] == 2 && map[i+3][j+1] == 2
-                        && map[i][j+2] == 2 && map[i+1][j+2] == 2
-                        && map[i+2][j+2] == 2 && map[i+3][j+2] == 2) {
-                    map[i+1][j+1] = 1;
-                    map[i+2][j+1] = 1;
-                }
-            }
-        }
-        for (int i=0; i<map.length-3; i++) {
-            for (int j=0; j<map[0].length-2; j++) {
-                if(map[i][j] == 2 && map[i+1][j] == 2
-                        && map[i+2][j] == 2
-                        && map[i][j+1] == 1 && map[i+1][j+1] == 2
-                        && map[i+2][j+1] == 2
-                        && map[i][j+2] == 2 && map[i+1][j+2] == 2
-                        && map[i+2][j+2] == 2) {
-                    map[i+2][j+1] = 1;
-                }
-            }
-        }
-        for (int i=0; i<map.length-3; i++) {
-            for (int j=0; j<map[0].length-2; j++) {
-                if(map[i][j] == 2 && map[i+1][j] == 2
-                        && map[i+2][j] == 2
-                        && map[i][j+1] == 1 && (map[i+1][j+1] == 2 || map[i+1][j+1] == 1)
-                        && map[i+2][j+1] == 1
-                        && map[i][j+2] == 2 && map[i+1][j+2] == 2
-                        && map[i+2][j+2] == 2) {
-                    map[i+2][j+1] = 1;
-                }
-            }
-        }
     }
 
     /**

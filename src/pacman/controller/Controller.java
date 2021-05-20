@@ -7,30 +7,22 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import pacman.model.ModelMusic;
+import pacman.model.Utilisateur;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Objects;
 
 
 public class Controller {
-ModelMusic modelMusic;
-
+    public Utilisateur utilisateur;
 
     public Controller() {
-        modelMusic = new ModelMusic();
-        modelMusic.music("theme", true);
+        this.utilisateur = new Utilisateur();
     }
 
 
     @FXML
     public void switchToScene(ActionEvent event) throws IOException {
-        modelMusic.stopAllMusic();
 //        System.out.println(((Node) event.getSource()).getId());
         Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/"+ ((Node) event.getSource()).getId() +".fxml")));
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -39,7 +31,4 @@ ModelMusic modelMusic;
         primaryStage.show();
         scoreView.requestFocus();
     }
-
-
-
 }

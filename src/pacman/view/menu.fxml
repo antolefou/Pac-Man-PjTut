@@ -13,7 +13,7 @@
                <Pane maxHeight="600.0" maxWidth="800" minHeight="600" minWidth="800" prefWidth="800.0" BorderPane.alignment="CENTER">
                 <ImageView fx:id="pacman_image" fitHeight="354.0" fitWidth="400.0" layoutX="200.5" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../ressources/image/Accueil/image_pac_fantome.png" />
+                        <Image url="@../ressources/image/Menu/image_pac_fantome.png" />
                     </image>
                 </ImageView>
 

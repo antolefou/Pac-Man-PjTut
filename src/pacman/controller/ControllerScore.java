@@ -1,19 +1,10 @@
 package pacman.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 import pacman.model.ScoreModel;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Objects;
-import java.util.Scanner;
 
 public class ControllerScore extends Controller {
 
@@ -28,14 +19,14 @@ public class ControllerScore extends Controller {
     public Label Nom4;
     public Label Nom5;
 
-    ScoreModel scoreModel = new ScoreModel();
+    public ScoreModel scoreModel;
 
     public ControllerScore() {
     }
 
-
     @FXML
     public void initialize() throws IOException {
+        scoreModel = new ScoreModel();
 
         scoreModel.lectureTxt();
         scoreModel.triTab();
@@ -53,7 +44,12 @@ public class ControllerScore extends Controller {
         Nom3.setText(String.valueOf(scoreModel.tab[2][0]));
         Nom4.setText(String.valueOf(scoreModel.tab[3][0]));
         Nom5.setText(String.valueOf(scoreModel.tab[4][0]));
+    }
 
+    @Override
+    public void switchToScene(ActionEvent event) throws IOException {
+        super.switchToScene(event);
+        scoreModel = null;
     }
 }
 
