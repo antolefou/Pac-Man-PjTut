@@ -13,8 +13,10 @@ import java.io.IOException;
 import java.util.Objects;
 
 
+
 public class Controller {
     public Utilisateur utilisateur;
+    public static Stage primaryStage;
 
     public Controller() {
         this.utilisateur = new Utilisateur();
@@ -25,10 +27,11 @@ public class Controller {
     public void switchToScene(ActionEvent event) throws IOException {
 //        System.out.println(((Node) event.getSource()).getId());
         Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/"+ ((Node) event.getSource()).getId() +".fxml")));
-        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        if (primaryStage  == null) primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         primaryStage.setScene(new Scene(scoreView));
         primaryStage.sizeToScene();
         primaryStage.show();
         scoreView.requestFocus();
     }
+
 }

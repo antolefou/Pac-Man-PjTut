@@ -1,5 +1,7 @@
 package pacman.model;
 
+import pacman.model.deplacement.Pacman;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -76,6 +78,31 @@ public class ScoreModel {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void TriScore(Pacman pac) throws IOException {
+        lectureTxt();
+        triTab();
+        scoreActuel = pac.score;
+        //System.out.println(scoreActuel);
+        if (pac.nbVie == 0){
+            if (scoreActuel > (int) tab[0][1]) {
+                //System.out.println("Ligne 1 du tableau avant chanement : " + (int) tab[0][1]);
+                tab[0][1] = scoreActuel;
+                String nom = "NomTest";
+                tab[0][0] = nom;
+            }
+            for (int i = 1; i< tab.length; i++){
+                if ((int) tab[i][1] > scoreActuel && scoreActuel > (int) tab[i+1][1]){
+                    tab[i+1][1] = scoreActuel;
+                    tab[i+1][0] = "Nom " + i;
+                }
+            }
+        }
+
+        //System.out.println("Ligne 1 du tableau : " + (int) tab[0][1]);
+        reecritureTxt();
+
     }
 
     public int getMeilleurScore() {

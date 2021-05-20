@@ -2,6 +2,9 @@ package pacman.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -10,6 +13,7 @@ import javafx.scene.input.KeyEvent;
 import pacman.model.deplacement.*;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import pacman.model.*;
 
@@ -32,7 +36,7 @@ public class ControllerJouer extends Controller {
     }
 
     public void initialize() {
-        this.updateRender = new UpdateRender(this.utilisateur, labelScore,  map, pacman, fantomeGroup);
+        this.updateRender = new UpdateRender(this,this.utilisateur, labelScore,  map, pacman, fantomeGroup);
         updateRender.jouer();
 
         // affichage meileur score
@@ -40,6 +44,27 @@ public class ControllerJouer extends Controller {
         this.scoreModel.lectureTxt();
         meilleurscore.setText(String.valueOf(scoreModel.getMeilleurScore()));
     }
+
+    @FXML
+    public void viePac() throws IOException {
+        ImageView[] tabVie = {vie1,vie2,vie3,vie4,vie5};
+        ImageView vie;
+
+        scoreModel.TriScore(this.pacman);
+        pacman.nbVie--;
+        vie = tabVie[pacman.nbVie];
+        vie.setImage(null);
+
+        if (pacman.nbVie == 0){
+            Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/gameOver.fxml")));
+            primaryStage.setScene(new Scene(scoreView));
+            primaryStage.sizeToScene();
+            primaryStage.show();
+            scoreView.requestFocus();
+        }
+
+    }
+
 
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();

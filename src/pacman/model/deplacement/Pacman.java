@@ -1,14 +1,21 @@
 package pacman.model.deplacement;
 
+import javafx.application.Platform;
 import javafx.scene.image.Image;
+import pacman.controller.ControllerJouer;
 import pacman.model.Map;
 import pacman.model.deplacement.Deplacement;
 
+import java.io.IOException;
+
 public class Pacman extends Deplacement {
+    private ControllerJouer controllerJouer;
     public boolean enVie = true;
     public int numNiveau = 1;
     // Score de pacman
     public int score = 0;
+    // Nombre de vie de pacman
+    public int nbVie = 5;
     // ------------ OBJET BONUS -------------
     // objet bonus: boost
     private boolean powerBoost;
@@ -160,6 +167,17 @@ public class Pacman extends Deplacement {
             } else if (map.grid[x][y] == Map.ValeurCase.SUPERGOMME) {
                 map.grid[x][y] = Map.ValeurCase.VIDE;
                 map.caseMap[x][y].setImage(null);
+
+                /*
+                Platform.runLater(()->{
+                    try {
+                        controllerJouer.viePac();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                 */
+
                 score += 50;
                 this.initSuperPacGomme();
             } else if (map.grid[x][y] == Map.ValeurCase.BOOST) {
@@ -207,5 +225,9 @@ public class Pacman extends Deplacement {
                 powerSuperPacGomme = false;
             }
         }
+    }
+
+    public void setControllerJouer(ControllerJouer controllerJouer) {
+        this.controllerJouer = controllerJouer;
     }
 }

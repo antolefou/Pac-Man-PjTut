@@ -2,8 +2,11 @@ package pacman.model.deplacement;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
+import pacman.controller.ControllerJouer;
 import pacman.model.Map;
 import pacman.model.Utilisateur;
+
+import java.io.IOException;
 
 public class UpdateRender extends Thread{
     private FantomeGroup fantomeGroup;
@@ -11,12 +14,14 @@ public class UpdateRender extends Thread{
     private final Label LABEL_SCORE;
     private final Map MAP;
     private final Pacman PACMAN;
+    private ControllerJouer controllerJouer;
     /*
     private final FantomeCampeur FantomeCAMPEUR;*/
     public Thread update;
     public Thread render;
 
-    public UpdateRender(Utilisateur utilisateur, Label labelScore, Map map, Pacman pacman, FantomeGroup fantomeGroup) {
+    public UpdateRender(ControllerJouer controllerJouer, Utilisateur utilisateur, Label labelScore, Map map, Pacman pacman, FantomeGroup fantomeGroup) {
+        this.controllerJouer = controllerJouer;
         this.UTILISATEUR = utilisateur;
         this.LABEL_SCORE = labelScore;
         this.MAP = map;
@@ -27,6 +32,7 @@ public class UpdateRender extends Thread{
         initialize();
     }
     public void initialize() {
+        this.PACMAN.setControllerJouer(controllerJouer);
         this.PACMAN.setMap(MAP);
         this.fantomeGroup.fantomes[0].setMap(MAP);
     }
