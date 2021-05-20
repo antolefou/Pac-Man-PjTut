@@ -7,10 +7,14 @@ import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
+import java.util.Objects;
+
 public class Map extends Group {
     public final static double TAILLE_CASE = 20.0;
 
-    public enum ValeurCase { VIDE, GOMME, SUPERGOMME, MUR, BOOST, INTERDIT}
+    public enum ValeurCase { VIDE, MUR, GOMME, SUPERGOMME, BOOST, INTERDIT
+                            , CERISE, FRAISE, ORANGE, POMME, MELON, VAISSEAU
+                            , CLOCHE, CLEF}
 
     private final int NB_CASE_X = 25;
     private final int NB_CASE_Y = 30;
@@ -26,6 +30,14 @@ public class Map extends Group {
     public Image imageSuperGomme;
     public Image imageBoost;
     public Image imageMurFantome;
+    public Image imageCerise;
+    public Image imageFraise;
+    public Image imageOrange;
+    public Image imagePomme;
+    public Image imageMelon;
+    public Image imageVaisseau;
+    public Image imageCloche;
+    public Image imageClef;
 //    Graphe
     public Graph<String, DefaultEdge> g;
     public String[][] grilleGraph;
@@ -39,14 +51,23 @@ public class Map extends Group {
      *      S  -> super gomme
      */
     public Map() {
-        this.imageMur = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/wall.png"));
-        this.imageGomme = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/Gomme.png"));
-        this.imageSuperGomme = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/SuperGomme.png"));
-        this.imageBoost = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/boost.png"));
-        this.imageMurFantome = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/murFantome.png"));
+        String src = "/pacman/ressources/image/Ecran_jouer/labyrinthe/";
+        this.imageMur = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src + "wall.png")));
+        this.imageGomme = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "Gomme.png")));
+        this.imageSuperGomme = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "SuperGomme.png")));
+        this.imageBoost = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "boost.png")));
+        this.imageMurFantome = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "murFantome.png")));
+        this.imageCerise = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "cerise.png")));
+        this.imageFraise = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "fraise.png")));
+        this.imageOrange = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "orange.png")));
+        this.imagePomme = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "pomme.png")));
+        this.imageMelon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "melon.png")));
+        this.imageVaisseau = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "vaisseau.png")));
+        this.imageCloche = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "cloche.png")));
+        this.imageClef = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "clef.png")));
 
         mapGenerator = new MapGenerator();
-        mapGenerator.initObjet(5, 3);
+        mapGenerator.initObjet(5, 3, 1);
         mapGeneree = mapGenerator.getMap();
 //        Vide mapGeneree
         mapGenerator = null;
@@ -60,6 +81,9 @@ public class Map extends Group {
         for (int i=0; i<25; i++) {
             for (int j=0; j<30; j++) {
                 switch (mapGeneree[i][j]) {
+                    case "V":
+                        this.grid[i][j] = ValeurCase.VIDE;
+                        break;
                     case "M":
                         this.grid[i][j] = ValeurCase.MUR;
                         break;
@@ -69,11 +93,35 @@ public class Map extends Group {
                     case "S":
                         this.grid[i][j] = ValeurCase.SUPERGOMME;
                         break;
+                    case "B":
+                        this.grid[i][j] = ValeurCase.BOOST;
+                        break;
                     case "I":
                         this.grid[i][j] = ValeurCase.INTERDIT;
                         break;
-                    case "B":
-                        this.grid[i][j] = ValeurCase.BOOST;
+                    case "C":
+                        this.grid[i][j] = ValeurCase.CERISE;
+                        break;
+                    case "F":
+                        this.grid[i][j] = ValeurCase.FRAISE;
+                        break;
+                    case "O":
+                        this.grid[i][j] = ValeurCase.ORANGE;
+                        break;
+                    case "P":
+                        this.grid[i][j] = ValeurCase.POMME;
+                        break;
+                    case "ME":
+                        this.grid[i][j] = ValeurCase.MELON;
+                        break;
+                    case "VA":
+                        this.grid[i][j] = ValeurCase.VAISSEAU;
+                        break;
+                    case "CLO":
+                        this.grid[i][j] = ValeurCase.CLOCHE;
+                        break;
+                    case "CLE":
+                        this.grid[i][j] = ValeurCase.CLEF;
                         break;
                 }
             }
@@ -136,6 +184,22 @@ public class Map extends Group {
                     this.caseMap[i][j].setImage(null);
                 } else if (this.grid[i][j] == ValeurCase.BOOST) {
                     this.caseMap[i][j].setImage(this.imageBoost);
+                } else if (this.grid[i][j] == ValeurCase.CERISE) {
+                    this.caseMap[i][j].setImage(this.imageCerise);
+                } else if (this.grid[i][j] == ValeurCase.FRAISE) {
+                    this.caseMap[i][j].setImage(this.imageFraise);
+                } else if (this.grid[i][j] == ValeurCase.ORANGE) {
+                    this.caseMap[i][j].setImage(this.imageOrange);
+                } else if (this.grid[i][j] == ValeurCase.POMME) {
+                    this.caseMap[i][j].setImage(this.imagePomme);
+                } else if (this.grid[i][j] == ValeurCase.MELON) {
+                    this.caseMap[i][j].setImage(this.imageMelon);
+                } else if (this.grid[i][j] == ValeurCase.VAISSEAU) {
+                    this.caseMap[i][j].setImage(this.imageVaisseau);
+                } else if (this.grid[i][j] == ValeurCase.CLOCHE) {
+                    this.caseMap[i][j].setImage(this.imageCloche);
+                } else if (this.grid[i][j] == ValeurCase.CLEF) {
+                    this.caseMap[i][j].setImage(this.imageClef);
                 }
                 this.getChildren().add(this.caseMap[i][j]);
             }
@@ -160,6 +224,22 @@ public class Map extends Group {
                     this.caseMap[i][j].setImage(null);
                 } else if (this.grid[i][j] == ValeurCase.BOOST) {
                     this.caseMap[i][j].setImage(this.imageBoost);
+                } else if (this.grid[i][j] == ValeurCase.CERISE) {
+                    this.caseMap[i][j].setImage(this.imageCerise);
+                } else if (this.grid[i][j] == ValeurCase.FRAISE) {
+                    this.caseMap[i][j].setImage(this.imageFraise);
+                } else if (this.grid[i][j] == ValeurCase.ORANGE) {
+                    this.caseMap[i][j].setImage(this.imageOrange);
+                } else if (this.grid[i][j] == ValeurCase.POMME) {
+                    this.caseMap[i][j].setImage(this.imagePomme);
+                } else if (this.grid[i][j] == ValeurCase.MELON) {
+                    this.caseMap[i][j].setImage(this.imageMelon);
+                } else if (this.grid[i][j] == ValeurCase.VAISSEAU) {
+                    this.caseMap[i][j].setImage(this.imageVaisseau);
+                } else if (this.grid[i][j] == ValeurCase.CLOCHE) {
+                    this.caseMap[i][j].setImage(this.imageCloche);
+                } else if (this.grid[i][j] == ValeurCase.CLEF) {
+                    this.caseMap[i][j].setImage(this.imageClef);
                 }
             }
         }
@@ -179,7 +259,7 @@ public class Map extends Group {
 
     public void recommence(int i) {
         mapGenerator = new MapGenerator();
-        mapGenerator.initObjet(5, 4);
+        mapGenerator.initObjet(5, 4, i);
         mapGeneree = mapGenerator.getMap();
         initialiseMapGeneree();
         miseAJourMap();

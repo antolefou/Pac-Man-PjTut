@@ -621,22 +621,46 @@ public class MapGenerator {
     /**
      * Ajoute les objets à la map
      */
-    public void initObjet(int nbSuperGomme, int nbBoost) {
+    public void initObjet(int nbSuperGomme, int nbBoost, int niveau) {
+        int nbFruit = 1;
+        String fruit = "";
+        if (niveau <= 1) {
+            nbFruit = 0;
+        } else if (niveau == 2) {
+            fruit = "C";
+        } else if (niveau == 3) {
+            fruit = "F";
+        } else if (niveau == 4) {
+            fruit = "O";
+        } else if (niveau == 5) {
+            fruit = "P";
+        } else if (niveau == 6) {
+            fruit = "ME";
+        } else if (niveau == 7) {
+            fruit = "VA";
+        } else if (niveau == 8) {
+            fruit = "CLO";
+        } else {
+            fruit = "CLE";
+        }
         int x,y;
-        while (nbSuperGomme != 0 || nbBoost != 0) {
+        while (nbSuperGomme != 0 || nbBoost != 0 || nbFruit !=0) {
+            x = (int) (Math.random() * (24+1));
+            y = (int) (Math.random() * (28-1+1) + 1);
             if (nbSuperGomme != 0) {
-                x = (int) (Math.random() * (24+1));
-                y = (int) (Math.random() * (28-1+1) + 1);
                 if (mapfinal[x][y].equals("G")) {
                     mapfinal[x][y] = "S";
                     nbSuperGomme--;
                 }
             } else if (nbBoost != 0) {
-                x = (int) (Math.random() * (24+1));
-                y = (int) (Math.random() * (28-1+1) + 1);
                 if (mapfinal[x][y].equals("G")) {
                     mapfinal[x][y] = "B";
                     nbBoost--;
+                }
+            } else  if (nbFruit != 0) {
+                if (mapfinal[x][y].equals("G")) {
+                    mapfinal[x][y] = fruit;
+                    nbFruit--;
                 }
             }
         }

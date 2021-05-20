@@ -167,7 +167,6 @@ public class Pacman extends Deplacement {
             } else if (map.grid[x][y] == Map.ValeurCase.SUPERGOMME) {
                 map.grid[x][y] = Map.ValeurCase.VIDE;
                 map.caseMap[x][y].setImage(null);
-
                 /*
                 Platform.runLater(()->{
                     try {
@@ -177,16 +176,47 @@ public class Pacman extends Deplacement {
                     }
                 });
                  */
-
                 score += 50;
                 this.initSuperPacGomme();
             } else if (map.grid[x][y] == Map.ValeurCase.BOOST) {
                 map.grid[x][y] = Map.ValeurCase.VIDE;
                 map.caseMap[x][y].setImage(null);
-                score += 100;
+                score += 50;
                 this.initPowerBoost();
             }else if (map.grid[x][y] == Map.ValeurCase.VIDE) {
                 // ne fait rien...
+            }else if (map.grid[x][y] == Map.ValeurCase.CERISE) {
+                map.grid[x][y] = Map.ValeurCase.VIDE;
+                map.caseMap[x][y].setImage(null);
+                score += 100;
+            }else if (map.grid[x][y] == Map.ValeurCase.FRAISE) {
+                map.grid[x][y] = Map.ValeurCase.VIDE;
+                map.caseMap[x][y].setImage(null);
+                score += 300;
+            }else if (map.grid[x][y] == Map.ValeurCase.ORANGE) {
+                map.grid[x][y] = Map.ValeurCase.VIDE;
+                map.caseMap[x][y].setImage(null);
+                score += 500;
+            }else if (map.grid[x][y] == Map.ValeurCase.POMME) {
+                map.grid[x][y] = Map.ValeurCase.VIDE;
+                map.caseMap[x][y].setImage(null);
+                score += 700;
+            }else if (map.grid[x][y] == Map.ValeurCase.MELON) {
+                map.grid[x][y] = Map.ValeurCase.VIDE;
+                map.caseMap[x][y].setImage(null);
+                score += 1000;
+            }else if (map.grid[x][y] == Map.ValeurCase.VAISSEAU) {
+                map.grid[x][y] = Map.ValeurCase.VIDE;
+                map.caseMap[x][y].setImage(null);
+                score += 2000;
+            }else if (map.grid[x][y] == Map.ValeurCase.CLOCHE) {
+                map.grid[x][y] = Map.ValeurCase.VIDE;
+                map.caseMap[x][y].setImage(null);
+                score += 3000;
+            }else if (map.grid[x][y] == Map.ValeurCase.CLEF) {
+                map.grid[x][y] = Map.ValeurCase.VIDE;
+                map.caseMap[x][y].setImage(null);
+                score += 5000;
             } else {
                 System.out.println("Execption dans l'interraction de pacman");
             }
@@ -216,7 +246,7 @@ public class Pacman extends Deplacement {
      */
     public void stopPower() {
         if (powerBoost) {
-            if (System.currentTimeMillis()-debutPowerBoost > 1000 * 5) {  // durée 5 sec
+            if (System.currentTimeMillis()-debutPowerBoost > 1000 * 50) {  // durée 5 sec
                 velocityMultiplicator = 2;
                 powerBoost = false;
             }
