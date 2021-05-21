@@ -12,6 +12,9 @@ public class Fantome extends Deplacement{
     public int positionXFinDeplacement;
     public int positionYFinDeplacement;
     public ArrayList<String> listeCoordoneDeplacementFant = new ArrayList<>();
+    public Pacman pacman;
+    public deplacements deplacementPasse = deplacements.AUCUN;
+
 
     public Fantome(int init_pos_x, int init_pos_y) {
         super(init_pos_x, init_pos_y);
@@ -69,5 +72,45 @@ public class Fantome extends Deplacement{
     }
 
     public void ia(){}
+
+
+    public boolean peutAvancerHorizontalement(Map map, int i) {
+        if (getPosY() % 20 == 1) {
+            if ((getPosX() % 20 != 1) || (map.grid[(((int)getPosX()/20)+i+25)%25][(int)getPosY()/20] != Map.ValeurCase.MUR)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean peutAvancerVerticalement(Map map, int i) {
+        if (getPosX() % 20 == 1 && getPosX() > 1 && getPosX() < 500) {
+            if ((getPosY() % 20 != 1) || (map.grid[(int)getPosX()/20][((int)getPosY()/20)+i] != Map.ValeurCase.MUR)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void ancienDeplacementFantome() {
+        switch (deplacementPasse) {
+            case BAS:
+                if (peutAvancerVerticalement(map,1))
+                    avanceBas();
+                break;
+            case DROITE:
+                if (peutAvancerHorizontalement(map,1))
+                    avanceDroite();
+                break;
+            case HAUT:
+                if (peutAvancerVerticalement(map,-1))
+                    avanceHaut();
+                break;
+            case GAUCHE:
+                if (peutAvancerHorizontalement(map,-1))
+                    avanceGauche();
+                break;
+        }
+        return;
+    }
 
 }

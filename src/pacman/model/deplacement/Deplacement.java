@@ -54,12 +54,12 @@ public class Deplacement extends Group {
     }
 
     public void avanceBas() {
-        this.posY += this.VELOCITY;;
+        this.posY += this.VELOCITY;
     }
 
     public void avanceGauche() {
         if (posX == 1) posX = 501;
-        this.posX -= this.VELOCITY;;
+        this.posX -= this.VELOCITY;
     }
 
     public void affichage() {
