@@ -41,6 +41,7 @@ public class UpdateRender extends Thread{
 
     public void jouer() {
 //        Thred update
+        PACMAN.nbVie = 5;
         this.update = new Thread(() -> {
             while (PACMAN.enVie) {
                 update();
@@ -76,10 +77,12 @@ public class UpdateRender extends Thread{
         for (int i = 0; i< PACMAN.velocityMultiplicator; i++) {  // gère le multiplicateur de pacman
             PACMAN.updateDeplacement();
             PACMAN.updateMapPacman();
+            fantomeSurPacman();
         }
         for (Fantome fantome : fantomeGroup.fantomes) {
             if (fantome instanceof FantomeCampeur){
                 fantome.ia();
+                fantomeSurPacman();
             }
         }
         if (MAP.aGagne()) { // réinitialise la map si tout est mangé
@@ -99,11 +102,24 @@ public class UpdateRender extends Thread{
             }
             //affichage score
             this.updateScore();
+            try {controllerJouer.viePac();} catch (IOException e) {e.printStackTrace();}
         });
     }
 
     // ------------------- UPDATE SCORE -------------------------
     public void updateScore() {
         this.LABEL_SCORE.setText(String.valueOf(PACMAN.score));
+    }
+
+    public void fantomeSurPacman() {
+        if (fantomeGroup.sontSurPacman()) {
+            PACMAN.initPosition();
+            PACMAN.nbVie --;
+            for (Fantome fantome : fantomeGroup.fantomes) {
+                if (fantome instanceof FantomeCampeur){
+                    fantome.initPosition();
+                }
+            }
+        }
     }
 }

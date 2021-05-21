@@ -70,8 +70,6 @@ public class Deplacement extends Group {
     public void initPosition() {
         posX = INIT_POS_X;
         posY = INIT_POS_Y;
-        this.imageView.setX(INIT_POS_X);
-        this.imageView.setY(INIT_POS_Y);
     }
 
 

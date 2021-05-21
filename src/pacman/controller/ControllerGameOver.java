@@ -17,30 +17,29 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class ControllerGameOver extends Controller{
-
+    public boolean aChangeDeScene = false;
 
     @FXML
-    public void handleEnterPressed(KeyEvent event) throws IOException {
-        if (event.getCode() == KeyCode.ENTER) {
-            Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/jouer.fxml")));
-            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            primaryStage.setScene(new Scene(scoreView));
-            primaryStage.sizeToScene();
-            primaryStage.show();
-            scoreView.requestFocus();
-        } else if (event.getCode() == KeyCode.SPACE){
-            Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/menu.fxml")));
-            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            primaryStage.setScene(new Scene(scoreView));
-            primaryStage.sizeToScene();
-            primaryStage.show();
-            scoreView.requestFocus();
-        }else {
-            System.out.println("la clef n'est pas reconu");
+    public void handle(KeyEvent event) throws IOException {
+        if (!aChangeDeScene) {
+            if (event.getCode() == KeyCode.ENTER) {
+                aChangeDeScene = true;
+                System.out.println("2");
+                Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/jouer.fxml")));
+                primaryStage.setScene(new Scene(scoreView));
+                primaryStage.sizeToScene();
+                primaryStage.show();
+                scoreView.requestFocus();
+            } else if (event.getCode() == KeyCode.SPACE) {
+                aChangeDeScene = true;
+                Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/menu.fxml")));
+                primaryStage.setScene(new Scene(scoreView));
+                primaryStage.sizeToScene();
+                primaryStage.show();
+                scoreView.requestFocus();
+            } else {
+                //            System.out.println("la clef n'est pas reconu");
+            }
         }
     }
-
-
-
-
 }

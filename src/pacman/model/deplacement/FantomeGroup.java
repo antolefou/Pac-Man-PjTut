@@ -12,4 +12,13 @@ public class FantomeGroup extends Group {
         fantomes[0] = new FantomeCampeur();
         this.getChildren().add(fantomes[0].getImageView());
     }
+
+    public boolean sontSurPacman() {
+        for (Fantome fantome : this.fantomes) {
+            if (fantome instanceof FantomeCampeur){
+                if (fantome.estSurPacman()) return true;
+            }
+        }
+        return false;
+    }
 }

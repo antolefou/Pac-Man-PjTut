@@ -28,6 +28,7 @@ public class ControllerJouer extends Controller {
     @FXML public ImageView vie3;
     @FXML public ImageView vie4;
     @FXML public ImageView vie5;
+    ImageView[] tabVie;
 
     private UpdateRender updateRender;
     public ScoreModel scoreModel;
@@ -43,26 +44,23 @@ public class ControllerJouer extends Controller {
         this.scoreModel = new ScoreModel();
         this.scoreModel.lectureTxt();
         meilleurscore.setText(String.valueOf(scoreModel.getMeilleurScore()));
+        //vie
+        tabVie = new ImageView[]{vie1, vie2, vie3, vie4, vie5};
     }
 
-    @FXML
     public void viePac() throws IOException {
-        ImageView[] tabVie = {vie1,vie2,vie3,vie4,vie5};
-        ImageView vie;
+        if (pacman.nbVie < 5) {
+            scoreModel.TriScore(this.pacman);
+            tabVie[pacman.nbVie].setImage(null);
 
-        scoreModel.TriScore(this.pacman);
-        pacman.nbVie--;
-        vie = tabVie[pacman.nbVie];
-        vie.setImage(null);
-
-        if (pacman.nbVie == 0){
-            Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/gameOver.fxml")));
-            primaryStage.setScene(new Scene(scoreView));
-            primaryStage.sizeToScene();
-            primaryStage.show();
-            scoreView.requestFocus();
+            if (pacman.nbVie == 0) {
+                Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/gameOver.fxml")));
+                primaryStage.setScene(new Scene(scoreView));
+                primaryStage.sizeToScene();
+                primaryStage.show();
+                scoreView.requestFocus();
+            }
         }
-
     }
 
 

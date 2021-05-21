@@ -113,4 +113,19 @@ public class Fantome extends Deplacement{
         return;
     }
 
+    public boolean estSurPacman() {
+        double ratioX = (this.getPosX()*1.0) / (pacman.getPosX()*1.0);
+        double ratioY = (this.getPosY()*1.0) / (pacman.getPosY()*1.0);
+        if (((ratioX>0.95 && ratioX<1.05) || (ratioX<-0.95 && ratioX>-1.05)) && ((ratioY>0.95 && ratioY<1.05) || (ratioY<-0.95 && ratioY>-1.05))) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void initPosition() {
+        super.initPosition();
+        deplacementPasse = deplacements.AUCUN;
+        deplacementActuel = deplacements.AUCUN;
+    }
 }
