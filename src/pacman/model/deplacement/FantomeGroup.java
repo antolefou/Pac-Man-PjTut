@@ -7,7 +7,7 @@ public class FantomeGroup extends Group {
     public Fantome[] fantomes;
 
     public FantomeGroup() {
-        fantomes = new Fantome[4];
+        fantomes = new Fantome[1];
 
         fantomes[0] = new FantomeCampeur();
         this.getChildren().add(fantomes[0].getImageView());

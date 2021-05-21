@@ -9,7 +9,7 @@ import pacman.model.Utilisateur;
 import java.io.IOException;
 
 public class UpdateRender extends Thread{
-    private FantomeGroup fantomeGroup;
+    private FantomeGroup fantomeGroup = new FantomeGroup();
     private final Utilisateur UTILISATEUR;
     private final Label LABEL_SCORE;
     private final Map MAP;
