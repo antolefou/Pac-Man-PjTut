@@ -74,12 +74,11 @@ public class UpdateRender extends Thread{
         for (int i = 0; i< PACMAN.velocityMultiplicator; i++) {  // gère le multiplicateur de pacman
             PACMAN.updateDeplacement();
             PACMAN.updateMapPacman();
+
         }
         for (Fantome fantome : fantomeGroup.fantomes) {
             if (fantome instanceof FantomeCampeur){
-                if (((FantomeCampeur) fantome).peutAvancerHorizontalement(-1)) {
-                    fantome.avanceGauche();
-                }
+                fantome.updateDeplacement();
             }
         }
         if (MAP.aGagne()) { // réinitialise la map si tout est mangé
@@ -95,9 +94,7 @@ public class UpdateRender extends Thread{
             PACMAN.affichage();
             //affichage fantomes
             for (Fantome fantome : fantomeGroup.fantomes) {
-                if (fantome instanceof FantomeCampeur){
-                    fantome.affichage();
-                }
+                fantome.affichage();
             }
             //affichage score
             this.updateScore();
