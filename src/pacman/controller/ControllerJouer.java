@@ -54,6 +54,12 @@ public class ControllerJouer extends Controller {
             tabVie[pacman.nbVie].setImage(null);
 
             if (pacman.nbVie == 0) {
+                // suppression
+                updateRender.PACMAN.enVie = false;
+                updateRender.update.stop();
+                updateRender.render.stop();
+                updateRender = null;
+                // affichage game over
                 Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/gameOver.fxml")));
                 primaryStage.setScene(new Scene(scoreView));
                 primaryStage.sizeToScene();

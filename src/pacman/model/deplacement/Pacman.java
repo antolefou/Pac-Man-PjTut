@@ -246,7 +246,7 @@ public class Pacman extends Deplacement {
      */
     public void stopPower() {
         if (powerBoost) {
-            if (System.currentTimeMillis()-debutPowerBoost > 1000 * 50) {  // durée 5 sec
+            if (System.currentTimeMillis()-debutPowerBoost > 1000 * 5) {  // durée 5 sec
                 velocityMultiplicator = 2;
                 powerBoost = false;
             }

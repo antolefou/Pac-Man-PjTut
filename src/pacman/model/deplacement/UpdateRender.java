@@ -13,7 +13,7 @@ public class UpdateRender extends Thread{
     private final Utilisateur UTILISATEUR;
     private final Label LABEL_SCORE;
     private final Map MAP;
-    private final Pacman PACMAN;
+    public final Pacman PACMAN;
     private ControllerJouer controllerJouer;
     /*
     private final FantomeCampeur FantomeCAMPEUR;*/
@@ -41,7 +41,6 @@ public class UpdateRender extends Thread{
 
     public void jouer() {
 //        Thred update
-        PACMAN.nbVie = 5;
         this.update = new Thread(() -> {
             while (PACMAN.enVie) {
                 update();
