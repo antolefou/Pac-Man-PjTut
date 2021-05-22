@@ -56,9 +56,6 @@ public class ScoreModel {
             }
         } while (p);
 
-//        for (int i = 0; i< tab.length;i++){
-//            System.out.println("Tableau trié : " + tab[i][0] + " : " + tab[i][1] );
-//        }
     }
 
     public void reecritureTxt() throws IOException {
@@ -80,27 +77,30 @@ public class ScoreModel {
         }
     }
 
+    public int Trouverindice(Pacman pac){
+        scoreActuel = pac.score;
+        for (int k = 0; k< tab.length-1;k++){
+            if ((int) tab[k][1] < scoreActuel){
+                return k;
+            }
+        }
+        return -1;
+    }
+
     public void TriScore(Pacman pac) throws IOException {
         lectureTxt();
         triTab();
         scoreActuel = pac.score;
-        //System.out.println(scoreActuel);
         if (pac.nbVie == 0){
-            if (scoreActuel > (int) tab[0][1]) {
-                //System.out.println("Ligne 1 du tableau avant chanement : " + (int) tab[0][1]);
-                tab[0][1] = scoreActuel;
-                String nom = "NomTest";
-                tab[0][0] = nom;
-            }
-            for (int i = 1; i< tab.length; i++){
-                if ((int) tab[i][1] > scoreActuel && scoreActuel > (int) tab[i+1][1]){
-                    tab[i+1][1] = scoreActuel;
-                    tab[i+1][0] = "Nom " + i;
+            if (Trouverindice(pac) != -1){
+                for (int i = tab.length-1; i>Trouverindice(pac);i--){
+                    tab[i][0] = tab[i-1][0];
+                    tab[i][1] = tab[i-1][1];
                 }
+                tab[Trouverindice(pac)][0] = "WWW";
+                tab[Trouverindice(pac)][1] = scoreActuel;
             }
         }
-
-        //System.out.println("Ligne 1 du tableau : " + (int) tab[0][1]);
         reecritureTxt();
 
     }

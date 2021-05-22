@@ -1,5 +1,5 @@
-julien,180000
-Nom2,50
-Nom5,30
-Nom2,20
-Nom3,10
+julien,5000
+ACD,450
+ABC,310
+rge,300
+aze,200

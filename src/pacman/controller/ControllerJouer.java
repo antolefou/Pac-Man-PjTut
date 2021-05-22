@@ -50,7 +50,6 @@ public class ControllerJouer extends Controller {
 
     public void viePac() throws IOException {
         if (pacman.nbVie < 5) {
-            scoreModel.TriScore(this.pacman);
             tabVie[pacman.nbVie].setImage(null);
 
             if (pacman.nbVie == 0) {
@@ -60,6 +59,7 @@ public class ControllerJouer extends Controller {
                 updateRender.render.stop();
                 updateRender = null;
                 // affichage game over
+                scoreModel.TriScore(this.pacman);
                 Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/gameOver.fxml")));
                 primaryStage.setScene(new Scene(scoreView));
                 primaryStage.sizeToScene();
