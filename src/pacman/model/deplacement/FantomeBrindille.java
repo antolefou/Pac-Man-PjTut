@@ -24,32 +24,24 @@ public class FantomeBrindille extends Fantome {
         }
         if (random % 10 != -1) {
             if (this.getPosY() <= pacman.getPosY() && this.peutAvancerVerticalement(map, -1) && deplacementActuel != deplacements.BAS) {
-                this.avanceHaut();
-                deplacementActuel = deplacements.HAUT;
+                this.ajouteAvanceDirection("HAUT");
             } else if (this.getPosY() >= pacman.getPosY() && this.peutAvancerVerticalement(map, 1) && deplacementActuel != deplacements.HAUT) {
-                this.avanceBas();
-                deplacementActuel = deplacements.BAS;
+                this.ajouteAvanceDirection("BAS");
             } else if (this.getPosX() <= pacman.getPosX() && this.peutAvancerHorizontalement(map, -1) && deplacementActuel != deplacements.DROITE) {
-                this.avanceGauche();
-                deplacementActuel = deplacements.GAUCHE;
+                this.ajouteAvanceDirection("GAUCHE");
             } else if (this.getPosX() >= pacman.getPosX() && this.peutAvancerHorizontalement(map, 1) && deplacementActuel != deplacements.GAUCHE) {
-                this.avanceDroite();
-                deplacementActuel = deplacements.DROITE;
+                this.ajouteAvanceDirection("DROITE");
             } else {
                 if (this.peutAvancerVerticalement(map, -1) && deplacementActuel != deplacements.BAS) {
-                    this.avanceHaut();
-                    deplacementActuel = deplacements.HAUT;
+                    this.ajouteAvanceDirection("HAUT");
                 } else if (this.peutAvancerVerticalement(map, 1) && deplacementActuel != deplacements.HAUT) {
-                    this.avanceBas();
-                    deplacementActuel = deplacements.BAS;
+                    this.ajouteAvanceDirection("BAS");
                 } else if (this.peutAvancerHorizontalement(map, -1) && deplacementActuel != deplacements.DROITE) {
-                    this.avanceGauche();
-                    deplacementActuel = deplacements.GAUCHE;
+                    this.ajouteAvanceDirection("GAUCHE");
                 } else if (this.peutAvancerHorizontalement(map, 1) && deplacementActuel != deplacements.GAUCHE) {
-                    this.avanceDroite();
-                    deplacementActuel = deplacements.DROITE;
+                    ajouteAvanceDirection("DROITE");
                 } else {
-                    ancienDeplacementFantome();
+                    System.out.println("erreur");
                 }
             }
         } else {

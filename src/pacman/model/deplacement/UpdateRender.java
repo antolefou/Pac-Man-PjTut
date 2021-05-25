@@ -7,6 +7,7 @@ import pacman.model.Map;
 import pacman.model.Utilisateur;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class UpdateRender extends Thread{
     private FantomeGroup fantomeGroup = new FantomeGroup();
@@ -88,8 +89,8 @@ public class UpdateRender extends Thread{
             fantomeSurPacman();
         }
         for (Fantome fantome : fantomeGroup.fantomes) {
-            fantome.ia();
-            fantomeSurPacman();
+            fantome.updateDeplacement();
+            System.out.println(fantome.listeCoordoneDeplacementFant);
         }
         if (MAP.aGagne()) { // réinitialise la map si tout est mangé
             PACMAN.initPosition(); // il faut rajouter init power
@@ -122,9 +123,8 @@ public class UpdateRender extends Thread{
             PACMAN.initPosition();
             PACMAN.nbVie --;
             for (Fantome fantome : fantomeGroup.fantomes) {
-                if (fantome instanceof FantomeCampeur){
-                    fantome.initPosition();
-                }
+                fantome.initPosition();
+                fantome.listeCoordoneDeplacementFant = new ArrayList<>();
             }
         }
     }

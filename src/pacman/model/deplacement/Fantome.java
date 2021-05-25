@@ -1,7 +1,9 @@
 package pacman.model.deplacement;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.SplittableRandom;
 
 import javafx.scene.image.Image;
 import pacman.model.Map;
@@ -12,32 +14,36 @@ public class Fantome extends Deplacement{
     public deplacements deplacementActuel = deplacements.AUCUN;
     public int positionXFinDeplacement;
     public int positionYFinDeplacement;
-    public ArrayList<String> listeCoordoneDeplacementFant = new ArrayList<>();
+    public List<String> listeCoordoneDeplacementFant;
     public Pacman pacman;
-    public deplacements deplacementPasse = deplacements.AUCUN;
+    public String coordoneePasse = null;
 
 
     public Fantome(int init_pos_x, int init_pos_y) {
         super(init_pos_x, init_pos_y);
+        this.listeCoordoneDeplacementFant = new ArrayList<>();
     }
 
     public void getNextFinalPos(){
-        String[] coorXY = this.listeCoordoneDeplacementFant.get(0).split("/");
-        this.listeCoordoneDeplacementFant.remove(0);
+        if (!this.listeCoordoneDeplacementFant.isEmpty()) {
+            String coord = this.listeCoordoneDeplacementFant.get(0);
+            String[] coorXY = coord.split("/");
+            this.listeCoordoneDeplacementFant.remove(0);
 
-        int x = Integer.parseInt(coorXY[0]);
-        int y = Integer.parseInt(coorXY[1]);
+            int x = Integer.parseInt(coorXY[0]);
+            int y = Integer.parseInt(coorXY[1]);
 
-        this.positionXFinDeplacement = tradCoorToPx(x);
-        this.positionYFinDeplacement = tradCoorToPx(y);
-        setOrientation();
+            this.positionXFinDeplacement = tradCoorToPx(x);
+            this.positionYFinDeplacement = tradCoorToPx(y);
+            this.setOrientation();
+        }
     }
 
     public void setOrientation(){
-        if (positionXFinDeplacement-this.getPosX() < 0) this.deplacementActuel = deplacements.DROITE;
-        else if (positionXFinDeplacement-this.getPosX() > 0) this.deplacementActuel = deplacements.GAUCHE;
-        else if (positionYFinDeplacement-this.getPosY() < 0) this.deplacementActuel = deplacements.BAS;
-        else this.deplacementActuel = deplacements.HAUT;
+        if (positionXFinDeplacement-this.getPosX() < 0) this.deplacementActuel = deplacements.GAUCHE;
+        else if (positionXFinDeplacement-this.getPosX() > 0) this.deplacementActuel = deplacements.DROITE;
+        else if (positionYFinDeplacement-this.getPosY() < 0) this.deplacementActuel = deplacements.HAUT;
+        else this.deplacementActuel = deplacements.BAS;
     }
 
     public int tradCoorToPx(int coordone){
@@ -46,23 +52,30 @@ public class Fantome extends Deplacement{
 
     public void updateDeplacement() {
 
-        if (this.listeCoordoneDeplacementFant.size() > 0) this.ia();
-
-        if (doitRechargerNextPos()) getNextFinalPos();
-
-        else if (positionXFinDeplacement != this.getPosX() && positionYFinDeplacement != this.getPosY()) {
+        if (this.listeCoordoneDeplacementFant.isEmpty()) {
+            this.ia();
+            if (!this.listeCoordoneDeplacementFant.isEmpty()) {
+                getNextFinalPos();
+            }
+        }
+        if (doitRechargerNextPos()) {
+            this.ia();
+            getNextFinalPos();
+        } else if (positionXFinDeplacement != this.getPosX() || positionYFinDeplacement != this.getPosY()) {
             switch (this.deplacementActuel) {
                 case HAUT:
-                    avanceHaut();
+                    if (peutAvancerVerticalement(map,-1)) this.avanceHaut();
                     break;
                 case DROITE:
-                    avanceDroite();
+                    if (peutAvancerHorizontalement(map,1)) this.avanceDroite();
                     break;
                 case BAS:
-                    avanceBas();
+                    if (peutAvancerVerticalement(map,1)) this.avanceBas();
                     break;
                 case GAUCHE:
-                    avanceGauche();
+                    if (peutAvancerHorizontalement(map,-1)) this.avanceGauche();
+                    break;
+                default:
                     break;
             }
         }
@@ -77,7 +90,7 @@ public class Fantome extends Deplacement{
 
     public boolean peutAvancerHorizontalement(Map map, int i) {
         if (getPosY() % 20 == 1) {
-            if ((getPosX() % 20 != 1) || (map.grid[(((int)getPosX()/20)+i+25)%25][(int)getPosY()/20] != Map.ValeurCase.MUR)) {
+            if ((getPosX() % 20 != 1) || (map.grid[((getPosX()/20)+i+25)%25][getPosY()/20] != Map.ValeurCase.MUR)) {
                 return true;
             }
         }
@@ -85,7 +98,7 @@ public class Fantome extends Deplacement{
     }
     public boolean peutAvancerVerticalement(Map map, int i) {
         if (getPosX() % 20 == 1 && getPosX() > 1 && getPosX() < 500) {
-            if ((getPosY() % 20 != 1) || (map.grid[(int)getPosX()/20][((int)getPosY()/20)+i] != Map.ValeurCase.MUR)) {
+            if ((getPosY() % 20 != 1) || (map.grid[getPosX()/20][(getPosY()/20)+i] != Map.ValeurCase.MUR)) {
                 return true;
             }
         }
@@ -93,25 +106,24 @@ public class Fantome extends Deplacement{
     }
 
     public void ancienDeplacementFantome() {
-        switch (deplacementPasse) {
+        switch (deplacementActuel) {
             case BAS:
                 if (peutAvancerVerticalement(map,1))
-                    avanceBas();
+                    ajouteAvanceDirection("BAS");
                 break;
             case DROITE:
                 if (peutAvancerHorizontalement(map,1))
-                    avanceDroite();
+                    ajouteAvanceDirection("DROITE");
                 break;
             case HAUT:
                 if (peutAvancerVerticalement(map,-1))
-                    avanceHaut();
+                    ajouteAvanceDirection("HAUT");
                 break;
             case GAUCHE:
                 if (peutAvancerHorizontalement(map,-1))
-                    avanceGauche();
+                    ajouteAvanceDirection("GAUCHE");
                 break;
         }
-        return;
     }
 
     public boolean estSurPacman() {
@@ -126,7 +138,6 @@ public class Fantome extends Deplacement{
     @Override
     public void initPosition() {
         super.initPosition();
-        deplacementPasse = deplacements.AUCUN;
         deplacementActuel = deplacements.AUCUN;
     }
 
@@ -136,16 +147,13 @@ public class Fantome extends Deplacement{
         int random = 0;
         if (Math.round(this.getPosX() * 0.0499) > 10 && Math.round(this.getPosX() * 0.0499) < 14 && Math.round(this.getPosY() * 0.0499) > 12 && Math.round(this.getPosY() * 0.0499) < 15) {
             if (this.peutAvancerVerticalement(map, -1)) {
-                this.avanceHaut();
-                deplacementActuel = deplacements.HAUT;
+                ajouteAvanceDirection("HAUT");
             }
             else if (this.peutAvancerHorizontalement(map, 1)) {
-                this.avanceDroite();
-                deplacementActuel = deplacements.DROITE;
+                ajouteAvanceDirection("DROITE");
             }
             else if (this.peutAvancerHorizontalement(map, -1)) {
-                this.avanceGauche();
-                deplacementActuel = deplacements.GAUCHE;
+                ajouteAvanceDirection("GAUCHE");
             }
         }
 
@@ -155,44 +163,53 @@ public class Fantome extends Deplacement{
             switch (random) {
                 case 0:
                     if (this.peutAvancerVerticalement(map, -1) && deplacementActuel != deplacements.BAS) {
-                        this.avanceHaut();
-                        deplacementActuel = deplacements.HAUT;
-                    } else {
-                        ancienDeplacementFantome();
+                        ajouteAvanceDirection("HAUT");
                     }
                     break;
 
                 case 1:
                     if (this.peutAvancerHorizontalement(map, -1) && deplacementActuel != deplacements.DROITE) {
-                        this.avanceGauche();
-                        deplacementActuel = deplacements.GAUCHE;
-                    } else {
-                        ancienDeplacementFantome();
-                        break;
+                        ajouteAvanceDirection("GAUCHE");
                     }
                     break;
 
                 case 2:
                     if (this.peutAvancerVerticalement(map, 1) && deplacementActuel != deplacements.HAUT) {
-                        this.avanceBas();
-                        deplacementActuel = deplacements.BAS;
-
-                    } else {
-                        ancienDeplacementFantome();
+                        ajouteAvanceDirection("BAS");
                     }
                     break;
 
                 case 3:
                     if (this.peutAvancerHorizontalement(map, 1) && deplacementActuel != deplacements.GAUCHE) {
-                        this.avanceDroite();
-                        deplacementActuel = deplacements.DROITE;
-                    } else {
-                        ancienDeplacementFantome();
+                        ajouteAvanceDirection("DROITE");
                     }
                     break;
                 default:
                     break;
             }
+        }
+    }
+
+    public void ajouteAvanceDirection(String direction) {
+        int x = getPosX()/20;
+        int y = getPosY()/20;
+        switch (direction){
+            case "HAUT":
+                y--;
+                this.listeCoordoneDeplacementFant.add(x + "/" + y);
+                break;
+            case "BAS":
+                y++;
+                this.listeCoordoneDeplacementFant.add(x + "/" + y);
+                break;
+            case "GAUCHE":
+                x--;
+                this.listeCoordoneDeplacementFant.add(x + "/" + y);
+                break;
+            case "DROITE":
+                x++;
+                this.listeCoordoneDeplacementFant.add(x + "/" + y);
+                break;
         }
     }
 }

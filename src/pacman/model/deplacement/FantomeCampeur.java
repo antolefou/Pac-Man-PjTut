@@ -1,9 +1,13 @@
 package pacman.model.deplacement;
 
 import javafx.scene.image.Image;
+import org.jgrapht.Graph;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.jgrapht.graph.DefaultEdge;
 import pacman.model.Map;
 import pacman.model.deplacement.Deplacement;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
@@ -36,76 +40,20 @@ public class FantomeCampeur extends Fantome {
 
         //IA mode campeur
         else if (getPosX() > 247 || getPosY() > 241) {
-            if (peutAvancerVerticalement(map,-1) && this.deplacementActuel != deplacements.BAS) {
-                avanceHaut();
-                deplacementActuel = deplacements.HAUT;
-            } else if (peutAvancerHorizontalement(map,-1) && deplacementActuel != deplacements.DROITE) {
-                avanceGauche();
-                deplacementActuel = deplacements.GAUCHE;
-            } else if (peutAvancerHorizontalement(map,1) && deplacementActuel != deplacements.GAUCHE) {
-                avanceDroite();
-                deplacementActuel = deplacements.DROITE;
-            } else if (peutAvancerVerticalement(map,1) && deplacementActuel != deplacements.HAUT) {
-                avanceBas();
-                deplacementActuel = deplacements.BAS;
-            }
+            int x = getPosX()/20;
+            int y = getPosY()/20;
+            String[][] grille = map.getGrilleGraph();
+            Graph<String, DefaultEdge> graphFantome = map.getG();
+            graphFantome.removeVertex(this.coordoneePasse);
+            List<String> dijkstra = DijkstraShortestPath.findPathBetween(graphFantome, grille[x][y], grille[1][1]).getVertexList();
+            dijkstra.remove(0);
+            this.listeCoordoneDeplacementFant = dijkstra;
         } else {
-
-            int random = rand.nextInt(4);
-
-            switch (random) {
-                case 0:
-                    if (peutAvancerVerticalement(map,-1)) {
-                        if (deplacementActuel != deplacements.BAS) {
-                            avanceHaut();
-                            deplacementActuel = deplacements.HAUT;
-                        }
-                    } else {
-                        ancienDeplacementFantome();
-                    }
-                    break;
-
-                case 1:
-                    if (peutAvancerHorizontalement(map, -1)) {
-                        if (deplacementActuel != deplacements.DROITE) {
-                            avanceGauche();
-                            deplacementActuel = deplacements.GAUCHE;
-                        }
-                    } else {
-                        ancienDeplacementFantome();
-                        break;
-                    }
-                    break;
-
-                case 2:
-                    if (peutAvancerVerticalement(map,1)) {
-                        if (deplacementActuel != deplacements.HAUT) {
-                            avanceBas();
-                            deplacementActuel = deplacements.BAS;
-                        }
-                    } else {
-                        ancienDeplacementFantome();
-                    }
-                    break;
-
-                case 3:
-                    if (peutAvancerHorizontalement(map,1)) {
-                        if (deplacementActuel != deplacements.GAUCHE) {
-                            avanceDroite();
-                            deplacementActuel = deplacements.DROITE;
-                        }
-                    } else {
-                        ancienDeplacementFantome();
-                    }
-                    break;
-                default:
-                    break;
-            }
+            iaFantomeAppeure();
         }
     }
 
     public boolean vueSurPacman() {
-
         for (int i=0; i < 23; i++) {
             String posPacman = Math.round(pacman.getPosX() * 0.0499) + "/" + Math.round(pacman.getPosY() * 0.0499);
             switch (deplacementActuel) {
@@ -145,7 +93,6 @@ public class FantomeCampeur extends Fantome {
                     return false;
             }
         }
-
         return false;
 
     }

@@ -43,6 +43,7 @@ public class Map extends Group {
     public String[][] grilleGraph;
 
 
+
     /**
      * Initialise les valeurs des images
      * map code:
@@ -264,5 +265,13 @@ public class Map extends Group {
         initialiseMapGeneree();
         miseAJourMap();
         initGraph();
+    }
+
+    public Graph<String, DefaultEdge> getG() {
+        return g;
+    }
+
+    public String[][] getGrilleGraph() {
+        return grilleGraph;
     }
 }
