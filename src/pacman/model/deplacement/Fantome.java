@@ -1,6 +1,7 @@
 package pacman.model.deplacement;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import javafx.scene.image.Image;
 import pacman.model.Map;
@@ -127,5 +128,71 @@ public class Fantome extends Deplacement{
         super.initPosition();
         deplacementPasse = deplacements.AUCUN;
         deplacementActuel = deplacements.AUCUN;
+    }
+
+
+    public void iaFantomeAppeure() {
+        Random rand = new Random();
+        int random = 0;
+        if (Math.round(this.getPosX() * 0.0499) > 10 && Math.round(this.getPosX() * 0.0499) < 14 && Math.round(this.getPosY() * 0.0499) > 12 && Math.round(this.getPosY() * 0.0499) < 15) {
+            if (this.peutAvancerVerticalement(map, -1)) {
+                this.avanceHaut();
+                deplacementActuel = deplacements.HAUT;
+            }
+            else if (this.peutAvancerHorizontalement(map, 1)) {
+                this.avanceDroite();
+                deplacementActuel = deplacements.DROITE;
+            }
+            else if (this.peutAvancerHorizontalement(map, -1)) {
+                this.avanceGauche();
+                deplacementActuel = deplacements.GAUCHE;
+            }
+        }
+
+        else {
+            random = rand.nextInt(4);
+
+            switch (random) {
+                case 0:
+                    if (this.peutAvancerVerticalement(map, -1) && deplacementActuel != deplacements.BAS) {
+                        this.avanceHaut();
+                        deplacementActuel = deplacements.HAUT;
+                    } else {
+                        ancienDeplacementFantome();
+                    }
+                    break;
+
+                case 1:
+                    if (this.peutAvancerHorizontalement(map, -1) && deplacementActuel != deplacements.DROITE) {
+                        this.avanceGauche();
+                        deplacementActuel = deplacements.GAUCHE;
+                    } else {
+                        ancienDeplacementFantome();
+                        break;
+                    }
+                    break;
+
+                case 2:
+                    if (this.peutAvancerVerticalement(map, 1) && deplacementActuel != deplacements.HAUT) {
+                        this.avanceBas();
+                        deplacementActuel = deplacements.BAS;
+
+                    } else {
+                        ancienDeplacementFantome();
+                    }
+                    break;
+
+                case 3:
+                    if (this.peutAvancerHorizontalement(map, 1) && deplacementActuel != deplacements.GAUCHE) {
+                        this.avanceDroite();
+                        deplacementActuel = deplacements.DROITE;
+                    } else {
+                        ancienDeplacementFantome();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

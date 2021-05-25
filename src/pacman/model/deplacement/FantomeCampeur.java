@@ -9,6 +9,7 @@ import java.util.Random;
 
 public class FantomeCampeur extends Fantome {
 
+    private final Random rand = new Random();
 
     public FantomeCampeur() {
         super(261, 281);
@@ -17,8 +18,7 @@ public class FantomeCampeur extends Fantome {
     }
 
     public void ia(){
-        Random rand = new Random();
-        int random = 0;
+
         if (vueSurPacman()) {
             String coordFantome = Math.round(getPosX() * 0.0499) + "/" + Math.round(getPosY() * 0.0499);
             String coordPacman = Math.round(pacman.getPosX() * 0.0499) + "/" + Math.round(pacman.getPosY()*0.0499);
@@ -51,7 +51,7 @@ public class FantomeCampeur extends Fantome {
             }
         } else {
 
-            random = rand.nextInt(4);
+            int random = rand.nextInt(4);
 
             switch (random) {
                 case 0:
