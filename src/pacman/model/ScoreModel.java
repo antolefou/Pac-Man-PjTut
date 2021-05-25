@@ -100,6 +100,11 @@ public class ScoreModel {
                 tab[Trouverindice(pac)][0] = "WWW";
                 tab[Trouverindice(pac)][1] = scoreActuel;
             }
+
+            if (scoreActuel < (int) tab[3][1] && scoreActuel > (int) tab[4][1]){
+                tab[4][0] = "PLY";
+                tab[4][1] = scoreActuel;
+            }
         }
         reecritureTxt();
 
