@@ -1,5 +1,5 @@
 julien,5000
+WWW,2150
+WWW,830
 ACD,450
 ABC,310
-rge,300
-aze,200

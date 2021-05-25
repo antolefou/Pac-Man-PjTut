@@ -37,6 +37,15 @@ public class UpdateRender extends Thread{
         this.fantomeGroup.fantomes[0].setMap(MAP);
         this.fantomeGroup.fantomes[0].pacman = PACMAN;
 
+        this.fantomeGroup.fantomes[1].setMap(MAP);
+        this.fantomeGroup.fantomes[1].pacman = PACMAN;
+
+        this.fantomeGroup.fantomes[2].setMap(MAP);
+        this.fantomeGroup.fantomes[2].pacman = PACMAN;
+
+        this.fantomeGroup.fantomes[3].setMap(MAP);
+        this.fantomeGroup.fantomes[3].pacman = PACMAN;
+
     }
 
     public void jouer() {
@@ -79,10 +88,8 @@ public class UpdateRender extends Thread{
             fantomeSurPacman();
         }
         for (Fantome fantome : fantomeGroup.fantomes) {
-            if (fantome instanceof FantomeCampeur){
-                fantome.ia();
-                fantomeSurPacman();
-            }
+            fantome.ia();
+            fantomeSurPacman();
         }
         if (MAP.aGagne()) { // réinitialise la map si tout est mangé
             PACMAN.initPosition(); // il faut rajouter init power
