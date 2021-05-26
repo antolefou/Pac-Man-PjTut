@@ -16,8 +16,8 @@ public class ControllerMenu extends Controller{
 
     public ControllerMenu() {
         if (!modelMusic.isPlaying("menu")) {
-            modelMusic.stopAllMusic();
-            modelMusic.music("menu", true);
+            this.stopAllMusic();
+            this.playMusic("menu", true);
         }
     }
 

@@ -6,7 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import pacman.model.Model;
 import pacman.model.ModelMusic;
 import pacman.model.Utilisateur;
 
@@ -37,6 +39,30 @@ public class Controller {
         primaryStage.sizeToScene();
         primaryStage.show();
         scoreView.requestFocus();
+    }
+    public void playMusic(String key, boolean loop) {
+        modelMusic.music(key).stop();
+        try {
+            if (loop) {
+                modelMusic.music(key).setCycleCount(MediaPlayer.INDEFINITE);
+            }
+            //mediaPlayer.setRate(0.5);
+            //mediaPlayer.setBalance(50);
+            modelMusic.music(key).play();
+
+
+        } catch (Exception e) {
+            System.out.println("Erreur de Fichier");
+        }
+
+
+    }
+    public void stopAllMusic() {
+        for (String i : modelMusic.getMediaPlayerHashMap().keySet()) {
+            if (modelMusic.getMediaPlayerHashMap().get(i).getStatus() == MediaPlayer.Status.PLAYING) {
+                modelMusic.getMediaPlayerHashMap().get(i).stop();
+            }
+        }
     }
 
 }
