@@ -49,7 +49,7 @@ public class Deplacement extends Group {
     }
 
     public void avanceDroite() {
-        if (posX == 501) posX = 1;
+        if (posX == 499) posX = -1;
         this.posX += this.VELOCITY;;
     }
 
