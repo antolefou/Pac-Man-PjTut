@@ -34,6 +34,10 @@ public class ControllerJouer extends Controller {
     public ScoreModel scoreModel;
 
     public ControllerJouer() {
+        modelMusic.stopAllMusic();
+        modelMusic.music("theme", true);
+
+        modelMusic.music("chomp", true);
     }
 
     public void initialize() {

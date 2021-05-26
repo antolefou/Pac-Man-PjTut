@@ -14,7 +14,12 @@ public class ControllerMenu extends Controller{
     @FXML ImageView fleche4;
     @FXML ImageView fleche5;
 
-    public ControllerMenu() {}
+    public ControllerMenu() {
+        if (!modelMusic.isPlaying("menu")) {
+            modelMusic.stopAllMusic();
+            modelMusic.music("menu", true);
+        }
+    }
 
     public void affiche_fleche1(MouseEvent mouseEvent) {
         Image image = new Image(getClass().getResourceAsStream("/pacman/ressources/image/Menu/pacman_fleche.png"));
