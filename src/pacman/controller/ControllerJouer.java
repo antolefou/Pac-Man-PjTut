@@ -49,25 +49,23 @@ public class ControllerJouer extends Controller {
     }
 
     public void viePac() throws IOException {
-        if (pacman.nbVie < 5) {
-            tabVie[pacman.nbVie].setImage(null);
+        if (pacman.nbVie < 5 && pacman.nbVie > -1) tabVie[pacman.nbVie].setImage(null);
 
-            if (pacman.nbVie == 0) {
-                // suppression
-                updateRender.PACMAN.enVie = false;
-                updateRender.update.stop();
-                updateRender.render.stop();
-                updateRender = null;
-                // affichage game over
-                scoreModel.TriScore(this.pacman);
-                Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/gameOver.fxml")));
-                primaryStage.setScene(new Scene(scoreView));
-                primaryStage.sizeToScene();
-                primaryStage.show();
-                scoreView.requestFocus();
+        if (pacman.nbVie == -1) {
+            // suppression
+            updateRender.PACMAN.enVie = false;
+            updateRender.update.stop();
+            updateRender.render.stop();
+            updateRender = null;
+            // affichage game over
+            scoreModel.TriScore(this.pacman);
+            Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/gameOver.fxml")));
+            primaryStage.setScene(new Scene(scoreView));
+            primaryStage.sizeToScene();
+            primaryStage.show();
+            scoreView.requestFocus();
             }
         }
-    }
 
 
     public void handle(KeyEvent keyEvent) {

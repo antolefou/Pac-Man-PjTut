@@ -91,20 +91,18 @@ public class ScoreModel {
         lectureTxt();
         triTab();
         scoreActuel = pac.score;
-        if (pac.nbVie == 0){
-            if (Trouverindice(pac) != -1){
-                for (int i = tab.length-1; i>Trouverindice(pac);i--){
-                    tab[i][0] = tab[i-1][0];
-                    tab[i][1] = tab[i-1][1];
-                }
-                tab[Trouverindice(pac)][0] = "WWW";
-                tab[Trouverindice(pac)][1] = scoreActuel;
+        if (Trouverindice(pac) != -1){
+            for (int i = tab.length-1; i>Trouverindice(pac);i--){
+                tab[i][0] = tab[i-1][0];
+                tab[i][1] = tab[i-1][1];
             }
+            tab[Trouverindice(pac)][0] = "PPP";
+            tab[Trouverindice(pac)][1] = scoreActuel;
+        }
 
-            if (scoreActuel < (int) tab[3][1] && scoreActuel > (int) tab[4][1]){
-                tab[4][0] = "PLY";
-                tab[4][1] = scoreActuel;
-            }
+        if (scoreActuel < (int) tab[3][1] && scoreActuel > (int) tab[4][1]){
+            tab[4][0] = "ZZZ";
+            tab[4][1] = scoreActuel;
         }
         reecritureTxt();
 
