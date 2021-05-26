@@ -14,7 +14,27 @@ public class FantomeFanBoy extends Fantome {
 
     public void ia() {
 
-        iaFantomeAppeure();
+        if (this.getPosY() <= pacman.getPosY() && this.peutAvancerVerticalement(map, -1) && deplacementActuel != deplacements.BAS) {
+            this.ajouteAvanceDirection("HAUT");
+        } else if (this.getPosY() >= pacman.getPosY() && this.peutAvancerVerticalement(map, 1) && deplacementActuel != deplacements.HAUT) {
+            this.ajouteAvanceDirection("BAS");
+        } else if (this.getPosX() <= pacman.getPosX() && this.peutAvancerHorizontalement(map, -1) && deplacementActuel != deplacements.DROITE) {
+            this.ajouteAvanceDirection("GAUCHE");
+        } else if (this.getPosX() >= pacman.getPosX() && this.peutAvancerHorizontalement(map, 1) && deplacementActuel != deplacements.GAUCHE) {
+            this.ajouteAvanceDirection("DROITE");
+        } else {
+            if (this.peutAvancerVerticalement(map, -1) && deplacementActuel != deplacements.BAS) {
+                this.ajouteAvanceDirection("HAUT");
+            } else if (this.peutAvancerVerticalement(map, 1) && deplacementActuel != deplacements.HAUT) {
+                this.ajouteAvanceDirection("BAS");
+            } else if (this.peutAvancerHorizontalement(map, -1) && deplacementActuel != deplacements.DROITE) {
+                this.ajouteAvanceDirection("GAUCHE");
+            } else if (this.peutAvancerHorizontalement(map, 1) && deplacementActuel != deplacements.GAUCHE) {
+                ajouteAvanceDirection("DROITE");
+            } else {
+                System.out.println("erreur");
+            }
+        }
 
     }
 }

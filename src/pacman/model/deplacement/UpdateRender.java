@@ -35,18 +35,7 @@ public class UpdateRender extends Thread{
     public void initialize() {
         this.PACMAN.setControllerJouer(controllerJouer);
         this.PACMAN.setMap(MAP);
-        this.fantomeGroup.fantomes[0].setMap(MAP);
-        this.fantomeGroup.fantomes[0].pacman = PACMAN;
-
-//        this.fantomeGroup.fantomes[1].setMap(MAP);
-//        this.fantomeGroup.fantomes[1].pacman = PACMAN;
-//
-//        this.fantomeGroup.fantomes[2].setMap(MAP);
-//        this.fantomeGroup.fantomes[2].pacman = PACMAN;
-//
-//        this.fantomeGroup.fantomes[3].setMap(MAP);
-//        this.fantomeGroup.fantomes[3].pacman = PACMAN;
-
+        addPacmanToFantome();
     }
 
     public void jouer() {
@@ -97,6 +86,7 @@ public class UpdateRender extends Thread{
         if (MAP.aGagne()) { // réinitialise la map si tout est mangé
             PACMAN.initPosition(); // il faut rajouter init power
             PACMAN.numNiveau ++;
+            fantomeGroup.reinitialisePosition();
             MAP.recommence(PACMAN.numNiveau);
         }
     }
@@ -125,10 +115,14 @@ public class UpdateRender extends Thread{
             PACMAN.initPosition();
             PACMAN.nbVie --;
             this.controllerJouer.playMusic("death", false);
-            for (Fantome fantome : fantomeGroup.fantomes) {
-                fantome.initPosition();
-                fantome.listeCoordoneDeplacementFant = new ArrayList<>();
-            }
+            fantomeGroup.reinitialisePosition();
+        }
+    }
+
+    public void addPacmanToFantome() {
+        for (Fantome fantome : fantomeGroup.fantomes) {
+            fantome.setMap(MAP);
+            fantome.pacman = PACMAN;
         }
     }
 }

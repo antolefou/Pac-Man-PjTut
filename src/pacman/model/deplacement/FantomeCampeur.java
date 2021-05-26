@@ -23,21 +23,11 @@ public class FantomeCampeur extends Fantome {
 
     public void ia(){
 
-//        if (vueSurPacman()) {
-//            String coordFantome = Math.round(getPosX() * 0.0499) + "/" + Math.round(getPosY() * 0.0499);
-//            String coordPacman = Math.round(pacman.getPosX() * 0.0499) + "/" + Math.round(pacman.getPosY()*0.0499);
-//                    List dijkstra = DijkstraShortestPath.findPathBetween(g, grilleGraph[pixToCoord(posActuelleFantomeX())][pixToCoord(posActuelleFantomeY()] , grilleGraph[12][15]);
-//                    while(dijkstra.get(0) != null) {
-//                        String split = dijkstra.get(0).split("/");
-//                        String x = coordToPixX(split[0]);
-//                        String y = coordToPixY(split[1]);
-//                        fantome.seDeplacerVers(x, y);
-//                        dijkstra.remove(0);
-////                    }
-//        }
-
-        //IA mode campeur
-        if (getPosX() > 247 || getPosY() > 241) {
+        if (vueSurPacman()) {
+            String coordFantome = (int)(getPosX()/20) + "/" + (int)(getPosY()/20);
+            String coordPacman = (int)(pacman.getPosX()/20) + "/" + (int)(pacman.getPosY()/20);
+            listeCoordoneDeplacementFant = DijkstraShortestPath.findPathBetween(map.g, coordFantome, coordPacman).getVertexList();
+        } else if (getPosX() > 247 || getPosY() > 241) { //IA mode campeur
             int x = getPosX() / 20;
             int y = getPosY() / 20;
             String[][] grille = map.getGrilleGraph();
@@ -45,11 +35,11 @@ public class FantomeCampeur extends Fantome {
             List<String> dijkstra = DijkstraShortestPath.findPathBetween(map.g, grille[x][y],coinGaucheHaut()).getVertexList();
             if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).addEdge(this.coordoneePasse, this.coordoneeActuel);
             dijkstra.remove(0);
-            System.out.println("calcule diskjtra");
+//            System.out.println("calcule diskjtra");
             this.listeCoordoneDeplacementFant = dijkstra;
         } else {
             iaFantomeAppeure();
-            System.out.println("liste après IA " + listeCoordoneDeplacementFant);
+//            System.out.println("liste après IA " + listeCoordoneDeplacementFant);
         }
     }
 
