@@ -79,7 +79,7 @@ public class UpdateRender extends Thread{
         }
         for (Fantome fantome : fantomeGroup.fantomes) {
             for (int i = 0; i< fantome.velocityMultiplicator; i++) {
-                fantome.updateDeplacement();
+//                fantome.updateDeplacement();
 //                  System.out.println(fantome.listeCoordoneDeplacementFant);
             }
         }

@@ -13,6 +13,8 @@ public class MapGenerator {
 
 
     public MapGenerator() {
+//        long debut = System.currentTimeMillis();
+
         initMap();
         creerTeleportateur();
         creerCarreMilieu();
@@ -22,8 +24,9 @@ public class MapGenerator {
 
         while(constructorX.size() != 0) construction();
         affineMapV4();
-        afficheMapPasFini2();
+//        afficheMapPasFini2();
         creerMapFinal();
+//        System.out.println(System.currentTimeMillis()- debut);
     }
 
     private void initMap() {
@@ -359,25 +362,29 @@ public class MapGenerator {
     }
 
     private void affineMapV4(){
+
         this.affineMap();
         creerCarreMilieu();
         int[][] mapPourAffine = this.ajouteBordure2D();
         int count = 1;
         int lastCount = 0;
-        while (count != lastCount){
-            lastCount = count;
-            count = 0;
-            for (int i=1; i<mapPourAffine.length-1; i++) {
-                for (int j = 1; j < mapPourAffine[0].length - 1; j++) {
-                    if (estRemplacable(mapPourAffine,i,j)) {
-                        mapPourAffine[i][j] = 0;
-                        count++;
+//        while (count != lastCount){
+            for (int k = 0 ; k < 60 ; k++){
+                lastCount = count;
+                count = 0;
+                for (int i=1; i<mapPourAffine.length-1; i++) {
+                    for (int j = 1; j < mapPourAffine[0].length - 1; j++) {
+                        if (estRemplacable(mapPourAffine,i,j)) {
+                            mapPourAffine[i][j] = 0;
+                            count++;
+                        }
                     }
                 }
+                this.enleveBordure2D(mapPourAffine);
+                creerCarreMilieu();
             }
-            this.enleveBordure2D(mapPourAffine);
-            creerCarreMilieu();
-        }
+
+//        }
     }
 
     private boolean estRemplacable(int[][] mapAAffine,int x , int y){
@@ -496,24 +503,28 @@ public class MapGenerator {
                         mapAAffine[x][y+1] > 1
                         &&mapAAffine[x][y-1] > 1         // cas 13:
                         && mapAAffine[x+1][y-1] > 1      // N11
-                        && mapAAffine[x+1][y] > 1        // NX1
+                        && mapAAffine[x+1][y] > 1        // 0X1
                         && mapAAffine[x+1][y+1] > 1      // N11
+                        && mapAAffine[x-1][y] < 2
+
                 )
                 ||
                 (
                         mapAAffine[x+1][y] > 1
                         &&mapAAffine[x-1][y] > 1         // cas 14:
-                        && mapAAffine[x-1][y+1] > 1      // NNN
+                        && mapAAffine[x-1][y+1] > 1      // N0N
                         && mapAAffine[x][y+1] > 1        // 1X1
                         && mapAAffine[x+1][y+1] > 1      // 111
+                        && mapAAffine[x][y-1] < 2
                 )
                 ||
                 (
                         mapAAffine[x][y+1] > 1
                         &&mapAAffine[x][y-1] > 1         // cas 15:
                         && mapAAffine[x-1][y-1] > 1      // 11N
-                        && mapAAffine[x-1][y] > 1        // 1XN
+                        && mapAAffine[x-1][y] > 1        // 1X0
                         && mapAAffine[x-1][y+1] > 1      // 11N
+                        && mapAAffine[x+1][y] < 2
                 )
                 ||
                 (
@@ -521,7 +532,8 @@ public class MapGenerator {
                         &&mapAAffine[x+1][y] > 1         // cas 16:
                         && mapAAffine[x-1][y-1] > 1      // 111
                         && mapAAffine[x][y-1] > 1        // 1X1
-                        && mapAAffine[x+1][y-1] > 1      // NNN
+                        && mapAAffine[x+1][y-1] > 1      // N0N
+                        && mapAAffine[x][y+1] < 2
                 )
 
 
