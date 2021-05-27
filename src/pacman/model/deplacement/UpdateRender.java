@@ -2,7 +2,6 @@ package pacman.model.deplacement;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
-import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import pacman.controller.ControllerJouer;
 import pacman.model.Map;
 import pacman.model.Utilisateur;
@@ -79,17 +78,6 @@ public class UpdateRender extends Thread{
         }
         for (Fantome fantome : fantomeGroup.fantomes) {
             for (int i = 0; i< fantome.velocityMultiplicator; i++) {
-                if (fantome.vueSurPacman() && !fantome.estVulnerable && !fantome.mort) {
-                    for(int j = 0; j<fantome.listeCoordoneDeplacementFant.size()-1; j++) fantome.listeCoordoneDeplacementFant.remove(j+1);
-                    System.out.println("Je te vois");
-                    String coordFantome = (fantome.getPosX() / 20) + "/" + (fantome.getPosY() / 20);
-                    String coordPacman = (PACMAN.getPosX() / 20) + "/" + (PACMAN.getPosY() / 20);
-                    if (!coordFantome.equals(coordPacman)) {
-                        fantome.listeCoordoneDeplacementFant.add(DijkstraShortestPath.findPathBetween(MAP.g, coordFantome, coordPacman).getVertexList().get(1));
-                    } else {
-                        fantome.iaFantomeAppeure();
-                    }
-                }
                 fantome.updateDeplacement();
 //                  System.out.println(fantome.listeCoordoneDeplacementFant);
             }

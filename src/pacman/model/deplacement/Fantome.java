@@ -119,7 +119,16 @@ public class Fantome extends Deplacement{
     }
 
     public void iaTest() {
-        if (getPosX() > 247 || getPosY() > 241) { //IA mode campeur
+        if (vueSurPacman() && !estVulnerable) {
+            System.out.println("Je te vois");
+            String coordFantome = (getPosX() / 20) + "/" + (getPosY() / 20);
+            String coordPacman = (pacman.getPosX() / 20) + "/" + (pacman.getPosY() / 20);
+            if (!coordFantome.equals(coordPacman)) {
+                listeCoordoneDeplacementFant.add(DijkstraShortestPath.findPathBetween(map.g, coordFantome, coordPacman).getVertexList().get(1));
+            } else {
+                iaFantomeAppeure();
+            }
+        } else if (getPosX() > 247 || getPosY() > 241) { //IA mode campeur
             System.out.println("Je te vois plus");
             int x = getPosX() / 20;
             int y = getPosY() / 20;
