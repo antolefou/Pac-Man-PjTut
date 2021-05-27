@@ -7,21 +7,17 @@ import org.jgrapht.Graph;
 import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 public class Map extends Group  {
+
     public final static double TAILLE_CASE = 20.0;
-
-    public enum ValeurCase { VIDE, MUR, GOMME, SUPERGOMME, BOOST, INTERDIT
-                            , CERISE, FRAISE, ORANGE, POMME, MELON, VAISSEAU
-                            , CLOCHE, CLEF}
-
     private final int NB_CASE_X = 25;
     private final int NB_CASE_Y = 30;
+//    valeur possible de chaque case de la map
+    public enum ValeurCase { VIDE, MUR, GOMME, SUPERGOMME, BOOST, INTERDIT, CERISE, FRAISE, ORANGE, POMME, MELON, VAISSEAU, CLOCHE, CLEF}
 
     public MapGenerator mapGenerator;
 
@@ -29,19 +25,19 @@ public class Map extends Group  {
     public ValeurCase[][] grid;
     public ImageView[][] caseMap;
 //    Images
-    public Image imageMur;
-    public Image imageGomme;
-    public Image imageSuperGomme;
-    public Image imageBoost;
-    public Image imageMurFantome;
-    public Image imageCerise;
-    public Image imageFraise;
-    public Image imageOrange;
-    public Image imagePomme;
-    public Image imageMelon;
-    public Image imageVaisseau;
-    public Image imageCloche;
-    public Image imageClef;
+    private final Image imageMur;
+    private final Image imageGomme;
+    private final Image imageSuperGomme;
+    private final Image imageBoost;
+    private final Image imageMurFantome;
+    private final Image imageCerise;
+    private final Image imageFraise;
+    private final Image imageOrange;
+    private final Image imagePomme;
+    private final Image imageMelon;
+    private final Image imageVaisseau;
+    private final Image imageCloche;
+    private final Image imageClef;
 //    Graphe
     public Graph<String, DefaultEdge> g;
     public String[][] grilleGraph;
@@ -70,125 +66,132 @@ public class Map extends Group  {
         this.imageVaisseau = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "vaisseau.png")));
         this.imageCloche = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "cloche.png")));
         this.imageClef = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "clef.png")));
+//         crée et affiche la map
+        this.creeMapAleatoire();
+        this.afficheMap();
+    }
 
-        mapGenerator = new MapGenerator();
-        mapGenerator.initObjet(5, 3, 1);
-        mapGeneree = mapGenerator.getMap();
-//        Vide mapGeneree
-        mapGenerator = null;
+    /**
+     * Crée une map aléatoire et recommence si jamais la map contient des zones isolées
+     */
+    private void creeMapAleatoire() {
+        this.creeMapAleatoire(1);
+    }
 
-        initialiseMapGeneree();
-        initGraph();
-
-        while (!estConnexe()){
+    /**
+     * Crée une map aléatoire et recommence si jamais la map contient des zones isolées
+     * @param niveau niveau de la map
+     */
+    public void creeMapAleatoire(int niveau) {
+        // crée une nouvelle map et recommence si jamais la map contient des zones isolées
+        do {
             mapGenerator = new MapGenerator();
-            mapGenerator.initObjet(5, 3, 1);
+            mapGenerator.initObjet(5, 3, niveau);
             mapGeneree = mapGenerator.getMap();
-//        Vide mapGeneree
-            mapGenerator = null;
-
+            mapGenerator = null; // Vide mapGeneree
 
             initialiseMapGeneree();
             initGraph();
-//            System.out.println("###############################est PASSER DANS LA PUTAIN DE BOUCLE##########################");
-        }
-//        System.out.println(estConnexe());
-//        System.out.println("-----------------------------");
-        afficheMap();
+        } while (!estConnexe());
     }
 
+
+    /**
+     * Initialise la map générée
+     */
     private void initialiseMapGeneree() {
         grid = new ValeurCase[this.NB_CASE_X][this.NB_CASE_Y];
-        for (int i=0; i<NB_CASE_X; i++) {
-            for (int j=0; j<NB_CASE_Y; j++) {
-                switch (mapGeneree[i][j]) {
+        for (int x=0; x<this.NB_CASE_X; x++) {
+            for (int y=0; y<this.NB_CASE_Y; y++) {
+                switch (mapGeneree[x][y]) {
                     case "V":
-                        this.grid[i][j] = ValeurCase.VIDE;
+                        this.grid[x][y] = ValeurCase.VIDE;
                         break;
                     case "M":
-                        this.grid[i][j] = ValeurCase.MUR;
+                        this.grid[x][y] = ValeurCase.MUR;
                         break;
                     case "G":
-                        this.grid[i][j] = ValeurCase.GOMME;
+                        this.grid[x][y] = ValeurCase.GOMME;
                         break;
                     case "S":
-                        this.grid[i][j] = ValeurCase.SUPERGOMME;
+                        this.grid[x][y] = ValeurCase.SUPERGOMME;
                         break;
                     case "B":
-                        this.grid[i][j] = ValeurCase.BOOST;
+                        this.grid[x][y] = ValeurCase.BOOST;
                         break;
                     case "I":
-                        this.grid[i][j] = ValeurCase.INTERDIT;
+                        this.grid[x][y] = ValeurCase.INTERDIT;
                         break;
                     case "C":
-                        this.grid[i][j] = ValeurCase.CERISE;
+                        this.grid[x][y] = ValeurCase.CERISE;
                         break;
                     case "F":
-                        this.grid[i][j] = ValeurCase.FRAISE;
+                        this.grid[x][y] = ValeurCase.FRAISE;
                         break;
                     case "O":
-                        this.grid[i][j] = ValeurCase.ORANGE;
+                        this.grid[x][y] = ValeurCase.ORANGE;
                         break;
                     case "P":
-                        this.grid[i][j] = ValeurCase.POMME;
+                        this.grid[x][y] = ValeurCase.POMME;
                         break;
                     case "ME":
-                        this.grid[i][j] = ValeurCase.MELON;
+                        this.grid[x][y] = ValeurCase.MELON;
                         break;
                     case "VA":
-                        this.grid[i][j] = ValeurCase.VAISSEAU;
+                        this.grid[x][y] = ValeurCase.VAISSEAU;
                         break;
                     case "CLO":
-                        this.grid[i][j] = ValeurCase.CLOCHE;
+                        this.grid[x][y] = ValeurCase.CLOCHE;
                         break;
                     case "CLE":
-                        this.grid[i][j] = ValeurCase.CLEF;
+                        this.grid[x][y] = ValeurCase.CLEF;
                         break;
+                    default:
+                        System.out.println("Erreur: La valeur de la case est inconnu");
                 }
             }
         }
     }
 
+    /**
+     * Initialise le graph en fonction de la map générée
+     */
     public void initGraph(){
         // Création du Graph
         this.g = new SimpleGraph<>(DefaultEdge.class);
-        this.grilleGraph = new String[NB_CASE_X][NB_CASE_Y];
-        for (int i=0; i<NB_CASE_X; i++) {
-            for (int j=0; j<NB_CASE_Y; j++) {
-                if (grid[i][j] != ValeurCase.MUR) {
-                    grilleGraph[i][j] = i+"/"+j;
-                    g.addVertex(grilleGraph[i][j]);
+        this.grilleGraph = new String[this.NB_CASE_X][this.NB_CASE_Y];
+        for (int x=0; x<this.NB_CASE_X; x++) {
+            for (int y=0; y<this.NB_CASE_Y; y++) {
+                if (grid[x][y] != ValeurCase.MUR) {
+                    grilleGraph[x][y] = x+"/"+y;
                 }else{
-                    grilleGraph[i][j] = "Mur"+i+"/"+j;
-                    g.addVertex(grilleGraph[i][j]);
+                    grilleGraph[x][y] = "Mur"+x+"/"+y;
+                }
+                g.addVertex(grilleGraph[x][y]);
+            }
+        }
+        for (int x=0; x<this.NB_CASE_X; x++) {
+            for (int y=0; y<this.NB_CASE_Y; y++) {
+                if (grilleGraph[x][y].equals(x + "/" + y) && grilleGraph[(x + 1) % this.NB_CASE_X][y].equals((x + 1) % this.NB_CASE_X + "/" + y)) {
+                    g.addEdge(grilleGraph[x][y], grilleGraph[((x+1)%this.NB_CASE_X)][y]);
+                }
+                if (grilleGraph[x][y].equals(x + "/" + y) && grilleGraph[x][(y + 1) % this.NB_CASE_Y].equals(x + "/" + (y + 1) % this.NB_CASE_Y)) {
+                    g.addEdge(grilleGraph[x][y], grilleGraph[x][(y+1)%this.NB_CASE_Y]);
                 }
             }
         }
-        for (int i=0; i<NB_CASE_X; i++) {
-            for (int j=0; j<NB_CASE_Y; j++) {
-                if (grilleGraph[i][j].equals(i + "/" + j) && grilleGraph[(i + 1) % NB_CASE_X][j].equals((i + 1) % NB_CASE_X + "/" + j)) {
-                    g.addEdge(grilleGraph[i][j], grilleGraph[((i+1)%NB_CASE_X)][j]);
-                }
-                if (grilleGraph[i][j].equals(i + "/" + j) && grilleGraph[i][(j + 1) % NB_CASE_Y].equals(i + "/" + (j + 1) % NB_CASE_Y)) {
-                    g.addEdge(grilleGraph[i][j], grilleGraph[i][(j+1)%NB_CASE_Y]);
-                }
-            }
-        }
-
-//        System.out.println(g.toString());
-//        // @example:toString:end
-//        System.out.println();
-//        // Fin de création du Graph
-//        System.out.println((DijkstraShortestPath.findPathBetween(g, grilleGraph[1][1] , grilleGraph[23][28] )));
     }
 
+    /**
+     * Renvoie true si le graph est connexe
+     * @return true si le graph est connexe
+     */
     public boolean estConnexe(){
         ConnectivityInspector<String, DefaultEdge> gTestConnecti = new ConnectivityInspector<>(this.g);
         List<Set<String>> listeSousGraphe = gTestConnecti.connectedSets();
         int count = 0;
-        for (int k = 0; k < listeSousGraphe.size(); k++){
-            if (listeSousGraphe.get(k).size() > 1){
-//                System.out.println(listeSousGraphe.get(k));
+        for (Set<String> strings : listeSousGraphe) {
+            if (strings.size() > 1) {
                 count++;
             }
         }
@@ -196,7 +199,7 @@ public class Map extends Group  {
     }
 
     /**
-     * Construit une grilles d'Imageview
+     * Construit une grilles d'Imageview et met les images en fonction de la map générée
      */
     public void afficheMap() {
         this.caseMap = new ImageView[this.NB_CASE_X][this.NB_CASE_Y];
@@ -241,45 +244,19 @@ public class Map extends Group  {
         this.caseMap[12][13].setImage(this.imageMurFantome);
     }
 
-    /**
-     * Construit une grilles d'Imageview
-     */
     public void miseAJourMap() {
         for (int i = 0; i < this.NB_CASE_X; i++) {
             for (int j = 0; j < this.NB_CASE_Y; j++) {
-                //affichage de la map
-                if (this.grid[i][j] == ValeurCase.MUR) {
-                    this.caseMap[i][j].setImage(this.imageMur);
-                } else if (this.grid[i][j] == ValeurCase.GOMME) {
-                    this.caseMap[i][j].setImage(this.imageGomme);
-                } else if (this.grid[i][j] == ValeurCase.SUPERGOMME) {
-                    this.caseMap[i][j].setImage(this.imageSuperGomme);
-                } else if (this.grid[i][j] == ValeurCase.INTERDIT) {
-                    this.caseMap[i][j].setImage(null);
-                } else if (this.grid[i][j] == ValeurCase.BOOST) {
-                    this.caseMap[i][j].setImage(this.imageBoost);
-                } else if (this.grid[i][j] == ValeurCase.CERISE) {
-                    this.caseMap[i][j].setImage(this.imageCerise);
-                } else if (this.grid[i][j] == ValeurCase.FRAISE) {
-                    this.caseMap[i][j].setImage(this.imageFraise);
-                } else if (this.grid[i][j] == ValeurCase.ORANGE) {
-                    this.caseMap[i][j].setImage(this.imageOrange);
-                } else if (this.grid[i][j] == ValeurCase.POMME) {
-                    this.caseMap[i][j].setImage(this.imagePomme);
-                } else if (this.grid[i][j] == ValeurCase.MELON) {
-                    this.caseMap[i][j].setImage(this.imageMelon);
-                } else if (this.grid[i][j] == ValeurCase.VAISSEAU) {
-                    this.caseMap[i][j].setImage(this.imageVaisseau);
-                } else if (this.grid[i][j] == ValeurCase.CLOCHE) {
-                    this.caseMap[i][j].setImage(this.imageCloche);
-                } else if (this.grid[i][j] == ValeurCase.CLEF) {
-                    this.caseMap[i][j].setImage(this.imageClef);
-                }
+                //mise à jour de la map
+                if (this.grid[i][j] == ValeurCase.VIDE) this.caseMap[i][j].setImage(null);
             }
         }
-        this.caseMap[12][13].setImage(this.imageMurFantome);
     }
 
+    /**
+     * Permet de savoir si le joueur a mangé tous les objets qui se trouvaient sur la map
+     * @return true si le joueur a gagné
+     */
     public boolean aGagne() {
         for (int i = 0; i < this.NB_CASE_X; i++) {
             for (int j = 0; j < this.NB_CASE_Y; j++) {
@@ -291,15 +268,10 @@ public class Map extends Group  {
         return true;
     }
 
-    public void recommence(int i) {
-        mapGenerator = new MapGenerator();
-        mapGenerator.initObjet(5, 4, i);
-        mapGeneree = mapGenerator.getMap();
-        initialiseMapGeneree();
-        miseAJourMap();
-        initGraph();
-    }
 
+    ////////////////////////////
+    /*    GETTER ET SETTER    */
+    ////////////////////////////
     public Graph<String, DefaultEdge> getG() {
         return g;
     }

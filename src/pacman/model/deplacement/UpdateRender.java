@@ -7,7 +7,6 @@ import pacman.model.Map;
 import pacman.model.Utilisateur;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class UpdateRender extends Thread{
     private FantomeGroup fantomeGroup;
@@ -86,7 +85,7 @@ public class UpdateRender extends Thread{
             PACMAN.initPosition(); // il faut rajouter init power
             PACMAN.numNiveau ++;
             fantomeGroup.reinitialisePosition();
-            MAP.recommence(PACMAN.numNiveau);
+            MAP.creeMapAleatoire(PACMAN.numNiveau);
         }
     }
 
@@ -98,6 +97,8 @@ public class UpdateRender extends Thread{
             for (Fantome fantome : fantomeGroup.fantomes) {
                 fantome.affichage();
             }
+            //affiche la map
+            MAP.miseAJourMap();
             //affichage score
             this.updateScore();
             try {controllerJouer.viePac();} catch (IOException e) {e.printStackTrace();}

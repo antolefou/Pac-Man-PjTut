@@ -366,4 +366,27 @@ public class Fantome extends Deplacement{
         if (x>9 && x<15 && y>12 && y<16) return true;
         return false;
     }
+
+    public void affichage() {
+        super.affichage();
+        switch (this.etat) {
+            case SPAWN:
+                this.setImageView(this.getImage());
+                break;
+            case NORMAL:
+                this.setImageView(this.getImage());
+                break;
+            case APPEURE:
+                this.setImageView(this.imageBlueGhost);
+                break;
+            case MORT:
+                this.setImageView(this.imageMort);
+                break;
+            default:
+                this.setImageView(this.getImage());
+                break;
+        }
+
+
+    }
 }

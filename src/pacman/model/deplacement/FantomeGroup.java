@@ -21,7 +21,9 @@ public class FantomeGroup extends Group {
 
     public void addFantomeToScene() {
         for (Fantome fantome : this.fantomes) {
-            this.getChildren().add(fantome.getImageView());
+            Platform.runLater(() -> {
+                this.getChildren().add(fantome.getImageView());
+            });
         }
     }
 
@@ -29,7 +31,6 @@ public class FantomeGroup extends Group {
         for (Fantome fantome : this.fantomes) {
             fantome.initPosition();
             fantome.listeCoordoneDeplacementFant = new ArrayList<>();
-            fantome.setImageView(fantome.getImage());
         }
         stopVulnerable();
     }
@@ -38,9 +39,6 @@ public class FantomeGroup extends Group {
         for (Fantome fantome : this.fantomes) {
             if (!fantome.estAuSpawn() && fantome.etat != Fantome.ValeurEtat.MORT) {
                 fantome.etat = Fantome.ValeurEtat.APPEURE;
-                Platform.runLater(() -> {
-                    fantome.setImageView(fantome.imageBlueGhost);
-                });
                 fantome.velocityMultiplicator = 1;
             }
         }
@@ -50,7 +48,6 @@ public class FantomeGroup extends Group {
         for (Fantome fantome : this.fantomes) {
             if (fantome.etat != Fantome.ValeurEtat.NORMAL && fantome.etat != Fantome.ValeurEtat.MORT && fantome.etat != Fantome.ValeurEtat.SPAWN) {
                 fantome.etat = Fantome.ValeurEtat.NORMAL;
-                fantome.setImageView(fantome.getImage());
                 fantome.velocityMultiplicator = 2;
             }
         }
