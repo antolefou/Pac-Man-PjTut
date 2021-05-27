@@ -11,3 +11,10 @@
     -fx-background-color: none;
     -fx-cursor: hand;
 }
+
+.text-field {
+    -fx-border-width: 1;
+    -fx-border-color: yellow;
+    -fx-background-color: black;
+    -fx-text-inner-color: yellow;
+}

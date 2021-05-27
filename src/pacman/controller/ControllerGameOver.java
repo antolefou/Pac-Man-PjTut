@@ -46,7 +46,6 @@ public class ControllerGameOver extends Controller{
                 }
             }
 
-
         } else if (event.getCode() == KeyCode.ALT) {
             Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/menu.fxml")));
             primaryStage.setScene(new Scene(scoreView));
