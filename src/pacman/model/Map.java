@@ -8,9 +8,12 @@ import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
-public class Map extends Group {
+public class Map extends Group  {
     public final static double TAILLE_CASE = 20.0;
 
     public enum ValeurCase { VIDE, MUR, GOMME, SUPERGOMME, BOOST, INTERDIT
@@ -76,6 +79,21 @@ public class Map extends Group {
 
         initialiseMapGeneree();
         initGraph();
+
+        while (!estConnexe()){
+            mapGenerator = new MapGenerator();
+            mapGenerator.initObjet(5, 3, 1);
+            mapGeneree = mapGenerator.getMap();
+//        Vide mapGeneree
+            mapGenerator = null;
+
+
+            initialiseMapGeneree();
+            initGraph();
+//            System.out.println("###############################est PASSER DANS LA PUTAIN DE BOUCLE##########################");
+        }
+//        System.out.println(estConnexe());
+//        System.out.println("-----------------------------");
         afficheMap();
     }
 
@@ -162,8 +180,21 @@ public class Map extends Group {
 //        System.out.println();
 //        // Fin de création du Graph
 //        System.out.println((DijkstraShortestPath.findPathBetween(g, grilleGraph[1][1] , grilleGraph[23][28] )));
-
     }
+
+    public boolean estConnexe(){
+        ConnectivityInspector<String, DefaultEdge> gTestConnecti = new ConnectivityInspector<>(this.g);
+        List<Set<String>> listeSousGraphe = gTestConnecti.connectedSets();
+        int count = 0;
+        for (int k = 0; k < listeSousGraphe.size(); k++){
+            if (listeSousGraphe.get(k).size() > 1){
+//                System.out.println(listeSousGraphe.get(k));
+                count++;
+            }
+        }
+        return count == 1;
+    }
+
     /**
      * Construit une grilles d'Imageview
      */
