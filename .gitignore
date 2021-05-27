@@ -2,4 +2,5 @@
 Pac-Man-PjTut.iml
 out/
 /.scannerwork/
+/src/pacman/model/Score.txt
 src/pacman/model/Score.txt
