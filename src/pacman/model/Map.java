@@ -99,8 +99,8 @@ public class Map extends Group  {
 
     private void initialiseMapGeneree() {
         grid = new ValeurCase[this.NB_CASE_X][this.NB_CASE_Y];
-        for (int i=0; i<25; i++) {
-            for (int j=0; j<30; j++) {
+        for (int i=0; i<NB_CASE_X; i++) {
+            for (int j=0; j<NB_CASE_Y; j++) {
                 switch (mapGeneree[i][j]) {
                     case "V":
                         this.grid[i][j] = ValeurCase.VIDE;
@@ -152,9 +152,9 @@ public class Map extends Group  {
     public void initGraph(){
         // Création du Graph
         this.g = new SimpleGraph<>(DefaultEdge.class);
-        this.grilleGraph = new String[25][30];
-        for (int i=0; i<25; i++) {
-            for (int j=0; j<30; j++) {
+        this.grilleGraph = new String[NB_CASE_X][NB_CASE_Y];
+        for (int i=0; i<NB_CASE_X; i++) {
+            for (int j=0; j<NB_CASE_Y; j++) {
                 if (grid[i][j] != ValeurCase.MUR) {
                     grilleGraph[i][j] = i+"/"+j;
                     g.addVertex(grilleGraph[i][j]);
@@ -164,13 +164,13 @@ public class Map extends Group  {
                 }
             }
         }
-        for (int i=0; i<25; i++) {
-            for (int j=0; j<30; j++) {
-                if (grilleGraph[i][j].equals(i + "/" + j) && grilleGraph[(i + 1) % 25][j].equals((i + 1) % 25 + "/" + j)) {
-                    g.addEdge(grilleGraph[i][j], grilleGraph[((i+1)%25)][j]);
+        for (int i=0; i<NB_CASE_X; i++) {
+            for (int j=0; j<NB_CASE_Y; j++) {
+                if (grilleGraph[i][j].equals(i + "/" + j) && grilleGraph[(i + 1) % NB_CASE_X][j].equals((i + 1) % NB_CASE_X + "/" + j)) {
+                    g.addEdge(grilleGraph[i][j], grilleGraph[((i+1)%NB_CASE_X)][j]);
                 }
-                if (grilleGraph[i][j].equals(i + "/" + j) && grilleGraph[i][(j + 1) % 30].equals(i + "/" + (j + 1) % 30)) {
-                    g.addEdge(grilleGraph[i][j], grilleGraph[i][(j+1)%30]);
+                if (grilleGraph[i][j].equals(i + "/" + j) && grilleGraph[i][(j + 1) % NB_CASE_Y].equals(i + "/" + (j + 1) % NB_CASE_Y)) {
+                    g.addEdge(grilleGraph[i][j], grilleGraph[i][(j+1)%NB_CASE_Y]);
                 }
             }
         }

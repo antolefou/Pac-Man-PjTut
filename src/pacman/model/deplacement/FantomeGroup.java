@@ -25,13 +25,6 @@ public class FantomeGroup extends Group {
         }
     }
 
-    public boolean sontSurPacman() {
-        for (Fantome fantome : this.fantomes) {
-            if (fantome.estSurPacman()) return true;
-        }
-        return false;
-    }
-
     public void reinitialisePosition() {
         for (Fantome fantome : this.fantomes) {
             fantome.initPosition();
@@ -44,9 +37,6 @@ public class FantomeGroup extends Group {
     public void setVulnerable() {
         for (Fantome fantome : this.fantomes) {
             if (!fantome.estAuSpawn() && fantome.etat != Fantome.ValeurEtat.MORT) {
-                for (int i = 0; i < fantome.listeCoordoneDeplacementFant.size()-1; i++) {
-                    fantome.listeCoordoneDeplacementFant.remove(1);
-                }
                 fantome.etat = Fantome.ValeurEtat.APPEURE;
                 Platform.runLater(() -> {
                     fantome.setImageView(fantome.imageBlueGhost);

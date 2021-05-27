@@ -3,7 +3,7 @@ package pacman.view;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.StackPane;
-import pacman.model.Model;
+
 import java.io.IOException;
 import java.util.Objects;
 

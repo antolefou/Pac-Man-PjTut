@@ -50,8 +50,6 @@ public class Pacman extends Deplacement {
         double pacmanX = this.getPosX();
         double pacmanY = this.getPosY();
         if (pacmanY % 20 == 1) {
-//            System.out.println("x " + ((((int)pacmanX/20)+i)+24)%24);
-//            System.out.println("y " + ((int)pacmanY/20));
             if (((pacmanX % 20 != 1) || (map.grid[((((int) pacmanX / 20) + i) + 25) % 25][((int) pacmanY / 20)] != Map.ValeurCase.MUR))) {
                 return true;
             }

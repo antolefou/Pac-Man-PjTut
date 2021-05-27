@@ -78,9 +78,7 @@ public class Fantome extends Deplacement{
                 break;
             case NORMAL:
                 this.estVulnerable = false;
-
                 updateDeplacements();
-//                avancePos();     //doit être mis, donc enlever code identique dans iaNormal
                 break;
             case APPEURE:
                 if (listeCoordoneDeplacementFant.size()>1) {
@@ -109,41 +107,6 @@ public class Fantome extends Deplacement{
                 }
                 break;
         }
-
-        /*
-        if (this.listeCoordoneDeplacementFant.isEmpty()) {
-            this.ia();
-            getNextFinalPos();
-        }
-        if (doitRechargerNextPos()) {
-            String tmp = this.coordoneeActuel;
-            this.coordoneeActuel = this.listeCoordoneDeplacementFant.get(0);
-            if (!tmp.equals(this.coordoneeActuel))
-                this.coordoneePasse = tmp;
-
-            this.listeCoordoneDeplacementFant.remove(0);
-            if(this.listeCoordoneDeplacementFant.isEmpty()){
-                this.ia();
-            }
-            getNextFinalPos();
-        } else if (positionXFinDeplacement != this.getPosX() || positionYFinDeplacement != this.getPosY()) {
-            switch (this.deplacementActuel) {
-                case HAUT:
-                    if (peutAvancerVerticalement(map,-1)) this.avanceHaut();
-                    break;
-                case DROITE:
-                    if (peutAvancerHorizontalement(map,1)) this.avanceDroite();
-                    break;
-                case BAS:
-                    if (peutAvancerVerticalement(map,1)) this.avanceBas();
-                    break;
-                case GAUCHE:
-                    if (peutAvancerHorizontalement(map,-1)) this.avanceGauche();
-                    break;
-                default:
-                    break;
-            }
-        }*/
     }
 
     private String coinGaucheHaut() {
@@ -156,15 +119,8 @@ public class Fantome extends Deplacement{
     }
 
     public void iaTest() {
-        if (vueSurPacman() && !estVulnerable) {
-            String coordFantome = (getPosX() / 20) + "/" + (getPosY() / 20);
-            String coordPacman = (pacman.getPosX() / 20) + "/" + (pacman.getPosY() / 20);
-            if (!coordFantome.equals(coordPacman)) {
-                listeCoordoneDeplacementFant = DijkstraShortestPath.findPathBetween(map.g, coordFantome, coordPacman).getVertexList();
-            } else {
-                iaFantomeAppeure();
-            }
-        } else if (getPosX() > 247 || getPosY() > 241) { //IA mode campeur
+        if (getPosX() > 247 || getPosY() > 241) { //IA mode campeur
+            System.out.println("Je te vois plus");
             int x = getPosX() / 20;
             int y = getPosY() / 20;
             String[][] grille = map.getGrilleGraph();
@@ -225,13 +181,13 @@ public class Fantome extends Deplacement{
         if (positionXFinDeplacement != this.getPosX() || positionYFinDeplacement != this.getPosY()) {
             switch (this.deplacementActuel) {
                 case HAUT:
-                    if (peutAvancerVerticalement2(map,-1)) this.avanceHaut();
+                    if (peutAvancerVerticalement(map,-1)) this.avanceHaut();
                     break;
                 case DROITE:
                     if (peutAvancerHorizontalement(map,1)) this.avanceDroite();
                     break;
                 case BAS:
-                    if (peutAvancerVerticalement2(map,1)) this.avanceBas();
+                    if (peutAvancerVerticalement(map,1)) this.avanceBas();
                     break;
                 case GAUCHE:
                     if (peutAvancerHorizontalement(map,-1)) this.avanceGauche();
@@ -251,50 +207,19 @@ public class Fantome extends Deplacement{
 
     public boolean peutAvancerHorizontalement(Map map, int i) {
         if (getPosY() % 20 == 1) {
-            if ((getPosX() % 20 != 1) || (map.grid[((getPosX()/20)+i+25)%25][getPosY()/20] != Map.ValeurCase.MUR)) {
-                return true;
-            }
+            return ((getPosX() % 20 != 1) || (map.grid[((getPosX()/20)+i+25)%25][getPosY()/20] != Map.ValeurCase.MUR));
         }
         return false;
     }
     public boolean peutAvancerVerticalement(Map map, int i) {
         if (getPosX() % 20 == 1 && getPosX() > 1 && getPosX() < 500) {
-            if ((getPosY() % 20 != 1) || (map.grid[getPosX()/20][(getPosY()/20)+i] != Map.ValeurCase.MUR)) {
-                if (map.grid[getPosX()/20][(getPosY()/20)] != Map.ValeurCase.INTERDIT && (map.grid[getPosX()/20][(getPosY()/20)+i] == Map.ValeurCase.INTERDIT))
-                    return false;
-                return true;
-            }
+            // Renvoie vrai si le fantome est mort.
+            // Renvoie vrai si il ne peut pas avoir atteint un mur.
+            // Renvoie vrai si la prochaine case n'est pas un mur et que la prochaine case n'est pas interdite.
+            // Pour être plus exact sur l'interdit : on vérifie si il est sur une case non interdite et que sa prochaine case est interdite dans ce cas on return false.
+            return (this.mort || (getPosY() % 20 != 1) || (map.grid[getPosX()/20][(getPosY()/20)+i] != Map.ValeurCase.MUR) && !((map.grid[getPosX() / 20][(getPosY() / 20)] != Map.ValeurCase.INTERDIT) && (map.grid[getPosX() / 20][(getPosY() / 20) + i] == Map.ValeurCase.INTERDIT)));
         }
         return false;
-    }
-    public boolean peutAvancerVerticalement2(Map map, int i) {
-        if (getPosX() % 20 == 1 && getPosX() > 1 && getPosX() < 500) {
-            if ((getPosY() % 20 != 1) || (map.grid[getPosX()/20][(getPosY()/20)+i] != Map.ValeurCase.MUR)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void ancienDeplacementFantome() {
-        switch (deplacementActuel) {
-            case BAS:
-                if (peutAvancerVerticalement(map,1))
-                    ajouteAvanceDirection("BAS");
-                break;
-            case DROITE:
-                if (peutAvancerHorizontalement(map,1))
-                    ajouteAvanceDirection("DROITE");
-                break;
-            case HAUT:
-                if (peutAvancerVerticalement(map,-1))
-                    ajouteAvanceDirection("HAUT");
-                break;
-            case GAUCHE:
-                if (peutAvancerHorizontalement(map,-1))
-                    ajouteAvanceDirection("GAUCHE");
-                break;
-        }
     }
 
     public boolean estSurPacman() {
@@ -314,12 +239,6 @@ public class Fantome extends Deplacement{
         debutSpawn = 0L;
     }
 
-    public void initDeplacementFantome() {
-        String coordFantome = (int)(getPosX()/20) + "/" + (int)(getPosY()/20);
-        String coordOut = "12/12";
-        listeCoordoneDeplacementFant = DijkstraShortestPath.findPathBetween(map.g, coordFantome, coordOut).getVertexList();
-    }
-
     public void iaFantomeAppeure() {
         ArrayList<String> listePossible = new ArrayList<>();
         if (this.peutAvancerVerticalement(map, -1) && deplacementActuel != deplacements.BAS) {
@@ -335,7 +254,7 @@ public class Fantome extends Deplacement{
             listePossible.add("DROITE");
         }
         Random rand = new Random();
-        ajouteAvanceDirection((String) listePossible.get(rand.nextInt(listePossible.size())));
+        ajouteAvanceDirection(listePossible.get(rand.nextInt(listePossible.size())));
     }
 
     public void ajouteAvanceDirection(String direction) {

@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import pacman.model.Model;
 import pacman.model.ModelMusic;
 import pacman.model.Utilisateur;
 

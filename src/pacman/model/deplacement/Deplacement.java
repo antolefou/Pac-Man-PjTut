@@ -39,8 +39,6 @@ public class Deplacement extends Group {
         this.imageView.setFitWidth(Map.TAILLE_CASE-2);
         this.imageView.setFitHeight(Map.TAILLE_CASE-2);
         this.imageView.toFront();
-//        this.getChildren().add(imageView);
-//        System.out.println(this.getChildren());
     }
 
 
