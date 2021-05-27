@@ -4,6 +4,7 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.jgrapht.Graph;
+import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
@@ -72,6 +73,7 @@ public class Map extends Group {
         mapGeneree = mapGenerator.getMap();
 //        Vide mapGeneree
         mapGenerator = null;
+
         initialiseMapGeneree();
         initGraph();
         afficheMap();

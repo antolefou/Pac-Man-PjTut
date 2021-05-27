@@ -81,6 +81,17 @@ public class ControllerJouer extends Controller {
             pacman.deplacementFutur = Deplacement.deplacements.BAS;
         } else if (code == KeyCode.LEFT || code == KeyCode.Q) {
             pacman.deplacementFutur = Deplacement.deplacements.GAUCHE;
+        }else if (code == KeyCode.R){
+            Parent scoreView = null;
+            try {
+                scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/jouer.fxml")));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            primaryStage.setScene(new Scene(scoreView));
+            primaryStage.sizeToScene();
+            primaryStage.show();
+            scoreView.requestFocus();
         }
     }
 

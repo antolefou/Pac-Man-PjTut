@@ -22,6 +22,7 @@ public class MapGenerator {
 
         while(constructorX.size() != 0) construction();
         affineMapV4();
+        afficheMapPasFini2();
         creerMapFinal();
     }
 
@@ -68,9 +69,9 @@ public class MapGenerator {
     }
 
     private void creerCarreMilieu() {
-        map[10][12] =  2;
-        map[11][12] =  2;
-        map[12][12] =  2;
+        map[10][12] = 2;
+        map[11][12] = 2;
+        map[12][12] = 2;
         map[9][12] = 2;
         map[9][13] = 2;
         map[9][14] = 2;
@@ -79,13 +80,13 @@ public class MapGenerator {
         map[10][16] = 2;
         map[11][16] = 2;
         map[12][16] = 2;
-        map[10][13] =  1;
-        map[11][13] =  1;
-        map[12][13] =  1;
-        map[10][14] =  1;
-        map[10][15] =  1;
-        map[11][15] =  1;
-        map[12][15] =  1;
+        map[10][13] = 1;
+        map[11][13] = 1;
+        map[12][13] = 1;
+        map[10][14] = 1;
+        map[10][15] = 1;
+        map[11][15] = 1;
+        map[12][15] = 1;
         map[11][14] = 3;
         map[12][14] = 3;
     }
@@ -361,12 +362,16 @@ public class MapGenerator {
         this.affineMap();
         creerCarreMilieu();
         int[][] mapPourAffine = this.ajouteBordure2D();
-
-        for (int m = 0 ; m<16 ;m++){
+        int count = 1;
+        int lastCount = 0;
+        while (count != lastCount){
+            lastCount = count;
+            count = 0;
             for (int i=1; i<mapPourAffine.length-1; i++) {
                 for (int j = 1; j < mapPourAffine[0].length - 1; j++) {
                     if (estRemplacable(mapPourAffine,i,j)) {
                         mapPourAffine[i][j] = 0;
+                        count++;
                     }
                 }
             }
@@ -671,9 +676,9 @@ public class MapGenerator {
     }
 
     public void afficheMapPasFini2(){
-        for (int i=0; i<map.length; i++) {
-            for (int j=0; j<map[0].length; j++) {
-                System.out.print(this.map[i][j]);
+        for (int y=0; y<map[0].length; y++) {
+            for (int x=0; x<map.length; x++) {
+                System.out.print(this.map[x][y]);
             }
             System.out.println();
         }
