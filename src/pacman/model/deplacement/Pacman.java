@@ -239,6 +239,7 @@ public class Pacman extends Deplacement {
     public void initSuperPacGomme() {
         debutSuperPacGomme = System.currentTimeMillis();
         powerSuperPacGomme = true;
+        controllerJouer.fantomeGroup.setVulnerable();
     }
 
     /**
@@ -253,6 +254,7 @@ public class Pacman extends Deplacement {
         } else if (powerSuperPacGomme) {
             if (System.currentTimeMillis()-debutSuperPacGomme > 1000 * 10) {  // durée 10 sec
                 powerSuperPacGomme = false;
+                controllerJouer.fantomeGroup.stopVulnerable();
             }
         }
     }

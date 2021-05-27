@@ -1,7 +1,9 @@
 package pacman.model.deplacement;
 
 import javafx.scene.image.Image;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
@@ -14,35 +16,42 @@ public class FantomeBrindille extends Fantome {
     public FantomeBrindille() {
         super(221, 281);
         this.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost3.gif"))));
+        imageBlueGhost = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghost.gif")));
+        imageMort = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/yeux.gif")));
         this.initialisation();
     }
 
-    public void ia() {
-
-//        if (compteur % 300 == 0) {
-//            random = rand.nextInt(10);
-//        }
-        if (this.getPosY() <= pacman.getPosY() && this.peutAvancerVerticalement(map, -1) && deplacementActuel != deplacements.BAS) {
-            this.ajouteAvanceDirection("HAUT");
-        } else if (this.getPosY() >= pacman.getPosY() && this.peutAvancerVerticalement(map, 1) && deplacementActuel != deplacements.HAUT) {
-            this.ajouteAvanceDirection("BAS");
-        } else if (this.getPosX() <= pacman.getPosX() && this.peutAvancerHorizontalement(map, -1) && deplacementActuel != deplacements.DROITE) {
-            this.ajouteAvanceDirection("GAUCHE");
-        } else if (this.getPosX() >= pacman.getPosX() && this.peutAvancerHorizontalement(map, 1) && deplacementActuel != deplacements.GAUCHE) {
-            this.ajouteAvanceDirection("DROITE");
+    /*public void ia(){
+        if (vueSurPacman()) {
+            String coordFantome = (getPosX()/20) + "/" + (getPosY()/20);
+            String coordPacman = (pacman.getPosX()/20) + "/" + (pacman.getPosY()/20);
+            System.out.println("vue pacman : " + coordFantome + coordPacman);
+            if (!coordFantome.equals(coordPacman)) {
+                listeCoordoneDeplacementFant = DijkstraShortestPath.findPathBetween(map.g, coordFantome, coordPacman).getVertexList();
+            }else {
+                iaFantomeAppeure();
+            }
+        } else if (getPosX() > 247 || getPosY() > 241) { //IA mode campeur
+            int x = getPosX() / 20;
+            int y = getPosY() / 20;
+            String[][] grille = map.getGrilleGraph();
+            if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).removeEdge(this.coordoneePasse, this.coordoneeActuel);
+            List<String> dijkstra = DijkstraShortestPath.findPathBetween(map.g, grille[x][y],coinGaucheHaut()).getVertexList();
+            if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).addEdge(this.coordoneePasse, this.coordoneeActuel);
+            dijkstra.remove(0);
+//            System.out.println("calcule diskjtra");
+            this.listeCoordoneDeplacementFant = dijkstra;
         } else {
-            if (this.peutAvancerVerticalement(map, -1) && deplacementActuel != deplacements.BAS) {
-                this.ajouteAvanceDirection("HAUT");
-            } else if (this.peutAvancerVerticalement(map, 1) && deplacementActuel != deplacements.HAUT) {
-                this.ajouteAvanceDirection("BAS");
-            } else if (this.peutAvancerHorizontalement(map, -1) && deplacementActuel != deplacements.DROITE) {
-                this.ajouteAvanceDirection("GAUCHE");
-            } else if (this.peutAvancerHorizontalement(map, 1) && deplacementActuel != deplacements.GAUCHE) {
-                ajouteAvanceDirection("DROITE");
-            } else {
-                System.out.println("erreur");
+            iaFantomeAppeure();
+        }
+    }*/
+
+    private String coinGaucheHaut() {
+        for (int y=0; y<8; y++) {
+            for (int x=0; x<8; x++) {
+                if (map.getGrilleGraph()[x][y].equals(x + "/" + y)) return x+"/"+y;
             }
         }
-//        compteur++;
+        return "";
     }
 }

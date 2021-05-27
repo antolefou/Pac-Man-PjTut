@@ -16,8 +16,7 @@ public class UpdateRender extends Thread{
     private final Map MAP;
     public final Pacman PACMAN;
     private ControllerJouer controllerJouer;
-    /*
-    private final FantomeCampeur FantomeCAMPEUR;*/
+
     public Thread update;
     public Thread render;
 
@@ -28,14 +27,14 @@ public class UpdateRender extends Thread{
         this.MAP = map;
         this.PACMAN = pacman;
         this.fantomeGroup = fantomeGroup;
-        /*
-        this.FantomeCAMPEUR = fantomeCampeur;*/
         initialize();
     }
+
     public void initialize() {
         this.PACMAN.setControllerJouer(controllerJouer);
         this.PACMAN.setMap(MAP);
         addPacmanToFantome();
+        fantomeGroup.initNumFantome();
     }
 
     public void jouer() {
@@ -79,7 +78,7 @@ public class UpdateRender extends Thread{
         }
         for (Fantome fantome : fantomeGroup.fantomes) {
             for (int i = 0; i< fantome.velocityMultiplicator; i++) {
-//                fantome.updateDeplacement();
+                fantome.updateDeplacement();
 //                  System.out.println(fantome.listeCoordoneDeplacementFant);
             }
         }
@@ -111,12 +110,29 @@ public class UpdateRender extends Thread{
     }
 
     public void fantomeSurPacman() {
-        if (fantomeGroup.sontSurPacman()) {
-            PACMAN.initPosition();
-            PACMAN.nbVie --;
-            this.controllerJouer.playMusic("death", false);
-            fantomeGroup.reinitialisePosition();
+        for (Fantome fantome : fantomeGroup.fantomes) {
+            if (fantome.estSurPacman()) {
+                if (fantome.etat == Fantome.ValeurEtat.APPEURE) {
+                    Platform.runLater(() -> {
+                        fantome.setImageView(fantome.imageMort);
+                    });
+                    fantome.mort = false;
+                    fantome.etat = Fantome.ValeurEtat.MORT;
+                    fantome.velocityMultiplicator = 3;
+                } else if (fantome.etat != Fantome.ValeurEtat.MORT){
+                    PACMAN.initPosition();
+                    PACMAN.nbVie--;
+                    this.controllerJouer.playMusic("death", false);
+                    fantomeGroup.reinitialisePosition();
+                }
+            }
         }
+//        if (fantomeGroup.sontSurPacman()) {
+//            PACMAN.initPosition();
+//            PACMAN.nbVie --;
+//            this.controllerJouer.playMusic("death", false);
+//            fantomeGroup.reinitialisePosition();
+//        }
     }
 
     public void addPacmanToFantome() {

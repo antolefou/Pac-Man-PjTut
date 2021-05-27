@@ -1,5 +1,6 @@
 package pacman.model.deplacement;
 
+import javafx.application.Platform;
 import javafx.scene.Group;
 import pacman.model.Map;
 
@@ -35,6 +36,39 @@ public class FantomeGroup extends Group {
         for (Fantome fantome : this.fantomes) {
             fantome.initPosition();
             fantome.listeCoordoneDeplacementFant = new ArrayList<>();
+            fantome.setImageView(fantome.getImage());
+        }
+        stopVulnerable();
+    }
+
+    public void setVulnerable() {
+        for (Fantome fantome : this.fantomes) {
+            if (!fantome.estAuSpawn() && fantome.etat != Fantome.ValeurEtat.MORT) {
+                for (int i = 0; i < fantome.listeCoordoneDeplacementFant.size()-1; i++) {
+                    fantome.listeCoordoneDeplacementFant.remove(1);
+                }
+                fantome.etat = Fantome.ValeurEtat.APPEURE;
+                Platform.runLater(() -> {
+                    fantome.setImageView(fantome.imageBlueGhost);
+                });
+                fantome.velocityMultiplicator = 1;
+            }
+        }
+    }
+
+    public void stopVulnerable() {
+        for (Fantome fantome : this.fantomes) {
+            if (fantome.etat != Fantome.ValeurEtat.NORMAL && fantome.etat != Fantome.ValeurEtat.MORT && fantome.etat != Fantome.ValeurEtat.SPAWN) {
+                fantome.etat = Fantome.ValeurEtat.NORMAL;
+                fantome.setImageView(fantome.getImage());
+                fantome.velocityMultiplicator = 2;
+            }
+        }
+    }
+
+    public void initNumFantome() {
+        for (int i=0; i<fantomes.length; i++) {
+            fantomes[i].numFantome = i+1;
         }
     }
 }
