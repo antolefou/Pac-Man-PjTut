@@ -1,5 +1,6 @@
 package pacman.model;
 
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -66,9 +67,10 @@ public class Map extends Group  {
         this.imageVaisseau = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "vaisseau.png")));
         this.imageCloche = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "cloche.png")));
         this.imageClef = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "clef.png")));
+//        init
+        this.grid = new ValeurCase[this.NB_CASE_X][this.NB_CASE_Y];
 //         crée et affiche la map
-        this.creeMapAleatoire();
-        this.afficheMap();
+        Platform.runLater(this::creeMapAleatoire);
     }
 
     /**
@@ -93,6 +95,8 @@ public class Map extends Group  {
             initialiseMapGeneree();
             initGraph();
         } while (!estConnexe());
+        if (this.caseMap == null) initialiseCaseMap();
+        this.afficheMap();
     }
 
 
@@ -100,7 +104,6 @@ public class Map extends Group  {
      * Initialise la map générée
      */
     private void initialiseMapGeneree() {
-        grid = new ValeurCase[this.NB_CASE_X][this.NB_CASE_Y];
         for (int x=0; x<this.NB_CASE_X; x++) {
             for (int y=0; y<this.NB_CASE_Y; y++) {
                 switch (mapGeneree[x][y]) {
@@ -199,17 +202,28 @@ public class Map extends Group  {
     }
 
     /**
+     * Initialise les cases de la map, cette méthode est appelée qu'une seule fois.
+     */
+    private void initialiseCaseMap() {
+        this.caseMap = new ImageView[this.NB_CASE_X][this.NB_CASE_Y];
+        for (int i = 0; i < this.NB_CASE_X; i++){
+            for (int j = 0; j < this.NB_CASE_Y; j++) {
+                this.caseMap[i][j] = new ImageView();
+                this.caseMap[i][j].setX((double) i * TAILLE_CASE);
+                this.caseMap[i][j].setY((double) j * TAILLE_CASE);
+                this.caseMap[i][j].setFitWidth(TAILLE_CASE);
+                this.caseMap[i][j].setFitHeight(TAILLE_CASE);
+                this.getChildren().add(this.caseMap[i][j]);
+            }
+        }
+    }
+
+    /**
      * Construit une grilles d'Imageview et met les images en fonction de la map générée
      */
     public void afficheMap() {
-        this.caseMap = new ImageView[this.NB_CASE_X][this.NB_CASE_Y];
         for (int i = 0; i < this.NB_CASE_X; i++) {
             for (int j = 0; j < this.NB_CASE_Y; j++) {
-                this.caseMap[i][j] = new ImageView();
-                this.caseMap[i][j].setX((double)i * TAILLE_CASE);
-                this.caseMap[i][j].setY((double)j * TAILLE_CASE);
-                this.caseMap[i][j].setFitWidth(TAILLE_CASE);
-                this.caseMap[i][j].setFitHeight(TAILLE_CASE);
                 //affichage de la map
                 if (this.grid[i][j] == ValeurCase.MUR) {
                     this.caseMap[i][j].setImage(this.imageMur);
@@ -238,7 +252,6 @@ public class Map extends Group  {
                 } else if (this.grid[i][j] == ValeurCase.CLEF) {
                     this.caseMap[i][j].setImage(this.imageClef);
                 }
-                this.getChildren().add(this.caseMap[i][j]);
             }
         }
         this.caseMap[12][13].setImage(this.imageMurFantome);

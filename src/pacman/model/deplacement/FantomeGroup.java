@@ -29,10 +29,12 @@ public class FantomeGroup extends Group {
 
     public void reinitialisePosition() {
         for (Fantome fantome : this.fantomes) {
-            fantome.initPosition();
+            fantome.velocityMultiplicator = 2;
+            fantome.etat = Fantome.ValeurEtat.SPAWN;
+            fantome.mort = false;
             fantome.listeCoordoneDeplacementFant = new ArrayList<>();
+            fantome.initPosition();
         }
-        stopVulnerable();
     }
 
     public void setVulnerable() {

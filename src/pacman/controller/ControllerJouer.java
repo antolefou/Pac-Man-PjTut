@@ -34,13 +34,14 @@ public class ControllerJouer extends Controller {
     public ScoreModel scoreModel;
 
     public ControllerJouer() {
+        super();
         this.stopAllMusic();
         this.playMusic("theme", true);
         this.playMusic("chomp", true);
     }
 
     public void initialize() {
-        this.updateRender = new UpdateRender(this,this.utilisateur, labelScore,  map, pacman, fantomeGroup);
+        this.updateRender = new UpdateRender(this, this.utilisateur, labelScore,  map, pacman, fantomeGroup);
         updateRender.jouer();
 
         // affichage meileur score
@@ -70,7 +71,11 @@ public class ControllerJouer extends Controller {
             }
         }
 
-
+    /**
+     * Gère les actions sur le clavier du joueur: déplacement pacman et recommencer la partie (r)
+     * @param keyEvent évènement de la touche
+     * @throws IOException renvoie une exception en cas d'erreur
+     */
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
         if (code == KeyCode.UP || code == KeyCode.Z) {
@@ -108,6 +113,5 @@ public class ControllerJouer extends Controller {
         updateRender.update.stop();
         updateRender.render.stop();
         updateRender = null;
-        this.utilisateur = null;
     }
 }

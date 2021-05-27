@@ -19,6 +19,15 @@ public class UpdateRender extends Thread{
     public Thread update;
     public Thread render;
 
+    /**
+     * Mise à jour des variables et affichage
+     * @param controllerJouer ControllerJouer
+     * @param utilisateur Utilisateur
+     * @param labelScore Label score
+     * @param map Map
+     * @param pacman Pacman
+     * @param fantomeGroup Group de fantomes
+     */
     public UpdateRender(ControllerJouer controllerJouer, Utilisateur utilisateur, Label labelScore, Map map, Pacman pacman, FantomeGroup fantomeGroup) {
         this.controllerJouer = controllerJouer;
         this.UTILISATEUR = utilisateur;
@@ -85,7 +94,9 @@ public class UpdateRender extends Thread{
             PACMAN.initPosition(); // il faut rajouter init power
             PACMAN.numNiveau ++;
             fantomeGroup.reinitialisePosition();
-            MAP.creeMapAleatoire(PACMAN.numNiveau);
+            Platform.runLater(() -> {
+                MAP.creeMapAleatoire(PACMAN.numNiveau);
+            });
         }
     }
 
@@ -97,7 +108,7 @@ public class UpdateRender extends Thread{
             for (Fantome fantome : fantomeGroup.fantomes) {
                 fantome.affichage();
             }
-            //affiche la map
+            // mise à jour de la map
             MAP.miseAJourMap();
             //affichage score
             this.updateScore();
@@ -114,9 +125,6 @@ public class UpdateRender extends Thread{
         for (Fantome fantome : fantomeGroup.fantomes) {
             if (fantome.estSurPacman()) {
                 if (fantome.etat == Fantome.ValeurEtat.APPEURE) {
-                    Platform.runLater(() -> {
-                        fantome.setImageView(fantome.imageMort);
-                    });
                     fantome.mort = false;
                     fantome.etat = Fantome.ValeurEtat.MORT;
                     fantome.velocityMultiplicator = 3;

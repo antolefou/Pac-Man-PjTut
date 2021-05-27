@@ -1,7 +1,10 @@
 package pacman.model;
 
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import pacman.model.deplacement.Pacman;
 
+import java.awt.*;
 import java.io.*;
 import java.util.Scanner;
 
@@ -110,5 +113,16 @@ public class ScoreModel {
     public int getMeilleurScore() {
         meilleurScore = (int) tab[0][1];
         return meilleurScore;
+    }
+
+    public void finDePartieReecriture(ScoreModel scoreModel, Utilisateur utilisateur, TextField txtpseudo) throws IOException {
+        scoreModel.lectureTxt();
+        utilisateur.setPseudoUtilisateur(txtpseudo.getText());
+        for(int i =0; i<scoreModel.tab.length; i++){
+            if (scoreModel.tab[i][0].equals("pseudoUt") ){
+                scoreModel.tab[i][0] = utilisateur.getPseudoUtilisateur();
+                scoreModel.reecritureTxt();
+            }
+        }
     }
 }

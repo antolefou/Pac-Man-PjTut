@@ -22,6 +22,7 @@ public class ControllerScore extends Controller {
     public ScoreModel scoreModel;
 
     public ControllerScore() {
+        super();
     }
 
     @FXML
