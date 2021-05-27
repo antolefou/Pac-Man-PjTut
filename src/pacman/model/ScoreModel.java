@@ -96,16 +96,15 @@ public class ScoreModel {
                 tab[i][0] = tab[i-1][0];
                 tab[i][1] = tab[i-1][1];
             }
-            tab[Trouverindice(pac)][0] = "PPP";
+            tab[Trouverindice(pac)][0] = "pseudoUt";
             tab[Trouverindice(pac)][1] = scoreActuel;
         }
 
         if (scoreActuel < (int) tab[3][1] && scoreActuel > (int) tab[4][1]){
-            tab[4][0] = "ZZZ";
+            tab[4][0] = "pseudoUt";
             tab[4][1] = scoreActuel;
         }
         reecritureTxt();
-
     }
 
     public int getMeilleurScore() {

@@ -12,7 +12,11 @@ public class Utilisateur {
     private final int THREAD_UPDATE = (int) ((1.0/50)*1000);
 //    Volume son
 
+//    Pseudo
+    static String pseudoUtilisateur;
+
     public Utilisateur() {
+        Utilisateur.pseudoUtilisateur = "PLAYER";
         this.fps = 60;
         this.threadRender  = (int) ((1.0/this.fps)*1000);
     }
@@ -68,5 +72,13 @@ public class Utilisateur {
 
     public int getTHREAD_UPDATE() {
         return THREAD_UPDATE;
+    }
+
+    public String getPseudoUtilisateur(){
+        return Utilisateur.pseudoUtilisateur;
+    }
+
+    public void setPseudoUtilisateur(String pseudoUtilisateur){
+        Utilisateur.pseudoUtilisateur = pseudoUtilisateur;
     }
 }

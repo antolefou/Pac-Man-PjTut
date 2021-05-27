@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.BorderPane?>
 
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controller.ControllerGameOver" onKeyPressed="#handle">
     <children>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: black;"  VBox.vgrow="ALWAYS">
@@ -38,7 +40,10 @@
                     </graphic>
                 </Button>
 
-                <Button fx:id="menu" layoutX="295.0" layoutY="520.0" mnemonicParsing="false"  style="-fx-background-color: black;" onAction="#switchToScene">
+
+                <Label text=" Saissisez votre pseudo (8 caractères max) " layoutX="285.0" layoutY="170"></Label>
+                <TextField fx:id="txtpseudo" layoutX="357.0" layoutY="200" alignment="CENTER" prefColumnCount="7"></TextField>
+                <Button fx:id="menu" layoutX="295.0" layoutY="525.0" mnemonicParsing="false"  style="-fx-background-color: black;" onAction="#switchToScene">
                     <graphic>
                         <ImageView fitHeight="11.0" fitWidth="199.0">
                             <image>
@@ -47,7 +52,6 @@
                         </ImageView>
                     </graphic>
                 </Button>
-
             </children>
         </AnchorPane>
     </children>
