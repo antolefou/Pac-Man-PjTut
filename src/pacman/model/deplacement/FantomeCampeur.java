@@ -2,8 +2,10 @@ package pacman.model.deplacement;
 
 import javafx.scene.image.Image;
 import org.jgrapht.Graph;
+import org.jgrapht.Graphs;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
 import pacman.model.Map;
 import pacman.model.deplacement.Deplacement;
 
@@ -22,25 +24,66 @@ public class FantomeCampeur extends Fantome {
         this.initialisation();
         this.deplacementActuel = deplacements.GAUCHE;
     }
+    public boolean vueSurPacman() {
+        for (int i=0; i < 23; i++) {
+            String posPacman = Math.round(pacman.getPosX() * 0.0499) + "/" + Math.round(pacman.getPosY() * 0.0499);
+            switch (deplacementActuel) {
+                case HAUT:
+                    if (map.grid[(int) (Math.round(getPosX()) * 0.0499)][(int) (Math.round(getPosY()) * 0.0499)-i] == Map.ValeurCase.MUR){
+                        return false;
+                    }
+                    else if (map.grilleGraph[(int) (Math.round(getPosX()) * 0.0499)][(int) (Math.round(getPosY()) * 0.0499)-i].equals(posPacman)) {
+                        return true;
+                    }
+                    break;
+                case GAUCHE:
+                    if (map.grid[(int) ((Math.round(getPosX()) * 0.0499)-i+25)%25][(int) (Math.round(getPosY()) * 0.0499)] == Map.ValeurCase.MUR) {
+                        return false;
+                    }
+                    else if (map.grilleGraph[((int) (Math.round(getPosX()) * 0.0499)-i+25)%25][(int) (Math.round(getPosY()) * 0.0499)].equals(posPacman)) {
+                        return true;
+                    }
+                    break;
+                case DROITE:
+                    if (map.grid[(int) ((Math.round(getPosX()) * 0.0499)+i+25)%25][(int) (Math.round(getPosY()) * 0.0499)] == Map.ValeurCase.MUR || (Math.round(getPosX() * 0.0499)+i)%25 == 0.0) {
+                        return false;
+                    }
+                    else if (map.grilleGraph[((int) (Math.round(getPosX()) * 0.0499)+i+25)%25][(int) (Math.round(getPosY()) * 0.0499)].equals(posPacman)) {
+                        return true;
+                    }
+                    break;
+                case BAS:
+                    if (map.grid[(int) (Math.round(getPosX()) * 0.0499)][(int) (Math.round(getPosY()) * 0.0499)+i] == Map.ValeurCase.MUR){
+                        return false;
+                    }
+                    else if (map.grilleGraph[(int) (Math.round(getPosX()) * 0.0499)][(int) (Math.round(getPosY()) * 0.0499)+i].equals(posPacman)) {
+                        return true;
+                    }
+                    break;
+                default:
+                    return false;
+            }
+        }
+        return false;
+    }
 
     public void ia(){
-        if (vueSurPacman() && !estVulnerable) {
-            String coordFantome = getCoordFantome();
-            String coordPacman = getCoordPacman();
-            if (!coordFantome.equals(coordPacman)) {
-                listeCoordoneDeplacementFant.add(DijkstraShortestPath.findPathBetween(map.g, coordFantome, coordPacman).getVertexList().get(1));
-            } else {
-                iaFantomeAppeure();
-            }
-        } else if (getPosX() > 247) { //IA mode campeur
+        if (getPosX() > 247) { //IA mode campeur
             int x = getPosX() / 20;
             int y = getPosY() / 20;
             String[][] grille = map.getGrilleGraph();
-            if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).removeEdge(this.coordoneePasse, this.coordoneeActuel);
-            List<String> dijkstra = DijkstraShortestPath.findPathBetween(map.g, grille[x][y], coinGaucheHaut()).getVertexList();
-            if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).addEdge(this.coordoneePasse, this.coordoneeActuel);
-            dijkstra.remove(0);
-            this.listeCoordoneDeplacementFant = dijkstra;
+
+            Graph<String, DefaultEdge> graphCopie = new SimpleGraph<>(DefaultEdge.class);
+            Graphs.addAllVertices(graphCopie, map.getG().vertexSet());
+            Graphs.addAllEdges(graphCopie, map.getG(), map.getG().edgeSet());
+            if (!coordoneeActuel.equals(coordoneePasse) && graphCopie.containsEdge(this.coordoneePasse, this.coordoneeActuel)) {
+                graphCopie.removeEdge(this.coordoneePasse, this.coordoneeActuel);
+            }
+            List<String> dijkstra = DijkstraShortestPath.findPathBetween(graphCopie, grille[x][y], coinGaucheHaut()).getVertexList();
+            if(dijkstra.size()>1) {
+                dijkstra.remove(0);
+                this.listeCoordoneDeplacementFant = dijkstra;
+            }else iaFantomeAppeure();
         } else {
             iaFantomeAppeure();
         }

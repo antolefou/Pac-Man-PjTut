@@ -1,7 +1,11 @@
 package pacman.model.deplacement;
 
 import javafx.scene.image.Image;
+import org.jgrapht.Graph;
+import org.jgrapht.Graphs;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
 
 import java.sql.SQLOutput;
 import java.util.List;
@@ -29,21 +33,20 @@ public class FantomeSardoche extends Fantome {
 
         if (random != 0) {
 
-            (map.getG()).removeEdge(this.coordoneePasse, this.coordoneeActuel);
+            Graph<String, DefaultEdge> graphCopie = new SimpleGraph<>(DefaultEdge.class);
+            Graphs.addAllVertices(graphCopie, map.getG().vertexSet());
+            Graphs.addAllEdges(graphCopie, map.getG(), map.getG().edgeSet());
+            if (!coordoneeActuel.equals(coordoneePasse) && graphCopie.containsEdge(this.coordoneePasse, this.coordoneeActuel)) {
+                graphCopie.removeEdge(this.coordoneePasse, this.coordoneeActuel);
+            }
 
-            List<String> dijkstra = DijkstraShortestPath.findPathBetween(map.g, grille[x][y], pacman.getPosX() / 20 + "/" + pacman.getPosY() / 20).getVertexList();
-
-            if (dijkstra.size() > 1)
-                listeCoordoneDeplacementFant.add(dijkstra.get(1));
-            else
+            List<String> dijkstra = DijkstraShortestPath.findPathBetween(graphCopie, grille[x][y], pacman.getPosX() / 20 + "/" + pacman.getPosY() / 20).getVertexList();
+            if(dijkstra.size()>1) {
+                dijkstra.remove(0);
                 listeCoordoneDeplacementFant.add(dijkstra.get(0));
-
-            if (!coordoneeActuel.equals(coordoneePasse))
-                (map.getG()).addEdge(this.coordoneePasse, this.coordoneeActuel);
+            }else iaFantomeAppeure();
         }
-
         else {
-
             iaFantomeAppeure();
         }
     }

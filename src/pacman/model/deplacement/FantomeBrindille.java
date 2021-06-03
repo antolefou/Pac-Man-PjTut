@@ -1,7 +1,11 @@
 package pacman.model.deplacement;
 
 import javafx.scene.image.Image;
+import org.jgrapht.Graph;
+import org.jgrapht.Graphs;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
 
 import java.util.List;
 import java.util.Objects;
@@ -47,14 +51,18 @@ public class FantomeBrindille extends Fantome {
                 }
             }
         } else {
-            String coordFantome = getCoordFantome();
-            String coordPacman = getCoordPacman();
-            if (!coordFantome.equals(coordPacman)) {
-                if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).removeEdge(this.coordoneePasse, this.coordoneeActuel);
-                List<String> dijkstra = DijkstraShortestPath.findPathBetween(map.g, coordFantome, coordPacman).getVertexList();
-                if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).addEdge(this.coordoneePasse, this.coordoneeActuel);
-                dijkstra.remove(0);
-                listeCoordoneDeplacementFant = dijkstra;
+            Graph<String, DefaultEdge> graphCopie = new SimpleGraph<>(DefaultEdge.class);
+            Graphs.addAllVertices(graphCopie, map.getG().vertexSet());
+            Graphs.addAllEdges(graphCopie, map.getG(), map.getG().edgeSet());
+            if (!coordoneeActuel.equals(coordoneePasse) && graphCopie.containsEdge(this.coordoneePasse, this.coordoneeActuel)) {
+                graphCopie.removeEdge(this.coordoneePasse, this.coordoneeActuel);
+                String coordFantome = getCoordFantome();
+                String coordPacman = getCoordPacman();
+                List<String> dijkstra = DijkstraShortestPath.findPathBetween(graphCopie, coordFantome, coordPacman).getVertexList();
+                if(dijkstra.size()>1) {
+                    dijkstra.remove(0);
+                    listeCoordoneDeplacementFant = dijkstra;
+                }else iaFantomeAppeure();
             } else {
                 iaFantomeAppeure();
             }

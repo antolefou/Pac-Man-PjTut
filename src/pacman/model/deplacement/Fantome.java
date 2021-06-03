@@ -58,24 +58,21 @@ public class Fantome extends Deplacement{
                         tempsSpawn = 0.25;
                         immobile = true;
                         mort = false;
-                        listeCoordoneDeplacementFant = null;
-                        this.positionXFinDeplacement = 0;
-                        this.positionYFinDeplacement = 0;
+                        listeCoordoneDeplacementFant.clear();
+                        this.positionXFinDeplacement = getPosX();
+                        this.positionYFinDeplacement = getPosY();
                     } else {
                         debutSpawn = System.currentTimeMillis();
                         tempsSpawn = numFantome;
                         immobile = true;
                     }
                 } else if(immobile && System.currentTimeMillis()-debutSpawn > 1000L * tempsSpawn) {
-                    String coordFantome = getCoordFantome();
-                    listeCoordoneDeplacementFant = DijkstraShortestPath.findPathBetween(map.g, coordFantome, "12/12").getVertexList();
-                    immobile = false;
-                    getNextFinalPos();
-                } else if (!immobile && !listeCoordoneDeplacementFant.isEmpty()) {
-                     avancePos();
-                } else if (this.getPosX() == 241 && this.getPosY() == 241){
-                    etat = ValeurEtat.NORMAL;
                     debutSpawn = 0L;
+                    etat = ValeurEtat.NORMAL;
+                    List<String> dijkstra = DijkstraShortestPath.findPathBetween(map.g, getCoordFantome(), "12/12").getVertexList();
+                    dijkstra.remove(0);
+                    listeCoordoneDeplacementFant = dijkstra;
+                    immobile = false;
                 }
                 break;
             case NORMAL:
@@ -119,20 +116,17 @@ public class Fantome extends Deplacement{
         if (this.listeCoordoneDeplacementFant.isEmpty()) {
             if (this.estVulnerable) this.iaFantomeAppeure();
             else this.ia();
-            getNextFinalPos();
         }
+        getNextFinalPos();
         avancePos();
     }
 
     public void avancePos() {
-        if (doitRechargerNextPos() &&  (!listeCoordoneDeplacementFant.isEmpty())) {
+        if (doitRechargerNextPos()) {
             String tmp = this.coordoneeActuel;
             this.coordoneeActuel = this.listeCoordoneDeplacementFant.get(0);
-            if (!tmp.equals(this.coordoneeActuel))
-                this.coordoneePasse = tmp;
+            this.coordoneePasse = tmp;
             this.listeCoordoneDeplacementFant.remove(0);
-            if (!listeCoordoneDeplacementFant.isEmpty())
-                getNextFinalPos();
         }
         else if (positionXFinDeplacement != this.getPosX() || positionYFinDeplacement != this.getPosY()) {
             switch (this.deplacementActuel) {
@@ -176,12 +170,9 @@ public class Fantome extends Deplacement{
     }
 
     public boolean estSurPacman() {
-        double ratioX = (this.getPosX()*1.0) / (pacman.getPosX()*1.0);
-        double ratioY = (this.getPosY()*1.0) / (pacman.getPosY()*1.0);
-        if (((ratioX>0.95 && ratioX<1.05) || (ratioX<-0.95 && ratioX>-1.05)) && ((ratioY>0.95 && ratioY<1.05) || (ratioY<-0.95 && ratioY>-1.05))) {
-            return true;
-        }
-        return false;
+        double ratioX = Math.abs(this.getPosX() - pacman.getPosX());
+        double ratioY = Math.abs(this.getPosY() - pacman.getPosY());
+        return ratioX < 15 && ratioY < 15;
     }
 
     @Override
@@ -231,49 +222,6 @@ public class Fantome extends Deplacement{
                 this.listeCoordoneDeplacementFant.add(x + "/" + y);
                 break;
         }
-    }
-
-    public boolean vueSurPacman() {
-        for (int i=0; i < 23; i++) {
-            String posPacman = Math.round(pacman.getPosX() * 0.0499) + "/" + Math.round(pacman.getPosY() * 0.0499);
-            switch (deplacementActuel) {
-                case HAUT:
-                    if (map.grid[(int) (Math.round(getPosX()) * 0.0499)][(int) (Math.round(getPosY()) * 0.0499)-i] == Map.ValeurCase.MUR){
-                        return false;
-                    }
-                    else if (map.grilleGraph[(int) (Math.round(getPosX()) * 0.0499)][(int) (Math.round(getPosY()) * 0.0499)-i].equals(posPacman)) {
-                        return true;
-                    }
-                    break;
-                case GAUCHE:
-                    if (map.grid[(int) ((Math.round(getPosX()) * 0.0499)-i+25)%25][(int) (Math.round(getPosY()) * 0.0499)] == Map.ValeurCase.MUR) {
-                        return false;
-                    }
-                    else if (map.grilleGraph[((int) (Math.round(getPosX()) * 0.0499)-i+25)%25][(int) (Math.round(getPosY()) * 0.0499)].equals(posPacman)) {
-                        return true;
-                    }
-                    break;
-                case DROITE:
-                    if (map.grid[(int) ((Math.round(getPosX()) * 0.0499)+i+25)%25][(int) (Math.round(getPosY()) * 0.0499)] == Map.ValeurCase.MUR || (Math.round(getPosX() * 0.0499)+i)%25 == 0.0) {
-                        return false;
-                    }
-                    else if (map.grilleGraph[((int) (Math.round(getPosX()) * 0.0499)+i+25)%25][(int) (Math.round(getPosY()) * 0.0499)].equals(posPacman)) {
-                        return true;
-                    }
-                    break;
-                case BAS:
-                    if (map.grid[(int) (Math.round(getPosX()) * 0.0499)][(int) (Math.round(getPosY()) * 0.0499)+i] == Map.ValeurCase.MUR){
-                        return false;
-                    }
-                    else if (map.grilleGraph[(int) (Math.round(getPosX()) * 0.0499)][(int) (Math.round(getPosY()) * 0.0499)+i].equals(posPacman)) {
-                        return true;
-                    }
-                    break;
-                default:
-                    return false;
-            }
-        }
-        return false;
     }
 
     public void getNextFinalPos(){
