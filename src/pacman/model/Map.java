@@ -8,9 +8,8 @@ import org.jgrapht.Graph;
 import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+
+import java.util.*;
 
 public class Map extends Group  {
 
@@ -43,6 +42,8 @@ public class Map extends Group  {
     public Graph<String, DefaultEdge> g;
     public String[][] grilleGraph;
 
+    static ArrayList<String> theme;
+
 
 
     /**
@@ -53,8 +54,10 @@ public class Map extends Group  {
      *      S  -> super gomme
      */
     public Map() {
+        initListeThemeMap();
+        shuffleTheme();
         String src = "/pacman/ressources/image/Ecran_jouer/labyrinthe/";
-        this.imageMur = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src + "wall.png")));
+        this.imageMur = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src + theme.get(1))));
         this.imageGomme = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "Gomme.png")));
         this.imageSuperGomme = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "SuperGomme.png")));
         this.imageBoost = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "boost.png")));
@@ -292,4 +295,16 @@ public class Map extends Group  {
     public String[][] getGrilleGraph() {
         return grilleGraph;
     }
+    public static void initListeThemeMap(){
+        theme = new ArrayList<>();
+        theme.add("wall.png");
+        theme.add("illusion.gif");
+
+
+    }
+    public static void shuffleTheme(){
+        Collections.shuffle(theme);
+    }
 }
+
+
