@@ -120,7 +120,6 @@ public class Fantome extends Deplacement{
 
     public void iaTest() {
         if (vueSurPacman() && !estVulnerable) {
-            System.out.println("Je te vois");
             String coordFantome = (getPosX() / 20) + "/" + (getPosY() / 20);
             String coordPacman = (pacman.getPosX() / 20) + "/" + (pacman.getPosY() / 20);
             if (!coordFantome.equals(coordPacman)) {
@@ -129,7 +128,6 @@ public class Fantome extends Deplacement{
                 iaFantomeAppeure();
             }
         } else if (getPosX() > 247 || getPosY() > 241) { //IA mode campeur
-            System.out.println("Je te vois plus");
             int x = getPosX() / 20;
             int y = getPosY() / 20;
             String[][] grille = map.getGrilleGraph();
@@ -146,35 +144,11 @@ public class Fantome extends Deplacement{
 
     private void updateDeplacements() {
         if (this.listeCoordoneDeplacementFant.isEmpty()) {
-
             if (this.estVulnerable) this.iaFantomeAppeure();
             else this.iaTest();
             getNextFinalPos();
         }
-        if (doitRechargerNextPos() && !listeCoordoneDeplacementFant.isEmpty()) {
-            String tmp = this.coordoneeActuel;
-            this.coordoneeActuel = this.listeCoordoneDeplacementFant.get(0);
-            if (!tmp.equals(this.coordoneeActuel)) this.coordoneePasse = tmp;
-            this.listeCoordoneDeplacementFant.remove(0);
-            getNextFinalPos();
-        } else if (positionXFinDeplacement != this.getPosX() || positionYFinDeplacement != this.getPosY()) {
-            switch (this.deplacementActuel) {
-                case HAUT:
-                    if (peutAvancerVerticalement(map,-1)) this.avanceHaut();
-                    break;
-                case DROITE:
-                    if (peutAvancerHorizontalement(map,1)) this.avanceDroite();
-                    break;
-                case BAS:
-                    if (peutAvancerVerticalement(map,1)) this.avanceBas();
-                    break;
-                case GAUCHE:
-                    if (peutAvancerHorizontalement(map,-1)) this.avanceGauche();
-                    break;
-                default:
-                    break;
-            }
-        }
+        avancePos();
     }
 
     public void avancePos() {
@@ -187,7 +161,7 @@ public class Fantome extends Deplacement{
             if (!listeCoordoneDeplacementFant.isEmpty())
                 getNextFinalPos();
         }
-        if (positionXFinDeplacement != this.getPosX() || positionYFinDeplacement != this.getPosY()) {
+        else if (positionXFinDeplacement != this.getPosX() || positionYFinDeplacement != this.getPosY()) {
             switch (this.deplacementActuel) {
                 case HAUT:
                     if (peutAvancerVerticalement(map,-1)) this.avanceHaut();
