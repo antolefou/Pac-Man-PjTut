@@ -28,19 +28,18 @@ public class ControllerGameOver extends Controller{
     @FXML
     public void handle(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.ENTER) {
-            System.out.println("2");
+            scoreModel.finDePartieReecriture(scoreModel, utilisateur, txtpseudo);
             Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/jouer.fxml")));
             primaryStage.setScene(new Scene(scoreView));
             primaryStage.sizeToScene();
             primaryStage.show();
             scoreView.requestFocus();
-            scoreModel.finDePartieReecriture(scoreModel, utilisateur, txtpseudo);
         } else if (event.getCode() == KeyCode.ALT) {
+            scoreModel.finDePartieReecriture(scoreModel, utilisateur, txtpseudo);
             Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/menu.fxml")));
             primaryStage.setScene(new Scene(scoreView));
             primaryStage.sizeToScene();
             primaryStage.show();
-            scoreModel.finDePartieReecriture(scoreModel, utilisateur, txtpseudo);
             scoreView.requestFocus();
         }
         this.utilisateur = null;
