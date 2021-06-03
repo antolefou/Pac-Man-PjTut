@@ -40,7 +40,6 @@ public class FantomeCampeur extends Fantome {
             List<String> dijkstra = DijkstraShortestPath.findPathBetween(map.g, grille[x][y], coinGaucheHaut()).getVertexList();
             if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).addEdge(this.coordoneePasse, this.coordoneeActuel);
             dijkstra.remove(0);
-//            System.out.println("calcule diskjtra");
             this.listeCoordoneDeplacementFant = dijkstra;
         } else {
             iaFantomeAppeure();

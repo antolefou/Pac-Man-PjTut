@@ -291,7 +291,6 @@ public class Fantome extends Deplacement{
     }
 
     public void setOrientation(){
-//        System.out.println(this.getPosX());
         if(this.getPosX()>20 && this.getPosX()<480){
             if (positionXFinDeplacement - this.getPosX() < 0) this.deplacementActuel = deplacements.GAUCHE;
             else if (positionXFinDeplacement - this.getPosX() > 0) this.deplacementActuel = deplacements.DROITE;

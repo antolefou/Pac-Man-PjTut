@@ -30,20 +30,38 @@ public class ControllerGameOver extends Controller{
     @FXML
     public void handle(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.ENTER) {
-            scoreModel.finDePartieReecriture(scoreModel, utilisateur, txtpseudo);
             Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/jouer.fxml")));
             primaryStage.setScene(new Scene(scoreView));
             primaryStage.sizeToScene();
             primaryStage.show();
             scoreView.requestFocus();
+            scoreModel.lectureTxt();
+            utilisateur.setPseudoUtilisateur(txtpseudo.getText());
+            for(int i =0; i<scoreModel.tab.length; i++){
+                if (scoreModel.tab[i][0].equals("pseudoUt") ){
+                    scoreModel.tab[i][0] = utilisateur.getPseudoUtilisateur();
+                    scoreModel.reecritureTxt();
+                }
+            }
+
         } else if (event.getCode() == KeyCode.ALT) {
-            scoreModel.finDePartieReecriture(scoreModel, utilisateur, txtpseudo);
             Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/menu.fxml")));
             primaryStage.setScene(new Scene(scoreView));
             primaryStage.sizeToScene();
             primaryStage.show();
+            scoreModel.lectureTxt();
+            utilisateur.setPseudoUtilisateur(txtpseudo.getText());
+            for(int i =0; i<scoreModel.tab.length; i++){
+                if (scoreModel.tab[i][0].equals("pseudoUt") ){
+                    scoreModel.tab[i][0] = utilisateur.getPseudoUtilisateur();
+                    scoreModel.reecritureTxt();
+                }
+            }
+
             scoreView.requestFocus();
+
+        } else {
+            //            System.out.println("la clef n'est pas reconu");
         }
-        this.utilisateur = null;
     }
 }

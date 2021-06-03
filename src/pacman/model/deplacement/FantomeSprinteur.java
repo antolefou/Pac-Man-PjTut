@@ -21,7 +21,6 @@ public class FantomeSprinteur extends Fantome {
     }
 
     public void ia(){
-        System.out.println(System.currentTimeMillis() - temps);
         if (temps == 0) temps = System.currentTimeMillis();
         if (System.currentTimeMillis() - temps > 2000) {
             this.velocityMultiplicator = 1;
