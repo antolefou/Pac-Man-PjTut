@@ -16,7 +16,7 @@ public class ModelMusic {
         mediaPlayerHashMap.put("theme", new MediaPlayer(new Media("file://" + System.getProperty("user.dir") + "/src/pacman/ressources/music/ace.mp3")));
         mediaPlayerHashMap.put("menu", new MediaPlayer(new Media("file://" + System.getProperty("user.dir") + "/src/pacman/ressources/music/dancin.mp3")));
         mediaPlayerHashMap.put("chomp", new MediaPlayer(new Media("file://" + System.getProperty("user.dir") + "/src/pacman/ressources/music/pacman_chomp.wav")));
-
+        mediaPlayerHashMap.put("gameOver", new MediaPlayer(new Media("file://" + System.getProperty("user.dir") + "/src/pacman/ressources/music/gameOver.mp3")));
         mediaPlayerHashMap.put("death", new MediaPlayer(new Media("file://" + System.getProperty("user.dir") + "/src/pacman/ressources/music/pacman_death.wav")));
         mediaPlayerHashMap.put("eatfruit", new MediaPlayer(new Media("file://" + System.getProperty("user.dir") + "/src/pacman/ressources/music/pacman_eatfruit.wav")));
         mediaPlayerHashMap.put("eatghost", new MediaPlayer(new Media("file://" + System.getProperty("user.dir") + "/src/pacman/ressources/music/pacman_eatghost.wav")));

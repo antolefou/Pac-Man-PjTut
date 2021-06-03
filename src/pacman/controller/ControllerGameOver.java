@@ -18,6 +18,8 @@ public class ControllerGameOver extends Controller{
 
     public ControllerGameOver() {
         super();
+        this.stopAllMusic();
+        this.playMusic("gameOver", true);
     }
 
     /**
