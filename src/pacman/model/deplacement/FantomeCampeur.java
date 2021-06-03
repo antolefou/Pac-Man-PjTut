@@ -13,8 +13,6 @@ import java.util.Random;
 
 public class FantomeCampeur extends Fantome {
 
-    private final Random rand = new Random();
-
     public FantomeCampeur() {
         super(261, 281);
         this.velocityMultiplicator = velocityMultiplicatorInitial;

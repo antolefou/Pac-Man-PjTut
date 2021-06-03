@@ -23,7 +23,7 @@ public class FantomeBrindille extends Fantome {
     }
 
     public void ia(){
-        random = rand.nextInt(6);
+        random = rand.nextInt(7);
         if (random != 5){
             if (this.getPosY() <= pacman.getPosY() && this.peutAvancerVerticalement(map, -1) && deplacementActuel != deplacements.BAS) {
                 this.ajouteAvanceDirection("HAUT");

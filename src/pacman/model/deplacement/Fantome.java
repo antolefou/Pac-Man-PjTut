@@ -67,7 +67,7 @@ public class Fantome extends Deplacement{
                         immobile = true;
                     }
                 } else if(immobile && System.currentTimeMillis()-debutSpawn > 1000L * tempsSpawn) {
-                    String coordFantome = (int) (getPosX() / 20) + "/" + (int) (getPosY() / 20);
+                    String coordFantome = getCoordFantome();
                     listeCoordoneDeplacementFant = DijkstraShortestPath.findPathBetween(map.g, coordFantome, "12/12").getVertexList();
                     immobile = false;
                     getNextFinalPos();
@@ -94,7 +94,7 @@ public class Fantome extends Deplacement{
             case MORT:
                 this.estVulnerable = false;
                 if (!this.mort) {
-                    String coordFantome = (int) (getPosX() / 20) + "/" + (int) (getPosY() / 20);
+                    String coordFantome = getCoordFantome();
                     String coordSpawn = INIT_POS_X / 20 + "/" + INIT_POS_Y / 20;
                     listeCoordoneDeplacementFant = DijkstraShortestPath.findPathBetween(map.g, coordFantome, coordSpawn).getVertexList();
                     getNextFinalPos();

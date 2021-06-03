@@ -31,7 +31,7 @@ public class FantomeSprinteur extends Fantome {
             this.velocityMultiplicator = velocityMultiplicatorInitial;
         }
         Random rand = new Random();
-        int random = rand.nextInt(5);
+        int random = rand.nextInt(4);
 
         int x = getPosX() / 20;
         int y = getPosY() / 20;
