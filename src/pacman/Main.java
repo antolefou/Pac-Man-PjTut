@@ -21,6 +21,7 @@ public class Main extends Application {
         primaryStage.setTitle("Pacman");
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.requestFocus();
 //         stop le programme lorsque l'on quitte la fenêtre
         primaryStage.setOnCloseRequest(t -> {
             Platform.exit();

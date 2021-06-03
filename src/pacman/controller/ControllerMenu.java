@@ -3,23 +3,44 @@ package pacman.controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import pacman.model.Map;
+import pacman.model.ScoreModel;
+import pacman.model.deplacement.Deplacement;
+import pacman.model.deplacement.Pacman;
+import pacman.model.deplacement.UpdateRender;
+
+import java.io.IOException;
+import java.util.Objects;
 
 public class ControllerMenu extends Controller{
+    @FXML public Pacman pacman;
+    @FXML public Map map;
     @FXML ImageView fleche1;
     @FXML ImageView fleche2;
     @FXML ImageView fleche3;
     @FXML ImageView fleche4;
     @FXML ImageView fleche5;
 
-    public ControllerMenu() {
+//    MapMenu mapM = new MapMenu();
+
+    public ControllerMenu() throws IOException {
         super();
         if (!modelMusic.isPlaying("menu")) {
             this.stopAllMusic();
             this.playMusic("menu", true);
         }
+
+//        mapM.initialiseMap();
+
+
     }
 
     public void affiche_fleche1(MouseEvent mouseEvent) {
@@ -66,6 +87,40 @@ public class ControllerMenu extends Controller{
         Platform.exit();
         System.exit(0);
     }
-
+//
+////
+////    public void initialize() {
+////        this.updateRender = new UpdateRender(null, this.utilisateur, null,  this.map, pacman, null);
+////        updateRender.jouer();
+////    }
+////
+////    /**
+////     * Gère les actions sur le clavier du joueur: déplacement pacman et recommencer la partie (r)
+////     * @param keyEvent évènement de la touche
+////     * @throws IOException renvoie une exception en cas d'erreur
+////     */
+//    public void handle(KeyEvent keyEvent) {
+//        KeyCode code = keyEvent.getCode();
+//        if (code == KeyCode.UP || code == KeyCode.Z) {
+//            pacman.deplacementFutur = Deplacement.deplacements.HAUT;
+//            pacman.updateDeplacement();
+//        } else if (code == KeyCode.RIGHT || code == KeyCode.D) {
+//            pacman.deplacementFutur = Deplacement.deplacements.DROITE;
+//        } else if (code == KeyCode.DOWN || code == KeyCode.S) {
+//            pacman.deplacementFutur = Deplacement.deplacements.BAS;
+//        } else if (code == KeyCode.LEFT || code == KeyCode.Q) {
+//            pacman.deplacementFutur = Deplacement.deplacements.GAUCHE;
+//        }
+//    }
+////
+////
+////    @Override
+////    public void switchToScene(ActionEvent event) throws IOException {
+////        super.switchToScene(event);
+//////         suprime les trucs pas utils par la suite
+////        updateRender.update.stop();
+////        updateRender.render.stop();
+////        updateRender = null;
+////    }
 
 }

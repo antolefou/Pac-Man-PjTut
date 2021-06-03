@@ -6,6 +6,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
+<?import pacman.model.deplacement.Pacman?>
+<!--<?import pacman.model.MapMenu?>-->
+
 <BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controller.ControllerMenu">
     <center>
         <BorderPane maxHeight="600.0" maxWidth="800" minHeight="600" minWidth="800" prefWidth="800.0">
@@ -22,7 +25,7 @@
                        <Image url="@../ressources/image/Commun_scenes/pacman_logo.png" />
                     </image>
                  </ImageView>
-                   
+
                 <Button fx:id="jouer" layoutX="341.0" layoutY="278.0" onAction="#switchToScene" onMouseExited="#enlever_fleche1" onMouseMoved="#affiche_fleche1" styleClass="boutonMenu" text="Jouer" />
                 <Button fx:id="option" layoutX="341.0" layoutY="338.0" onAction="#switchToScene" onMouseExited="#enlever_fleche2" onMouseMoved="#affiche_fleche2" styleClass="boutonMenu" text="Options" />
                 <Button fx:id="score" layoutX="341.0" layoutY="398.0" onAction="#switchToScene" onMouseExited="#enlever_fleche3" onMouseMoved="#affiche_fleche3" styleClass="boutonMenu" text="Scores" />
@@ -36,6 +39,8 @@
                  <ImageView fx:id="fleche5" fitHeight="37.0" fitWidth="65.0" layoutX="275.0" layoutY="522.0" pickOnBounds="true" preserveRatio="true" />
             </Pane>
             </top>
+<!--            <MapMenu fx:id="map" />-->
+<!--            <Pacman fx:id="pacman" />-->
         </BorderPane>
     </center>
 </BorderPane>
