@@ -118,6 +118,10 @@ public class Fantome extends Deplacement{
         return "";
     }
 
+    public void ia() {
+
+    }
+
     private void updateDeplacements() {
         if (this.listeCoordoneDeplacementFant.isEmpty()) {
             if (this.estVulnerable) this.iaFantomeAppeure();
@@ -160,9 +164,6 @@ public class Fantome extends Deplacement{
     public boolean doitRechargerNextPos(){
         return  (this.positionXFinDeplacement == this.getPosX() && this.positionYFinDeplacement == this.getPosY());
     }
-
-    public void ia(){}
-
 
     public boolean peutAvancerHorizontalement(Map map, int i) {
         if (getPosY() % 20 == 1) {
@@ -336,7 +337,13 @@ public class Fantome extends Deplacement{
                 this.setImageView(this.getImage());
                 break;
         }
+    }
 
+    public String getCoordPacman(){
+        return (pacman.getPosX() / 20) + "/" + (pacman.getPosY() / 20);
+    }
 
+    public String getCoordFantome(){
+        return (getPosX() / 20) + "/" + (getPosY() / 20);
     }
 }
