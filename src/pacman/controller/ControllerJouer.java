@@ -52,6 +52,11 @@ public class ControllerJouer extends Controller {
         tabVie = new ImageView[]{vie1, vie2, vie3, vie4, vie5};
     }
 
+    /**
+     * Regarde le nombre de vie de pac-man,
+     * affiche son nombre de vie sur l'écran et charge l'écran game over quand il n'en a plus
+     * @throws IOException exeption lancer a la ligne 71 par load
+     */
     public void viePac() throws IOException {
         if (pacman.nbVie < 5 && pacman.nbVie > -1) tabVie[pacman.nbVie].setImage(null);
 

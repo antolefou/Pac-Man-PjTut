@@ -59,6 +59,8 @@ public class Controller {
 //            mediaPlayer.setRate(0.5);
 //            mediaPlayer.setBalance(50);
             modelMusic.music(key).play();
+            modelMusic.music(key).setVolume(0);
+
         } catch (Exception e) {
             System.out.println("Erreur de Fichier");
         }

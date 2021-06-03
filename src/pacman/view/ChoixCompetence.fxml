@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="100.0" layoutY="248.0" mnemonicParsing="false" styleClass="boutton-ChoixCompetence">
+         <graphic>
+            <ImageView fitHeight="100.0" fitWidth="100.0" x="550.0" y="250.0">
+               <image>
+                  <Image url="../ressources/image/Competence/Robot/RobotNotSelect.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="328.0" layoutY="247.0" mnemonicParsing="false" styleClass="boutton-ChoixCompetence">
+         <graphic>
+            <ImageView fitHeight="100.0" fitWidth="100.0">
+               <image>
+                  <Image url="../ressources/image/Competence/Teleport/TeleportNotSelect.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="552.0" layoutY="252.0" mnemonicParsing="false"  styleClass="boutton-ChoixCompetence">
+         <graphic>
+            <ImageView fitHeight="100.0" fitWidth="100.0" x="350.0" y="250.0">
+               <image>
+                  <Image url="../ressources/image/Competence/Freeze/FreezeNotSelect.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Text fill="WHITE" layoutX="143.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuilliez choisir votre Compétence" textAlignment="CENTER" wrappingWidth="493.0872802734375">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="270.0" layoutY="476.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description claire nette et précise" textAlignment="CENTER" wrappingWidth="273.2475891113281">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

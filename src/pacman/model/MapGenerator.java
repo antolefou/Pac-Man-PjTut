@@ -24,8 +24,8 @@ public class MapGenerator {
 
         while(constructorX.size() != 0) construction();
         affineMapV4();
-//        afficheMapPasFini2();
         creerMapFinal();
+        
 //        System.out.println(System.currentTimeMillis()- debut);
     }
 
@@ -363,7 +363,7 @@ public class MapGenerator {
 
     private void affineMapV4(){
 
-        this.affineMap();
+//        this.affineMap();
         creerCarreMilieu();
         int[][] mapPourAffine = this.ajouteBordure2D();
         int count = 1;
@@ -410,7 +410,7 @@ public class MapGenerator {
                         mapAAffine[x][y-1] < 2
                         && mapAAffine[x][y+1] < 2   //cas3:N0N
                                                     //     0XN
-                        && mapAAffine[x-1][y] < 2    //     N0N
+                        && mapAAffine[x-1][y] < 2   //     N0N
                 )
                 ||
 
