@@ -88,7 +88,7 @@ public class UpdateRender extends Thread{
             for (int i = 0; i< fantome.velocityMultiplicator; i++) {
                 fantome.updateDeplacement();
                 fantomeSurPacman();
-                System.out.println(fantome.listeCoordoneDeplacementFant);
+//                System.out.println(fantome.listeCoordoneDeplacementFant);
             }
         }
         if (MAP.aGagne()) { // réinitialise la map si tout est mangé

@@ -52,7 +52,7 @@ public class FantomeSprinteur extends Fantome {
             if(dijkstra.size()>1) {
                 dijkstra.remove(0);
                 listeCoordoneDeplacementFant.add(dijkstra.get(0));
-            }else iaFantomeAppeure();
+            } else System.out.println("Erreur dans ia (FantomeSprinten)");
         } else {
 
             iaFantomeAppeure();

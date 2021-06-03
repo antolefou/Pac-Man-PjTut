@@ -170,9 +170,7 @@ public class Fantome extends Deplacement{
     }
 
     public boolean estSurPacman() {
-        double ratioX = Math.abs(this.getPosX() - pacman.getPosX());
-        double ratioY = Math.abs(this.getPosY() - pacman.getPosY());
-        return ratioX < 15 && ratioY < 15;
+        return (getCoordPacman().equals(getCoordFantome()));
     }
 
     @Override

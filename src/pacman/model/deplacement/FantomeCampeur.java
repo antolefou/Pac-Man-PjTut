@@ -83,7 +83,7 @@ public class FantomeCampeur extends Fantome {
             if(dijkstra.size()>1) {
                 dijkstra.remove(0);
                 this.listeCoordoneDeplacementFant = dijkstra;
-            }else iaFantomeAppeure();
+            } else System.out.println("Erreur dans ia (FantomeCampeur)");
         } else {
             iaFantomeAppeure();
         }

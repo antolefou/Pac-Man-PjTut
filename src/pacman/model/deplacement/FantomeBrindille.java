@@ -62,7 +62,7 @@ public class FantomeBrindille extends Fantome {
                 if(dijkstra.size()>1) {
                     dijkstra.remove(0);
                     listeCoordoneDeplacementFant = dijkstra;
-                }else iaFantomeAppeure();
+                } else System.out.println("Erreur dans ia (FantomeBrindille)");
             } else {
                 iaFantomeAppeure();
             }
