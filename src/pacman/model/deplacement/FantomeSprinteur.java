@@ -3,25 +3,35 @@ package pacman.model.deplacement;
 import javafx.scene.image.Image;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-public class FantomeSardoche extends Fantome {
+public class FantomeSprinteur extends Fantome {
+    private long temps = 0;
 
-    public FantomeSardoche() {
-        super(241, 261);
+    public FantomeSprinteur() {
+        super(241, 281);
+        this.velocityMultiplicatorInitial = 3;
         this.velocityMultiplicator = velocityMultiplicatorInitial;
-        this.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost1.gif"))));
+        this.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost2.gif"))));
         imageBlueGhost = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghost.gif")));
         imageMort = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/yeux.gif")));
         this.initialisation();
     }
 
-    public void ia() {
+    public void ia(){
+        System.out.println(System.currentTimeMillis() - temps);
+        if (temps == 0) temps = System.currentTimeMillis();
+        if (System.currentTimeMillis() - temps > 2000) {
+            this.velocityMultiplicator = 1;
+        }
+        if (System.currentTimeMillis() - temps > 4000) {
+            temps = System.currentTimeMillis();
+            this.velocityMultiplicator = velocityMultiplicatorInitial;
+        }
         Random rand = new Random();
-        int random = rand.nextInt(10);
+        int random = rand.nextInt(5);
 
         int x = getPosX() / 20;
         int y = getPosY() / 20;
@@ -40,11 +50,11 @@ public class FantomeSardoche extends Fantome {
 
             if (!coordoneeActuel.equals(coordoneePasse))
                 (map.getG()).addEdge(this.coordoneePasse, this.coordoneeActuel);
-        }
-
-        else {
+        } else {
 
             iaFantomeAppeure();
         }
     }
+
+
 }

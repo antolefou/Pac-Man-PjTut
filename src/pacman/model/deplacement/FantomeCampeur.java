@@ -17,6 +17,7 @@ public class FantomeCampeur extends Fantome {
 
     public FantomeCampeur() {
         super(261, 281);
+        this.velocityMultiplicator = velocityMultiplicatorInitial;
         this.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost4.gif"))));
         imageBlueGhost = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghost.gif")));
         imageMort = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/yeux.gif")));
@@ -33,7 +34,7 @@ public class FantomeCampeur extends Fantome {
             } else {
                 iaFantomeAppeure();
             }
-        } else if (getPosX() > 247 || getPosY() > 241) { //IA mode campeur
+        } else if (getPosX() > 247) { //IA mode campeur
             int x = getPosX() / 20;
             int y = getPosY() / 20;
             String[][] grille = map.getGrilleGraph();

@@ -24,12 +24,14 @@ public class Fantome extends Deplacement{
     public ValeurEtat etat;
     // spawn
     private long debutSpawn = 0L;
-    private int tempsSpawn = 0;
+    private double tempsSpawn = 0;
     private boolean immobile;
     public boolean mort;
     //image
     public Image imageBlueGhost;
     public Image imageMort;
+
+    public final int VelocityMultiplicatorAppeure = 1;
 
     public boolean estVulnerable;
 
@@ -53,7 +55,7 @@ public class Fantome extends Deplacement{
                 if (debutSpawn == 0L) {
                     if (mort) {
                         debutSpawn = System.currentTimeMillis();
-                        tempsSpawn = 0;
+                        tempsSpawn = 0.25;
                         immobile = true;
                         mort = false;
                         listeCoordoneDeplacementFant = null;
@@ -61,7 +63,7 @@ public class Fantome extends Deplacement{
                         this.positionYFinDeplacement = 0;
                     } else {
                         debutSpawn = System.currentTimeMillis();
-                        tempsSpawn = 3 +numFantome*2;
+                        tempsSpawn = numFantome;
                         immobile = true;
                     }
                 } else if(immobile && System.currentTimeMillis()-debutSpawn > 1000L * tempsSpawn) {
@@ -100,22 +102,13 @@ public class Fantome extends Deplacement{
                 } else if (getPosX() == INIT_POS_X && getPosY() == INIT_POS_Y) {
                     etat = ValeurEtat.SPAWN;
                     this.setImageView(this.getImage());
-                    velocityMultiplicator = 2;
+                    velocityMultiplicator = velocityMultiplicatorInitial;
                 } else {
                     getNextFinalPos();
                     avancePos();
                 }
                 break;
         }
-    }
-
-    private String coinGaucheHaut() {
-        for (int y=0; y<8; y++) {
-            for (int x=0; x<8; x++) {
-                if (map.getGrilleGraph()[x][y].equals(x + "/" + y)) return x+"/"+y;
-            }
-        }
-        return "";
     }
 
     public void ia() {

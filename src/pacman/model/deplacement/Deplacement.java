@@ -15,7 +15,8 @@ public class Deplacement extends Group {
     private int posY;
 
     public final int VELOCITY = 1;
-    public int velocityMultiplicator = 2;
+    public int velocityMultiplicator;
+    public int velocityMultiplicatorInitial = 2;
 
     public enum deplacements {AUCUN, HAUT, DROITE, BAS, GAUCHE}
 

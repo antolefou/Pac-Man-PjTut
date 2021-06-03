@@ -2,7 +2,6 @@ package pacman.model.deplacement;
 
 import javafx.application.Platform;
 import javafx.scene.Group;
-import pacman.model.Map;
 
 import java.util.ArrayList;
 
@@ -14,7 +13,7 @@ public class FantomeGroup extends Group {
 
         fantomes[0] = new FantomeCampeur();
         fantomes[1] = new FantomeBrindille();
-        fantomes[2] = new FantomeFanBoy();
+        fantomes[2] = new FantomeSprinteur();
         fantomes[3] = new FantomeSardoche();
         addFantomeToScene();
     }
@@ -29,7 +28,7 @@ public class FantomeGroup extends Group {
 
     public void reinitialisePosition() {
         for (Fantome fantome : this.fantomes) {
-            fantome.velocityMultiplicator = 2;
+            fantome.velocityMultiplicator = fantome.velocityMultiplicatorInitial;
             fantome.etat = Fantome.ValeurEtat.SPAWN;
             fantome.mort = false;
             fantome.listeCoordoneDeplacementFant = new ArrayList<>();
@@ -41,7 +40,7 @@ public class FantomeGroup extends Group {
         for (Fantome fantome : this.fantomes) {
             if (!fantome.estAuSpawn() && fantome.etat != Fantome.ValeurEtat.MORT) {
                 fantome.etat = Fantome.ValeurEtat.APPEURE;
-                fantome.velocityMultiplicator = 1;
+                fantome.velocityMultiplicator = fantome.VelocityMultiplicatorAppeure;
             }
         }
     }
@@ -50,7 +49,7 @@ public class FantomeGroup extends Group {
         for (Fantome fantome : this.fantomes) {
             if (fantome.etat != Fantome.ValeurEtat.NORMAL && fantome.etat != Fantome.ValeurEtat.MORT && fantome.etat != Fantome.ValeurEtat.SPAWN) {
                 fantome.etat = Fantome.ValeurEtat.NORMAL;
-                fantome.velocityMultiplicator = 2;
+                fantome.velocityMultiplicator = fantome.velocityMultiplicatorInitial;
             }
         }
     }

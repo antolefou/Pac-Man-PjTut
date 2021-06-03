@@ -29,6 +29,7 @@ public class Pacman extends Deplacement {
 
     public Pacman() {
         super(241, 321);
+        this.velocityMultiplicator = velocityMultiplicatorInitial;
         this.setImage(new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanUp.gif")));
         this.initialisation();
         Platform.runLater(() -> {
