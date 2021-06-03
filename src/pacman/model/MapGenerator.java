@@ -363,7 +363,7 @@ public class MapGenerator {
 
     private void affineMapV4(){
 
-//        this.affineMap();
+        this.affineMap();
         creerCarreMilieu();
         int[][] mapPourAffine = this.ajouteBordure2D();
         int count = 1;
