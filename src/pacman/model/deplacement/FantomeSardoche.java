@@ -3,8 +3,10 @@ package pacman.model.deplacement;
 import javafx.scene.image.Image;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 public class FantomeSardoche extends Fantome {
 
@@ -16,32 +18,32 @@ public class FantomeSardoche extends Fantome {
         this.initialisation();
     }
 
-    public void ia(){
-        if (vueSurPacman()) {
-            String coordFantome = (int)(getPosX()/20) + "/" + (int)(getPosY()/20);
-            String coordPacman = (int)(pacman.getPosX()/20) + "/" + (int)(pacman.getPosY()/20);
-            listeCoordoneDeplacementFant = DijkstraShortestPath.findPathBetween(map.g, coordFantome, coordPacman).getVertexList();
-        } else if (getPosX() > 247 || getPosY() > 241) { //IA mode campeur
-            int x = getPosX() / 20;
-            int y = getPosY() / 20;
-            String[][] grille = map.getGrilleGraph();
+    public void ia() {
+        Random rand = new Random();
+        int random = rand.nextInt(10);
+
+        int x = getPosX() / 20;
+        int y = getPosY() / 20;
+        String[][] grille = map.getGrilleGraph();
+
+        if (random != 0) {
+
             (map.getG()).removeEdge(this.coordoneePasse, this.coordoneeActuel);
-            List<String> dijkstra = DijkstraShortestPath.findPathBetween(map.g, grille[x][y],coinGaucheHaut()).getVertexList();
-            if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).addEdge(this.coordoneePasse, this.coordoneeActuel);
-            dijkstra.remove(0);
-//            System.out.println("calcule diskjtra");
-            this.listeCoordoneDeplacementFant = dijkstra;
-        } else {
+
+            List<String> dijkstra = DijkstraShortestPath.findPathBetween(map.g, grille[x][y], pacman.getPosX() / 20 + "/" + pacman.getPosY() / 20).getVertexList();
+
+            if (dijkstra.size() > 1)
+                listeCoordoneDeplacementFant.add(dijkstra.get(1));
+            else
+                listeCoordoneDeplacementFant.add(dijkstra.get(0));
+
+            if (!coordoneeActuel.equals(coordoneePasse))
+                (map.getG()).addEdge(this.coordoneePasse, this.coordoneeActuel);
+        }
+
+        else {
+
             iaFantomeAppeure();
         }
-    }
-
-    private String coinGaucheHaut() {
-        for (int y=0; y<8; y++) {
-            for (int x=0; x<8; x++) {
-                if (map.getGrilleGraph()[x][y].equals(x + "/" + y)) return x+"/"+y;
-            }
-        }
-        return "";
     }
 }

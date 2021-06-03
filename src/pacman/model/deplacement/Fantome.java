@@ -118,34 +118,10 @@ public class Fantome extends Deplacement{
         return "";
     }
 
-    public void iaTest() {
-        if (vueSurPacman() && !estVulnerable) {
-            String coordFantome = (getPosX() / 20) + "/" + (getPosY() / 20);
-            String coordPacman = (pacman.getPosX() / 20) + "/" + (pacman.getPosY() / 20);
-            if (!coordFantome.equals(coordPacman)) {
-                listeCoordoneDeplacementFant.add(DijkstraShortestPath.findPathBetween(map.g, coordFantome, coordPacman).getVertexList().get(1));
-            } else {
-                iaFantomeAppeure();
-            }
-        } else if (getPosX() > 247 || getPosY() > 241) { //IA mode campeur
-            int x = getPosX() / 20;
-            int y = getPosY() / 20;
-            String[][] grille = map.getGrilleGraph();
-            if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).removeEdge(this.coordoneePasse, this.coordoneeActuel);
-            List<String> dijkstra = DijkstraShortestPath.findPathBetween(map.g, grille[x][y], coinGaucheHaut()).getVertexList();
-            if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).addEdge(this.coordoneePasse, this.coordoneeActuel);
-            dijkstra.remove(0);
-//            System.out.println("calcule diskjtra");
-            this.listeCoordoneDeplacementFant = dijkstra;
-        } else {
-            iaFantomeAppeure();
-        }
-    }
-
     private void updateDeplacements() {
         if (this.listeCoordoneDeplacementFant.isEmpty()) {
             if (this.estVulnerable) this.iaFantomeAppeure();
-            else this.iaTest();
+            else this.ia();
             getNextFinalPos();
         }
         avancePos();

@@ -21,37 +21,9 @@ public class FantomeBrindille extends Fantome {
         this.initialisation();
     }
 
-    /*public void ia(){
-        if (vueSurPacman()) {
-            String coordFantome = (getPosX()/20) + "/" + (getPosY()/20);
-            String coordPacman = (pacman.getPosX()/20) + "/" + (pacman.getPosY()/20);
-            System.out.println("vue pacman : " + coordFantome + coordPacman);
-            if (!coordFantome.equals(coordPacman)) {
-                listeCoordoneDeplacementFant = DijkstraShortestPath.findPathBetween(map.g, coordFantome, coordPacman).getVertexList();
-            }else {
-                iaFantomeAppeure();
-            }
-        } else if (getPosX() > 247 || getPosY() > 241) { //IA mode campeur
-            int x = getPosX() / 20;
-            int y = getPosY() / 20;
-            String[][] grille = map.getGrilleGraph();
-            if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).removeEdge(this.coordoneePasse, this.coordoneeActuel);
-            List<String> dijkstra = DijkstraShortestPath.findPathBetween(map.g, grille[x][y],coinGaucheHaut()).getVertexList();
-            if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).addEdge(this.coordoneePasse, this.coordoneeActuel);
-            dijkstra.remove(0);
-//            System.out.println("calcule diskjtra");
-            this.listeCoordoneDeplacementFant = dijkstra;
-        } else {
-            iaFantomeAppeure();
-        }
-    }*/
+    public void ia(){
 
-    private String coinGaucheHaut() {
-        for (int y=0; y<8; y++) {
-            for (int x=0; x<8; x++) {
-                if (map.getGrilleGraph()[x][y].equals(x + "/" + y)) return x+"/"+y;
-            }
-        }
-        return "";
+        iaFantomeAppeure();
     }
+
 }

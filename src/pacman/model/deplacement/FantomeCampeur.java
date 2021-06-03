@@ -25,17 +25,41 @@ public class FantomeCampeur extends Fantome {
     }
 
     public void ia(){
-        /*if (vueSurPacman()) {
-            String coordFantome = (int)(getPosX()/20) + "/" + (int)(getPosY()/20);
-            String coordPacman = (int)(pacman.getPosX()/20) + "/" + (int)(pacman.getPosY()/20);
-            listeCoordoneDeplacementFant = DijkstraShortestPath.findPathBetween(map.g, coordFantome, coordPacman).getVertexList();
-        }*/
+
+        /*
         if (getPosX() > 247 || getPosY() > 241) { //IA mode campeur
             int x = getPosX() / 20;
             int y = getPosY() / 20;
             String[][] grille = map.getGrilleGraph();
             (map.getG()).removeEdge(this.coordoneePasse, this.coordoneeActuel);
             List<String> dijkstra = DijkstraShortestPath.findPathBetween(map.g, grille[x][y],coinGaucheHaut()).getVertexList();
+            if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).addEdge(this.coordoneePasse, this.coordoneeActuel);
+            dijkstra.remove(0);
+//            System.out.println("calcule diskjtra");
+            this.listeCoordoneDeplacementFant = dijkstra;
+        } else {
+            iaFantomeAppeure();
+        }
+
+         */
+
+        if (vueSurPacman() && !estVulnerable) {
+            String coordFantome = (getPosX() / 20) + "/" + (getPosY() / 20);
+            String coordPacman = (pacman.getPosX() / 20) + "/" + (pacman.getPosY() / 20);
+            if (!coordFantome.equals(coordPacman)) {
+                if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).removeEdge(this.coordoneePasse, this.coordoneeActuel);
+                listeCoordoneDeplacementFant.add(DijkstraShortestPath.findPathBetween(map.g, coordFantome, coordPacman).getVertexList().get(1));
+                if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).addEdge(this.coordoneePasse, this.coordoneeActuel);
+
+            } else {
+                iaFantomeAppeure();
+            }
+        } else if (getPosX() > 247 || getPosY() > 241) { //IA mode campeur
+            int x = getPosX() / 20;
+            int y = getPosY() / 20;
+            String[][] grille = map.getGrilleGraph();
+            if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).removeEdge(this.coordoneePasse, this.coordoneeActuel);
+            List<String> dijkstra = DijkstraShortestPath.findPathBetween(map.g, grille[x][y], coinGaucheHaut()).getVertexList();
             if (!coordoneeActuel.equals(coordoneePasse)) (map.getG()).addEdge(this.coordoneePasse, this.coordoneeActuel);
             dijkstra.remove(0);
 //            System.out.println("calcule diskjtra");
