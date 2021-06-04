@@ -93,7 +93,7 @@ public class Map extends Group  {
         // crée une nouvelle map et recommence si jamais la map contient des zones isolées
         do {
             mapGenerator = new MapGenerator();
-            mapGenerator.initObjet(5, 3, niveau);
+            mapGenerator.initObjet(25, 3, niveau);
             mapGeneree = mapGenerator.getMap();
             mapGenerator = null; // Vide mapGeneree
 

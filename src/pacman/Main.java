@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.application.Platform;
 
+import pacman.model.Utilisateur;
 import pacman.view.View;
 
 public class Main extends Application {
@@ -16,6 +17,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 //         Affichage de la vue
         View view = new View();
+        Utilisateur utilisateur = new Utilisateur(); // à ne pas supprimer même si il n'est pas utilisé
 //         Création d'une scène sans initialiser la vue
         Scene scene = new Scene(view);
         primaryStage.setTitle("Pacman");

@@ -71,15 +71,15 @@ public class FantomeGroup extends Group {
     public void freezeFantomes() {
         for (Fantome fantome : fantomes) {
             switch (fantome.etat) {
-                case MORT -> {
+                case MORT:
                     fantome.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/yeuxGeles.gif"))));
-                }
-                case APPEURE -> {
+                    break;
+                case APPEURE:
                     fantome.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghostGele.gif"))));
-                }
-                default -> {
+                    break;
+                default:
                     fantome.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost" + fantome.numFantome + "Gele.gif"))));
-                }
+                    break;
             }
         }
     }
@@ -87,15 +87,15 @@ public class FantomeGroup extends Group {
     public void unfreezeFantomes() {
         for (Fantome fantome : fantomes) {
             switch (fantome.etat) {
-                case MORT -> {
+                case MORT:
                     fantome.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/yeux.gif"))));
-                }
-                case APPEURE -> {
+                    break;
+                case APPEURE:
                     fantome.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghost.gif"))));
-                }
-                default -> {
+                    break;
+                default:
                     fantome.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost" + fantome.numFantome + ".gif"))));
-                }
+                    break;
             }
         }
     }

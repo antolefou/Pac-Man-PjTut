@@ -20,5 +20,22 @@
 }
 
 .boutton-ChoixCompetence {
+    -fx-min-height: 100;
+    -fx-max-height: 100;
+    -fx-min-width: 100;
+    -fx-max-width: 100;
+    -fx-border-radius: 1;
     -fx-background-color: black;
+    -fx-background-radius: 100;
+}
+
+.boutton-ChoixCompetence:hover {
+    -fx-background-color: yellow;
+    -fx-background-radius: 100;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+.textDescription {
+    -fx-alignment: center;
 }

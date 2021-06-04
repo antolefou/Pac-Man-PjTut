@@ -281,18 +281,18 @@ public class Pacman extends Deplacement {
         projectile.velocityMultiplicator = 5;
 
         switch (this.deplacementActuel) {
-            case DROITE -> {
+            case DROITE:
                 this.projectileRotate = 0;
-            }
-            case BAS -> {
+                break;
+            case BAS:
                 this.projectileRotate = 90;
-            }
-            case GAUCHE -> {
+                break;
+            case GAUCHE:
                 this.projectileRotate = 180;
-            }
-            default -> {
+                break;
+            default:
                 this.projectileRotate = -90;
-            }
+                break;
         }
 
         Platform.runLater(() -> this.getChildren().add(projectile.getImageView()));

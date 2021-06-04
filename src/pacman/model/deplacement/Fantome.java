@@ -281,7 +281,7 @@ public class Fantome extends Deplacement {
             case SPAWN:
                 this.setImageView(this.getImage());
                 break;
-            case NORMAL:
+            case NORMAL: // pas utile
                 this.setImageView(this.getImage());
                 break;
             case APPEURE:

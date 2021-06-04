@@ -1,28 +1,36 @@
 package pacman.model;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 public class Utilisateur {
+//    ------- CARACTERISTIQUES -------
+//    Pseudo
+static String pseudoUtilisateur;
 //    vitesse de pacman
-    private int fps;
-    private int threadRender;
+    private int fps = 60;
+    private int threadRender  = (int) ((1.0/this.fps)*1000);
 //     Vitesse de Jeu
     private final int THREAD_UPDATE = (int) ((1.0/50)*1000);
 //    Volume son
+    public int son;
+//    Competence du joueur
+    public String competenceDepart;
+    public String competenceA;
+    public String competenceB;
+    public String competenceC;
+    public String niveauCompetenceA;
+    public String niveauCompetenceB;
+    public String niveauCompetenceC;
 
-//    Pseudo
-    static String pseudoUtilisateur;
+
 
     public Utilisateur() {
-        Utilisateur.pseudoUtilisateur = "PLAYER";
-        this.fps = 60;
-        this.threadRender  = (int) ((1.0/this.fps)*1000);
+        lectureUtilisateur();
     }
 
 
-    public void initUtilisateur() {
+    public void lectureUtilisateur() {
         try {
             FileInputStream file = new FileInputStream("src/pacman/model/Utilisateur.txt");
             Scanner scanner = new Scanner(file);
@@ -31,20 +39,95 @@ public class Utilisateur {
                 String txt = scanner.nextLine();
                 String[] ligne = txt.split(",");
 
-                if (ligne[0].equals("fps")) {
-                    fps = Integer.parseInt(ligne[1]);
-                } else if (ligne[0].equals("son")) {
-                    //
+                switch (ligne[0]) {
+                    case "pseudo":
+                        this.setPseudoUtilisateur(ligne[1]);
+                        break;
+                    case "fps":
+                        this.fps = Integer.parseInt(ligne[1]);
+                        break;
+                    case "son":
+                        this.son = Integer.parseInt(ligne[1]);
+                        break;
+                    case "CompetenceA":
+                        this.competenceA = ligne[1];
+                        break;
+                    case "CompetenceDepart":
+                        this.competenceDepart = ligne[1];
+                        break;
+                    case "CompetenceB":
+                        this.competenceB = ligne[1];
+                        break;
+                    case "CompetenceC":
+                        this.competenceC = ligne[1];
+                        break;
+                    case "NiveauCompetenceA":
+                        this.niveauCompetenceA = ligne[1];
+                        break;
+                    case "NiveauCompetenceB":
+                        this.niveauCompetenceB = ligne[1];
+                        break;
+                    case "NiveauCompetenceC":
+                        this.niveauCompetenceC = ligne[1];
+                        break;
+                    default:
+                        System.out.println("Erreur dans fichier utilisateur");
+                        break;
                 }
             }
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public void saveUtilisateur() {
+    public void ecritureUtilisateur() {
+        try {
+            PrintWriter writer = new PrintWriter("src/pacman/model/Utilisateur.txt");
+            writer.println("fps," + fps);
+            writer.println("son," + son);
+            writer.println("CompetenceDepart," + competenceDepart);
+            writer.println("CompetenceA," + competenceA);
+            writer.println("CompetenceB," + competenceB);
+            writer.println("CompetenceC," + competenceC);
+            writer.println("NiveauCompetenceA," + niveauCompetenceA);
+            writer.println("NiveauCompetenceB," + niveauCompetenceB);
+            writer.println("NiveauCompetenceC," + niveauCompetenceC);
 
+            writer.close();
+//            FileWriter fw = new FileWriter("src/pacman/model/Utilisateur.txt");
+//            BufferedWriter bw = new BufferedWriter(fw);
+
+//            bw.write("fps," + fps + "\n" +
+//                    "son," + son +"\n" +
+//                    "CompetenceDepart," + competenceDepart +"\n" +
+//                    "CompetenceA,\n" + competenceA +"\n" +
+//                    "CompetenceB,\n" + competenceB +"\n" +
+//                    "CompetenceC,\n" + competenceC +"\n" +
+//                    "NiveauCompetenceA," + niveauCompetenceA +"\n" +
+//                    "NiveauCompetenceB," + niveauCompetenceB +"\n" +
+//                    "NiveauCompetenceC," + niveauCompetenceC);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void reinitialiseUtilisateur() {
+        try {
+            FileWriter fw = new FileWriter("src/pacman/model/Utilisateur.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            bw.write("fps,60\n" +
+                    "son,80\n" +
+                    "CompetenceDepart,aucune\n" +
+                    "CompetenceA,aucune\n" +
+                    "CompetenceB,aucune\n" +
+                    "CompetenceC,aucune\n" +
+                    "NiveauCompetenceA,0\n" +
+                    "NiveauCompetenceB,0\n" +
+                    "NiveauCompetenceC,0");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     ////// GETTER ET SETTER ////////
