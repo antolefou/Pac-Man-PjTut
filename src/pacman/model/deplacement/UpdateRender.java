@@ -82,12 +82,18 @@ public class UpdateRender extends Thread{
         for (int i = 0; i< PACMAN.velocityMultiplicator; i++) {  // gère le multiplicateur de pacman
             PACMAN.updateDeplacement();
             PACMAN.updateMapPacman();
-            //fantomeSurPacman();
+            fantomeSurPacman();
         }
-        for (Fantome fantome : fantomeGroup.fantomes) {
-            for (int i = 0; i< fantome.velocityMultiplicator; i++) {
-                fantome.updateDeplacement();
-                //fantomeSurPacman();
+        if(PACMAN.freeze) {
+            if (System.currentTimeMillis() - PACMAN.tempsDebutFreeze > 5000) PACMAN.freeze = false;
+        }
+        else {
+            for (Fantome fantome : fantomeGroup.fantomes) {
+                for (int i = 0; i < fantome.velocityMultiplicator; i++) {
+                    fantome.updateDeplacement();
+                    fantomeSurPacman();
+//                System.out.println(fantome.listeCoordoneDeplacementFant);
+                }
             }
         }
         if (MAP.aGagne()) { // réinitialise la map si tout est mangé
@@ -132,6 +138,9 @@ public class UpdateRender extends Thread{
                 } else if (fantome.etat != Fantome.ValeurEtat.MORT){
                     PACMAN.initPosition();
                     PACMAN.nbVie--;
+                    if (PACMAN.teleporteurPose) {
+                        PACMAN.teleporteur.supprimeTeleporteur();
+                    }
                     this.controllerJouer.playMusic("death", false);
                     fantomeGroup.reinitialisePosition();
                 }

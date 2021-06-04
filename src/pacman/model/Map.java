@@ -17,7 +17,7 @@ public class Map extends Group  {
     private final int NB_CASE_X = 25;
     private final int NB_CASE_Y = 30;
 //    valeur possible de chaque case de la map
-    public enum ValeurCase { VIDE, MUR, GOMME, SUPERGOMME, BOOST, INTERDIT, CERISE, FRAISE, ORANGE, POMME, MELON, VAISSEAU, CLOCHE, CLEF}
+    public enum ValeurCase { VIDE, MUR, GOMME, SUPERGOMME, BOOST, INTERDIT, TELEPORTEUR, CERISE, FRAISE, ORANGE, POMME, MELON, VAISSEAU, CLOCHE, CLEF}
 
     public MapGenerator mapGenerator;
 
@@ -30,6 +30,7 @@ public class Map extends Group  {
     private final Image imageSuperGomme;
     private final Image imageBoost;
     private final Image imageMurFantome;
+    private final Image imageTeleporteur;
     private final Image imageCerise;
     private final Image imageFraise;
     private final Image imageOrange;
@@ -62,6 +63,7 @@ public class Map extends Group  {
         this.imageSuperGomme = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "SuperGomme.png")));
         this.imageBoost = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "boost.png")));
         this.imageMurFantome = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "murFantome.png")));
+        this.imageTeleporteur = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "teleporteur.gif")));
         this.imageCerise = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "cerise.png")));
         this.imageFraise = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "fraise.png")));
         this.imageOrange = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "orange.png")));
@@ -265,6 +267,7 @@ public class Map extends Group  {
             for (int j = 0; j < this.NB_CASE_Y; j++) {
                 //mise à jour de la map
                 if (this.grid[i][j] == ValeurCase.VIDE) this.caseMap[i][j].setImage(null);
+                else if (this.grid[i][j] == ValeurCase.TELEPORTEUR) this.caseMap[i][j].setImage(this.imageTeleporteur);
             }
         }
     }

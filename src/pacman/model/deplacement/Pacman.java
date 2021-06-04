@@ -4,11 +4,9 @@ import javafx.application.Platform;
 import javafx.scene.image.Image;
 import pacman.controller.ControllerJouer;
 import pacman.model.Map;
-import pacman.model.deplacement.Deplacement;
-
-import java.io.IOException;
 
 public class Pacman extends Deplacement {
+
     private ControllerJouer controllerJouer;
     public boolean enVie = true;
     public int numNiveau = 1;
@@ -26,11 +24,26 @@ public class Pacman extends Deplacement {
 
     public deplacements deplacementFutur = deplacements.AUCUN;
 
+    public Teleporteur teleporteur;
+    public boolean teleporteurPose;
+    public boolean competenceAPrete;
+    public boolean competenceEPrete;
+    public boolean freeze;
+    public double tempsDebutFreeze;
 
     public Pacman() {
         super(241, 321);
         this.velocityMultiplicator = velocityMultiplicatorInitial;
         this.setImage(new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanUp.gif")));
+
+        this.competenceAPrete = true;
+        this.competenceEPrete = true;
+
+        this.teleporteurPose = false;
+        this.freeze = false;
+        tempsDebutFreeze = 0;
+
+
         this.initialisation();
         Platform.runLater(() -> {
             this.getChildren().add(getImageView());
@@ -200,6 +213,8 @@ public class Pacman extends Deplacement {
                 score += 5000;
             }else if (map.grid[x][y] == null) {
                 map.grid[x][y] = Map.ValeurCase.VIDE;
+            }else if (map.grid[x][y] == Map.ValeurCase.TELEPORTEUR) {
+                //
             } else {
                 System.out.println("Execption dans l'interraction de pacman");
             }
@@ -225,21 +240,39 @@ public class Pacman extends Deplacement {
         controllerJouer.fantomeGroup.setVulnerable();
     }
 
+    public void competenceTeleportation() {
+        if (!teleporteurPose) {
+            teleporteurPose = true;
+            this.teleporteur = new Teleporteur(this, map);
+            teleporteur.poseTeleporteur(getPosX(), getPosY());
+        }
+        else {
+            teleporteur.teleporte();
+        }
+    }
+
+    public void competenceFreeze() {
+        this.freeze = true;
+        tempsDebutFreeze = System.currentTimeMillis();
+    }
+
     /**
      * Stoppe tous les objets bonus qui ont atteinds le temps d'effet
      */
     public void stopPower() {
         if (powerBoost) {
-            if (System.currentTimeMillis()-debutPowerBoost > 1000 * 5) {  // durée 5 sec
+            long tempsPowerBoost = System.currentTimeMillis();
+            if (tempsPowerBoost-debutPowerBoost > 1000 * 5) {  // durée 5 sec
                 velocityMultiplicator = 2;
                 powerBoost = false;
             }
         } else if (powerSuperPacGomme) {
-            if (System.currentTimeMillis()-debutSuperPacGomme > 1000 * 10) {  // durée 10 sec
+            long tempsPacGomme = System.currentTimeMillis();
+            if (tempsPacGomme-debutSuperPacGomme > 1000 * 10) {  // durée 10 sec
                 powerSuperPacGomme = false;
                 controllerJouer.fantomeGroup.stopVulnerable();
             }
-            else controllerJouer.fantomeGroup.setClignotant(System.currentTimeMillis() - debutSuperPacGomme > 1000 * 7.5);
+            else controllerJouer.fantomeGroup.setClignotant(tempsPacGomme - debutSuperPacGomme > 1000 * 7.5);
         }
     }
 
