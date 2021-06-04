@@ -239,6 +239,7 @@ public class Pacman extends Deplacement {
                 powerSuperPacGomme = false;
                 controllerJouer.fantomeGroup.stopVulnerable();
             }
+            else controllerJouer.fantomeGroup.setClignotant(System.currentTimeMillis() - debutSuperPacGomme > 1000 * 7.5);
         }
     }
 

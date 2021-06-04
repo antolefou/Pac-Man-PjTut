@@ -2,6 +2,7 @@ package pacman.model.deplacement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import javafx.scene.image.Image;
@@ -27,8 +28,10 @@ public class Fantome extends Deplacement{
     private double tempsSpawn = 0;
     private boolean immobile;
     public boolean mort;
+    public boolean clignote;
     //image
     public Image imageBlueGhost;
+    public Image imageBlueGhostClignote;
     public Image imageMort;
 
     public final int VelocityMultiplicatorAppeure = 1;
@@ -41,10 +44,12 @@ public class Fantome extends Deplacement{
         this.listeCoordoneDeplacementFant = new ArrayList<>();
         this.coordoneeActuel = init_pos_x/20 + "/" + init_pos_y/20;
         this.coordoneePasse = init_pos_x/20 + "/" + init_pos_y/20;
+        imageBlueGhostClignote = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghostClignote.gif")));
 
         this.etat = ValeurEtat.SPAWN;
         this.estVulnerable = false;
         this.mort = false;
+        this.clignote = false;
 
     }
 
@@ -266,7 +271,8 @@ public class Fantome extends Deplacement{
                 this.setImageView(this.getImage());
                 break;
             case APPEURE:
-                this.setImageView(this.imageBlueGhost);
+                if(this.clignote) this.setImageView(this.imageBlueGhostClignote);
+                else this.setImageView(this.imageBlueGhost);
                 break;
             case MORT:
                 this.setImageView(this.imageMort);

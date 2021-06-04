@@ -54,6 +54,12 @@ public class FantomeGroup extends Group {
         }
     }
 
+    public void setClignotant(boolean valeur) {
+        for (Fantome fantome : this.fantomes) {
+            fantome.clignote = valeur;
+        }
+    }
+
     public void initNumFantome() {
         for (int i=0; i<fantomes.length; i++) {
             fantomes[i].numFantome = i+1;
