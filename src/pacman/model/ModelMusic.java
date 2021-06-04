@@ -11,16 +11,19 @@ public class ModelMusic {
     // int cpt;
 
     public ModelMusic() {
-
+        //              A mettre si vous êtes sur windows
+        // String system = "/" + System.getProperty("user.dir").replaceAll("\\\\", "/");
+        //              A mettre si vous êtes sur Linux
+        String system = System.getProperty("user.dir");
         mediaPlayerHashMap = new HashMap<String, MediaPlayer>();
-        mediaPlayerHashMap.put("theme", new MediaPlayer(new Media("file://" + System.getProperty("user.dir") + "/src/pacman/ressources/music/ace.mp3")));
-        mediaPlayerHashMap.put("menu", new MediaPlayer(new Media("file://" + System.getProperty("user.dir") + "/src/pacman/ressources/music/dancin.mp3")));
-        mediaPlayerHashMap.put("chomp", new MediaPlayer(new Media("file://" + System.getProperty("user.dir") + "/src/pacman/ressources/music/pacman_chomp.wav")));
-        mediaPlayerHashMap.put("gameOver", new MediaPlayer(new Media("file://" + System.getProperty("user.dir") + "/src/pacman/ressources/music/gameOver.mp3")));
-        mediaPlayerHashMap.put("death", new MediaPlayer(new Media("file://" + System.getProperty("user.dir") + "/src/pacman/ressources/music/pacman_death.wav")));
-        mediaPlayerHashMap.put("eatfruit", new MediaPlayer(new Media("file://" + System.getProperty("user.dir") + "/src/pacman/ressources/music/pacman_eatfruit.wav")));
-        mediaPlayerHashMap.put("eatghost", new MediaPlayer(new Media("file://" + System.getProperty("user.dir") + "/src/pacman/ressources/music/pacman_eatghost.wav")));
-        mediaPlayerHashMap.put("extrapac", new MediaPlayer(new Media("file://" + System.getProperty("user.dir") + "/src/pacman/ressources/music/pacman_extrapac.wav")));
+        mediaPlayerHashMap.put("theme", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/ace.mp3")));
+        mediaPlayerHashMap.put("menu", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/dancin.mp3")));
+        mediaPlayerHashMap.put("chomp", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/pacman_chomp.wav")));
+        mediaPlayerHashMap.put("gameOver", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/gameOver.mp3")));
+        mediaPlayerHashMap.put("death", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/pacman_death.wav")));
+        mediaPlayerHashMap.put("eatfruit", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/pacman_eatfruit.wav")));
+        mediaPlayerHashMap.put("eatghost", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/pacman_eatghost.wav")));
+        mediaPlayerHashMap.put("extrapac", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/pacman_extrapac.wav")));
     }
 
 

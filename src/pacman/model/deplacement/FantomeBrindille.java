@@ -1,14 +1,15 @@
 package pacman.model.deplacement;
 
 import javafx.scene.image.Image;
+import org.jgrapht.Graphs;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
 public class FantomeBrindille extends Fantome {
 
     private int compteur = 0;
-    private int random = 0;
     private final Random rand = new Random();
 
     public FantomeBrindille() {
@@ -21,13 +22,19 @@ public class FantomeBrindille extends Fantome {
     }
 
     public void ia(){
-        Random rand = new Random();
-        int random = rand.nextInt(10);
-        if (random != 0) {
-            listeCoordoneDeplacementFant = dijkstra(false, false, this.coordoneeActuel, getCoordPacman());
-            if(this.listeCoordoneDeplacementFant.isEmpty()) System.out.println("ia Sardoche renvoie liste vide");
-        } else {
-            iaRandom();
+        if(compteur<12) {
+            List<String> choixPossible = Graphs.neighborListOf(map.getG(), getCoordFantome());
+            choixPossible.remove(coordoneePasse);
+            choixPossible.remove("12/13");
+            if (choixPossible.size() > 1) {
+                choixPossible.remove(dijkstra(false, false, getCoordFantome(), getCoordPacman()).get(0));
+            }
+            listeCoordoneDeplacementFant = dijkstra(false, true, getCoordFantome(), choixPossible.get(rand.nextInt(choixPossible.size())));
+            compteur++;
+        }
+        else{
+            listeCoordoneDeplacementFant = dijkstra(false, true, this.coordoneeActuel, getCoordPacman());
+            this.compteur = 0;
         }
     }
 }

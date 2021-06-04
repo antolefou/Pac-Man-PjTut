@@ -87,7 +87,7 @@ public class Fantome extends Deplacement {
                 break;
             case NORMAL:
                 if (this.estVulnerable) {
-                    if(listeCoordoneDeplacementFant.size()>0) {
+                    if(listeCoordoneDeplacementFant.size()>1) {
                         String tmp = listeCoordoneDeplacementFant.get(0);
                         listeCoordoneDeplacementFant.clear();
                         listeCoordoneDeplacementFant.add(tmp);
@@ -98,7 +98,7 @@ public class Fantome extends Deplacement {
                 break;
             case APPEURE:
                 if(!estVulnerable) {
-                    if(listeCoordoneDeplacementFant.size()>0) {
+                    if(listeCoordoneDeplacementFant.size()>1) {
                         String tmp = listeCoordoneDeplacementFant.get(0);
                         listeCoordoneDeplacementFant.clear();
                         listeCoordoneDeplacementFant.add(tmp);
@@ -110,7 +110,7 @@ public class Fantome extends Deplacement {
             case MORT:
                 this.estVulnerable = false;
                 if (!this.mort) {
-                    if(this.listeCoordoneDeplacementFant.size()>0){
+                    if(this.listeCoordoneDeplacementFant.size()>1){
                         String tmp = listeCoordoneDeplacementFant.get(0);
                         listeCoordoneDeplacementFant.clear();
                         listeCoordoneDeplacementFant.add(tmp);
@@ -240,7 +240,6 @@ public class Fantome extends Deplacement {
         choixPossible.remove("12/13");
         Random rand = new Random();
         listeCoordoneDeplacementFant = dijkstra(false, true, getCoordFantome(), choixPossible.get(rand.nextInt(choixPossible.size())));
-        System.out.println(listeCoordoneDeplacementFant);
     }
 
     public void getNextFinalPos(){
