@@ -34,6 +34,6 @@ public class FantomeBrindille extends Fantome {
             } else {
                 iaRandom();
             }
-        } else listeCoordoneDeplacementFant = dijkstra(false, true, getCoordFantome(), getCoordPacman());
+        } else listeCoordoneDeplacementFant = dijkstra(false, true, this.coordoneeActuel, getCoordPacman());
     }
 }

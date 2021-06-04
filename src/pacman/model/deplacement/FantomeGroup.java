@@ -29,9 +29,9 @@ public class FantomeGroup extends Group {
     public void reinitialisePosition() {
         for (Fantome fantome : this.fantomes) {
             fantome.velocityMultiplicator = fantome.velocityMultiplicatorInitial;
-            fantome.etat = Fantome.ValeurEtat.SPAWN;
             fantome.mort = false;
-            fantome.listeCoordoneDeplacementFant = new ArrayList<>();
+            fantome.etat = Fantome.ValeurEtat.SPAWN;
+            fantome.listeCoordoneDeplacementFant.clear();
             fantome.initPosition();
         }
     }
@@ -48,9 +48,9 @@ public class FantomeGroup extends Group {
     public void stopVulnerable() {
         for (Fantome fantome : this.fantomes) {
             if (fantome.etat != Fantome.ValeurEtat.NORMAL && fantome.etat != Fantome.ValeurEtat.MORT && fantome.etat != Fantome.ValeurEtat.SPAWN) {
+                fantome.listeCoordoneDeplacementFant.clear();
                 fantome.etat = Fantome.ValeurEtat.NORMAL;
                 fantome.velocityMultiplicator = fantome.velocityMultiplicatorInitial;
-                fantome.listeCoordoneDeplacementFant.clear();
             }
         }
     }

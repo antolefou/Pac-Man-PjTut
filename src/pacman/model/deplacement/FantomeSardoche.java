@@ -20,7 +20,7 @@ public class FantomeSardoche extends Fantome {
         Random rand = new Random();
         int random = rand.nextInt(10);
         if (random != 0) {
-            listeCoordoneDeplacementFant = dijkstra(false, false, getCoordFantome(), getCoordPacman());
+            listeCoordoneDeplacementFant = dijkstra(false, false, this.coordoneeActuel, getCoordPacman());
             if(this.listeCoordoneDeplacementFant.isEmpty()) System.out.println("ia Sardoche renvoie liste vide");
         } else {
             iaRandom();

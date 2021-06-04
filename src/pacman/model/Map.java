@@ -13,7 +13,7 @@ import java.util.*;
 
 public class Map extends Group  {
 
-    public final static double TAILLE_CASE = 20.0;
+    public final static int TAILLE_CASE = 20;
     private final int NB_CASE_X = 25;
     private final int NB_CASE_Y = 30;
 //    valeur possible de chaque case de la map

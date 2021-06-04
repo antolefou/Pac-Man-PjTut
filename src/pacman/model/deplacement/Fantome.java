@@ -78,14 +78,14 @@ public class Fantome extends Deplacement{
                 } else if(immobile && System.currentTimeMillis()-debutSpawn > 1000L * tempsSpawn) {
                     debutSpawn = 0L;
                     etat = ValeurEtat.NORMAL;
-                    listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), "12/12");
+                    listeCoordoneDeplacementFant = dijkstra(true, true, this.coordoneeActuel, "12/12");
                     immobile = false;
                 }
                 break;
             case NORMAL:
                 if(this.estVulnerable){
-                    this.estVulnerable = false;
-                    listeCoordoneDeplacementFant.clear();
+                    updateDeplacements();
+                    estVulnerable = false;
                 }
                 updateDeplacements();
                 break;
@@ -97,6 +97,7 @@ public class Fantome extends Deplacement{
             case MORT:
                 this.estVulnerable = false;
                 if (!this.mort) {
+                    listeCoordoneDeplacementFant.clear();
                     mort = true;
                     String coordSpawn = INIT_POS_X / 20 + "/" + INIT_POS_Y / 20;
                     listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), coordSpawn);
@@ -130,7 +131,7 @@ public class Fantome extends Deplacement{
             graphCopie.removeEdge(this.coordoneePasse, this.coordoneeActuel);
         }
         List<String> dijkstra = DijkstraShortestPath.findPathBetween(graphCopie, coordoneeDepart, coordoneeArrive).getVertexList();
-        if(!this.mort) dijkstra.remove(0);
+        dijkstra.remove(0);
         if(!cheminEntier) {
             String tmp = dijkstra.get(0);
             dijkstra.clear();
@@ -149,25 +150,19 @@ public class Fantome extends Deplacement{
     }
 
     public void avancePos() {
-        if (doitRechargerNextPos()) {
-            String tmp = this.coordoneeActuel;
-            this.coordoneeActuel = this.listeCoordoneDeplacementFant.get(0);
-            this.coordoneePasse = tmp;
-            this.listeCoordoneDeplacementFant.remove(0);
-        }
-        else if (positionXFinDeplacement != this.getPosX() || positionYFinDeplacement != this.getPosY()) {
+        if (positionXFinDeplacement != this.getPosX() || positionYFinDeplacement != this.getPosY()) {
             switch (this.deplacementActuel) {
                 case HAUT:
-                    if (peutAvancerVerticalement(map,-1)) this.avanceHaut();
+                    this.avanceHaut();
                     break;
                 case DROITE:
-                    if (peutAvancerHorizontalement(map,1)) this.avanceDroite();
+                    this.avanceDroite();
                     break;
                 case BAS:
-                    if (peutAvancerVerticalement(map,1)) this.avanceBas();
+                    this.avanceBas();
                     break;
                 case GAUCHE:
-                    if (peutAvancerHorizontalement(map,-1)) this.avanceGauche();
+                    this.avanceGauche();
                     break;
                 default:
                     break;
@@ -181,7 +176,9 @@ public class Fantome extends Deplacement{
 
     public boolean peutAvancerHorizontalement(Map map, int i) {
         if (getPosY() % 20 == 1) {
-            return (this.mort || (getPosX() % 20 != 1) || (map.grid[((getPosX()/20)+i+25)%25][getPosY()/20] != Map.ValeurCase.MUR));
+            if (getPosX() % 20 != 1) {
+                return true;
+            }else return (map.grid[((getPosX()/20)+i+25)%25][getPosY()/20] != Map.ValeurCase.MUR);
         }
         return false;
     }
@@ -191,7 +188,11 @@ public class Fantome extends Deplacement{
             // Renvoie vrai si il ne peut pas avoir atteint un mur.
             // Renvoie vrai si la prochaine case n'est pas un mur et que la prochaine case n'est pas interdite.
             // Pour être plus exact sur l'interdit : on vérifie si il est sur une case non interdite et que sa prochaine case est interdite dans ce cas on return false.
-            return (this.mort || (getPosY() % 20 != 1) || (map.grid[getPosX()/20][(getPosY()/20)+i] != Map.ValeurCase.MUR) && !((map.grid[getPosX() / 20][(getPosY() / 20)] != Map.ValeurCase.INTERDIT) && (map.grid[getPosX() / 20][(getPosY() / 20) + i] == Map.ValeurCase.INTERDIT)));
+            if(getPosY() % 20 != 1) return true;
+            if((map.grid[getPosX()/20][(getPosY()/20)+i] == Map.ValeurCase.MUR)) return false;
+            if (!this.mort && (map.grid[getPosX() / 20][(getPosY() / 20)] != Map.ValeurCase.INTERDIT && map.grid[getPosX() / 20][(getPosY() / 20) + i] == Map.ValeurCase.INTERDIT)) {
+                return false;
+            }else return true;
         }
         return false;
     }
@@ -204,6 +205,8 @@ public class Fantome extends Deplacement{
     public void initPosition() {
         super.initPosition();
         deplacementActuel = deplacements.AUCUN;
+        this.coordoneeActuel= this.INIT_POS_X/20 + "/" + this.INIT_POS_Y/20;
+        this.coordoneePasse = this.INIT_POS_X/20 + "/" + this.INIT_POS_Y/20;
         etat = ValeurEtat.SPAWN;
         debutSpawn = 0L;
     }
@@ -256,8 +259,8 @@ public class Fantome extends Deplacement{
         int x = Integer.parseInt(coorXY[0]);
         int y = Integer.parseInt(coorXY[1]);
 
-        this.positionXFinDeplacement = tradCoorToPx(x);
-        this.positionYFinDeplacement = tradCoorToPx(y);
+        this.positionXFinDeplacement = x * Map.TAILLE_CASE + 1;
+        this.positionYFinDeplacement = y * Map.TAILLE_CASE + 1;
         this.setOrientation();
     }
 
@@ -267,11 +270,21 @@ public class Fantome extends Deplacement{
             else if (positionXFinDeplacement - this.getPosX() > 0) this.deplacementActuel = deplacements.DROITE;
             else if (positionYFinDeplacement - this.getPosY() < 0) this.deplacementActuel = deplacements.HAUT;
             else if (positionYFinDeplacement - this.getPosY() > 0) this.deplacementActuel = deplacements.BAS;
+            else if (doitRechargerNextPos()) {
+                updateCoordonnees();
+            }
+            else System.out.println("erreur orientation");
+        }else{
+            if (doitRechargerNextPos()) {
+                updateCoordonnees();
+            }
         }
     }
-
-    public int tradCoorToPx(int coordone){
-        return (int) (coordone*Map.TAILLE_CASE + 1);
+    public void updateCoordonnees(){
+        String tmp = this.coordoneeActuel;
+        this.coordoneeActuel = this.getCoordFantome();
+        this.coordoneePasse = tmp;
+        this.listeCoordoneDeplacementFant.remove(0);
     }
 
     public boolean estAuSpawn() {

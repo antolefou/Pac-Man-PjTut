@@ -29,7 +29,7 @@ public class FantomeSprinteur extends Fantome {
         Random rand = new Random();
         int random = rand.nextInt(3);
         if (random != 0) {
-            listeCoordoneDeplacementFant = dijkstra(false, false, getCoordFantome(), getCoordPacman());
+            listeCoordoneDeplacementFant = dijkstra(false, false, this.coordoneeActuel, getCoordPacman());
             if(this.listeCoordoneDeplacementFant.isEmpty()) System.out.println("ia Sprinteur renvoie liste vide");
 
         } else {

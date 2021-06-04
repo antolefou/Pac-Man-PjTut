@@ -61,7 +61,7 @@ public class FantomeCampeur extends Fantome {
 
     public void ia(){
         if (getPosX() > 247) { //IA mode campeur
-            this.listeCoordoneDeplacementFant = dijkstra(false, true, getCoordFantome(), coinGaucheHaut());
+            this.listeCoordoneDeplacementFant = dijkstra(false, true, this.coordoneeActuel, coinGaucheHaut());
             if(this.listeCoordoneDeplacementFant.isEmpty()) System.out.println("ia Campeur renvoie liste vide");
         } else {
             iaRandom();
