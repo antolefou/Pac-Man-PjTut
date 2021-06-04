@@ -84,8 +84,17 @@ public class UpdateRender extends Thread{
             PACMAN.updateMapPacman();
             fantomeSurPacman();
         }
+        if(PACMAN.projectileLance) {
+            for (int i = 0; i< PACMAN.projectile.velocityMultiplicator; i++) {
+                PACMAN.updateProjectile();
+            }
+        }
+
         if(PACMAN.freeze) {
-            if (System.currentTimeMillis() - PACMAN.tempsDebutFreeze > 5000) PACMAN.freeze = false;
+            if (System.currentTimeMillis() - PACMAN.tempsDebutFreeze > 5000) {
+                PACMAN.freeze = false;
+                fantomeGroup.unfreezeFantomes();
+            }
         }
         else {
             for (Fantome fantome : fantomeGroup.fantomes) {
@@ -111,6 +120,10 @@ public class UpdateRender extends Thread{
         Platform.runLater(() -> {
             //affichage pacman
             PACMAN.affichage();
+            //affichage projectile
+            if (PACMAN.projectileLance) {
+                PACMAN.renderProjectile();
+            }
             //affichage fantomes
             for (Fantome fantome : fantomeGroup.fantomes) {
                 fantome.affichage();
@@ -140,6 +153,10 @@ public class UpdateRender extends Thread{
                     PACMAN.nbVie--;
                     if (PACMAN.teleporteurPose) {
                         PACMAN.teleporteur.supprimeTeleporteur();
+                    }
+                    if (PACMAN.projectileLance) {
+                        PACMAN.projectileLance = false;
+                        PACMAN.projectile.setImageView(null);
                     }
                     this.controllerJouer.playMusic("death", false);
                     fantomeGroup.reinitialisePosition();

@@ -2,8 +2,11 @@ package pacman.model.deplacement;
 
 import javafx.application.Platform;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import pacman.controller.ControllerJouer;
 import pacman.model.Map;
+
+import java.util.Objects;
 
 public class Pacman extends Deplacement {
 
@@ -24,12 +27,19 @@ public class Pacman extends Deplacement {
 
     public deplacements deplacementFutur = deplacements.AUCUN;
 
-    public Teleporteur teleporteur;
-    public boolean teleporteurPose;
     public boolean competenceAPrete;
     public boolean competenceEPrete;
+    public boolean competenceTPrete;
+
+    public Teleporteur teleporteur;
+    public boolean teleporteurPose;
+
+    public Deplacement projectile;
+    public boolean projectileLance;
+
     public boolean freeze;
     public double tempsDebutFreeze;
+    private double projectileRotate;
 
     public Pacman() {
         super(241, 321);
@@ -38,11 +48,13 @@ public class Pacman extends Deplacement {
 
         this.competenceAPrete = true;
         this.competenceEPrete = true;
+        this.competenceTPrete = true;
 
         this.teleporteurPose = false;
         this.freeze = false;
         tempsDebutFreeze = 0;
 
+        this.projectileLance = false;
 
         this.initialisation();
         Platform.runLater(() -> {
@@ -253,11 +265,89 @@ public class Pacman extends Deplacement {
 
     public void competenceFreeze() {
         this.freeze = true;
+        controllerJouer.fantomeGroup.freezeFantomes();
         tempsDebutFreeze = System.currentTimeMillis();
     }
 
+    public void competenceProjectile() {
+        Image imageProjectile= new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/projectile.gif")));
+
+        projectileLance = true;
+        projectile = new Deplacement(getPosX(), getPosY());
+        projectile.setImage(imageProjectile);
+        Platform.runLater(() -> {
+            projectile.initialisation();
+        });
+        projectile.velocityMultiplicator = 5;
+
+        switch (this.deplacementActuel) {
+            case DROITE -> {
+                this.projectileRotate = 0;
+            }
+            case BAS -> {
+                this.projectileRotate = 90;
+            }
+            case GAUCHE -> {
+                this.projectileRotate = 180;
+            }
+            default -> {
+                this.projectileRotate = -90;
+            }
+        }
+
+        Platform.runLater(() -> this.getChildren().add(projectile.getImageView()));
+    }
+
+    public boolean projectileSurFantome() {
+        for (Fantome fantome : controllerJouer.fantomeGroup.fantomes) {
+            if (fantome.getPosX()/20 == projectile.getPosX()/20 && fantome.getPosY()/20 == projectile.getPosY()/20) return true;
+        }
+        return false;
+    }
+
+    public void updateProjectile() {
+
+        switch ((int) projectileRotate) {
+            case -90 :
+                if (map.grid[projectile.getPosX()/20][(projectile.getPosY()/20)] == Map.ValeurCase.MUR || projectileSurFantome()) {
+                    projectile.setImageView(null);
+                    projectileLance = false;
+                }
+                else projectile.avanceHaut();
+                break;
+            case 0 :
+                if (map.grid[((projectile.getPosX()/20)+1)%25][projectile.getPosY()/20] == Map.ValeurCase.MUR || (projectile.getPosX()/20) +1  >= 24 || projectileSurFantome()) {
+                    projectile.setImageView(null);
+                    projectileLance = false;
+                }
+                else projectile.avanceDroite();
+                break;
+            case 90 :
+                if (map.grid[projectile.getPosX()/20][(projectile.getPosY()/20)+1] == Map.ValeurCase.MUR || projectileSurFantome()) {
+                    projectile.setImageView(null);
+                    projectileLance = false;
+                }
+                else projectile.avanceBas();
+                break;
+            case 180 :
+                if (map.grid[(projectile.getPosX()/20)%25][projectile.getPosY()/20] == Map.ValeurCase.MUR || (projectile.getPosX()/20) -1  <= -1 || projectileSurFantome()) {
+                    projectile.setImageView(null);
+                    projectileLance = false;
+                }
+                else projectile.avanceGauche();
+                break;
+        }
+    }
+
+    public void renderProjectile() {
+        if(this.projectile.getImageView() != null) {
+            projectile.affichage();
+            this.projectile.getImageView().setRotate(this.projectileRotate);
+        }
+    }
+
     /**
-     * Stoppe tous les objets bonus qui ont atteinds le temps d'effet
+     * Stoppe tous les objets bonus qui ont atteint le temps d'effet
      */
     public void stopPower() {
         if (powerBoost) {
@@ -279,4 +369,6 @@ public class Pacman extends Deplacement {
     public void setControllerJouer(ControllerJouer controllerJouer) {
         this.controllerJouer = controllerJouer;
     }
+
+
 }

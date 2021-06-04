@@ -18,6 +18,7 @@ public class Deplacement extends Group {
     public int velocityMultiplicator;
     public int velocityMultiplicatorInitial = 2;
 
+
     public enum deplacements {AUCUN, HAUT, DROITE, BAS, GAUCHE}
 
     public deplacements deplacementActuel = deplacements.AUCUN;

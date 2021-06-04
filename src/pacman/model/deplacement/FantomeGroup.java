@@ -2,8 +2,10 @@ package pacman.model.deplacement;
 
 import javafx.application.Platform;
 import javafx.scene.Group;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class FantomeGroup extends Group {
     public Fantome[] fantomes;
@@ -11,10 +13,10 @@ public class FantomeGroup extends Group {
     public FantomeGroup() {
         fantomes = new Fantome[4];
 
-        fantomes[0] = new FantomeCampeur();
-        fantomes[1] = new FantomeBrindille();
-        fantomes[2] = new FantomeSprinteur();
-        fantomes[3] = new FantomeSardoche();
+        fantomes[0] = new FantomeSardoche();
+        fantomes[1] = new FantomeSprinteur();
+        fantomes[2] = new FantomeBrindille();
+        fantomes[3] = new FantomeCampeur();
         addFantomeToScene();
     }
 
@@ -63,6 +65,38 @@ public class FantomeGroup extends Group {
     public void initNumFantome() {
         for (int i=0; i<fantomes.length; i++) {
             fantomes[i].numFantome = i+1;
+        }
+    }
+
+    public void freezeFantomes() {
+        for (Fantome fantome : fantomes) {
+            switch (fantome.etat) {
+                case MORT -> {
+                    fantome.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/yeuxGeles.gif"))));
+                }
+                case APPEURE -> {
+                    fantome.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghostGele.gif"))));
+                }
+                default -> {
+                    fantome.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost" + fantome.numFantome + "Gele.gif"))));
+                }
+            }
+        }
+    }
+
+    public void unfreezeFantomes() {
+        for (Fantome fantome : fantomes) {
+            switch (fantome.etat) {
+                case MORT -> {
+                    fantome.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/yeux.gif"))));
+                }
+                case APPEURE -> {
+                    fantome.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghost.gif"))));
+                }
+                default -> {
+                    fantome.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost" + fantome.numFantome + ".gif"))));
+                }
+            }
         }
     }
 }
