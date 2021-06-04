@@ -82,17 +82,17 @@ public class UpdateRender extends Thread{
         for (int i = 0; i< PACMAN.velocityMultiplicator; i++) {  // gère le multiplicateur de pacman
             PACMAN.updateDeplacement();
             PACMAN.updateMapPacman();
-            fantomeSurPacman();
+            //fantomeSurPacman();
         }
         for (Fantome fantome : fantomeGroup.fantomes) {
             for (int i = 0; i< fantome.velocityMultiplicator; i++) {
                 fantome.updateDeplacement();
-                fantomeSurPacman();
-//                System.out.println(fantome.listeCoordoneDeplacementFant);
+                //fantomeSurPacman();
             }
         }
         if (MAP.aGagne()) { // réinitialise la map si tout est mangé
             PACMAN.initPosition(); // il faut rajouter init power
+            PACMAN.deplacementActuel = Deplacement.deplacements.AUCUN;
             PACMAN.numNiveau ++;
             fantomeGroup.reinitialisePosition();
             Platform.runLater(() -> {

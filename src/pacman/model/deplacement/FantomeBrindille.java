@@ -1,13 +1,7 @@
 package pacman.model.deplacement;
 
 import javafx.scene.image.Image;
-import org.jgrapht.Graph;
-import org.jgrapht.Graphs;
-import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.SimpleGraph;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
@@ -28,7 +22,7 @@ public class FantomeBrindille extends Fantome {
 
     public void ia(){
         random = rand.nextInt(7);
-        if (random != 5){
+        if (random != 0){
             if (this.getPosY() <= pacman.getPosY() && this.peutAvancerVerticalement(map, -1) && deplacementActuel != deplacements.BAS) {
                 this.ajouteAvanceDirection("HAUT");
             } else if (this.getPosY() >= pacman.getPosY() && this.peutAvancerVerticalement(map, 1) && deplacementActuel != deplacements.HAUT) {
@@ -38,35 +32,8 @@ public class FantomeBrindille extends Fantome {
             } else if (this.getPosX() >= pacman.getPosX() && this.peutAvancerHorizontalement(map, 1) && deplacementActuel != deplacements.GAUCHE) {
                 this.ajouteAvanceDirection("DROITE");
             } else {
-                if (this.peutAvancerVerticalement(map, -1) && deplacementActuel != deplacements.BAS) {
-                    this.ajouteAvanceDirection("HAUT");
-                } else if (this.peutAvancerVerticalement(map, 1) && deplacementActuel != deplacements.HAUT) {
-                    this.ajouteAvanceDirection("BAS");
-                } else if (this.peutAvancerHorizontalement(map, -1) && deplacementActuel != deplacements.DROITE) {
-                    this.ajouteAvanceDirection("GAUCHE");
-                } else if (this.peutAvancerHorizontalement(map, 1) && deplacementActuel != deplacements.GAUCHE) {
-                    ajouteAvanceDirection("DROITE");
-                } else {
-                    System.out.println("erreur");
-                }
+                iaRandom();
             }
-        } else {
-            Graph<String, DefaultEdge> graphCopie = new SimpleGraph<>(DefaultEdge.class);
-            Graphs.addAllVertices(graphCopie, map.getG().vertexSet());
-            Graphs.addAllEdges(graphCopie, map.getG(), map.getG().edgeSet());
-            if (!coordoneeActuel.equals(coordoneePasse) && graphCopie.containsEdge(this.coordoneePasse, this.coordoneeActuel)) {
-                graphCopie.removeEdge(this.coordoneePasse, this.coordoneeActuel);
-                String coordFantome = getCoordFantome();
-                String coordPacman = getCoordPacman();
-                List<String> dijkstra = DijkstraShortestPath.findPathBetween(graphCopie, coordFantome, coordPacman).getVertexList();
-                if(dijkstra.size()>1) {
-                    dijkstra.remove(0);
-                    listeCoordoneDeplacementFant = dijkstra;
-                } else System.out.println("Erreur dans ia (FantomeBrindille)");
-            } else {
-                iaFantomeAppeure();
-            }
-        }
+        } else listeCoordoneDeplacementFant = dijkstra(false, true, getCoordFantome(), getCoordPacman());
     }
-
 }

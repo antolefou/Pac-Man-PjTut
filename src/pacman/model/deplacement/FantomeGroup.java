@@ -50,6 +50,7 @@ public class FantomeGroup extends Group {
             if (fantome.etat != Fantome.ValeurEtat.NORMAL && fantome.etat != Fantome.ValeurEtat.MORT && fantome.etat != Fantome.ValeurEtat.SPAWN) {
                 fantome.etat = Fantome.ValeurEtat.NORMAL;
                 fantome.velocityMultiplicator = fantome.velocityMultiplicatorInitial;
+                fantome.listeCoordoneDeplacementFant.clear();
             }
         }
     }

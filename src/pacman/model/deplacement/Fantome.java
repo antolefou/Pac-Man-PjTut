@@ -6,7 +6,11 @@ import java.util.Objects;
 import java.util.Random;
 
 import javafx.scene.image.Image;
+import org.jgrapht.Graph;
+import org.jgrapht.Graphs;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
 import pacman.model.Map;
 
 
@@ -57,7 +61,7 @@ public class Fantome extends Deplacement{
         switch (etat) {
             case SPAWN:
                 this.estVulnerable = false;
-                if (debutSpawn == 0L) {
+                if (debutSpawn == 0L && pacman.deplacementActuel != deplacements.AUCUN) {
                     if (mort) {
                         debutSpawn = System.currentTimeMillis();
                         tempsSpawn = 0.25;
@@ -74,41 +78,34 @@ public class Fantome extends Deplacement{
                 } else if(immobile && System.currentTimeMillis()-debutSpawn > 1000L * tempsSpawn) {
                     debutSpawn = 0L;
                     etat = ValeurEtat.NORMAL;
-                    List<String> dijkstra = DijkstraShortestPath.findPathBetween(map.g, getCoordFantome(), "12/12").getVertexList();
-                    dijkstra.remove(0);
-                    listeCoordoneDeplacementFant = dijkstra;
+                    listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), "12/12");
                     immobile = false;
                 }
                 break;
             case NORMAL:
-                this.estVulnerable = false;
+                if(this.estVulnerable){
+                    this.estVulnerable = false;
+                    listeCoordoneDeplacementFant.clear();
+                }
                 updateDeplacements();
                 break;
             case APPEURE:
-                if (listeCoordoneDeplacementFant.size()>1) {
-                    for(int i = 0; i < listeCoordoneDeplacementFant.size()-1; i++){
-                        this.listeCoordoneDeplacementFant.remove(i+1);
-                    }
-                }
+                listeCoordoneDeplacementFant.clear();
                 this.estVulnerable = true;
                 updateDeplacements();
                 break;
             case MORT:
                 this.estVulnerable = false;
                 if (!this.mort) {
-                    String coordFantome = getCoordFantome();
-                    String coordSpawn = INIT_POS_X / 20 + "/" + INIT_POS_Y / 20;
-                    listeCoordoneDeplacementFant = DijkstraShortestPath.findPathBetween(map.g, coordFantome, coordSpawn).getVertexList();
-                    getNextFinalPos();
                     mort = true;
+                    String coordSpawn = INIT_POS_X / 20 + "/" + INIT_POS_Y / 20;
+                    listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), coordSpawn);
                 } else if (getPosX() == INIT_POS_X && getPosY() == INIT_POS_Y) {
                     etat = ValeurEtat.SPAWN;
                     this.setImageView(this.getImage());
                     velocityMultiplicator = velocityMultiplicatorInitial;
-                } else {
-                    getNextFinalPos();
-                    avancePos();
                 }
+                updateDeplacements();
                 break;
         }
     }
@@ -117,9 +114,34 @@ public class Fantome extends Deplacement{
 
     }
 
+    /**
+     * Renvoie le chemin de coordonnée le plus rapide pour aller de départ à arrivé avec quelques précisions selon les boolean.
+     * @param isDemiTourAutorise si vrai on ne supprime pas la coordonnée derrière lui si faux on la supprime
+     * @param cheminEntier si vrai on retourne le tableau de coordonnee en entier si faux on ne renvoie que la première coordonee
+     * @param coordoneeDepart départ dijkstra
+     * @param coordoneeArrive arrivé dijkstra
+     * @return List<String> de coordonnee
+     */
+    public List<String> dijkstra(boolean isDemiTourAutorise, boolean cheminEntier, String coordoneeDepart, String coordoneeArrive){
+        Graph<String, DefaultEdge> graphCopie = new SimpleGraph<>(DefaultEdge.class);
+        Graphs.addAllVertices(graphCopie, map.getG().vertexSet());
+        Graphs.addAllEdges(graphCopie, map.getG(), map.getG().edgeSet());
+        if (!coordoneeActuel.equals(coordoneePasse) && graphCopie.containsEdge(this.coordoneePasse, this.coordoneeActuel) && !isDemiTourAutorise) {
+            graphCopie.removeEdge(this.coordoneePasse, this.coordoneeActuel);
+        }
+        List<String> dijkstra = DijkstraShortestPath.findPathBetween(graphCopie, coordoneeDepart, coordoneeArrive).getVertexList();
+        if(!this.mort) dijkstra.remove(0);
+        if(!cheminEntier) {
+            String tmp = dijkstra.get(0);
+            dijkstra.clear();
+            dijkstra.add(tmp);
+        }
+        return dijkstra;
+    }
+
     private void updateDeplacements() {
         if (this.listeCoordoneDeplacementFant.isEmpty()) {
-            if (this.estVulnerable) this.iaFantomeAppeure();
+            if (this.estVulnerable) this.iaRandom();
             else this.ia();
         }
         getNextFinalPos();
@@ -154,12 +176,12 @@ public class Fantome extends Deplacement{
     }
 
     public boolean doitRechargerNextPos(){
-        return  (this.positionXFinDeplacement == this.getPosX() && this.positionYFinDeplacement == this.getPosY());
+        return (this.positionXFinDeplacement == this.getPosX() && this.positionYFinDeplacement == this.getPosY());
     }
 
     public boolean peutAvancerHorizontalement(Map map, int i) {
         if (getPosY() % 20 == 1) {
-            return ((getPosX() % 20 != 1) || (map.grid[((getPosX()/20)+i+25)%25][getPosY()/20] != Map.ValeurCase.MUR));
+            return (this.mort || (getPosX() % 20 != 1) || (map.grid[((getPosX()/20)+i+25)%25][getPosY()/20] != Map.ValeurCase.MUR));
         }
         return false;
     }
@@ -186,7 +208,7 @@ public class Fantome extends Deplacement{
         debutSpawn = 0L;
     }
 
-    public void iaFantomeAppeure() {
+    public void iaRandom() {
         ArrayList<String> listePossible = new ArrayList<>();
         if (this.peutAvancerVerticalement(map, -1) && deplacementActuel != deplacements.BAS) {
             listePossible.add("HAUT");
@@ -228,17 +250,15 @@ public class Fantome extends Deplacement{
     }
 
     public void getNextFinalPos(){
-        if (!listeCoordoneDeplacementFant.isEmpty()) {
-            String coord = this.listeCoordoneDeplacementFant.get(0);
-            String[] coorXY = coord.split("/");
+        String coord = this.listeCoordoneDeplacementFant.get(0);
+        String[] coorXY = coord.split("/");
 
-            int x = Integer.parseInt(coorXY[0]);
-            int y = Integer.parseInt(coorXY[1]);
+        int x = Integer.parseInt(coorXY[0]);
+        int y = Integer.parseInt(coorXY[1]);
 
-            this.positionXFinDeplacement = tradCoorToPx(x);
-            this.positionYFinDeplacement = tradCoorToPx(y);
-            this.setOrientation();
-        }
+        this.positionXFinDeplacement = tradCoorToPx(x);
+        this.positionYFinDeplacement = tradCoorToPx(y);
+        this.setOrientation();
     }
 
     public void setOrientation(){
@@ -251,7 +271,7 @@ public class Fantome extends Deplacement{
     }
 
     public int tradCoorToPx(int coordone){
-        return (int) (coordone* Map.TAILLE_CASE + 1);
+        return (int) (coordone*Map.TAILLE_CASE + 1);
     }
 
     public boolean estAuSpawn() {

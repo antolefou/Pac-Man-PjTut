@@ -1,17 +1,9 @@
 package pacman.model.deplacement;
 
 import javafx.scene.image.Image;
-import org.jgrapht.Graph;
-import org.jgrapht.Graphs;
-import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.SimpleGraph;
 import pacman.model.Map;
-import pacman.model.deplacement.Deplacement;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
 public class FantomeCampeur extends Fantome {
 
@@ -69,23 +61,10 @@ public class FantomeCampeur extends Fantome {
 
     public void ia(){
         if (getPosX() > 247) { //IA mode campeur
-            int x = getPosX() / 20;
-            int y = getPosY() / 20;
-            String[][] grille = map.getGrilleGraph();
-
-            Graph<String, DefaultEdge> graphCopie = new SimpleGraph<>(DefaultEdge.class);
-            Graphs.addAllVertices(graphCopie, map.getG().vertexSet());
-            Graphs.addAllEdges(graphCopie, map.getG(), map.getG().edgeSet());
-            if (!coordoneeActuel.equals(coordoneePasse) && graphCopie.containsEdge(this.coordoneePasse, this.coordoneeActuel)) {
-                graphCopie.removeEdge(this.coordoneePasse, this.coordoneeActuel);
-            }
-            List<String> dijkstra = DijkstraShortestPath.findPathBetween(graphCopie, grille[x][y], coinGaucheHaut()).getVertexList();
-            if(dijkstra.size()>1) {
-                dijkstra.remove(0);
-                this.listeCoordoneDeplacementFant = dijkstra;
-            } else System.out.println("Erreur dans ia (FantomeCampeur)");
+            this.listeCoordoneDeplacementFant = dijkstra(false, true, getCoordFantome(), coinGaucheHaut());
+            if(this.listeCoordoneDeplacementFant.isEmpty()) System.out.println("ia Campeur renvoie liste vide");
         } else {
-            iaFantomeAppeure();
+            iaRandom();
         }
     }
 
