@@ -1,5 +1,6 @@
 package pacman.model.deplacement;
 
+import java.lang.invoke.SwitchPoint;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +16,7 @@ import pacman.model.Map;
 
 
 
-public class Fantome extends Deplacement{
+public class Fantome extends Deplacement {
     public int numFantome;
     public deplacements deplacementActuel = deplacements.AUCUN;
     public int positionXFinDeplacement;
@@ -24,8 +25,10 @@ public class Fantome extends Deplacement{
     public Pacman pacman;
     public String coordoneePasse = null;
     public String coordoneeActuel = null;
+
     // spawn -> attend un temps aléatoire, puis sort du spawn
     public enum ValeurEtat {NORMAL, SPAWN, APPEURE, MORT}
+
     public ValeurEtat etat;
     // spawn
     private long debutSpawn = 0L;
@@ -46,8 +49,8 @@ public class Fantome extends Deplacement{
     public Fantome(int init_pos_x, int init_pos_y) {
         super(init_pos_x, init_pos_y);
         this.listeCoordoneDeplacementFant = new ArrayList<>();
-        this.coordoneeActuel = init_pos_x/20 + "/" + init_pos_y/20;
-        this.coordoneePasse = init_pos_x/20 + "/" + init_pos_y/20;
+        this.coordoneeActuel = init_pos_x / 20 + "/" + init_pos_y / 20;
+        this.coordoneePasse = init_pos_x / 20 + "/" + init_pos_y / 20;
         imageBlueGhostClignote = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghostClignote.gif")));
 
         this.etat = ValeurEtat.SPAWN;
@@ -75,7 +78,7 @@ public class Fantome extends Deplacement{
                         tempsSpawn = numFantome;
                         immobile = true;
                     }
-                } else if(immobile && System.currentTimeMillis()-debutSpawn > 1000L * tempsSpawn) {
+                } else if (immobile && System.currentTimeMillis() - debutSpawn > 1000L * tempsSpawn) {
                     debutSpawn = 0L;
                     etat = ValeurEtat.NORMAL;
                     listeCoordoneDeplacementFant = dijkstra(true, true, this.coordoneeActuel, "12/12");
@@ -83,24 +86,39 @@ public class Fantome extends Deplacement{
                 }
                 break;
             case NORMAL:
-                if(this.estVulnerable){
-                    updateDeplacements();
+                if (this.estVulnerable) {
+                    if(listeCoordoneDeplacementFant.size()>0) {
+                        String tmp = listeCoordoneDeplacementFant.get(0);
+                        listeCoordoneDeplacementFant.clear();
+                        listeCoordoneDeplacementFant.add(tmp);
+                    }
                     estVulnerable = false;
                 }
                 updateDeplacements();
                 break;
             case APPEURE:
-                listeCoordoneDeplacementFant.clear();
-                this.estVulnerable = true;
+                if(!estVulnerable) {
+                    if(listeCoordoneDeplacementFant.size()>0) {
+                        String tmp = listeCoordoneDeplacementFant.get(0);
+                        listeCoordoneDeplacementFant.clear();
+                        listeCoordoneDeplacementFant.add(tmp);
+                    }
+                    this.estVulnerable = true;
+                }
                 updateDeplacements();
                 break;
             case MORT:
                 this.estVulnerable = false;
                 if (!this.mort) {
-                    listeCoordoneDeplacementFant.clear();
+                    if(this.listeCoordoneDeplacementFant.size()>0){
+                        String tmp = listeCoordoneDeplacementFant.get(0);
+                        listeCoordoneDeplacementFant.clear();
+                        listeCoordoneDeplacementFant.add(tmp);
+                    }
                     mort = true;
                     String coordSpawn = INIT_POS_X / 20 + "/" + INIT_POS_Y / 20;
-                    listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), coordSpawn);
+                    List<String> dijkstra = dijkstra(true, true, getCoordFantome(), coordSpawn);
+                    listeCoordoneDeplacementFant.addAll(dijkstra);
                 } else if (getPosX() == INIT_POS_X && getPosY() == INIT_POS_Y) {
                     etat = ValeurEtat.SPAWN;
                     this.setImageView(this.getImage());
@@ -117,13 +135,14 @@ public class Fantome extends Deplacement{
 
     /**
      * Renvoie le chemin de coordonnée le plus rapide pour aller de départ à arrivé avec quelques précisions selon les boolean.
+     *
      * @param isDemiTourAutorise si vrai on ne supprime pas la coordonnée derrière lui si faux on la supprime
-     * @param cheminEntier si vrai on retourne le tableau de coordonnee en entier si faux on ne renvoie que la première coordonee
-     * @param coordoneeDepart départ dijkstra
-     * @param coordoneeArrive arrivé dijkstra
+     * @param cheminEntier       si vrai on retourne le tableau de coordonnee en entier si faux on ne renvoie que la première coordonee
+     * @param coordoneeDepart    départ dijkstra
+     * @param coordoneeArrive    arrivé dijkstra
      * @return List<String> de coordonnee
      */
-    public List<String> dijkstra(boolean isDemiTourAutorise, boolean cheminEntier, String coordoneeDepart, String coordoneeArrive){
+    public List<String> dijkstra(boolean isDemiTourAutorise, boolean cheminEntier, String coordoneeDepart, String coordoneeArrive) {
         Graph<String, DefaultEdge> graphCopie = new SimpleGraph<>(DefaultEdge.class);
         Graphs.addAllVertices(graphCopie, map.getG().vertexSet());
         Graphs.addAllEdges(graphCopie, map.getG(), map.getG().edgeSet());
@@ -132,7 +151,7 @@ public class Fantome extends Deplacement{
         }
         List<String> dijkstra = DijkstraShortestPath.findPathBetween(graphCopie, coordoneeDepart, coordoneeArrive).getVertexList();
         dijkstra.remove(0);
-        if(!cheminEntier) {
+        if (!cheminEntier) {
             String tmp = dijkstra.get(0);
             dijkstra.clear();
             dijkstra.add(tmp);
@@ -150,19 +169,22 @@ public class Fantome extends Deplacement{
     }
 
     public void avancePos() {
-        if (positionXFinDeplacement != this.getPosX() || positionYFinDeplacement != this.getPosY()) {
+        if (doitRechargerNextPos()) {
+            updateCoordonnees();
+            this.listeCoordoneDeplacementFant.remove(0);
+        } else if (positionXFinDeplacement != this.getPosX() || positionYFinDeplacement != this.getPosY()) {
             switch (this.deplacementActuel) {
                 case HAUT:
-                    this.avanceHaut();
+                    if (peutAvancerVerticalement(map, -1)) this.avanceHaut();
                     break;
                 case DROITE:
-                    this.avanceDroite();
+                    if (peutAvancerHorizontalement(map, 1)) this.avanceDroite();
                     break;
                 case BAS:
-                    this.avanceBas();
+                    if (peutAvancerVerticalement(map, 1)) this.avanceBas();
                     break;
                 case GAUCHE:
-                    this.avanceGauche();
+                    if (peutAvancerHorizontalement(map, -1)) this.avanceGauche();
                     break;
                 default:
                     break;
@@ -170,7 +192,7 @@ public class Fantome extends Deplacement{
         }
     }
 
-    public boolean doitRechargerNextPos(){
+    public boolean doitRechargerNextPos() {
         return (this.positionXFinDeplacement == this.getPosX() && this.positionYFinDeplacement == this.getPosY());
     }
 
@@ -178,10 +200,11 @@ public class Fantome extends Deplacement{
         if (getPosY() % 20 == 1) {
             if (getPosX() % 20 != 1) {
                 return true;
-            }else return (map.grid[((getPosX()/20)+i+25)%25][getPosY()/20] != Map.ValeurCase.MUR);
+            } else return (map.grid[((getPosX() / 20) + i + 25) % 25][getPosY() / 20] != Map.ValeurCase.MUR);
         }
         return false;
     }
+
     public boolean peutAvancerVerticalement(Map map, int i) {
         if (getPosX() % 20 == 1 && getPosX() > 1 && getPosX() < 500) {
             // Renvoie vrai si le fantome est mort.
@@ -212,44 +235,12 @@ public class Fantome extends Deplacement{
     }
 
     public void iaRandom() {
-        ArrayList<String> listePossible = new ArrayList<>();
-        if (this.peutAvancerVerticalement(map, -1) && deplacementActuel != deplacements.BAS) {
-            listePossible.add("HAUT");
-        }
-        if (this.peutAvancerHorizontalement(map, -1) && deplacementActuel != deplacements.DROITE) {
-            listePossible.add("GAUCHE");
-        }
-        if (this.peutAvancerVerticalement(map, 1) && deplacementActuel != deplacements.HAUT) {
-            listePossible.add("BAS");
-        }
-        if (this.peutAvancerHorizontalement(map, 1) && deplacementActuel != deplacements.GAUCHE) {
-            listePossible.add("DROITE");
-        }
+        List<String> choixPossible = Graphs.neighborListOf(map.getG(), getCoordFantome());
+        choixPossible.remove(coordoneePasse);
+        choixPossible.remove("12/13");
         Random rand = new Random();
-        ajouteAvanceDirection(listePossible.get(rand.nextInt(listePossible.size())));
-    }
-
-    public void ajouteAvanceDirection(String direction) {
-        int x = getPosX()/20;
-        int y = getPosY()/20;
-        switch (direction){
-            case "HAUT":
-                y--;
-                this.listeCoordoneDeplacementFant.add(x + "/" + y);
-                break;
-            case "BAS":
-                y++;
-                this.listeCoordoneDeplacementFant.add(x + "/" + y);
-                break;
-            case "GAUCHE":
-                x = (x-1 +25)%25;
-                this.listeCoordoneDeplacementFant.add(x + "/" + y);
-                break;
-            case "DROITE":
-                x = (x+1 +25)%25;
-                this.listeCoordoneDeplacementFant.add(x + "/" + y);
-                break;
-        }
+        listeCoordoneDeplacementFant = dijkstra(false, true, getCoordFantome(), choixPossible.get(rand.nextInt(choixPossible.size())));
+        System.out.println(listeCoordoneDeplacementFant);
     }
 
     public void getNextFinalPos(){
@@ -270,21 +261,12 @@ public class Fantome extends Deplacement{
             else if (positionXFinDeplacement - this.getPosX() > 0) this.deplacementActuel = deplacements.DROITE;
             else if (positionYFinDeplacement - this.getPosY() < 0) this.deplacementActuel = deplacements.HAUT;
             else if (positionYFinDeplacement - this.getPosY() > 0) this.deplacementActuel = deplacements.BAS;
-            else if (doitRechargerNextPos()) {
-                updateCoordonnees();
-            }
-            else System.out.println("erreur orientation");
-        }else{
-            if (doitRechargerNextPos()) {
-                updateCoordonnees();
-            }
         }
     }
     public void updateCoordonnees(){
         String tmp = this.coordoneeActuel;
         this.coordoneeActuel = this.getCoordFantome();
         this.coordoneePasse = tmp;
-        this.listeCoordoneDeplacementFant.remove(0);
     }
 
     public boolean estAuSpawn() {

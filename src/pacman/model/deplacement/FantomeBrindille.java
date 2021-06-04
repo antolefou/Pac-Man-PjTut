@@ -21,19 +21,13 @@ public class FantomeBrindille extends Fantome {
     }
 
     public void ia(){
-        random = rand.nextInt(7);
-        if (random != 0){
-            if (this.getPosY() <= pacman.getPosY() && this.peutAvancerVerticalement(map, -1) && deplacementActuel != deplacements.BAS) {
-                this.ajouteAvanceDirection("HAUT");
-            } else if (this.getPosY() >= pacman.getPosY() && this.peutAvancerVerticalement(map, 1) && deplacementActuel != deplacements.HAUT) {
-                this.ajouteAvanceDirection("BAS");
-            } else if (this.getPosX() <= pacman.getPosX() && this.peutAvancerHorizontalement(map, -1) && deplacementActuel != deplacements.DROITE) {
-                this.ajouteAvanceDirection("GAUCHE");
-            } else if (this.getPosX() >= pacman.getPosX() && this.peutAvancerHorizontalement(map, 1) && deplacementActuel != deplacements.GAUCHE) {
-                this.ajouteAvanceDirection("DROITE");
-            } else {
-                iaRandom();
-            }
-        } else listeCoordoneDeplacementFant = dijkstra(false, true, this.coordoneeActuel, getCoordPacman());
+        Random rand = new Random();
+        int random = rand.nextInt(10);
+        if (random != 0) {
+            listeCoordoneDeplacementFant = dijkstra(false, false, this.coordoneeActuel, getCoordPacman());
+            if(this.listeCoordoneDeplacementFant.isEmpty()) System.out.println("ia Sardoche renvoie liste vide");
+        } else {
+            iaRandom();
+        }
     }
 }
