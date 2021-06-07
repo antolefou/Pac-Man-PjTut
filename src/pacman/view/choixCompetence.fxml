@@ -6,45 +6,46 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controller.ControllerCompetence">
-   <Pane layoutX="100" layoutY="100" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-      <children>
+   <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+       <children>
+           <Button fx:id="menu" layoutX="0" layoutY="12.0" mnemonicParsing="false" onAction="#switchToScene" style="-fx-background-color: black;" styleClass="boutonMenu">
+               <graphic>
+                   <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@../ressources/image/Commun_scenes/BoutonMenu.png" />
+                       </image>
+                   </ImageView>
+               </graphic>
+           </Button>
+           
          <Text fill="WHITE" layoutX="179.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choississez votre compétence">
             <font>
                <Font size="16.0" />
             </font>
          </Text>
-         <Text fx:id="description" fill="WHITE" layoutX="100.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textDescription" text="Description de la compétence" textAlignment="CENTER" wrappingWidth="400.0">
+         <Text fx:id="description" fill="WHITE" layoutX="200.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textDescription" text="Description de la compétence" textAlignment="CENTER" wrappingWidth="400.0">
             <font>
                <Font size="16.0" />
             </font>
          </Text>
-         <Button fx:id="teleporteur" layoutX="429.0" layoutY="154.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionTeleporteur" styleClass="boutton-ChoixCompetence">
-            <graphic>
-               <ImageView id="teleporteur" fitHeight="95.0" fitWidth="95.0" preserveRatio="true">
-                  <image>
-                    <Image url="@../ressources/image/Competence/Teleport/teleporteur.png" />
-                 </image>
-               </ImageView>
-          </graphic>
-        </Button>
-         <Button fx:id="robot" layoutX="250.0" layoutY="154.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionRobot" styleClass="boutton-ChoixCompetence">
-          <graphic>
-               <ImageView id="robot" fitHeight="95.0" fitWidth="95.0" preserveRatio="true">
-                  <image>
-                   <Image url="@../ressources/image/Competence/Robot/robot.png" />
-                </image>
-             </ImageView>
-          </graphic>
-       </Button>
-         <Button fx:id="frezze" layoutX="100.0" layoutY="154.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionFrezzz" styleClass="boutton-ChoixCompetence">
-          <graphic>
-               <ImageView id="frezze" fitHeight="95.0" fitWidth="95.0" preserveRatio="true">
-                  <image>
-                    <Image url="@../ressources/image/Competence/Freeze/frezze.png" />
-                 </image>
-             </ImageView>
-          </graphic>
-         </Button>
+         <Button fx:id="teleporteur" layoutX="429.0" layoutY="154.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionTeleporteur" styleClass="boutton-ChoixCompetence" />
+         <Button fx:id="robot" layoutX="250.0" layoutY="154.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionRobot" styleClass="boutton-ChoixCompetence" />
+         <Button fx:id="frezze" layoutX="100.0" layoutY="154.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionFrezzz" styleClass="boutton-ChoixCompetence" />
+         <ImageView id="frezze" fitHeight="95.0" fitWidth="95.0" layoutX="190.0" layoutY="210.0" preserveRatio="true">
+            <image>
+              <Image url="@../ressources/image/Competence/Freeze/frezze.png" />
+           </image>
+       </ImageView>
+         <ImageView id="robot" fitHeight="95.0" fitWidth="95.0" layoutX="310.0" layoutY="210.0" preserveRatio="true">
+            <image>
+             <Image url="@../ressources/image/Competence/Robot/robot.png" />
+          </image>
+       </ImageView>
+         <ImageView id="teleporteur" fitHeight="95.0" fitWidth="95.0" layoutX="430.0" layoutY="210.0" preserveRatio="true">
+            <image>
+                <Image url="@../ressources/image/Competence/Teleport/teleporteur.png" />
+           </image>
+         </ImageView>
     </children>
    </Pane>
 </BorderPane>

@@ -15,7 +15,6 @@ static String pseudoUtilisateur;
 //    Volume son
     public int son;
 //    Competence du joueur
-    public String competenceDepart;
     public String competenceA;
     public String competenceB;
     public String competenceC;
@@ -52,9 +51,6 @@ static String pseudoUtilisateur;
                     case "CompetenceA":
                         this.competenceA = ligne[1];
                         break;
-                    case "CompetenceDepart":
-                        this.competenceDepart = ligne[1];
-                        break;
                     case "CompetenceB":
                         this.competenceB = ligne[1];
                         break;
@@ -85,7 +81,6 @@ static String pseudoUtilisateur;
             PrintWriter writer = new PrintWriter("src/pacman/model/Utilisateur.txt");
             writer.println("fps," + fps);
             writer.println("son," + son);
-            writer.println("CompetenceDepart," + competenceDepart);
             writer.println("CompetenceA," + competenceA);
             writer.println("CompetenceB," + competenceB);
             writer.println("CompetenceC," + competenceC);
@@ -94,18 +89,6 @@ static String pseudoUtilisateur;
             writer.println("NiveauCompetenceC," + niveauCompetenceC);
 
             writer.close();
-//            FileWriter fw = new FileWriter("src/pacman/model/Utilisateur.txt");
-//            BufferedWriter bw = new BufferedWriter(fw);
-
-//            bw.write("fps," + fps + "\n" +
-//                    "son," + son +"\n" +
-//                    "CompetenceDepart," + competenceDepart +"\n" +
-//                    "CompetenceA,\n" + competenceA +"\n" +
-//                    "CompetenceB,\n" + competenceB +"\n" +
-//                    "CompetenceC,\n" + competenceC +"\n" +
-//                    "NiveauCompetenceA," + niveauCompetenceA +"\n" +
-//                    "NiveauCompetenceB," + niveauCompetenceB +"\n" +
-//                    "NiveauCompetenceC," + niveauCompetenceC);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -118,7 +101,6 @@ static String pseudoUtilisateur;
 
             bw.write("fps,60\n" +
                     "son,80\n" +
-                    "CompetenceDepart,aucune\n" +
                     "CompetenceA,aucune\n" +
                     "CompetenceB,aucune\n" +
                     "CompetenceC,aucune\n" +

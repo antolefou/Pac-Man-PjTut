@@ -35,12 +35,12 @@ public class ControllerCompetence extends Controller{
     }
 
     public void setDescriptionFrezzz(MouseEvent mouseEvent) {
-        description.setText("Pacman fait gelé les fantomes");
+        description.setText("Pacman fait geler les fantomes");
     }
 
     public void play(ActionEvent actionEvent) throws IOException {
         Utilisateur utilisateur = new Utilisateur();
-        utilisateur.competenceDepart = ((Node) actionEvent.getSource()).getId();
+        utilisateur.competenceA = ((Node) actionEvent.getSource()).getId();
         utilisateur.ecritureUtilisateur();
         utilisateur = null;
 
