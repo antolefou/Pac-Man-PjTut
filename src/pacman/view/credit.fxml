@@ -18,27 +18,43 @@
                 <content>
                     <BorderPane prefHeight="1000" prefWidth="800.0" style="-fx-background-color: black;" >
                         <center>
-                            <Pane maxHeight="2000" maxWidth="800" minHeight="2000" minWidth="800" prefWidth="800.0">
+                            <Pane maxHeight="2500" maxWidth="800" minHeight="3000" minWidth="800" prefWidth="800.0">
 
 
-                                <ImageView fx:id="pacman_logo" fitHeight="354.0" fitWidth="537.0" layoutX="131.5" layoutY="1250" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../ressources/image/Commun_scenes/pacman_logo.png" />
-                                    </image>
-                                </ImageView>
-                                <ImageView fx:id="credit" fitHeight="30.0" fitWidth="100.0" layoutX="350.0" layoutY="755" pickOnBounds="true" preserveRatio="true">
+
+                                <ImageView fx:id="credit" fitHeight="30.0" fitWidth="100.0" layoutX="350.0" layoutY="600" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../ressources/image/Credit/Crédits.png" />
                                     </image>
                                 </ImageView>
-                                <ImageView fx:id="chef_projet" fitHeight="125.0" fitWidth="300.0" layoutX="250.0" layoutY="800.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fx:id="chef_projet" fitHeight="125.0" fitWidth="300.0" layoutX="250.0" layoutY="645.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../ressources/image/Credit/ChefProjetCredit.png" />
                                     </image>
                                 </ImageView>
-                                <ImageView fx:id="developpeurs" fitHeight="350.0" fitWidth="500.0" layoutX="150.0" layoutY="912.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fx:id="developpeurs" fitHeight="350.0" fitWidth="500.0" layoutX="150.0" layoutY="757.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../ressources/image/Credit/Developpeurs.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fx:id="musique" fitHeight="700" fitWidth="800" layoutX="200.0" layoutY="1000.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../ressources/image/Credit/Musiques.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fx:id="remerciements" fitHeight="350" fitWidth="500" layoutX="175.0" layoutY="1700.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../ressources/image/Credit/Remerciements.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fx:id="pacman_logo" fitHeight="354.0" fitWidth="537.0" layoutX="150.0" layoutY="2000" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../ressources/image/Commun_scenes/pacman_logo.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fx:id="logos" fitHeight="350" fitWidth="500" layoutX="175.0" layoutY="2100.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../ressources/image/Credit/Logos.png" />
                                     </image>
                                 </ImageView>
                             </Pane>
