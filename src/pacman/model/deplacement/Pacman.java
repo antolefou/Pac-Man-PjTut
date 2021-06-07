@@ -281,9 +281,7 @@ public class Pacman extends Deplacement {
         projectileLance = true;
         projectile = new Deplacement(getPosX(), getPosY());
         projectile.setImage(imageProjectile);
-        Platform.runLater(() -> {
-            projectile.initialisation();
-        });
+        projectile.initialisation();
         projectile.velocityMultiplicator = 5;
 
         switch (this.deplacementActuel) {
@@ -342,6 +340,9 @@ public class Pacman extends Deplacement {
                 }
                 else projectile.avanceGauche();
                 break;
+            default:
+                projectile.setImageView(null);
+                projectileLance = false;
         }
     }
 
