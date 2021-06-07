@@ -62,6 +62,12 @@ public class Pacman extends Deplacement {
         });
     }
 
+    @Override
+    public void initPosition() {
+        super.initPosition();
+        deplacementFutur = deplacements.AUCUN;
+        deplacementActuel = deplacements.AUCUN;
+    }
 
     boolean peutAvancerVerticalement(int i) { //haut -> -1 bas -> 1
         double pacmanX = this.getPosX();

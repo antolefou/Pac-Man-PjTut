@@ -28,6 +28,7 @@ public class ControllerJouer extends Controller {
     @FXML public ImageView vie3;
     @FXML public ImageView vie4;
     @FXML public ImageView vie5;
+    @FXML public
     ImageView[] tabVie;
 
     private UpdateRender updateRender;
