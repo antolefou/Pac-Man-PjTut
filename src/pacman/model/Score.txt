@@ -1,5 +1,5 @@
 julien,150000
 antolabos,42160
 ,7250
+,6020
 julien,5440
-antolefou,5370

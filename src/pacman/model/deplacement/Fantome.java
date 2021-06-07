@@ -39,7 +39,10 @@ public class Fantome extends Deplacement {
     //image
     public Image imageBlueGhost;
     public Image imageBlueGhostClignote;
+    public Image imageBlueGhostGele;
     public Image imageMort;
+    public Image imageYeuxGeles;
+    public Image imageFantomeGele;
 
     public final int VelocityMultiplicatorAppeure = 1;
 
@@ -51,7 +54,9 @@ public class Fantome extends Deplacement {
         this.listeCoordoneDeplacementFant = new ArrayList<>();
         this.coordoneeActuel = init_pos_x / 20 + "/" + init_pos_y / 20;
         this.coordoneePasse = init_pos_x / 20 + "/" + init_pos_y / 20;
-        imageBlueGhostClignote = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghostClignote.gif")));
+        this.imageBlueGhostClignote = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghostClignote.gif")));
+        this.imageYeuxGeles = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/yeuxGeles.gif")));
+        this.imageBlueGhostGele = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghostGele.gif")));
 
         this.etat = ValeurEtat.SPAWN;
         this.estVulnerable = false;
@@ -278,21 +283,18 @@ public class Fantome extends Deplacement {
     public void affichage() {
         super.affichage();
         switch (this.etat) {
-            case SPAWN:
-                this.setImageView(this.getImage());
-                break;
-            case NORMAL: // pas utile
-                this.setImageView(this.getImage());
-                break;
             case APPEURE:
-                if(this.clignote) this.setImageView(this.imageBlueGhostClignote);
+                if (pacman.freeze) this.setImageView(this.imageBlueGhostGele);
+                else if(this.clignote) this.setImageView(this.imageBlueGhostClignote);
                 else this.setImageView(this.imageBlueGhost);
                 break;
             case MORT:
-                this.setImageView(this.imageMort);
+                if (pacman.freeze) this.setImageView(this.imageYeuxGeles);
+                else this.setImageView(this.imageMort);
                 break;
             default:
-                this.setImageView(this.getImage());
+                if (pacman.freeze) this.setImageView(this.imageFantomeGele);
+                else this.setImageView(this.getImage());
                 break;
         }
     }

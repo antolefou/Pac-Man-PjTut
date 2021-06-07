@@ -362,7 +362,15 @@ public class Pacman extends Deplacement {
                 velocityMultiplicator = 2;
                 powerBoost = false;
             }
-        } else if (powerSuperPacGomme) {
+        }
+        if(freeze) {
+            long tempsFreeze = System.currentTimeMillis();
+            if (tempsFreeze - tempsDebutFreeze > 5000) {
+                freeze = false;
+                controllerJouer.fantomeGroup.unfreezeFantomes();
+            }
+        }
+        else if (powerSuperPacGomme) {
             long tempsPacGomme = System.currentTimeMillis();
             if (tempsPacGomme-debutSuperPacGomme > 1000 * 10) {  // durée 10 sec
                 powerSuperPacGomme = false;

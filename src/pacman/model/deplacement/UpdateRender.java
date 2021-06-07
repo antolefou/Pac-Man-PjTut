@@ -2,11 +2,13 @@ package pacman.model.deplacement;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import pacman.controller.ControllerJouer;
 import pacman.model.Map;
 import pacman.model.Utilisateur;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class UpdateRender extends Thread{
     private FantomeGroup fantomeGroup;
@@ -89,14 +91,7 @@ public class UpdateRender extends Thread{
                 PACMAN.updateProjectile();
             }
         }
-
-        if(PACMAN.freeze) {
-            if (System.currentTimeMillis() - PACMAN.tempsDebutFreeze > 5000) {
-                PACMAN.freeze = false;
-                fantomeGroup.unfreezeFantomes();
-            }
-        }
-        else {
+        if (!PACMAN.freeze) {
             for (Fantome fantome : fantomeGroup.fantomes) {
                 for (int i = 0; i < fantome.velocityMultiplicator; i++) {
                     fantome.updateDeplacement();
