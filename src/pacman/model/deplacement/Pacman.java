@@ -359,7 +359,7 @@ public class Pacman extends Deplacement {
         if (powerBoost) {
             long tempsPowerBoost = System.currentTimeMillis();
             if (tempsPowerBoost-debutPowerBoost > 1000 * 5) {  // durée 5 sec
-                velocityMultiplicator = 2;
+                velocityMultiplicator = velocityMultiplicatorInitial;
                 powerBoost = false;
             }
         }
@@ -377,6 +377,21 @@ public class Pacman extends Deplacement {
             }
             else controllerJouer.fantomeGroup.setClignotant(tempsPacGomme - debutSuperPacGomme > 1000 * 7.5);
         }
+    }
+
+    public void reinitialisePowers() {
+        if (powerBoost) {
+            velocityMultiplicator = velocityMultiplicatorInitial;
+            powerBoost = false;
+        }
+        if (teleporteurPose) {
+            teleporteur.supprimeTeleporteur();
+        }
+        if (projectileLance) {
+            projectileLance = false;
+            projectile.setImageView(null);
+        }
+        controllerJouer.fantomeGroup.unfreezeFantomes();
     }
 
     public void setControllerJouer(ControllerJouer controllerJouer) {

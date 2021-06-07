@@ -146,15 +146,8 @@ public class UpdateRender extends Thread{
                 } else if (fantome.etat != Fantome.ValeurEtat.MORT){
                     PACMAN.initPosition();
                     PACMAN.nbVie--;
-                    if (PACMAN.teleporteurPose) {
-                        PACMAN.teleporteur.supprimeTeleporteur();
-                    }
-                    if (PACMAN.projectileLance) {
-                        PACMAN.projectileLance = false;
-                        PACMAN.projectile.setImageView(null);
-                    }
+                    PACMAN.reinitialisePowers();
                     this.controllerJouer.playMusic("death", false);
-                    fantomeGroup.unfreezeFantomes();
                     fantomeGroup.reinitialisePosition();
                 }
             }
