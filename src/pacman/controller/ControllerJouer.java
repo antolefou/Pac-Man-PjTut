@@ -109,11 +109,11 @@ public class ControllerJouer extends Controller {
             scoreView.requestFocus();
         }
 
-        else if (code == KeyCode.A) {
+        else if (code == KeyCode.J) {
             if (pacman.competenceAPrete) pacman.competenceTeleportation();
         }
 
-        else if (code == KeyCode.E) {
+        else if (code == KeyCode.K) {
             if (pacman.competenceEPrete) pacman.competenceFreeze();
         }
 
