@@ -9,7 +9,6 @@ import java.util.Random;
 
 public class FantomeBrindille extends Fantome {
 
-    private int compteur = 0;
     private final Random rand = new Random();
 
     public FantomeBrindille() {
@@ -22,7 +21,7 @@ public class FantomeBrindille extends Fantome {
     }
 
     public void ia(){
-        if(compteur<10) {
+        if(this.compteur<10) {
             List<String> choixPossible = Graphs.neighborListOf(map.getG(), getCoordFantome());
             choixPossible.remove(coordoneePasse);
             choixPossible.remove("12/13");
@@ -30,7 +29,7 @@ public class FantomeBrindille extends Fantome {
                 choixPossible.remove(dijkstra(false, false, getCoordFantome(), getCoordPacman()).get(0));
             }
             listeCoordoneDeplacementFant = dijkstra(false, true, getCoordFantome(), choixPossible.get(rand.nextInt(choixPossible.size())));
-            compteur++;
+            this.compteur++;
         }
         else{
             listeCoordoneDeplacementFant = dijkstra(false, true, this.coordoneeActuel, getCoordPacman());

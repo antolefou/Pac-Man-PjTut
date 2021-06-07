@@ -17,12 +17,14 @@ public class FantomeSardoche extends Fantome {
     }
 
     public void ia() {
-        Random rand = new Random();
-        int random = rand.nextInt(10);
-        if (random != 0) {
+        if (compteur < 10) {
             listeCoordoneDeplacementFant = dijkstra(false, false, this.coordoneeActuel, getCoordPacman());
-            if(this.listeCoordoneDeplacementFant.isEmpty()) System.out.println("ia Sardoche renvoie liste vide");
-        } else {
+            compteur++;
+        } else if (compteur <= 13){
+            iaRandom();
+            compteur++;
+        }else{
+            compteur = 0;
             iaRandom();
         }
     }

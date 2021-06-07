@@ -19,20 +19,17 @@ public class FantomeSprinteur extends Fantome {
     }
 
     public void ia(){
-        if (System.currentTimeMillis() - temps > 2000) {
+        if (System.currentTimeMillis() - temps > 2000 && System.currentTimeMillis() - temps <= 4000 ) {
             this.velocityMultiplicator = 1;
-        }
-        if (System.currentTimeMillis() - temps > 4000) {
+        } else if (System.currentTimeMillis() - temps > 4000) {
             temps = System.currentTimeMillis();
             this.velocityMultiplicator = velocityMultiplicatorInitial;
         }
-        Random rand = new Random();
-        int random = rand.nextInt(3);
-        if (random != 0) {
+        if (compteur < 6) {
             listeCoordoneDeplacementFant = dijkstra(false, false, this.coordoneeActuel, getCoordPacman());
-            if(this.listeCoordoneDeplacementFant.isEmpty()) System.out.println("ia Sprinteur renvoie liste vide");
-
+            compteur++;
         } else {
+            compteur = 0;
             iaRandom();
         }
     }

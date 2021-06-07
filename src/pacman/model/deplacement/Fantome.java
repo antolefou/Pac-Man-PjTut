@@ -47,6 +47,7 @@ public class Fantome extends Deplacement {
     public final int VelocityMultiplicatorAppeure = 1;
 
     public boolean estVulnerable;
+    public int compteur;
 
 
     public Fantome(int init_pos_x, int init_pos_y) {
@@ -62,6 +63,7 @@ public class Fantome extends Deplacement {
         this.estVulnerable = false;
         this.mort = false;
         this.clignote = false;
+        this.compteur = 0;
 
     }
 
@@ -292,6 +294,10 @@ public class Fantome extends Deplacement {
                 else this.setImageView(this.getImage());
                 break;
         }
+    }
+    public void faisDemiTour(){
+        listeCoordoneDeplacementFant.clear();
+        dijkstra(true, false, this.coordoneeActuel, this.coordoneePasse);
     }
 
     public String getCoordPacman(){
