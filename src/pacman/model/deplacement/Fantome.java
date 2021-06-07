@@ -295,9 +295,53 @@ public class Fantome extends Deplacement {
                 break;
         }
     }
+
     public void faisDemiTour(){
-        listeCoordoneDeplacementFant.clear();
-        dijkstra(true, false, this.coordoneeActuel, this.coordoneePasse);
+        String coordonneesCroisement = trouveCroisement();
+        listeCoordoneDeplacementFant = DijkstraShortestPath.findPathBetween(map.g, coordoneeActuel, coordonneesCroisement).getVertexList();
+    }
+
+    public String trouveCroisement() {
+        String coordonnees = this.coordoneeActuel;
+        switch (this.deplacementActuel) {
+            case HAUT:
+                for (int i=this.getPosY()/20; i<30; i++) {
+                    if(map.grid[this.getPosX()/20][i] == Map.ValeurCase.MUR) {
+                        coordonnees = this.getPosX()/20 + "/" + (i-1);
+                        break;
+                    }
+                }
+                break;
+
+            case DROITE:
+                for (int i=this.getPosX()/20; i>-1; i--) {
+                    if(map.grid[i][this.getPosY()/20] == Map.ValeurCase.MUR) {
+                        coordonnees = (i+1) + "/" + this.getPosY()/20;
+                        break;
+                    }
+                }
+                break;
+
+            case BAS:
+                for (int i=this.getPosY()/20; i>-1; i--) {
+                    if(map.grid[this.getPosX()/20][i] == Map.ValeurCase.MUR) {
+                        coordonnees = this.getPosX()/20 + "/" + (i+1);
+                        break;
+                    }
+                }
+                break;
+
+            case GAUCHE:
+                for (int i=this.getPosX()/20; i<25; i++) {
+                    if(map.grid[i][this.getPosY()/20] == Map.ValeurCase.MUR) {
+                        coordonnees = (i-1) + "/" + this.getPosY()/20;
+                        break;
+                    }
+                }
+                break;
+
+        }
+        return coordonnees;
     }
 
     public String getCoordPacman(){
