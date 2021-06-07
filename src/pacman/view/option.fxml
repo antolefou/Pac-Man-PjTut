@@ -7,19 +7,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.control.*?>
 
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.Group?>
 <BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controller.ControllerOption">
     <center>
         <Pane maxHeight="600.0" maxWidth="800" minHeight="600" minWidth="500" prefWidth="500.0" style="-fx-background-color: black;">
-         <ImageView fitHeight="360.0" fitWidth="310.0" layoutX="450.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../ressources/image/Option/fantome_nom.png" />
-            </image>
-         </ImageView>
-         <ImageView fitHeight="232.0" fitWidth="328.0" layoutX="10.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../ressources/image/Option/Deplacement.png" />
-            </image>
-         </ImageView>
          <Button fx:id="menu" layoutX="0" layoutY="12.0" mnemonicParsing="false" onAction="#switchToScene" style="-fx-background-color: black;" styleClass="boutonMenu">
             <graphic>
                <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
@@ -29,6 +21,69 @@
                </ImageView>
             </graphic>
          </Button>
+            <Group fx:id="commande">
+                <Label fx:id="commandes" text="Commandes" layoutX="20" layoutY="100" textFill="#f9ff00"></Label>
+                <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="20.0" layoutY="350" preserveRatio="true">
+                    <image>
+                        <Image url="@../ressources/image/Competence/Teleport/TeleportNotSelect.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="5" layoutY="395" preserveRatio="true">
+                    <image>
+                        <Image url="@../ressources/image/Ecran_jouer/scoresvie/ToucheL.png" />
+                    </image>
+                </ImageView>
+                <Label text="Touche L " layoutX="100" layoutY="370" textFill="#48ff05" style="-fx-font-size: 20"></Label>
+                <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="20.0" layoutY="250" preserveRatio="true">
+                    <image>
+                        <Image url="@../ressources/image/Competence/Freeze/FreezeNotSelect.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="5" layoutY="295" preserveRatio="true">
+                    <image>
+                        <Image url="@../ressources/image/Ecran_jouer/scoresvie/ToucheK.png" />
+                    </image>
+                </ImageView>
+                <Label text="Touche K " layoutX="100" layoutY="270" textFill="#ff12df" style="-fx-font-size: 20"></Label>
+                <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="20.0" layoutY="150" preserveRatio="true">
+                    <image>
+                        <Image url="@../ressources/image/Competence/Robot/RobotNotSelect.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="5" layoutY="195" preserveRatio="true">
+                    <image>
+                        <Image url="@../ressources/image/Ecran_jouer/scoresvie/ToucheJ.png" />
+                    </image>
+                </ImageView>
+                <Label text="Touche J" layoutX="100" layoutY="170" textFill="#ffd106" style="-fx-font-size: 20"></Label>
+            </Group>
+
+
+            <Group fx:id="commandesDeplacement">
+                <Label text="Déplacements" layoutX="470" layoutY="110" textFill="#f9ff00" style="-fx-font-size: 20"></Label>
+                <ImageView fitHeight="120" layoutX="450" layoutY="150" preserveRatio="true">
+                    <image>
+                        <Image url="@../ressources/image/Option/Deplacement.png" />
+                    </image>
+                </ImageView>
+                <Label text="ou" layoutX="530" layoutY="270" textFill="#f9ff00" style="-fx-font-size: 20"></Label>
+                <ImageView fitHeight="120" layoutX="450" layoutY="300" preserveRatio="true">
+                    <image>
+                        <Image url="@../ressources/image/Option/DeplacementT.png" />
+                    </image>
+                </ImageView>
+
+            </Group>
+
+            <Group fx:id="reglages">
+                <Label fx:id="reglage" text="Réglages" layoutX="20" layoutY="460" textFill="#f9ff00"></Label>
+                <Label text="Son" layoutY="515" layoutX="80" textFill="#ffffff" style="-fx-font-size: 20"></Label>
+                <Slider fx:id="sliderSon" layoutY="505" layoutX="130" min="0" max="100" prefHeight="50" prefWidth="200"></Slider>
+                <Label text="FPS" layoutY="515" layoutX="450" textFill="#ffffff" style="-fx-font-size: 20"></Label>
+                <Slider fx:id="sliderFPS" layoutY="505" layoutX="500" min="0" max="100" prefHeight="50" prefWidth="200"></Slider>
+
+            </Group>
+
 
         </Pane>
     </center>

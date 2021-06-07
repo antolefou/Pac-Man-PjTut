@@ -39,3 +39,11 @@
 .textDescription {
     -fx-alignment: center;
 }
+
+#reglage{
+    -fx-font-size: 24;
+}
+
+#commandes{
+    -fx-font-size: 24;
+}

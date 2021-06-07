@@ -310,7 +310,10 @@ public class Pacman extends Deplacement {
 
     public boolean projectileSurFantome() {
         for (Fantome fantome : controllerJouer.fantomeGroup.fantomes) {
-            if (fantome.getPosX()/20 == projectile.getPosX()/20 && fantome.getPosY()/20 == projectile.getPosY()/20) return true;
+            if (fantome.getPosX()/20 == projectile.getPosX()/20 && fantome.getPosY()/20 == projectile.getPosY()/20) {
+                fantome.faisDemiTour();
+                return true;
+            }
         }
         return false;
     }
