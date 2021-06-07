@@ -115,11 +115,11 @@ public class ControllerJouer extends Controller {
         }
 
         else if (code == KeyCode.K) {
-            if (pacman.competenceEPrete) pacman.competenceFreeze();
+            if (pacman.competenceBPrete) pacman.competenceFreeze();
         }
 
         else if (code == KeyCode.SPACE) {
-            if (pacman.competenceTPrete && !pacman.projectileLance) {
+            if (pacman.competenceCPrete && !pacman.projectileLance) {
                 pacman.competenceProjectile();
             }
 

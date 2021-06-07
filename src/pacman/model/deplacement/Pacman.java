@@ -2,7 +2,6 @@ package pacman.model.deplacement;
 
 import javafx.application.Platform;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import pacman.controller.ControllerJouer;
 import pacman.model.Map;
 
@@ -27,9 +26,13 @@ public class Pacman extends Deplacement {
 
     public deplacements deplacementFutur = deplacements.AUCUN;
 
+    public boolean competenceADeverouillee;
+    public boolean competenceBDeverouillee;
+    public boolean competenceCDeverouillee;
+
     public boolean competenceAPrete;
-    public boolean competenceEPrete;
-    public boolean competenceTPrete;
+    public boolean competenceBPrete;
+    public boolean competenceCPrete;
 
     public Teleporteur teleporteur;
     public boolean teleporteurPose;
@@ -46,9 +49,12 @@ public class Pacman extends Deplacement {
         this.velocityMultiplicator = velocityMultiplicatorInitial;
         this.setImage(new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanUp.gif")));
 
+        this.competenceADeverouillee = false;
+        this.competenceBDeverouillee = false;
+        this.competenceCDeverouillee = false;
         this.competenceAPrete = true;
-        this.competenceEPrete = true;
-        this.competenceTPrete = true;
+        this.competenceBPrete = true;
+        this.competenceCPrete = true;
 
         this.teleporteurPose = false;
         this.freeze = false;
