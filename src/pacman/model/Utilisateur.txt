@@ -1,6 +1,6 @@
 fps,60
 son,80
-CompetenceA,frezze
+CompetenceA,robot
 CompetenceB,aucune
 CompetenceC,aucune
 NiveauCompetenceA,0
