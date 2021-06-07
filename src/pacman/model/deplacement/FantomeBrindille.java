@@ -22,7 +22,7 @@ public class FantomeBrindille extends Fantome {
     }
 
     public void ia(){
-        if(compteur<12) {
+        if(compteur<10) {
             List<String> choixPossible = Graphs.neighborListOf(map.getG(), getCoordFantome());
             choixPossible.remove(coordoneePasse);
             choixPossible.remove("12/13");

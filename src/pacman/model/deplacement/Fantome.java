@@ -115,11 +115,7 @@ public class Fantome extends Deplacement {
             case MORT:
                 this.estVulnerable = false;
                 if (!this.mort) {
-                    if(this.listeCoordoneDeplacementFant.size()>1){
-                        String tmp = listeCoordoneDeplacementFant.get(0);
-                        listeCoordoneDeplacementFant.clear();
-                        listeCoordoneDeplacementFant.add(tmp);
-                    }
+                    listeCoordoneDeplacementFant.clear();
                     mort = true;
                     String coordSpawn = INIT_POS_X / 20 + "/" + INIT_POS_Y / 20;
                     List<String> dijkstra = dijkstra(true, true, getCoordFantome(), coordSpawn);
@@ -155,7 +151,7 @@ public class Fantome extends Deplacement {
             graphCopie.removeEdge(this.coordoneePasse, this.coordoneeActuel);
         }
         List<String> dijkstra = DijkstraShortestPath.findPathBetween(graphCopie, coordoneeDepart, coordoneeArrive).getVertexList();
-        dijkstra.remove(0);
+        if(getPosX()%20 == 1 && getPosY()%20 == 1) dijkstra.remove(0);
         if (!cheminEntier) {
             String tmp = dijkstra.get(0);
             dijkstra.clear();
@@ -276,8 +272,7 @@ public class Fantome extends Deplacement {
     public boolean estAuSpawn() {
         int x = this.getPosX()/20;
         int y = this.getPosY()/20 ;
-        if (x>9 && x<15 && y>12 && y<16) return true;
-        return false;
+        return x>9 && x<15 && y>12 && y<16;
     }
 
     public void affichage() {
