@@ -154,6 +154,7 @@ public class UpdateRender extends Thread{
                         PACMAN.projectile.setImageView(null);
                     }
                     this.controllerJouer.playMusic("death", false);
+                    fantomeGroup.unfreezeFantomes();
                     fantomeGroup.reinitialisePosition();
                 }
             }

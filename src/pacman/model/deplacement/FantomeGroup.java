@@ -86,6 +86,7 @@ public class FantomeGroup extends Group {
     }
 
     public void unfreezeFantomes() {
+        fantomes[0].pacman.freeze = false;
         for (Fantome fantome : fantomes) {
             switch (fantome.etat) {
                 case MORT:

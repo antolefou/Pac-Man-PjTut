@@ -366,7 +366,6 @@ public class Pacman extends Deplacement {
         if(freeze) {
             long tempsFreeze = System.currentTimeMillis();
             if (tempsFreeze - tempsDebutFreeze > 5000) {
-                freeze = false;
                 controllerJouer.fantomeGroup.unfreezeFantomes();
             }
         }
@@ -383,6 +382,4 @@ public class Pacman extends Deplacement {
     public void setControllerJouer(ControllerJouer controllerJouer) {
         this.controllerJouer = controllerJouer;
     }
-
-
 }
