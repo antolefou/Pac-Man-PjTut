@@ -20,7 +20,7 @@ public class ControllerCredit extends Controller{
 
     @FXML
     public void initialize() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(30),new KeyValue(scrollPane.vvalueProperty(), 1)));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(60),new KeyValue(scrollPane.vvalueProperty(), 1)));
         timeline.setCycleCount(Animation.INDEFINITE);
         Animation animation = timeline;
         animation.play();

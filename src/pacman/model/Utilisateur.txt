@@ -1,6 +1,6 @@
 fps,60
 son,80
-CompetenceA,teleporteur
+CompetenceA,frezze
 CompetenceB,aucune
 CompetenceC,aucune
 NiveauCompetenceA,0
