@@ -1,6 +1,6 @@
 fps,60
 son,80
-CompetenceA,robot
+CompetenceA,teleporteur
 CompetenceB,aucune
 CompetenceC,aucune
 NiveauCompetenceA,0
