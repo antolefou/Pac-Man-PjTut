@@ -49,10 +49,10 @@
 }
 
 
-.azd{
-    -fx-text-fill: yellow;
-    -fx-font-family : Rosemary_Roman;
-
+.boutonCompetence {
+    -fx-border-width: 10px;
+    -fx-border-color: yellow;
+    -fx-border-style: solid;
 }
 
 

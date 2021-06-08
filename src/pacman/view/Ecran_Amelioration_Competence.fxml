@@ -25,7 +25,7 @@
         </Button>
         <Button id="competenceMilieu" layoutX="342.0" layoutY="357.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
             <graphic>
-                <ImageView fitHeight="132.0" fitWidth="110.0">
+                <ImageView fitHeight="132.0" fitWidth="110.0" styleClass="boutonCompetence">
                        <image>
                           <Image url="@../ressources/image/Ecran_Competence/layoutCarte.png" />
                        </image>
