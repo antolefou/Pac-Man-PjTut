@@ -38,7 +38,7 @@
                            </ImageView>
                            </Group>
 
-                           <Group fx:id="groupCompetenceFrezze">
+                           <Group fx:id="groupCompetenceFreeze">
                               <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="90.0" layoutY="-245" preserveRatio="true">
                                  <image>
                                     <Image url="@../ressources/image/Competence/Freeze/FreezeNotSelect.png" />

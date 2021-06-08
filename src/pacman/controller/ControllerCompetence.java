@@ -39,7 +39,7 @@ public class ControllerCompetence extends Controller{
         description.setText(utilisateur.tabCompetence[0][0]);
     }
 
-    public void setDescriptionFrezze(MouseEvent mouseEvent) {
+    public void setDescriptionFreeze(MouseEvent mouseEvent) {
         description.setText(utilisateur.tabCompetence[0][4]);
     }
 
@@ -55,8 +55,8 @@ public class ControllerCompetence extends Controller{
             case "tirer":
                 utilisateur.niveauCompetenceTirer = 0;
                 break;
-            case "frezze":
-                utilisateur.niveauCompetenceFrezze = 0;
+            case "freeze":
+                utilisateur.niveauCompetenceFreeze = 0;
                 break;
             case "teleporteur":
                 utilisateur.niveauCompetenceTeleporteur = 0;

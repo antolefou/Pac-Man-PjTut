@@ -30,7 +30,7 @@ public class ControllerJouer extends Controller {
     @FXML public ImageView vie4;
     @FXML public ImageView vie5;
     @FXML public Group groupCompetenceTirer;
-    @FXML public Group groupCompetenceFrezze;
+    @FXML public Group groupCompetenceFreeze;
     @FXML public Group groupCompetenceTeleporteur;
     public ImageView[] tabVie;
     public Utilisateur utilisateur;
@@ -58,7 +58,7 @@ public class ControllerJouer extends Controller {
         tabVie = new ImageView[]{vie1, vie2, vie3, vie4, vie5};
         //affichage competence
         if (utilisateur.niveauCompetenceTirer < 0) groupCompetenceTirer.setVisible(false);
-        if (utilisateur.niveauCompetenceFrezze < 0) groupCompetenceFrezze.setVisible(false);
+        if (utilisateur.niveauCompetenceFreeze < 0) groupCompetenceFreeze.setVisible(false);
         if (utilisateur.niveauCompetenceTeleporteur < 0) groupCompetenceTeleporteur.setVisible(false);
     }
 

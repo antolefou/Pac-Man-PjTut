@@ -16,7 +16,7 @@ static String pseudoUtilisateur;
     public int son;
 //    Competence du joueur
     public int niveauCompetenceTirer;
-    public int niveauCompetenceFrezze;
+    public int niveauCompetenceFreeze;
     public int niveauCompetenceTeleporteur;
 //    tableau de competences
     public String[][] tabCompetence;
@@ -151,8 +151,8 @@ static String pseudoUtilisateur;
                     case "niveauCompetenceTirer":
                         this.niveauCompetenceTirer = Integer.parseInt(ligne[1]);
                         break;
-                    case "niveauCompetenceFrezze":
-                        this.niveauCompetenceFrezze = Integer.parseInt(ligne[1]);
+                    case "niveauCompetenceFreeze":
+                        this.niveauCompetenceFreeze = Integer.parseInt(ligne[1]);
                         break;
                     case "niveauCompetenceTeleporteur":
                         this.niveauCompetenceTeleporteur = Integer.parseInt(ligne[1]);
@@ -173,7 +173,7 @@ static String pseudoUtilisateur;
             writer.println("fps," + fps);
             writer.println("son," + son);
             writer.println("niveauCompetenceTirer," + niveauCompetenceTirer);
-            writer.println("niveauCompetenceFrezze," + niveauCompetenceFrezze);
+            writer.println("niveauCompetenceFreeze," + niveauCompetenceFreeze);
             writer.println("niveauCompetenceTeleporteur," + niveauCompetenceTeleporteur);
 
             writer.close();
@@ -184,7 +184,7 @@ static String pseudoUtilisateur;
 
     public void reinitialiseCompetencesUtilisateur() {
         niveauCompetenceTirer = -1;
-        niveauCompetenceFrezze = -1;
+        niveauCompetenceFreeze = -1;
         niveauCompetenceTeleporteur = -1;
     }
 

@@ -2,13 +2,11 @@ package pacman.model.deplacement;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import pacman.controller.ControllerJouer;
 import pacman.model.Map;
 import pacman.model.Utilisateur;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class UpdateRender extends Thread{
     private FantomeGroup fantomeGroup;
@@ -47,7 +45,7 @@ public class UpdateRender extends Thread{
         fantomeGroup.initNumFantome();
         // competence
         PACMAN.competenceADeverouillee = this.UTILISATEUR.niveauCompetenceTirer>=0;
-        PACMAN.competenceBDeverouillee = this.UTILISATEUR.niveauCompetenceFrezze>=0;
+        PACMAN.competenceBDeverouillee = this.UTILISATEUR.niveauCompetenceFreeze >=0;
         PACMAN.competenceCDeverouillee = this.UTILISATEUR.niveauCompetenceTeleporteur>=0;
     }
 

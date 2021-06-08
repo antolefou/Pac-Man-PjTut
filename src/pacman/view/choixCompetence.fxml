@@ -27,18 +27,18 @@
 
                 <Button fx:id="tirer" layoutX="200.0" layoutY="260.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionTirer" styleClass="boutton-ChoixCompetence" >
                     <graphic>
-                        <ImageView id="frezze" fitHeight="95.0" fitWidth="95.0" preserveRatio="true">
+                        <ImageView id="freeze" fitHeight="95.0" fitWidth="95.0" preserveRatio="true">
                             <image>
                                 <Image url="@../ressources/image/Competence/Robot/robot.png" />
                             </image>
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="frezze" layoutX="350.0" layoutY="260.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionFrezze" styleClass="boutton-ChoixCompetence">
+                <Button fx:id="freeze" layoutX="350.0" layoutY="260.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionFreeze" styleClass="boutton-ChoixCompetence">
                     <graphic>
                     <ImageView id="tirer" fitHeight="95.0" fitWidth="95.0" preserveRatio="true">
                         <image>
-                            <Image url="@../ressources/image/Competence/Freeze/frezze.png" />
+                            <Image url="@../ressources/image/Competence/Freeze/freeze.png" />
                         </image>
                     </ImageView>
                     </graphic>
