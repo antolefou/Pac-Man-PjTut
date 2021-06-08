@@ -45,13 +45,12 @@ public class Deplacement extends Group {
 
 
     public void avanceHaut() {
-        System.out.println("Haut");
         this.posY -= this.VELOCITY;
     }
 
     public void avanceDroite() {
         if (posX == 499) posX = -1;
-        this.posX += this.VELOCITY;;
+        this.posX += this.VELOCITY;
     }
 
     public void avanceBas() {

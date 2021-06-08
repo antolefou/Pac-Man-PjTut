@@ -63,9 +63,7 @@ public class Pacman extends Deplacement {
         this.projectileLance = false;
 
         this.initialisation();
-        Platform.runLater(() -> {
-            this.getChildren().add(getImageView());
-        });
+        Platform.runLater(() -> this.getChildren().add(getImageView()));
     }
 
     @Override
@@ -196,8 +194,8 @@ public class Pacman extends Deplacement {
                 break;
         }
         if (pacmanX % 20 == comparaisonX && pacmanY % 20 == comparaisonY) {
-            int x = ((((int) pacmanX / 20) + 25) % 25 + addX)%25;
-            int y = (int) pacmanY / 20 + addY;
+            int x = (((pacmanX / 20) + 25) % 25 + addX)%25;
+            int y = pacmanY / 20 + addY;
             if (map.grid[x][y] == Map.ValeurCase.GOMME) {
                 map.grid[x][y] = Map.ValeurCase.VIDE;
                 score += 10;
@@ -310,8 +308,11 @@ public class Pacman extends Deplacement {
 
     public boolean projectileSurFantome() {
         for (Fantome fantome : controllerJouer.fantomeGroup.fantomes) {
-            if (fantome.getCoordFantome().equals(projectile.getPosX() / 20 + "/" + projectile.getPosY() / 20) || (((fantome.getPosX() - projectile.getPosX()) < 18) && ((fantome.getPosX() - projectile.getPosX()) >= 0) && ((fantome.getPosY() - projectile.getPosY()) < 18) && ((fantome.getPosY() - projectile.getPosY()) >= 0)))
+            if (fantome.getCoordFantome().equals(projectile.getPosX() / 20 + "/" + projectile.getPosY() / 20) || (((fantome.getPosX() - projectile.getPosX()) < 18) && ((fantome.getPosX() - projectile.getPosX()) >= 0) && ((fantome.getPosY() - projectile.getPosY()) < 18) && ((fantome.getPosY() - projectile.getPosY()) >= 0))){
+                fantome.faisDemiTour();
                 return true;
+            }
+
         }
         return false;
     }
