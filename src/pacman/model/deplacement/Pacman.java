@@ -44,6 +44,9 @@ public class Pacman extends Deplacement {
     public double tempsDebutFreeze;
     private double projectileRotate;
 
+    public boolean touchesInversees;
+    private long tempsDebutTouchesInversees;
+
     public Pacman() {
         super(241, 321);
         this.velocityMultiplicator = velocityMultiplicatorInitial;
@@ -116,6 +119,22 @@ public class Pacman extends Deplacement {
 
     public void updateDeplacement() {
         boolean peutAvancer = false;
+        if (touchesInversees) {
+            switch (deplacementFutur) {
+                case HAUT:
+                    deplacementFutur = deplacements.BAS;
+                    break;
+                case DROITE:
+                    deplacementFutur = deplacements.GAUCHE;
+                    break;
+                case BAS:
+                    deplacementFutur = deplacements.HAUT;
+                    break;
+                case GAUCHE:
+                    deplacementFutur = deplacements.DROITE;
+                    break;
+            }
+        }
         if (deplacementFutur != Deplacement.deplacements.AUCUN) {
             switch (deplacementFutur) {
                 case HAUT:
@@ -270,6 +289,7 @@ public class Pacman extends Deplacement {
         }
         else {
             teleporteur.teleporte();
+            touchesInversees();
         }
     }
 
@@ -356,6 +376,13 @@ public class Pacman extends Deplacement {
         }
     }
 
+    // ---------------------  CONTREPARTIES DES POUVOIRS   ------------------------------------------
+
+    public void touchesInversees() {
+        this.touchesInversees = true;
+        tempsDebutTouchesInversees = System.currentTimeMillis();
+    }
+
     /**
      * Stoppe tous les objets bonus qui ont atteint le temps d'effet
      */
@@ -381,6 +408,12 @@ public class Pacman extends Deplacement {
             }
             else controllerJouer.fantomeGroup.setClignotant(tempsPacGomme - debutSuperPacGomme > 1000 * 7.5);
         }
+        if(touchesInversees) {
+            long tempsTouchesInversees = System.currentTimeMillis();
+            if (tempsTouchesInversees-tempsDebutTouchesInversees > 1000 * 5) {
+                touchesInversees = false;
+            }
+        }
     }
 
     public void reinitialisePowers() {
@@ -396,6 +429,10 @@ public class Pacman extends Deplacement {
             projectile.setImageView(null);
         }
         controllerJouer.fantomeGroup.unfreezeFantomes();
+
+        if(touchesInversees) {
+            touchesInversees = false;
+        }
     }
 
     public void setControllerJouer(ControllerJouer controllerJouer) {
