@@ -72,7 +72,6 @@
                         <Image url="@../ressources/image/Option/DeplacementT.png" />
                     </image>
                 </ImageView>
-
             </Group>
 
             <Group fx:id="reglages">

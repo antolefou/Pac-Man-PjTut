@@ -23,7 +23,7 @@
                            <Group fx:id="groupCompetenceTirer">
                               <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="0.0" layoutY="-245" preserveRatio="true">
                                  <image>
-                                    <Image url="@../ressources/image/Competence/Robot/RobotNotSelect.png" />
+                                    <Image url="@../ressources/image/Competence/Tirer/tirer.png" />
                                  </image>
                               </ImageView>
                               <Label fx:id="prixCompetenceTirer" graphicTextGap="5.0" layoutX="20.0" layoutY="-175.0" prefHeight="44.0" prefWidth="50.0" text="50" textFill="#faff00">
@@ -41,7 +41,7 @@
                            <Group fx:id="groupCompetenceFreeze">
                               <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="90.0" layoutY="-245" preserveRatio="true">
                                  <image>
-                                    <Image url="@../ressources/image/Competence/Freeze/FreezeNotSelect.png" />
+                                    <Image url="@../ressources/image/Competence/Freeze/Freeze.png" />
                                  </image>
                               </ImageView>
                               <Label fx:id="prixFreeze" graphicTextGap="5.0" layoutX="110.0" layoutY="-175.0" prefHeight="44.0" prefWidth="50.0" text="50" textFill="#faff00">
@@ -58,7 +58,7 @@
                            <Group fx:id="groupCompetenceTeleporteur">
                               <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="180.0" layoutY="-245" preserveRatio="true">
                                  <image>
-                                    <Image url="@../ressources/image/Competence/Teleport/TeleportNotSelect.png" />
+                                    <Image url="@../ressources/image/Competence/Teleport/teleport.png" />
                                  </image>
                               </ImageView>
                               <Label fx:id="prixTeleporteur" graphicTextGap="5.0" layoutX="200.0" layoutY="-175.0" prefHeight="44.0" prefWidth="50.0" text="50" textFill="#faff00">

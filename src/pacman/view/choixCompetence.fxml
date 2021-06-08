@@ -29,7 +29,7 @@
                     <graphic>
                         <ImageView id="freeze" fitHeight="95.0" fitWidth="95.0" preserveRatio="true">
                             <image>
-                                <Image url="@../ressources/image/Competence/Robot/robot.png" />
+                                <Image url="@../ressources/image/Competence/Tirer/tirer.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -38,7 +38,7 @@
                     <graphic>
                     <ImageView id="tirer" fitHeight="95.0" fitWidth="95.0" preserveRatio="true">
                         <image>
-                            <Image url="@../ressources/image/Competence/Freeze/freeze.png" />
+                            <Image url="@../ressources/image/Competence/Freeze/Freeze.png" />
                         </image>
                     </ImageView>
                     </graphic>
@@ -47,7 +47,7 @@
                     <graphic>
                         <ImageView id="teleporteur" fitHeight="95.0" fitWidth="95.0" preserveRatio="true">
                             <image>
-                                <Image url="@../ressources/image/Competence/Teleport/teleporteur.png" />
+                                <Image url="@../ressources/image/Competence/Teleport/teleport.png" />
                             </image>
                         </ImageView>
                     </graphic>
