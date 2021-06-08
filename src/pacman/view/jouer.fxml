@@ -20,13 +20,13 @@
                      <Group layoutX="14.0" layoutY="330.0">
                         <children>
 
-                           <Group fx:id="groupCompetenceA">
+                           <Group fx:id="groupCompetenceTirer">
                               <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="0.0" layoutY="-245" preserveRatio="true">
                                  <image>
                                     <Image url="@../ressources/image/Competence/Robot/RobotNotSelect.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="prixCompetenceA" graphicTextGap="5.0" layoutX="20.0" layoutY="-175.0" prefHeight="44.0" prefWidth="50.0" text="50" textFill="#faff00">
+                              <Label fx:id="prixCompetenceTirer" graphicTextGap="5.0" layoutX="20.0" layoutY="-175.0" prefHeight="44.0" prefWidth="50.0" text="50" textFill="#faff00">
                                  <font>
                                     <Font name="utkal medium" size="18.0" />
                                  </font>
@@ -38,7 +38,7 @@
                            </ImageView>
                            </Group>
 
-                           <Group fx:id="groupCompetenceG">
+                           <Group fx:id="groupCompetenceFrezze">
                               <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="90.0" layoutY="-245" preserveRatio="true">
                                  <image>
                                     <Image url="@../ressources/image/Competence/Freeze/FreezeNotSelect.png" />
@@ -55,13 +55,13 @@
                                  </image>
                               </ImageView>
                            </Group>
-                           <Group fx:id="groupCompetenceB">
+                           <Group fx:id="groupCompetenceTeleporteur">
                               <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="180.0" layoutY="-245" preserveRatio="true">
                                  <image>
                                     <Image url="@../ressources/image/Competence/Teleport/TeleportNotSelect.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="prixTeleport" graphicTextGap="5.0" layoutX="200.0" layoutY="-175.0" prefHeight="44.0" prefWidth="50.0" text="50" textFill="#faff00">
+                              <Label fx:id="prixTeleporteur" graphicTextGap="5.0" layoutX="200.0" layoutY="-175.0" prefHeight="44.0" prefWidth="50.0" text="50" textFill="#faff00">
                                  <font>
                                     <Font name="utkal medium" size="18.0" />
                                  </font>

@@ -29,6 +29,9 @@ public class ControllerJouer extends Controller {
     @FXML public ImageView vie3;
     @FXML public ImageView vie4;
     @FXML public ImageView vie5;
+    @FXML public Group groupCompetenceTirer;
+    @FXML public Group groupCompetenceFrezze;
+    @FXML public Group groupCompetenceTeleporteur;
     ImageView[] tabVie;
 
     private UpdateRender updateRender;
@@ -51,6 +54,11 @@ public class ControllerJouer extends Controller {
         meilleurscore.setText(String.valueOf(scoreModel.getMeilleurScore()));
         //vie
         tabVie = new ImageView[]{vie1, vie2, vie3, vie4, vie5};
+        //affichage competence
+        Utilisateur utilisateur = new Utilisateur();
+        if (utilisateur.niveauCompetenceTirer < 0) groupCompetenceTirer.setVisible(false);
+        if (utilisateur.niveauCompetenceFrezze < 0) groupCompetenceFrezze.setVisible(false);
+        if (utilisateur.niveauCompetenceTeleporteur < 0) groupCompetenceTeleporteur.setVisible(false);
     }
 
     /**

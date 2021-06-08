@@ -18,9 +18,8 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class ControllerCompetence extends Controller{
-    @FXML
-    public Text description;
-//    @FXML description = new Text();
+    @FXML public Text description;
+    public Utilisateur utilisateur;
     
     public ControllerCompetence() {
         super();
@@ -28,25 +27,27 @@ public class ControllerCompetence extends Controller{
 
     public void initialize(){
         description.setFont(this.rosemary);
+        utilisateur = new Utilisateur();
     }
 
 
 
     public void unsetDescription(MouseEvent mouseEvent) {
-        description.setText("Choississez votre compétence");
-    }
-
-    public void setDescriptionTeleporteur(MouseEvent mouseEvent) {
-        description.setText("Pacman peut poser un téléporteur");
+        description.setText("Veuillez choisir votre compétence");
     }
 
     public void setDescriptionTirer(MouseEvent mouseEvent) {
-        description.setText("Pacman tirer");
+        description.setText(utilisateur.tabCompetence[0][0]);
     }
 
-    public void setDescriptionFrezzz(MouseEvent mouseEvent) {
-        description.setText("Pacman fait geler les fantomes");
+    public void setDescriptionFrezze(MouseEvent mouseEvent) {
+        description.setText(utilisateur.tabCompetence[0][4]);
     }
+
+    public void setDescriptionTeleporteur(MouseEvent mouseEvent) {
+        description.setText(utilisateur.tabCompetence[0][8]);
+    }
+
 
     public void play(ActionEvent actionEvent) throws IOException {
         Utilisateur utilisateur = new Utilisateur();
