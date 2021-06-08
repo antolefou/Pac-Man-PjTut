@@ -119,6 +119,7 @@ public class UpdateRender extends Thread{
             if (PACMAN.projectileLance) {
                 PACMAN.renderProjectile();
             }
+            if (!PACMAN.projectileLance && PACMAN.projectile != null) PACMAN.projectile.setImageView(null);
             //affichage fantomes
             for (Fantome fantome : fantomeGroup.fantomes) {
                 fantome.affichage();

@@ -322,34 +322,29 @@ public class Pacman extends Deplacement {
         switch ((int) projectileRotate) {
             case -90 :
                 if (map.grid[projectile.getPosX()/20][(projectile.getPosY()/20)] == Map.ValeurCase.MUR || projectileSurFantome()) {
-                    projectile.setImageView(null);
                     projectileLance = false;
                 }
                 else projectile.avanceHaut();
                 break;
             case 0 :
                 if (map.grid[((projectile.getPosX()/20)+1)%25][projectile.getPosY()/20] == Map.ValeurCase.MUR || (projectile.getPosX()/20) +1  >= 24 || projectileSurFantome()) {
-                    projectile.setImageView(null);
                     projectileLance = false;
                 }
                 else projectile.avanceDroite();
                 break;
             case 90 :
                 if (map.grid[projectile.getPosX()/20][(projectile.getPosY()/20)+1] == Map.ValeurCase.MUR || projectileSurFantome()) {
-                    projectile.setImageView(null);
                     projectileLance = false;
                 }
                 else projectile.avanceBas();
                 break;
             case 180 :
                 if (map.grid[(projectile.getPosX()/20)%25][projectile.getPosY()/20] == Map.ValeurCase.MUR || (projectile.getPosX()/20) -1  <= -1 || projectileSurFantome()) {
-                    projectile.setImageView(null);
                     projectileLance = false;
                 }
                 else projectile.avanceGauche();
                 break;
             default:
-                projectile.setImageView(null);
                 projectileLance = false;
         }
     }
