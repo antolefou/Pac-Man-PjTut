@@ -48,6 +48,9 @@ public class Pacman extends Deplacement {
     private long tempsDebutTouchesInversees;
     private long tempsDebutRalentissement;
     private boolean ralentissement;
+    public int pertePointsTirer;
+    public int pertePointsFreeze;
+    public int pertePointsTeleporte;
 
     public Pacman() {
         super(241, 321);
@@ -66,6 +69,11 @@ public class Pacman extends Deplacement {
         tempsDebutFreeze = 0;
 
         this.projectileLance = false;
+
+        this.pertePointsTirer = 100;
+        this.pertePointsFreeze = 250;
+        this.pertePointsTeleporte = 500;
+
 
         this.initialisation();
         Platform.runLater(() -> this.getChildren().add(getImageView()));
@@ -286,12 +294,13 @@ public class Pacman extends Deplacement {
     }
 
     public void competenceTeleportation() {
-        if (!teleporteurPose) {
+        if (!teleporteurPose && score >= pertePointsTeleporte) {
             teleporteurPose = true;
             this.teleporteur = new Teleporteur(this, map);
             teleporteur.poseTeleporteur(getPosX(), getPosY());
+            pertePoints(pertePointsTeleporte);
         }
-        else {
+        else if (teleporteurPose){
             teleporteur.teleporte();
             touchesInversees();
         }
@@ -302,11 +311,11 @@ public class Pacman extends Deplacement {
         controllerJouer.fantomeGroup.freezeFantomes();
         tempsDebutFreeze = System.currentTimeMillis();
         ralentissement();
+        pertePoints(pertePointsFreeze);
     }
 
     public void competenceProjectile() {
         Image imageProjectile= new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/projectile.gif")));
-
         projectileLance = true;
         projectile = new Deplacement(getPosX(), getPosY());
         projectile.setImage(imageProjectile);
@@ -327,7 +336,7 @@ public class Pacman extends Deplacement {
                 this.projectileRotate = -90;
                 break;
         }
-
+        pertePoints(pertePointsTirer);
         Platform.runLater(() -> this.getChildren().add(projectile.getImageView()));
     }
 
@@ -392,6 +401,10 @@ public class Pacman extends Deplacement {
         this.velocityMultiplicator = velocityMultiplicatorInitial/2;
         ralentissement = true;
         tempsDebutRalentissement = System.currentTimeMillis();
+    }
+
+    public void pertePoints(int pointsPerdus) {
+        this.score -= pointsPerdus;
     }
 
     /**
