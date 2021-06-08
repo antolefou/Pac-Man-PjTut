@@ -25,7 +25,7 @@
                 <Label fx:id="commandes" text="Commandes" layoutX="20" layoutY="100" textFill="#f9ff00"></Label>
                 <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="20.0" layoutY="350" preserveRatio="true">
                     <image>
-                        <Image url="@../ressources/image/Competence/Teleport/TeleportNotSelect.png" />
+                        <Image url="@../ressources/image/Competence/Teleport/teleport.png" />
                     </image>
                 </ImageView>
                 <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="5" layoutY="395" preserveRatio="true">
@@ -36,7 +36,7 @@
                 <Label text="Touche L " layoutX="100" layoutY="370" textFill="#48ff05" style="-fx-font-size: 20"></Label>
                 <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="20.0" layoutY="250" preserveRatio="true">
                     <image>
-                        <Image url="@../ressources/image/Competence/Freeze/FreezeNotSelect.png" />
+                        <Image url="@../ressources/image/Competence/Freeze/Freeze.png" />
                     </image>
                 </ImageView>
                 <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="5" layoutY="295" preserveRatio="true">
@@ -47,15 +47,15 @@
                 <Label text="Touche K " layoutX="100" layoutY="270" textFill="#ff12df" style="-fx-font-size: 20"></Label>
                 <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="20.0" layoutY="150" preserveRatio="true">
                     <image>
-                        <Image url="@../ressources/image/Competence/Robot/RobotNotSelect.png" />
+                        <Image url="@../ressources/image/Competence/Tirer/tirer.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="5" layoutY="195" preserveRatio="true">
+                <ImageView fitHeight="40.0" fitWidth="35.0" layoutX="5" layoutY="190" preserveRatio="true">
                     <image>
-                        <Image url="@../ressources/image/Ecran_jouer/scoresvie/ToucheJ.png" />
+                        <Image url="@../ressources/image/Ecran_jouer/scoresvie/ToucheSpace.png" />
                     </image>
                 </ImageView>
-                <Label text="Touche J" layoutX="100" layoutY="170" textFill="#ffd106" style="-fx-font-size: 20"></Label>
+                <Label text="Touche Espace" layoutX="100" layoutY="170" textFill="#ffd106" style="-fx-font-size: 20"></Label>
             </Group>
 
 
