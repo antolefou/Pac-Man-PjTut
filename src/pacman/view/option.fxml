@@ -22,40 +22,40 @@
             </graphic>
          </Button>
             <Group fx:id="commande">
-                <Label fx:id="commandes" text="Commandes" layoutX="20" layoutY="100" textFill="#f9ff00"></Label>
-                <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="20.0" layoutY="350" preserveRatio="true">
+                <Label fx:id="commandes" text="Commandes" layoutX="160" layoutY="100" textFill="#f9ff00"></Label>
+                <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="100.0" layoutY="350" preserveRatio="true">
                     <image>
                         <Image url="@../ressources/image/Competence/Teleport/teleport.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="5" layoutY="395" preserveRatio="true">
+                <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="85" layoutY="395" preserveRatio="true">
                     <image>
                         <Image url="@../ressources/image/Ecran_jouer/scoresvie/ToucheL.png" />
                     </image>
                 </ImageView>
-                <Label text="Touche L " layoutX="100" layoutY="370" textFill="#48ff05" style="-fx-font-size: 20"></Label>
-                <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="20.0" layoutY="250" preserveRatio="true">
+                <Label text="Touche L " layoutX="185" layoutY="370" textFill="#48ff05" style="-fx-font-size: 20"></Label>
+                <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="100.0" layoutY="250" preserveRatio="true">
                     <image>
                         <Image url="@../ressources/image/Competence/Freeze/Freeze.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="5" layoutY="295" preserveRatio="true">
+                <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="85" layoutY="295" preserveRatio="true">
                     <image>
                         <Image url="@../ressources/image/Ecran_jouer/scoresvie/ToucheK.png" />
                     </image>
                 </ImageView>
-                <Label text="Touche K " layoutX="100" layoutY="270" textFill="#ff12df" style="-fx-font-size: 20"></Label>
-                <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="20.0" layoutY="150" preserveRatio="true">
+                <Label text="Touche K " layoutX="185" layoutY="270" textFill="#ff12df" style="-fx-font-size: 20"></Label>
+                <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="100.0" layoutY="150" preserveRatio="true">
                     <image>
                         <Image url="@../ressources/image/Competence/Tirer/tirer.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="40.0" fitWidth="35.0" layoutX="5" layoutY="190" preserveRatio="true">
+                <ImageView fitHeight="40.0" fitWidth="35.0" layoutX="85" layoutY="190" preserveRatio="true">
                     <image>
                         <Image url="@../ressources/image/Ecran_jouer/scoresvie/ToucheSpace.png" />
                     </image>
                 </ImageView>
-                <Label text="Touche Espace" layoutX="100" layoutY="170" textFill="#ffd106" style="-fx-font-size: 20"></Label>
+                <Label text="Touche Espace" layoutX="185" layoutY="170" textFill="#ffd106" style="-fx-font-size: 20"></Label>
             </Group>
 
 
@@ -75,7 +75,7 @@
             </Group>
 
             <Group fx:id="reglages">
-                <Label fx:id="reglage" text="Réglages" layoutX="20" layoutY="460" textFill="#f9ff00"></Label>
+                <Label fx:id="reglage" text="Réglages" layoutX="340" layoutY="460" textFill="#f9ff00"></Label>
                 <Label text="Son" layoutY="505" layoutX="80" textFill="#ffffff" style="-fx-font-size: 20"></Label>
                 <Slider fx:id="sliderSon"  value="60" showTickLabels="true" showTickMarks="true" layoutY="505"
                         layoutX="130" min="0" max="100" prefHeight="50" prefWidth="200"/>
