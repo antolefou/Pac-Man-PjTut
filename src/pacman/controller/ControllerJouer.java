@@ -124,9 +124,7 @@ public class ControllerJouer extends Controller {
         } else if (code == KeyCode.K) {
             if (pacman.competenceBPrete && pacman.competenceBDeverouillee) pacman.competenceFreeze();
         } else if (code == KeyCode.SPACE) {
-            if (pacman.competenceCPrete && !pacman.projectileLance && pacman.competenceADeverouillee) {
-                pacman.competenceProjectile();
-            }
+            if (pacman.competenceCPrete && !pacman.projectileLance && pacman.competenceADeverouillee) pacman.competenceProjectile();
 
         }
     }
