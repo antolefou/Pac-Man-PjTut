@@ -89,7 +89,6 @@ public class ControllerJouer extends Controller {
     /**
      * Gère les actions sur le clavier du joueur: déplacement pacman et recommencer la partie (r)
      * @param keyEvent évènement de la touche
-     * @throws IOException renvoie une exception en cas d'erreur
      */
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
@@ -113,7 +112,7 @@ public class ControllerJouer extends Controller {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            primaryStage.setScene(new Scene(scoreView));
+            primaryStage.setScene(new Scene(Objects.requireNonNull(scoreView)));
             primaryStage.sizeToScene();
             primaryStage.show();
             scoreView.requestFocus();

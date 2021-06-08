@@ -60,8 +60,6 @@ public class ControllerGameOver extends Controller{
 
             scoreView.requestFocus();
 
-        } else {
-            //            System.out.println("la clef n'est pas reconu");
         }
     }
 }

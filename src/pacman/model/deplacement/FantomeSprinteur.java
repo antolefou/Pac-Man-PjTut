@@ -3,7 +3,6 @@ package pacman.model.deplacement;
 import javafx.scene.image.Image;
 
 import java.util.Objects;
-import java.util.Random;
 
 public class FantomeSprinteur extends Fantome {
     private long temps = 0;

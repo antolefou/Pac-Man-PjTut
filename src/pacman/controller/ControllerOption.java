@@ -1,12 +1,7 @@
 package pacman.controller;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
-
-import javax.swing.event.ChangeListener;
 
 public class ControllerOption extends Controller{
     //valeur
@@ -29,7 +24,7 @@ public class ControllerOption extends Controller{
         sliderFPS.setValue(utilisateur.getFps());
     }
 
-    public void valeurSliderSon(ActionEvent event) {
+    public void valeurSliderSon() {
         valueSon = sliderSon.getValue();
         valueFPS = sliderFPS.getValue();
         utilisateur.setSon((int)valueSon);
