@@ -1,5 +1,7 @@
 package pacman.model;
 
+import pacman.controller.ControllerOption;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -165,6 +167,7 @@ static String pseudoUtilisateur;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
     }
 
     public void ecritureUtilisateur() {
@@ -200,8 +203,12 @@ static String pseudoUtilisateur;
 
     public void updateFps(int fps) {
         this.fps = fps;
-        this.threadRender = (int) ((1.0/threadRender)*1000);
+        this.threadRender = (int) ((1.0/this.fps)*1000);
     }
+
+    public int getSon(){ return son; }
+
+    public void setSon(int son){ this.son = son; }
 
     public int getThreadRender() {
         return threadRender;

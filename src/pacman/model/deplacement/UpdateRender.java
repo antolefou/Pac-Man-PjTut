@@ -64,6 +64,7 @@ public class UpdateRender extends Thread{
         update.setDaemon(true);
         update.start();
 //        Thread render
+        UTILISATEUR.updateFps(UTILISATEUR.getFps());
         this.render = new Thread(() -> {
             while (PACMAN.enVie){
                 render();
