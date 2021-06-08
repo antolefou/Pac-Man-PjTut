@@ -54,3 +54,25 @@
     -fx-font-family : Rosemary_Roman;
 
 }
+
+
+
+.boutonOption {
+    -fx-background-color: black;
+    -fx-border-color: yellow;
+    -fx-border-width: 1;
+    -fx-border-radius: 30;
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+    -fx-background-radius: 30;
+}
+
+.boutonOption:hover {
+    -fx-cursor: hand;
+    -fx-background-color: yellow;
+    -fx-text-fill: black;
+    -fx-border-width: 1;
+    -fx-border-radius: 30;
+    -fx-font-size: 16;
+    -fx-background-radius: 30;
+}

@@ -83,7 +83,7 @@
                 <Slider fx:id="sliderFPS"  showTickLabels="true" showTickMarks="true" layoutY="505" value="80" layoutX="500" min="10" max="60" prefHeight="50"
                         prefWidth="200"/>
 
-                <Button fx:id="valider" onAction="#valeurSliderSon" style="-fx-background-color: black; -fx-border-color: yellow; -fx-border-width: 1; -fx-border-radius: 30; -fx-font-size: 16; -fx-text-fill: white" layoutX="355" layoutY="550"> Valider </Button>
+                <Button styleClass="boutonOption" fx:id="valider" layoutX="355" layoutY="550" onAction="#valeurSliderSon"> Valider </Button>
             </Group>
 
 

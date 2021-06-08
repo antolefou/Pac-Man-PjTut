@@ -20,6 +20,7 @@ static String pseudoUtilisateur;
     public int niveauCompetenceTirer;
     public int niveauCompetenceFreeze;
     public int niveauCompetenceTeleporteur;
+    public int pointJoueur;
 //    tableau de competences
     public String[][] tabCompetence;
 
@@ -165,6 +166,9 @@ static String pseudoUtilisateur;
                     case "niveauCompetenceTeleporteur":
                         this.niveauCompetenceTeleporteur = Integer.parseInt(ligne[1]);
                         break;
+                    case "pointJoueur":
+                        this.pointJoueur = Integer.parseInt(ligne[1]);
+                        break;
                     default:
                         System.out.println("Erreur dans fichier utilisateur :");
                         break;
@@ -184,6 +188,7 @@ static String pseudoUtilisateur;
             writer.println("niveauCompetenceTirer," + niveauCompetenceTirer);
             writer.println("niveauCompetenceFreeze," + niveauCompetenceFreeze);
             writer.println("niveauCompetenceTeleporteur," + niveauCompetenceTeleporteur);
+            writer.println("pointJoueur," + pointJoueur);
 
             writer.close();
         } catch (IOException e) {
@@ -195,6 +200,7 @@ static String pseudoUtilisateur;
         niveauCompetenceTirer = -1;
         niveauCompetenceFreeze = -1;
         niveauCompetenceTeleporteur = -1;
+        pointJoueur = 0;
     }
 
     ////// GETTER ET SETTER ////////
