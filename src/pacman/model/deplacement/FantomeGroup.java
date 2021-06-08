@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class FantomeGroup extends Group {
@@ -22,9 +21,7 @@ public class FantomeGroup extends Group {
 
     public void addFantomeToScene() {
         for (Fantome fantome : this.fantomes) {
-            Platform.runLater(() -> {
-                this.getChildren().add(fantome.getImageView());
-            });
+            Platform.runLater(() -> this.getChildren().add(fantome.getImageView()));
         }
     }
 

@@ -15,7 +15,7 @@ public class ModelMusic {
         // String system = "/" + System.getProperty("user.dir").replaceAll("\\\\", "/");
         //              A mettre si vous êtes sur Linux
         String system = System.getProperty("user.dir");
-        mediaPlayerHashMap = new HashMap<String, MediaPlayer>();
+        mediaPlayerHashMap = new HashMap<>();
         mediaPlayerHashMap.put("theme", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/ace.mp3")));
         mediaPlayerHashMap.put("menu", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/dancin.mp3")));
         mediaPlayerHashMap.put("chomp", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/pacman_chomp.wav")));
@@ -33,9 +33,7 @@ public class ModelMusic {
 
 
     public boolean isPlaying(String key) {
-        if (mediaPlayerHashMap.get(key).getStatus() == MediaPlayer.Status.PLAYING) {
-            return true;
-        } else return false;
+        return mediaPlayerHashMap.get(key).getStatus() == MediaPlayer.Status.PLAYING;
     }
 
     public HashMap<String, MediaPlayer> getMediaPlayerHashMap() {

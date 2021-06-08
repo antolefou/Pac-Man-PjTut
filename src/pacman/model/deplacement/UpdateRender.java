@@ -9,12 +9,12 @@ import pacman.model.Utilisateur;
 import java.io.IOException;
 
 public class UpdateRender extends Thread{
-    private FantomeGroup fantomeGroup;
+    private final FantomeGroup fantomeGroup;
     private final Utilisateur UTILISATEUR;
     private final Label LABEL_SCORE;
     private final Map MAP;
     public final Pacman PACMAN;
-    private ControllerJouer controllerJouer;
+    private final ControllerJouer controllerJouer;
 
     public Thread update;
     public Thread render;
@@ -77,13 +77,9 @@ public class UpdateRender extends Thread{
         });
         render.setDaemon(true);
         render.start();
-//            start = System.nanoTime();
-//            stop = System.nanoTime();
-//            System.out.println(stop - start);
     }
 
     private void update() {
-//        System.out.println("Pacman x " + pacman.getPosX() + "    y " + pacman.getPosY());
         for (int i = 0; i< PACMAN.velocityMultiplicator; i++) {  // gère le multiplicateur de pacman
             PACMAN.updateDeplacement();
             PACMAN.updateMapPacman();
@@ -110,9 +106,7 @@ public class UpdateRender extends Thread{
             PACMAN.numNiveau ++;
             fantomeGroup.reinitialisePosition();
             PACMAN.reinitialisePowers();
-            Platform.runLater(() -> {
-                MAP.creeMapAleatoire(PACMAN.numNiveau);
-            });
+            Platform.runLater(() -> MAP.creeMapAleatoire(PACMAN.numNiveau));
         }
     }
 

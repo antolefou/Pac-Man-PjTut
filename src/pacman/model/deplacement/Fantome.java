@@ -1,6 +1,5 @@
 package pacman.model.deplacement;
 
-import java.lang.invoke.SwitchPoint;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,8 +22,8 @@ public class Fantome extends Deplacement {
     public int positionYFinDeplacement;
     public List<String> listeCoordoneDeplacementFant;
     public Pacman pacman;
-    public String coordoneePasse = null;
-    public String coordoneeActuel = null;
+    public String coordoneePasse;
+    public String coordoneeActuel;
 
     // spawn -> attend un temps aléatoire, puis sort du spawn
     public enum ValeurEtat {NORMAL, SPAWN, APPEURE, MORT}

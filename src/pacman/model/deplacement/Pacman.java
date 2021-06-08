@@ -54,10 +54,14 @@ public class Pacman extends Deplacement {
 
     public int compteurFantomeMange;
 
+    private final Image imagePacman = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanUp.gif")));
+    private final Image imagePacmanEtourdi = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanEtourdi.gif")));
+    private final Image imagePacmanGele = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanGele.gif")));
+
     public Pacman() {
         super(241, 321);
         this.velocityMultiplicator = velocityMultiplicatorInitial;
-        this.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanUp.gif"))));
+        Platform.runLater(() -> this.setImageView(imagePacman));
 
         this.competenceADeverouillee = false;
         this.competenceBDeverouillee = false;
@@ -389,6 +393,7 @@ public class Pacman extends Deplacement {
     public void touchesInversees() {
         this.touchesInversees = true;
         tempsDebutTouchesInversees = System.currentTimeMillis();
+        Platform.runLater(() -> setImageView(imagePacmanEtourdi));
     }
 
     public void ralentissement() {
@@ -396,6 +401,7 @@ public class Pacman extends Deplacement {
         else this.velocityMultiplicator = velocityMultiplicatorInitial/2;
         ralentissement = true;
         tempsDebutRalentissement = System.currentTimeMillis();
+        Platform.runLater(() -> setImageView(imagePacmanGele));
     }
 
     public void pertePoints(int pointsPerdus) {
@@ -431,6 +437,7 @@ public class Pacman extends Deplacement {
         if(touchesInversees) {
             long tempsTouchesInversees = System.currentTimeMillis();
             if (tempsTouchesInversees-tempsDebutTouchesInversees > 1000 * 5) {
+                Platform.runLater(() -> this.setImageView(imagePacman));
                 touchesInversees = false;
             }
         }
@@ -440,6 +447,7 @@ public class Pacman extends Deplacement {
                 ralentissement = false;
                 if(powerBoost) velocityMultiplicator = velocityMultiplicatorInitial * 2;
                 else velocityMultiplicator = velocityMultiplicatorInitial;
+                Platform.runLater(() -> this.setImageView(imagePacman));
             }
         }
     }
@@ -456,9 +464,13 @@ public class Pacman extends Deplacement {
         }
         controllerJouer.fantomeGroup.unfreezeFantomes();
 
-        if(touchesInversees) touchesInversees = false;
+        if(touchesInversees) {
+            touchesInversees = false;
+        }
         if(ralentissement) ralentissement = false;
         velocityMultiplicator = velocityMultiplicatorInitial;
+        
+        Platform.runLater(() -> this.setImageView(imagePacman));
     }
 
     public void setControllerJouer(ControllerJouer controllerJouer) {
