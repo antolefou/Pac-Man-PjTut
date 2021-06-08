@@ -45,6 +45,7 @@ public class Deplacement extends Group {
 
 
     public void avanceHaut() {
+        System.out.println("Haut");
         this.posY -= this.VELOCITY;
     }
 

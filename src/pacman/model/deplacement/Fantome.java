@@ -216,15 +216,14 @@ public class Fantome extends Deplacement {
             // Pour être plus exact sur l'interdit : on vérifie si il est sur une case non interdite et que sa prochaine case est interdite dans ce cas on return false.
             if(getPosY() % 20 != 1) return true;
             if((map.grid[getPosX()/20][(getPosY()/20)+i] == Map.ValeurCase.MUR)) return false;
-            if (!this.mort && (map.grid[getPosX() / 20][(getPosY() / 20)] != Map.ValeurCase.INTERDIT && map.grid[getPosX() / 20][(getPosY() / 20) + i] == Map.ValeurCase.INTERDIT)) {
-                return false;
-            }else return true;
+            else return !(!this.mort && (map.grid[getPosX() / 20][(getPosY() / 20)] != Map.ValeurCase.INTERDIT && map.grid[getPosX() / 20][(getPosY() / 20) + i] == Map.ValeurCase.INTERDIT));
         }
         return false;
     }
 
     public boolean estSurPacman() {
-        return (getCoordPacman().equals(getCoordFantome()));
+        if (getCoordPacman().equals(getCoordFantome())) return true;
+        else return (((pacman.getPosX() - getPosX()) < 18) && ((pacman.getPosX() - getPosX()) >= 0) && ((pacman.getPosY() -  getPosY()) < 18) && ((pacman.getPosY() -  getPosY()) >= 0));
     }
 
     @Override
@@ -297,52 +296,11 @@ public class Fantome extends Deplacement {
     }
 
     public void faisDemiTour(){
-        String coordonneesCroisement = trouveCroisement();
-        listeCoordoneDeplacementFant = DijkstraShortestPath.findPathBetween(map.g, coordoneeActuel, coordonneesCroisement).getVertexList();
+        listeCoordoneDeplacementFant.clear();
+        listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), this.coordoneePasse);
     }
 
-    public String trouveCroisement() {
-        String coordonnees = this.coordoneeActuel;
-        switch (this.deplacementActuel) {
-            case HAUT:
-                for (int i=this.getPosY()/20; i<30; i++) {
-                    if(map.grid[this.getPosX()/20][i] == Map.ValeurCase.MUR) {
-                        coordonnees = this.getPosX()/20 + "/" + (i-1);
-                        break;
-                    }
-                }
-                break;
 
-            case DROITE:
-                for (int i=this.getPosX()/20; i>-1; i--) {
-                    if(map.grid[i][this.getPosY()/20] == Map.ValeurCase.MUR) {
-                        coordonnees = (i+1) + "/" + this.getPosY()/20;
-                        break;
-                    }
-                }
-                break;
-
-            case BAS:
-                for (int i=this.getPosY()/20; i>-1; i--) {
-                    if(map.grid[this.getPosX()/20][i] == Map.ValeurCase.MUR) {
-                        coordonnees = this.getPosX()/20 + "/" + (i+1);
-                        break;
-                    }
-                }
-                break;
-
-            case GAUCHE:
-                for (int i=this.getPosX()/20; i<25; i++) {
-                    if(map.grid[i][this.getPosY()/20] == Map.ValeurCase.MUR) {
-                        coordonnees = (i-1) + "/" + this.getPosY()/20;
-                        break;
-                    }
-                }
-                break;
-
-        }
-        return coordonnees;
-    }
 
     public String getCoordPacman(){
         return (pacman.getPosX() / 20) + "/" + (pacman.getPosY() / 20);
