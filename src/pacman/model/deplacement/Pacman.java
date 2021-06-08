@@ -46,6 +46,8 @@ public class Pacman extends Deplacement {
 
     public boolean touchesInversees;
     private long tempsDebutTouchesInversees;
+    private long tempsDebutRalentissement;
+    private boolean ralentissement;
 
     public Pacman() {
         super(241, 321);
@@ -268,7 +270,9 @@ public class Pacman extends Deplacement {
      * Initialise pacman avec les attributs de l'objet bonus: boost
      */
     public void initPowerBoost() {
-        this.velocityMultiplicator = 4;
+        if (!ralentissement)
+            this.velocityMultiplicator = velocityMultiplicatorInitial * 2;
+        else this.velocityMultiplicator = velocityMultiplicatorInitial;
         debutPowerBoost = System.currentTimeMillis();
         powerBoost = true;
     }
@@ -297,6 +301,7 @@ public class Pacman extends Deplacement {
         this.freeze = true;
         controllerJouer.fantomeGroup.freezeFantomes();
         tempsDebutFreeze = System.currentTimeMillis();
+        ralentissement();
     }
 
     public void competenceProjectile() {
@@ -383,6 +388,12 @@ public class Pacman extends Deplacement {
         tempsDebutTouchesInversees = System.currentTimeMillis();
     }
 
+    public void ralentissement() {
+        this.velocityMultiplicator = velocityMultiplicatorInitial/2;
+        ralentissement = true;
+        tempsDebutRalentissement = System.currentTimeMillis();
+    }
+
     /**
      * Stoppe tous les objets bonus qui ont atteint le temps d'effet
      */
@@ -390,7 +401,8 @@ public class Pacman extends Deplacement {
         if (powerBoost) {
             long tempsPowerBoost = System.currentTimeMillis();
             if (tempsPowerBoost-debutPowerBoost > 1000 * 5) {  // durée 5 sec
-                velocityMultiplicator = velocityMultiplicatorInitial;
+                if(ralentissement) velocityMultiplicator = velocityMultiplicatorInitial/2;
+                else velocityMultiplicator = velocityMultiplicatorInitial;
                 powerBoost = false;
             }
         }
@@ -414,25 +426,31 @@ public class Pacman extends Deplacement {
                 touchesInversees = false;
             }
         }
+        if(ralentissement) {
+            long tempsRalentissement = System.currentTimeMillis();
+            if (tempsRalentissement-tempsDebutRalentissement > 1000 * 10) {
+                ralentissement = false;
+                if(powerBoost) velocityMultiplicator = velocityMultiplicatorInitial * 2;
+                else velocityMultiplicator = velocityMultiplicatorInitial;
+            }
+        }
     }
 
     public void reinitialisePowers() {
         if (powerBoost) {
-            velocityMultiplicator = velocityMultiplicatorInitial;
             powerBoost = false;
         }
-        if (teleporteurPose) {
-            teleporteur.supprimeTeleporteur();
-        }
+        if (teleporteurPose) teleporteur.supprimeTeleporteur();
+
         if (projectileLance) {
             projectileLance = false;
             projectile.setImageView(null);
         }
         controllerJouer.fantomeGroup.unfreezeFantomes();
 
-        if(touchesInversees) {
-            touchesInversees = false;
-        }
+        if(touchesInversees) touchesInversees = false;
+        if(ralentissement) ralentissement = false;
+        velocityMultiplicator = velocityMultiplicatorInitial;
     }
 
     public void setControllerJouer(ControllerJouer controllerJouer) {
