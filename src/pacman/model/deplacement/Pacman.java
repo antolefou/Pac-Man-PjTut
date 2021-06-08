@@ -392,7 +392,8 @@ public class Pacman extends Deplacement {
     }
 
     public void ralentissement() {
-        this.velocityMultiplicator = velocityMultiplicatorInitial/2;
+        if (powerBoost) this.velocityMultiplicator = velocityMultiplicatorInitial;
+        else this.velocityMultiplicator = velocityMultiplicatorInitial/2;
         ralentissement = true;
         tempsDebutRalentissement = System.currentTimeMillis();
     }

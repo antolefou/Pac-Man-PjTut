@@ -109,6 +109,7 @@ public class UpdateRender extends Thread{
             PACMAN.compteurFantomeMange = 0;
             PACMAN.numNiveau ++;
             fantomeGroup.reinitialisePosition();
+            PACMAN.reinitialisePowers();
             Platform.runLater(() -> {
                 MAP.creeMapAleatoire(PACMAN.numNiveau);
             });
