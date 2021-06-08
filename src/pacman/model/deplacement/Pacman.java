@@ -52,6 +52,8 @@ public class Pacman extends Deplacement {
     public int pertePointsFreeze;
     public int pertePointsTeleporte;
 
+    public int compteurFantomeMange;
+
     public Pacman() {
         super(241, 321);
         this.velocityMultiplicator = velocityMultiplicatorInitial;
@@ -69,6 +71,7 @@ public class Pacman extends Deplacement {
         tempsDebutFreeze = 0;
 
         this.projectileLance = false;
+        this.compteurFantomeMange = 0;
 
         this.pertePointsTirer = 100;
         this.pertePointsFreeze = 250;

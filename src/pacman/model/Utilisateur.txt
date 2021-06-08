@@ -1,5 +1,5 @@
 fps,60
 son,80
 niveauCompetenceTirer,-1
-niveauCompetenceFreeze,-1
-niveauCompetenceTeleporteur,0
+niveauCompetenceFreeze,0
+niveauCompetenceTeleporteur,-1

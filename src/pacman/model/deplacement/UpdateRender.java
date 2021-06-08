@@ -106,6 +106,7 @@ public class UpdateRender extends Thread{
         if (MAP.aGagne()) { // réinitialise la map si tout est mangé
             PACMAN.initPosition(); // il faut rajouter init power
             PACMAN.deplacementActuel = Deplacement.deplacements.AUCUN;
+            PACMAN.compteurFantomeMange = 0;
             PACMAN.numNiveau ++;
             fantomeGroup.reinitialisePosition();
             Platform.runLater(() -> {
@@ -147,7 +148,10 @@ public class UpdateRender extends Thread{
                     fantome.mort = false;
                     fantome.etat = Fantome.ValeurEtat.MORT;
                     fantome.velocityMultiplicator = 3;
+                    PACMAN.score += 200 * Math.pow(2.0, PACMAN.compteurFantomeMange);
+                    PACMAN.compteurFantomeMange++;
                 } else if (fantome.etat != Fantome.ValeurEtat.MORT){
+                    PACMAN.compteurFantomeMange = 0;
                     PACMAN.initPosition();
                     PACMAN.nbVie--;
                     PACMAN.reinitialisePowers();

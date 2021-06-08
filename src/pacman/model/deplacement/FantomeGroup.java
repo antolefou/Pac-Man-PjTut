@@ -49,6 +49,7 @@ public class FantomeGroup extends Group {
     }
 
     public void stopVulnerable() {
+        fantomes[0].pacman.compteurFantomeMange = 0;
         for (Fantome fantome : this.fantomes) {
             if (fantome.etat != Fantome.ValeurEtat.NORMAL && fantome.etat != Fantome.ValeurEtat.MORT && fantome.etat != Fantome.ValeurEtat.SPAWN) {
                 fantome.etat = Fantome.ValeurEtat.NORMAL;

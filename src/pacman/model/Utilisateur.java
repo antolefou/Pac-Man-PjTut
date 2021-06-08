@@ -34,21 +34,21 @@ static String pseudoUtilisateur;
 
         /* -- Niveau 0 -- */
 
+        // --------- Projectile -----------
+        tabCompetence[0][0] = "Cette compétence permet de tirer sur un fantôme pour qu'il se retourne.";
+        tabCompetence[0][1] = "10000";
+        tabCompetence[0][2] = "20";
+        tabCompetence[0][3] = "10";
+
         // --------- Freeze -----------
         // description
-        tabCompetence[0][0] = "Cette compétence permet de geler/immobiliser les fantômes pendant 2 secondes.";
+        tabCompetence[0][4] = "Cette compétence permet de geler/immobiliser les fantômes pendant 2 secondes.";
         // Coût d'achat
-        tabCompetence[0][1] = "10000";
-        //Coût d'utilisation
-        tabCompetence[0][2] = "100";
-        //Durée de recharge
-        tabCompetence[0][3] = "15";
-
-        // --------- Projectile -----------
-        tabCompetence[0][4] = "Cette compétence permet de tirer sur un fantôme pour qu'il se retourne.";
         tabCompetence[0][5] = "10000";
-        tabCompetence[0][6] = "20";
-        tabCompetence[0][7] = "10";
+        //Coût d'utilisation
+        tabCompetence[0][6] = "100";
+        //Durée de recharge
+        tabCompetence[0][7] = "15";
 
         // --------- Téléporteur -----------
         tabCompetence[0][8] = "Cette compétence lors de la première utilisation dépose un téléporteur, lors de la deuxième utilisation Pac-Man est téléporté sur le téléporteur.";
@@ -58,21 +58,23 @@ static String pseudoUtilisateur;
 
         /* -- Niveau 1 -- */
 
+        // --------- Projectile -----------
+        tabCompetence[1][0] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
+        tabCompetence[1][1] = "4000";
+        tabCompetence[1][2] = "20";
+        tabCompetence[1][3] = "8";
+
         // --------- Freeze -----------
         // description
-        tabCompetence[1][0] = "Cette amélioration de la compétence freeze réduit le temps de recharge de 2 secondes";
+        tabCompetence[1][4] = "Cette amélioration de la compétence freeze réduit le temps de recharge de 2 secondes";
         // Coût d'achat
-        tabCompetence[1][1] = "5 000";
+        tabCompetence[1][5] = "5 000";
         //Coût d'utilisation
-        tabCompetence[1][2] = "100";
+        tabCompetence[1][6] = "100";
         //Durée de recharge
-        tabCompetence[1][3] = "13";
+        tabCompetence[1][7] = "13";
 
-        // --------- Projectile -----------
-        tabCompetence[1][4] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
-        tabCompetence[1][5] = "4000";
-        tabCompetence[1][6] = "20";
-        tabCompetence[1][7] = "8";
+
 
         // --------- Téléporteur -----------
         tabCompetence[1][8] = "Cette amélioration de la compétence téléporteur réduit le coût d'utilisation de 50 points";
@@ -82,21 +84,23 @@ static String pseudoUtilisateur;
 
         /* -- Niveau 2 -- */
 
+        // --------- Projectile -----------
+        tabCompetence[2][0] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
+        tabCompetence[2][1] = "4000";
+        tabCompetence[2][2] = "20";
+        tabCompetence[2][3] = "8";
+
         // --------- Freeze -----------
         // description
-        tabCompetence[2][0] = "Cette amélioration de la compétence freeze réduit le temps de recharge de 2 secondes";
+        tabCompetence[2][4] = "Cette amélioration de la compétence freeze réduit le temps de recharge de 2 secondes";
         // Coût d'achat
-        tabCompetence[2][1] = "5 000";
+        tabCompetence[2][5] = "5 000";
         //Coût d'utilisation
-        tabCompetence[2][2] = "100";
+        tabCompetence[2][6] = "100";
         //Durée de recharge
-        tabCompetence[2][3] = "13";
+        tabCompetence[2][7] = "13";
 
-        // --------- Projectile -----------
-        tabCompetence[2][4] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
-        tabCompetence[2][5] = "4000";
-        tabCompetence[2][6] = "20";
-        tabCompetence[2][7] = "8";
+
 
         // --------- Téléporteur -----------
         tabCompetence[2][8] = "Cette amélioration de la compétence téléporteur réduit le coût d'utilisation de 50 points";
@@ -106,21 +110,23 @@ static String pseudoUtilisateur;
 
         /* -- Niveau 3 -- */
 
+        // --------- Projectile -----------
+        tabCompetence[3][0] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
+        tabCompetence[3][1] = "4000";
+        tabCompetence[3][2] = "20";
+        tabCompetence[3][3] = "6";
+
         // --------- Freeze -----------
         // description
-        tabCompetence[3][0] = "Cette amélioration de la compétence freeze réduit le coût d'utilisation de 20 points";
+        tabCompetence[3][4] = "Cette amélioration de la compétence freeze réduit le coût d'utilisation de 20 points";
         // Coût d'achat
-        tabCompetence[3][1] = "5 000";
+        tabCompetence[3][5] = "5 000";
         //Coût d'utilisation
-        tabCompetence[3][2] = "80";
+        tabCompetence[3][6] = "80";
         //Durée de recharge
-        tabCompetence[3][3] = "13";
+        tabCompetence[3][7] = "13";
 
-        // --------- Projectile -----------
-        tabCompetence[3][4] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
-        tabCompetence[3][5] = "4000";
-        tabCompetence[3][6] = "20";
-        tabCompetence[3][7] = "6";
+
 
         // --------- Téléporteur -----------
         tabCompetence[3][8] = "Cette amélioration de la compétence téléporteur réduit le coût d'utilisation de 8 secondes";
