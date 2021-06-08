@@ -150,7 +150,7 @@ public class UpdateRender extends Thread{
                     fantome.etat = Fantome.ValeurEtat.MORT;
                     fantome.velocityMultiplicator = 3;
                     PACMAN.score += 200 * Math.pow(2.0, PACMAN.compteurFantomeMange);
-                    PACMAN.compteurFantomeMange++;
+                    if(PACMAN.compteurFantomeMange < 4) PACMAN.compteurFantomeMange++;
                 } else if (fantome.etat != Fantome.ValeurEtat.MORT){
                     PACMAN.compteurFantomeMange = 0;
                     PACMAN.initPosition();
