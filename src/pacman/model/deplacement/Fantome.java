@@ -296,7 +296,31 @@ public class Fantome extends Deplacement {
 
     public void faisDemiTour(){
         listeCoordoneDeplacementFant.clear();
-        listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), this.coordoneePasse);
+        List<String> choixPossible = Graphs.neighborListOf(map.getG(), getCoordFantome());
+        switch (this.deplacementActuel){
+            case BAS:
+                if(choixPossible.contains((getPosX()/20) + "/" + ((getPosY()/20)-1))) listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), (getPosX()/20) + "/" + ((getPosY()/20)-1));
+                else if (choixPossible.contains( ((getPosX()/20)-1) + "/" + (getPosY()/20))) listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(),  ((getPosX()/20)-1) + "/" + (getPosY()/20));
+                else listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), ((getPosX()/20)+1) + "/" + (getPosY()/20));
+                break;
+            case HAUT:
+                if(choixPossible.contains((getPosX()/20) + "/" + ((getPosY()/20)+1))) listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(),  (getPosX()/20) + "/" + ((getPosY()/20)+1));
+                else if (choixPossible.contains( ((getPosX()/20)-1) + "/" + (getPosY()/20))) listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(),   ((getPosX()/20)-1) + "/" + (getPosY()/20));
+                else listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), ((getPosX()/20)+1) + "/" + (getPosY()/20));
+                break;
+            case DROITE:
+                if(choixPossible.contains(((getPosX()/20)-1) + "/" + (getPosY()/20))) listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), ((getPosX()/20)-1) + "/" + (getPosY()/20));
+                else if (choixPossible.contains( (getPosX()/20) + "/" + ((getPosY()/20)-1))) listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(),  (getPosX()/20) + "/" + ((getPosY()/20)-1));
+                else listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(),  (getPosX()/20) + "/" + ((getPosY()/20)+1));
+                break;
+            case GAUCHE:
+                if(choixPossible.contains(((getPosX()/20)+1) + "/" + (getPosY()/20))) listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), ((getPosX()/20)+1) + "/" + (getPosY()/20));
+                else if (choixPossible.contains((getPosX()/20) + "/" + ((getPosY()/20)-1))) listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(),  (getPosX()/20) + "/" + ((getPosY()/20)-1));
+                else listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(),  (getPosX()/20) + "/" + ((getPosY()/20)+1));
+                break;
+            default:
+                break;
+        }
     }
 
 
