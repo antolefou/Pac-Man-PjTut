@@ -55,7 +55,7 @@ public class Pacman extends Deplacement {
     public Pacman() {
         super(241, 321);
         this.velocityMultiplicator = velocityMultiplicatorInitial;
-        this.setImage(new Image(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanUp.gif")));
+        this.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanUp.gif"))));
 
         this.competenceADeverouillee = false;
         this.competenceBDeverouillee = false;
@@ -90,9 +90,7 @@ public class Pacman extends Deplacement {
         double pacmanX = this.getPosX();
         double pacmanY = this.getPosY();
         if (pacmanX % 20 == 1) {
-            if ((pacmanY % 20 != 1) || ((map.grid[((int) pacmanX / 20) % 25][(((int) pacmanY / 20) + i) % 30] != Map.ValeurCase.MUR) && (map.grid[((int) pacmanX / 20)][((int) pacmanY / 20) + i] != Map.ValeurCase.INTERDIT))) {
-                return true;
-            }
+            return (pacmanY % 20 != 1) || ((map.grid[((int) pacmanX / 20) % 25][(((int) pacmanY / 20) + i) % 30] != Map.ValeurCase.MUR) && (map.grid[((int) pacmanX / 20)][((int) pacmanY / 20) + i] != Map.ValeurCase.INTERDIT));
         }
         return false;
     }
@@ -101,9 +99,7 @@ public class Pacman extends Deplacement {
         double pacmanX = this.getPosX();
         double pacmanY = this.getPosY();
         if (pacmanY % 20 == 1) {
-            if (((pacmanX % 20 != 1) || (map.grid[((((int) pacmanX / 20) + i) + 25) % 25][((int) pacmanY / 20)] != Map.ValeurCase.MUR))) {
-                return true;
-            }
+            return (pacmanX % 20 != 1) || (map.grid[((((int) pacmanX / 20) + i) + 25) % 25][((int) pacmanY / 20)] != Map.ValeurCase.MUR);
         }
         return false;
     }
@@ -236,8 +232,7 @@ public class Pacman extends Deplacement {
                 map.grid[x][y] = Map.ValeurCase.VIDE;
                 score += 50;
                 this.initPowerBoost();
-            }else if (map.grid[x][y] == Map.ValeurCase.VIDE) {
-                // ne fait rien...
+
             }else if (map.grid[x][y] == Map.ValeurCase.CERISE) {
                 map.grid[x][y] = Map.ValeurCase.VIDE;
                 score += 100;
@@ -264,10 +259,6 @@ public class Pacman extends Deplacement {
                 score += 5000;
             }else if (map.grid[x][y] == null) {
                 map.grid[x][y] = Map.ValeurCase.VIDE;
-            }else if (map.grid[x][y] == Map.ValeurCase.TELEPORTEUR) {
-                //
-            } else {
-                System.out.println("Execption dans l'interraction de pacman");
             }
         }
         this.stopPower();
