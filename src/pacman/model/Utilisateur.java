@@ -15,17 +15,117 @@ static String pseudoUtilisateur;
 //    Volume son
     public int son;
 //    Competence du joueur
-    public String competenceA;
-    public String competenceB;
-    public String competenceC;
-    public String niveauCompetenceA;
-    public String niveauCompetenceB;
-    public String niveauCompetenceC;
-
+    public int niveauCompetenceTirer;
+    public int niveauCompetenceFrezze;
+    public int niveauCompetenceTeleporteur;
+//    tableau de competences
+    public String[][] tabCompetence;
 
 
     public Utilisateur() {
         lectureUtilisateur();
+        initTabCompetence();
+    }
+
+    public void initTabCompetence() {
+        tabCompetence = new String[4][12];
+
+        /* -- Niveau 0 -- */
+
+        // --------- Freeze -----------
+        // description
+        tabCompetence[0][0] = "Cette compétence permet de geler/immobiliser les fantômes pendant 2 secondes.";
+        // Coût d'achat
+        tabCompetence[0][1] = "10000";
+        //Coût d'utilisation
+        tabCompetence[0][2] = "100";
+        //Durée de recharge
+        tabCompetence[0][3] = "15";
+
+        // --------- Projectile -----------
+        tabCompetence[0][4] = "Cette compétence permet de tirer sur un fantôme pour qu'il se retourne.";
+        tabCompetence[0][5] = "10000";
+        tabCompetence[0][6] = "20";
+        tabCompetence[0][7] = "10";
+
+        // --------- Téléporteur -----------
+        tabCompetence[0][8] = "Cette compétence lors de la première utilisation dépose un téléporteur, lors de la deuxième utilisation Pac-Man est téléporté sur le téléporteur.";
+        tabCompetence[0][9] = "10 000";
+        tabCompetence[0][10] = "500";
+        tabCompetence[0][11] = "30";
+
+        /* -- Niveau 1 -- */
+
+        // --------- Freeze -----------
+        // description
+        tabCompetence[1][0] = "Cette amélioration de la compétence freeze réduit le temps de recharge de 2 secondes";
+        // Coût d'achat
+        tabCompetence[1][1] = "5 000";
+        //Coût d'utilisation
+        tabCompetence[1][2] = "100";
+        //Durée de recharge
+        tabCompetence[1][3] = "13";
+
+        // --------- Projectile -----------
+        tabCompetence[1][4] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
+        tabCompetence[1][5] = "4000";
+        tabCompetence[1][6] = "20";
+        tabCompetence[1][7] = "8";
+
+        // --------- Téléporteur -----------
+        tabCompetence[1][8] = "Cette amélioration de la compétence téléporteur réduit le coût d'utilisation de 50 points";
+        tabCompetence[1][9] = "3000";
+        tabCompetence[1][10] = "450";
+        tabCompetence[1][11] = "30";
+
+        /* -- Niveau 2 -- */
+
+        // --------- Freeze -----------
+        // description
+        tabCompetence[2][0] = "Cette amélioration de la compétence freeze réduit le temps de recharge de 2 secondes";
+        // Coût d'achat
+        tabCompetence[2][1] = "5 000";
+        //Coût d'utilisation
+        tabCompetence[2][2] = "100";
+        //Durée de recharge
+        tabCompetence[2][3] = "13";
+
+        // --------- Projectile -----------
+        tabCompetence[2][4] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
+        tabCompetence[2][5] = "4000";
+        tabCompetence[2][6] = "20";
+        tabCompetence[2][7] = "8";
+
+        // --------- Téléporteur -----------
+        tabCompetence[2][8] = "Cette amélioration de la compétence téléporteur réduit le coût d'utilisation de 50 points";
+        tabCompetence[2][9] = "3000";
+        tabCompetence[2][10] = "450";
+        tabCompetence[2][11] = "30";
+
+        /* -- Niveau 3 -- */
+
+        // --------- Freeze -----------
+        // description
+        tabCompetence[3][0] = "Cette amélioration de la compétence freeze réduit le coût d'utilisation de 20 points";
+        // Coût d'achat
+        tabCompetence[3][1] = "5 000";
+        //Coût d'utilisation
+        tabCompetence[3][2] = "80";
+        //Durée de recharge
+        tabCompetence[3][3] = "13";
+
+        // --------- Projectile -----------
+        tabCompetence[3][4] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
+        tabCompetence[3][5] = "4000";
+        tabCompetence[3][6] = "20";
+        tabCompetence[3][7] = "6";
+
+        // --------- Téléporteur -----------
+        tabCompetence[3][8] = "Cette amélioration de la compétence téléporteur réduit le coût d'utilisation de 8 secondes";
+        tabCompetence[3][9] = "7000";
+        tabCompetence[3][10] = "450";
+        tabCompetence[3][11] = "22";
+
     }
 
 
@@ -48,26 +148,17 @@ static String pseudoUtilisateur;
                     case "son":
                         this.son = Integer.parseInt(ligne[1]);
                         break;
-                    case "CompetenceA":
-                        this.competenceA = ligne[1];
+                    case "niveauCompetenceTirer":
+                        this.niveauCompetenceTirer = Integer.parseInt(ligne[1]);
                         break;
-                    case "CompetenceB":
-                        this.competenceB = ligne[1];
+                    case "niveauCompetenceFrezze":
+                        this.niveauCompetenceFrezze = Integer.parseInt(ligne[1]);
                         break;
-                    case "CompetenceC":
-                        this.competenceC = ligne[1];
-                        break;
-                    case "NiveauCompetenceA":
-                        this.niveauCompetenceA = ligne[1];
-                        break;
-                    case "NiveauCompetenceB":
-                        this.niveauCompetenceB = ligne[1];
-                        break;
-                    case "NiveauCompetenceC":
-                        this.niveauCompetenceC = ligne[1];
+                    case "niveauCompetenceTeleporteur":
+                        this.niveauCompetenceTeleporteur = Integer.parseInt(ligne[1]);
                         break;
                     default:
-                        System.out.println("Erreur dans fichier utilisateur");
+                        System.out.println("Erreur dans fichier utilisateur :");
                         break;
                 }
             }
@@ -81,12 +172,9 @@ static String pseudoUtilisateur;
             PrintWriter writer = new PrintWriter("src/pacman/model/Utilisateur.txt");
             writer.println("fps," + fps);
             writer.println("son," + son);
-            writer.println("CompetenceA," + competenceA);
-            writer.println("CompetenceB," + competenceB);
-            writer.println("CompetenceC," + competenceC);
-            writer.println("NiveauCompetenceA," + niveauCompetenceA);
-            writer.println("NiveauCompetenceB," + niveauCompetenceB);
-            writer.println("NiveauCompetenceC," + niveauCompetenceC);
+            writer.println("niveauCompetenceTirer," + niveauCompetenceTirer);
+            writer.println("niveauCompetenceFrezze," + niveauCompetenceFrezze);
+            writer.println("niveauCompetenceTeleporteur," + niveauCompetenceTeleporteur);
 
             writer.close();
         } catch (IOException e) {
@@ -94,22 +182,10 @@ static String pseudoUtilisateur;
         }
     }
 
-    public void reinitialiseUtilisateur() {
-        try {
-            FileWriter fw = new FileWriter("src/pacman/model/Utilisateur.txt");
-            BufferedWriter bw = new BufferedWriter(fw);
-
-            bw.write("fps,60\n" +
-                    "son,80\n" +
-                    "CompetenceA,aucune\n" +
-                    "CompetenceB,aucune\n" +
-                    "CompetenceC,aucune\n" +
-                    "NiveauCompetenceA,0\n" +
-                    "NiveauCompetenceB,0\n" +
-                    "NiveauCompetenceC,0");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void reinitialiseCompetencesUtilisateur() {
+        niveauCompetenceTirer = -1;
+        niveauCompetenceFrezze = -1;
+        niveauCompetenceTeleporteur = -1;
     }
 
     ////// GETTER ET SETTER ////////

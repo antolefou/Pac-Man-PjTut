@@ -40,8 +40,8 @@ public class ControllerCompetence extends Controller{
         description.setText("Pacman peut poser un téléporteur");
     }
 
-    public void setDescriptionRobot(MouseEvent mouseEvent) {
-        description.setText("Pacman fait apparaitre un robot qui ramasse les pac-gomme");
+    public void setDescriptionTirer(MouseEvent mouseEvent) {
+        description.setText("Pacman tirer");
     }
 
     public void setDescriptionFrezzz(MouseEvent mouseEvent) {
@@ -50,7 +50,18 @@ public class ControllerCompetence extends Controller{
 
     public void play(ActionEvent actionEvent) throws IOException {
         Utilisateur utilisateur = new Utilisateur();
-        utilisateur.competenceA = ((Node) actionEvent.getSource()).getId();
+        utilisateur.reinitialiseCompetencesUtilisateur();
+        switch (((Node) actionEvent.getSource()).getId()) {
+            case "tirer":
+                utilisateur.niveauCompetenceTirer = 0;
+                break;
+            case "frezze":
+                utilisateur.niveauCompetenceFrezze = 0;
+                break;
+            case "teleporteur":
+                utilisateur.niveauCompetenceTeleporteur = 0;
+                break;
+        }
         utilisateur.ecritureUtilisateur();
         utilisateur = null;
 

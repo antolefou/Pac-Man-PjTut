@@ -1,8 +1,5 @@
 fps,60
 son,80
-CompetenceA,robot
-CompetenceB,aucune
-CompetenceC,aucune
-NiveauCompetenceA,0
-NiveauCompetenceB,0
-NiveauCompetenceC,0
+niveauCompetenceTirer,-1
+niveauCompetenceFrezze,0
+niveauCompetenceTeleporteur,-1

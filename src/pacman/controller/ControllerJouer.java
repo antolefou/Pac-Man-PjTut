@@ -3,6 +3,7 @@ package pacman.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -28,7 +29,6 @@ public class ControllerJouer extends Controller {
     @FXML public ImageView vie3;
     @FXML public ImageView vie4;
     @FXML public ImageView vie5;
-    @FXML public
     ImageView[] tabVie;
 
     private UpdateRender updateRender;

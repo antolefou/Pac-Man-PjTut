@@ -25,25 +25,25 @@
                     </font>
                 </Text>
 
-                <Button fx:id="teleporteur" layoutX="200.0" layoutY="260.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionFrezzz" styleClass="boutton-ChoixCompetence" >
+                <Button fx:id="tirer" layoutX="200.0" layoutY="260.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionFrezzz" styleClass="boutton-ChoixCompetence" >
                     <graphic>
                         <ImageView id="frezze" fitHeight="95.0" fitWidth="95.0" preserveRatio="true">
                             <image>
-                                <Image url="@../ressources/image/Competence/Freeze/frezze.png" />
+                                <Image url="@../ressources/image/Competence/Robot/robot.png" />
                             </image>
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="robot" layoutX="350.0" layoutY="260.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionRobot" styleClass="boutton-ChoixCompetence">
+                <Button fx:id="frezze" layoutX="350.0" layoutY="260.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionTirer" styleClass="boutton-ChoixCompetence">
                     <graphic>
-                    <ImageView id="robot" fitHeight="95.0" fitWidth="95.0" preserveRatio="true">
+                    <ImageView id="tirer" fitHeight="95.0" fitWidth="95.0" preserveRatio="true">
                         <image>
-                            <Image url="@../ressources/image/Competence/Robot/robot.png" />
+                            <Image url="@../ressources/image/Competence/Freeze/frezze.png" />
                         </image>
                     </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="frezze" layoutX="500.0" layoutY="260.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionTeleporteur" styleClass="boutton-ChoixCompetence" >
+                <Button fx:id="teleporteur" layoutX="500.0" layoutY="260.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionTeleporteur" styleClass="boutton-ChoixCompetence" >
                     <graphic>
                         <ImageView id="teleporteur" fitHeight="95.0" fitWidth="95.0" preserveRatio="true">
                             <image>

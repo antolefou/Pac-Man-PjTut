@@ -279,7 +279,7 @@ public class Map extends Group  {
     public boolean aGagne() {
         for (int i = 0; i < this.NB_CASE_X; i++) {
             for (int j = 0; j < this.NB_CASE_Y; j++) {
-                if (grid[i][j] != ValeurCase.INTERDIT &&  grid[i][j] != ValeurCase.MUR &&  grid[i][j] != ValeurCase.VIDE && grid[i][j] != ValeurCase.TELEPORTEUR) {
+                if (grid[i][j] != ValeurCase.INTERDIT &&  grid[i][j] != ValeurCase.MUR &&  grid[i][j] != ValeurCase.VIDE &&  grid[i][j] != ValeurCase.TELEPORTEUR) {
                     return false;
                 }
             }
