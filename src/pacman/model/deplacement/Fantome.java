@@ -124,7 +124,6 @@ public class Fantome extends Deplacement {
                     listeCoordoneDeplacementFant.addAll(dijkstra);
                 } else if (getPosX() == INIT_POS_X && getPosY() == INIT_POS_Y) {
                     etat = ValeurEtat.SPAWN;
-                    this.setImageView(this.getImage());
                     velocityMultiplicator = velocityMultiplicatorInitial;
                 }
                 updateDeplacements();
