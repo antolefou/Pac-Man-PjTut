@@ -106,6 +106,7 @@ public class UpdateRender extends Thread{
             PACMAN.numNiveau ++;
             fantomeGroup.reinitialisePosition();
             PACMAN.reinitialisePowers();
+            PACMAN.toutesCompetencesPretes();
             Platform.runLater(() -> MAP.creeMapAleatoire(PACMAN.numNiveau));
         }
     }
@@ -150,6 +151,7 @@ public class UpdateRender extends Thread{
                     PACMAN.initPosition();
                     PACMAN.nbVie--;
                     PACMAN.reinitialisePowers();
+                    PACMAN.toutesCompetencesPretes();
                     this.controllerJouer.playMusic("death", false);
                     fantomeGroup.reinitialisePosition();
                 }
