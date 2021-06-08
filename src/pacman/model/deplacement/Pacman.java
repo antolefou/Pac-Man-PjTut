@@ -34,6 +34,13 @@ public class Pacman extends Deplacement {
     public boolean competenceBPrete;
     public boolean competenceCPrete;
 
+    public double tempsDeRechargeCompetenceA;
+    public double tempsDeRechargeCompetenceB;
+    public double tempsDeRechargeCompetenceC;
+    public double debutTempsDeRechargeCompetenceA;
+    public double debutTempsDeRechargeCompetenceB;
+    public double debutTempsDeRechargeCompetenceC;
+
     public Teleporteur teleporteur;
     public boolean teleporteurPose;
 
@@ -69,6 +76,10 @@ public class Pacman extends Deplacement {
         this.competenceAPrete = true;
         this.competenceBPrete = true;
         this.competenceCPrete = true;
+
+        this.tempsDeRechargeCompetenceA = 20;
+        this.tempsDeRechargeCompetenceB = 20;
+        this.tempsDeRechargeCompetenceC = 5;
 
         this.teleporteurPose = false;
         this.freeze = false;
@@ -269,6 +280,7 @@ public class Pacman extends Deplacement {
             }
         }
         this.stopPower();
+        this.tempsDeRecharge();
     }
 
     // ---------------------  POUVOIRS DE PACMAN   ------------------------------------------
@@ -293,6 +305,8 @@ public class Pacman extends Deplacement {
 
     public void competenceTeleportation() {
         if (!teleporteurPose && score >= pertePointsTeleporte) {
+            debutTempsDeRechargeCompetenceA = System.currentTimeMillis();
+            competenceAPrete = false;
             teleporteurPose = true;
             this.teleporteur = new Teleporteur(this, map);
             teleporteur.poseTeleporteur(getPosX(), getPosY());
@@ -305,6 +319,8 @@ public class Pacman extends Deplacement {
     }
 
     public void competenceFreeze() {
+        debutTempsDeRechargeCompetenceB = System.currentTimeMillis();
+        competenceBPrete = false;
         this.freeze = true;
         controllerJouer.fantomeGroup.freezeFantomes();
         tempsDebutFreeze = System.currentTimeMillis();
@@ -313,6 +329,8 @@ public class Pacman extends Deplacement {
     }
 
     public void competenceProjectile() {
+        debutTempsDeRechargeCompetenceC = System.currentTimeMillis();
+        competenceCPrete = false;
         Image imageProjectile= new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/projectile.gif")));
         projectileLance = true;
         projectile = new Deplacement(getPosX(), getPosY());
@@ -452,6 +470,23 @@ public class Pacman extends Deplacement {
         }
     }
 
+    public void tempsDeRecharge() {
+        long tempsDeRecharge = System.currentTimeMillis();
+        if (!competenceAPrete) {
+            if (tempsDeRecharge-debutTempsDeRechargeCompetenceA > 1000 * tempsDeRechargeCompetenceA) competenceAPrete = true;
+        }if (!competenceBPrete) {
+            if (tempsDeRecharge-debutTempsDeRechargeCompetenceB > 1000 * tempsDeRechargeCompetenceB) competenceBPrete = true;
+        }if (!competenceCPrete) {
+            if (tempsDeRecharge-debutTempsDeRechargeCompetenceC > 1000 * tempsDeRechargeCompetenceC) competenceCPrete = true;
+        }
+    }
+
+    public void toutesCompetencesPretes() {
+        competenceAPrete = true;
+        competenceBPrete = true;
+        competenceCPrete = true;
+    }
+
     public void reinitialisePowers() {
         if (powerBoost) {
             powerBoost = false;
@@ -469,7 +504,7 @@ public class Pacman extends Deplacement {
         }
         if(ralentissement) ralentissement = false;
         velocityMultiplicator = velocityMultiplicatorInitial;
-        
+
         Platform.runLater(() -> this.setImageView(imagePacman));
     }
 
