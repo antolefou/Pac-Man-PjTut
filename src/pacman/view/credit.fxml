@@ -22,7 +22,7 @@
 
 
 
-                                <ImageView fx:id="credit" fitHeight="30.0" fitWidth="100.0" layoutX="350.0" layoutY="600" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fx:id="credit" fitHeight="70.0" fitWidth="140.0" layoutX="335.0" layoutY="600" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../ressources/image/Credit/Crédits.png" />
                                     </image>
