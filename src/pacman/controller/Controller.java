@@ -7,7 +7,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import pacman.Main;
 import pacman.model.ModelMusic;
 import pacman.model.Utilisateur;
 
@@ -18,6 +20,7 @@ public class Controller {
     public static Stage primaryStage;
     public static ModelMusic modelMusic;
     public Utilisateur utilisateur;
+    public Font rosemary;
 
     /**
      * Controller (classe mère)
@@ -25,6 +28,7 @@ public class Controller {
     public Controller() {
         this.utilisateur = new Utilisateur();
         if(Controller.modelMusic == null)  Controller.modelMusic = new ModelMusic();
+        rosemary = Font.loadFont(Main.class.getResource("ressources/police/Rosemary_Roman.ttf").toExternalForm(),24);
     }
 
     /**

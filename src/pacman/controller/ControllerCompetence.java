@@ -7,19 +7,29 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import jdk.jfr.Description;
+import pacman.Main;
 import pacman.model.Utilisateur;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class ControllerCompetence extends Controller{
-    @FXML Text description;
+    @FXML
+    public Text description;
+//    @FXML description = new Text();
     
     public ControllerCompetence() {
         super();
     }
+
+    public void initialize(){
+        description.setFont(this.rosemary);
+    }
+
 
 
     public void unsetDescription(MouseEvent mouseEvent) {

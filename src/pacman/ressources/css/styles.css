@@ -47,3 +47,10 @@
 #commandes{
     -fx-font-size: 24;
 }
+
+
+.azd{
+    -fx-text-fill: yellow;
+    -fx-font-family : Rosemary_Roman;
+
+}
