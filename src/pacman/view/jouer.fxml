@@ -6,10 +6,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import pacman.model.*?>
+<?import pacman.model.deplacement.*?>
 
-<?import pacman.model.deplacement.Pacman?>
-<?import pacman.model.deplacement.FantomeCampeur?>
-<?import pacman.model.deplacement.FantomeGroup?>
 <BorderPane onKeyPressed="#handle" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controller.ControllerJouer">
    <center>
       <BorderPane maxHeight="600.0" maxWidth="800" minHeight="600" minWidth="800" prefWidth="800.0">
@@ -21,7 +19,7 @@
                         <children>
 
                            <Group fx:id="groupCompetenceTirer">
-                              <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="0.0" layoutY="-245" preserveRatio="true">
+                              <ImageView fx:id="imageCompetenceTirer" fitHeight="68.0" fitWidth="68.0" layoutX="0.0" layoutY="-245" preserveRatio="true">
                                  <image>
                                     <Image url="@../ressources/image/Competence/Tirer/tirer.png" />
                                  </image>
@@ -29,6 +27,11 @@
                               <Label fx:id="prixCompetenceTirer" graphicTextGap="5.0" layoutX="20.0" layoutY="-175.0" prefHeight="44.0" prefWidth="50.0" text="50" textFill="#faff00">
                                  <font>
                                     <Font name="utkal medium" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="cooldownCompetenceTirer" graphicTextGap="5.0" layoutX="8.0" layoutY="-258.0" prefHeight="-50.0" prefWidth="54.0" styleClass="cooldownJouer" text="99" textAlignment="CENTER" textFill="red">
+                                 <font>
+                                    <Font name="utkal medium" size="36.0" />
                                  </font>
                               </Label>
                               <ImageView fitHeight="40.0" fitWidth="35.0" layoutX="0.0" layoutY="-195.0" preserveRatio="true">
@@ -145,11 +148,10 @@
          <right>
             <Pane maxHeight="600" maxWidth="500">
                <Map fx:id="map" />
-               <FantomeGroup fx:id="fantomeGroup"/>
+               <FantomeGroup fx:id="fantomeGroup" />
                <Pacman fx:id="pacman" />
             </Pane>
          </right>
       </BorderPane>
    </center>
 </BorderPane>
-

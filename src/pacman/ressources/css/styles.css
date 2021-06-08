@@ -1,3 +1,12 @@
+.boutonRetourMenu {
+    -fx-background-radius: none;
+    -fx-background-color: none;
+}
+
+.boutonRetourMenu:hover {
+    -fx-cursor: hand;
+}
+
 .boutonMenu {
     -fx-text-fill: white;
     -fx-font-size: 25;
@@ -49,10 +58,14 @@
 }
 
 
-.boutonCompetence {
-    -fx-border-width: 10px;
-    -fx-border-color: yellow;
+.boutonCompetence:hover {
+    -fx-background-radius: none;
+    -fx-translate-y: -2px;
+    -fx-translate-x: -2px;
+    -fx-border-width: 2px;
+    -fx-border-color: white;
     -fx-border-style: solid;
+    -fx-cursor: hand;
 }
 
 
@@ -75,4 +88,9 @@
     -fx-border-radius: 30;
     -fx-font-size: 16;
     -fx-background-radius: 30;
+}
+
+.cooldownJouer {
+    -fx-text-alignment: center;
+    -fx-alignment: center;
 }

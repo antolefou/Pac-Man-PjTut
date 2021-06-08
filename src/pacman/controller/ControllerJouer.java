@@ -34,6 +34,10 @@ public class ControllerJouer extends Controller {
     @FXML public Group groupCompetenceTeleporteur;
     public ImageView[] tabVie;
     public Utilisateur utilisateur;
+    // Competences
+    @FXML public ImageView imageCompetenceTirer;
+    @FXML public Label prixCompetenceTirer;
+    @FXML public Label cooldownCompetenceTirer;
 
     private UpdateRender updateRender;
     public ScoreModel scoreModel;
@@ -60,6 +64,8 @@ public class ControllerJouer extends Controller {
         if (utilisateur.niveauCompetenceTirer < 0) groupCompetenceTirer.setVisible(false);
         if (utilisateur.niveauCompetenceFreeze < 0) groupCompetenceFreeze.setVisible(false);
         if (utilisateur.niveauCompetenceTeleporteur < 0) groupCompetenceTeleporteur.setVisible(false);
+        cooldownCompetenceTirer.setText("");
+
     }
 
     /**

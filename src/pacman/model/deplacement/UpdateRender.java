@@ -129,6 +129,8 @@ public class UpdateRender extends Thread{
             //affichage score
             this.updateScore();
             try {controllerJouer.viePac();} catch (IOException e) {e.printStackTrace();}
+            //affichage des compétences
+            renderCompetences();
         });
     }
 
@@ -163,6 +165,17 @@ public class UpdateRender extends Thread{
         for (Fantome fantome : fantomeGroup.fantomes) {
             fantome.setMap(MAP);
             fantome.pacman = PACMAN;
+        }
+    }
+
+    public void renderCompetences() {
+        if (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceC < 1000 * PACMAN.tempsDeRechargeCompetenceC) {
+            int cooldown = (int) ((1000 * PACMAN.tempsDeRechargeCompetenceC - (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceC))/1000);
+            controllerJouer.imageCompetenceTirer.setOpacity(0.5);
+            controllerJouer.cooldownCompetenceTirer.setText(String.valueOf(cooldown));
+        } else {
+            controllerJouer.cooldownCompetenceTirer.setText("");
+            controllerJouer.imageCompetenceTirer.setOpacity(1);
         }
     }
 }
