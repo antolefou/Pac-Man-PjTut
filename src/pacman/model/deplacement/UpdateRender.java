@@ -45,6 +45,10 @@ public class UpdateRender extends Thread{
         this.PACMAN.setMap(MAP);
         addPacmanToFantome();
         fantomeGroup.initNumFantome();
+        // competence
+        PACMAN.competenceADeverouillee = this.UTILISATEUR.niveauCompetenceTirer>=0;
+        PACMAN.competenceBDeverouillee = this.UTILISATEUR.niveauCompetenceFrezze>=0;
+        PACMAN.competenceCDeverouillee = this.UTILISATEUR.niveauCompetenceTeleporteur>=0;
     }
 
     public void jouer() {

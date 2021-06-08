@@ -32,7 +32,8 @@ public class ControllerJouer extends Controller {
     @FXML public Group groupCompetenceTirer;
     @FXML public Group groupCompetenceFrezze;
     @FXML public Group groupCompetenceTeleporteur;
-    ImageView[] tabVie;
+    public ImageView[] tabVie;
+    public Utilisateur utilisateur;
 
     private UpdateRender updateRender;
     public ScoreModel scoreModel;
@@ -45,6 +46,7 @@ public class ControllerJouer extends Controller {
     }
 
     public void initialize() {
+        utilisateur = new Utilisateur();
         this.updateRender = new UpdateRender(this, this.utilisateur, labelScore,  map, pacman, fantomeGroup);
         updateRender.jouer();
 
@@ -55,7 +57,6 @@ public class ControllerJouer extends Controller {
         //vie
         tabVie = new ImageView[]{vie1, vie2, vie3, vie4, vie5};
         //affichage competence
-        Utilisateur utilisateur = new Utilisateur();
         if (utilisateur.niveauCompetenceTirer < 0) groupCompetenceTirer.setVisible(false);
         if (utilisateur.niveauCompetenceFrezze < 0) groupCompetenceFrezze.setVisible(false);
         if (utilisateur.niveauCompetenceTeleporteur < 0) groupCompetenceTeleporteur.setVisible(false);
@@ -119,15 +120,11 @@ public class ControllerJouer extends Controller {
         }
 
         else if (code == KeyCode.L) {
-            if (pacman.competenceAPrete) pacman.competenceTeleportation();
-        }
-
-        else if (code == KeyCode.K) {
-            if (pacman.competenceBPrete) pacman.competenceFreeze();
-        }
-
-        else if (code == KeyCode.SPACE) {
-            if (pacman.competenceCPrete && !pacman.projectileLance) {
+            if (pacman.competenceAPrete && pacman.competenceCDeverouillee) pacman.competenceTeleportation();
+        } else if (code == KeyCode.K) {
+            if (pacman.competenceBPrete && pacman.competenceBDeverouillee) pacman.competenceFreeze();
+        } else if (code == KeyCode.SPACE) {
+            if (pacman.competenceCPrete && !pacman.projectileLance && pacman.competenceADeverouillee) {
                 pacman.competenceProjectile();
             }
 
