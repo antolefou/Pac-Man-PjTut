@@ -154,45 +154,41 @@ public class Pacman extends Deplacement {
 
     public void updateDeplacement() {
         boolean peutAvancer = false;
-        if (touchesInversees) {
-            switch (deplacementFutur) {
-                case HAUT:
-                    deplacementFutur = deplacements.BAS;
-                    break;
-                case DROITE:
-                    deplacementFutur = deplacements.GAUCHE;
-                    break;
-                case BAS:
-                    deplacementFutur = deplacements.HAUT;
-                    break;
-                case GAUCHE:
-                    deplacementFutur = deplacements.DROITE;
-                    break;
-            }
-        }
         if (deplacementFutur != Deplacement.deplacements.AUCUN) {
             switch (deplacementFutur) {
                 case HAUT:
-                    if (peutAvancerVerticalement(-1)) {
+                    if (peutAvancerVerticalement(-1) && !touchesInversees) {
                         avanceHaut();
                         peutAvancer = true;
-                    }
-                    break;
-                case DROITE:
-                    if (peutAvancerHorizontalement(1)) {
-                        avanceDroite();
-                        peutAvancer = true;
-                    }
-                    break;
-                case BAS:
-                    if (peutAvancerVerticalement(1)) {
+                    }else if (peutAvancerVerticalement(1) && touchesInversees) {
                         avanceBas();
                         peutAvancer = true;
                     }
                     break;
-                case GAUCHE:
-                    if (peutAvancerHorizontalement(-1)) {
+                case DROITE:
+                    if (peutAvancerHorizontalement(1) && !touchesInversees) {
+                        avanceDroite();
+                        peutAvancer = true;
+                    }else if (peutAvancerHorizontalement(-1) && touchesInversees) {
                         avanceGauche();
+                        peutAvancer = true;
+                    }
+                    break;
+                case BAS:
+                    if (peutAvancerVerticalement(1) && !touchesInversees) {
+                        avanceBas();
+                        peutAvancer = true;
+                    }else if (peutAvancerVerticalement(-1) && touchesInversees) {
+                        avanceHaut();
+                        peutAvancer = true;
+                    }
+                    break;
+                case GAUCHE:
+                    if (peutAvancerHorizontalement(-1) && !touchesInversees) {
+                        avanceGauche();
+                        peutAvancer = true;
+                    } else if (peutAvancerHorizontalement(1) && touchesInversees) {
+                        avanceDroite();
                         peutAvancer = true;
                     }
                     break;
@@ -204,20 +200,28 @@ public class Pacman extends Deplacement {
         } else {
             switch (deplacementActuel) {
                 case HAUT:
-                    if (peutAvancerVerticalement(-1))
+                    if (peutAvancerVerticalement(-1) && !touchesInversees)
                         avanceHaut();
-                    break;
-                case DROITE:
-                    if (peutAvancerHorizontalement(1))
-                        avanceDroite();
-                    break;
-                case BAS:
-                    if (peutAvancerVerticalement(1))
+                    else if (peutAvancerVerticalement(1) && touchesInversees)
                         avanceBas();
                     break;
-                case GAUCHE:
-                    if (peutAvancerHorizontalement(-1))
+                case DROITE:
+                    if (peutAvancerHorizontalement(1) && !touchesInversees)
+                        avanceDroite();
+                    else if (peutAvancerHorizontalement(-1) && touchesInversees)
                         avanceGauche();
+                    break;
+                case BAS:
+                    if (peutAvancerVerticalement(1) && !touchesInversees)
+                        avanceBas();
+                    else if (peutAvancerVerticalement(-1) && touchesInversees)
+                        avanceHaut();
+                    break;
+                case GAUCHE:
+                    if (peutAvancerHorizontalement(-1) && !touchesInversees)
+                        avanceGauche();
+                    else if (peutAvancerHorizontalement(1) && touchesInversees)
+                        avanceDroite();
                     break;
             }
         }
