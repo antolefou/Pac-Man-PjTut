@@ -132,11 +132,11 @@ public class ControllerJouer extends Controller {
         }
 
         else if (code == KeyCode.L) {
-            if (pacman.competenceTeleporteurPrete && pacman.competenceTirerDeverouillee) pacman.competenceTeleportation();
+            if (pacman.competenceTeleporteurDeverouillee) pacman.competenceTeleportation();
         } else if (code == KeyCode.K) {
             if (pacman.score >= pacman.pertePointsFreeze && pacman.competenceFreezePrete && pacman.competenceFreezeDeverouillee) pacman.competenceFreeze();
         } else if (code == KeyCode.SPACE) {
-            if (pacman.score >= pacman.pertePointsTirer && pacman.competenceTirerPrete && !pacman.projectileLance && pacman.competenceTeleporteurDeverouillee) pacman.competenceProjectile();
+            if (pacman.score >= pacman.pertePointsTirer && pacman.competenceTirerPrete && !pacman.projectileLance && pacman.competenceTirerDeverouillee) pacman.competenceProjectile();
 
         }
     }

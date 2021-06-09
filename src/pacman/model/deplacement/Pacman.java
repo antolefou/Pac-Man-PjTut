@@ -304,15 +304,15 @@ public class Pacman extends Deplacement {
     }
 
     public void competenceTeleportation() {
-        if (!teleporteurPose && score >= pertePointsTeleporte) {
-            debutTempsDeRechargeCompetenceTeleporteur = System.currentTimeMillis();
-            competenceTeleporteurPrete = false;
+        if (!teleporteurPose && score >= pertePointsTeleporte && competenceTeleporteurPrete) {
             teleporteurPose = true;
             this.teleporteur = new Teleporteur(this, map);
             teleporteur.poseTeleporteur(getPosX(), getPosY());
             pertePoints(pertePointsTeleporte);
         }
         else if (teleporteurPose){
+            debutTempsDeRechargeCompetenceTeleporteur = System.currentTimeMillis();
+            competenceTeleporteurPrete = false;
             teleporteur.teleporte();
             touchesInversees();
         }
@@ -454,7 +454,7 @@ public class Pacman extends Deplacement {
         }
         if(touchesInversees) {
             long tempsTouchesInversees = System.currentTimeMillis();
-            if (tempsTouchesInversees-tempsDebutTouchesInversees > 1000 * 5) {
+            if (tempsTouchesInversees-tempsDebutTouchesInversees > 1000 * 15) {
                 Platform.runLater(() -> this.setImageView(imagePacman));
                 touchesInversees = false;
             }
@@ -479,12 +479,6 @@ public class Pacman extends Deplacement {
         }if (!competenceTirerPrete) {
             if (tempsDeRecharge- debutTempsDeRechargeCompetenceTirer > 1000 * tempsDeRechargeCompetenceTirer) competenceTirerPrete = true;
         }
-    }
-
-    public void toutesCompetencesPretes() {
-        competenceTeleporteurPrete = true;
-        competenceFreezePrete = true;
-        competenceTirerPrete = true;
     }
 
     public void reinitialisePowers() {
