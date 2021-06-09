@@ -132,11 +132,7 @@ public class MapGenerator {
         map[x][y] = 2;
         constructorX.add(x);
         constructorY.add(y);
-        constructorDir.add("none");/*
-		map[6][23] = 2;
-		constructorX.add(6);
-		constructorY.add(23);
-		constructorDir.add("none");*/
+        constructorDir.add("none");
     }
 
     private void initConstruction() {
@@ -182,11 +178,10 @@ public class MapGenerator {
             int x = constructorX.get(0);
             int y = constructorY.get(0);
             int nbDeplacement = (int) (Math.random()*(6-4+1))+4;
-            outerloop:
             switch(constructorDir.get(0)) {
                 case "d":
                     if (x>11 || map[x+1][y] == 2 || map[x+1][y] == 1)
-                        break outerloop;
+                        break;
                     for (int j=0; j<nbDeplacement; j++) {
                         if (x<12 && map[x+1][y] != 1) {
                             map[x+1][y] = 2;
@@ -202,7 +197,7 @@ public class MapGenerator {
                     break;
                 case "b":
                     if (map[x][y+1] == 2 || map[x][y+1] == 1)
-                        break outerloop;
+                        break;
                     for (int j=0; j<nbDeplacement; j++) {
                         if (y<28 && map[x][y+1] != 1) {
                             map[x][y+1] = 2;
@@ -218,7 +213,7 @@ public class MapGenerator {
                     break;
                 case "g":
                     if (map[x-1][y] == 2 || map[x-1][y] == 1)
-                        break outerloop;
+                        break;
                     for (int j=0; j<nbDeplacement; j++) {
                         if (x>1 && map[x-1][y] != 1) {
                             map[x-1][y] = 2;
@@ -234,7 +229,7 @@ public class MapGenerator {
                     break;
                 case "h":
                     if (map[x][y-1] == 2 || map[x][y-1] == 1)
-                        break outerloop;
+                        break;
                     for (int j=0; j<nbDeplacement; j++) {
                         if (y>1 && map[x][y-1] != 1) {
                             map[x][y-1] = 2;

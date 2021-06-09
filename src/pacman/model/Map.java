@@ -121,7 +121,6 @@ public class Map extends Group  {
             while (y < NB_CASE_Y && !pointArticulation){
                 if(grilleGraph[x][y].equals(x+"/"+y) && test.isCutpoint(grilleGraph[x][y]) && !grilleGraph[x][y].equals(12+"/"+12) && !grilleGraph[x][y].equals(12+"/"+13) && !grilleGraph[x][y].equals(12+"/"+14)) {
                     pointArticulation = true;
-                    System.out.println(grilleGraph[x][y]);
                 }
                 y++;
             }
