@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import pacman.model.Map;
+import pacman.model.Utilisateur;
 import pacman.model.deplacement.Pacman;
 
 import java.util.Objects;
@@ -25,6 +26,13 @@ public class ControllerMenu extends Controller{
             this.stopAllMusic();
             this.playMusic("menu", true);
         }
+        initUtilisateur();
+    }
+
+    private void initUtilisateur() {
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.reinitialiseCompetencesUtilisateur();
+        utilisateur.ecritureUtilisateur();
     }
 
     public void affiche_fleche1() {

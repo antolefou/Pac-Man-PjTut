@@ -31,7 +31,7 @@ static String pseudoUtilisateur;
     }
 
     public void initTabCompetence() {
-        tabCompetence = new String[4][12];
+        tabCompetence = new String[5][12];
 
         /* -- Niveau 0 -- */
 
@@ -134,6 +134,27 @@ static String pseudoUtilisateur;
         tabCompetence[3][9] = "7000";
         tabCompetence[3][10] = "450";
         tabCompetence[3][11] = "22";
+
+        // fin d'amelioration
+        // --------- Projectile -----------
+        tabCompetence[4][0] = "Cette amélioration est au niveau maximum";
+        tabCompetence[4][1] = "4000";
+        tabCompetence[4][2] = "20";
+        tabCompetence[4][3] = "6";
+        // --------- Freeze -----------
+        // description
+        tabCompetence[4][4] = "Cette amélioration est au niveau maximum";
+        // Coût d'achat
+        tabCompetence[4][5] = "5 000";
+        //Coût d'utilisation
+        tabCompetence[4][6] = "80";
+        //Durée de recharge
+        tabCompetence[4][7] = "13";
+        // --------- Téléporteur -----------
+        tabCompetence[4][8] = "Cette amélioration est au niveau maximum";
+        tabCompetence[4][9] = "7000";
+        tabCompetence[4][10] = "450";
+        tabCompetence[4][11] = "22";
 
     }
 

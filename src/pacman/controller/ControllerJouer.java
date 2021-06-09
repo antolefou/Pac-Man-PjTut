@@ -59,6 +59,7 @@ public class ControllerJouer extends Controller {
         utilisateur = new Utilisateur();
         this.updateRender = new UpdateRender(this, this.utilisateur, labelScore,  map, pacman, fantomeGroup);
         updateRender.jouer();
+        pacman.score = utilisateur.pointJoueur;
 
         // affichage meileur score
         this.scoreModel = new ScoreModel();
@@ -84,6 +85,9 @@ public class ControllerJouer extends Controller {
         if (pacman.nbVie < 5 && pacman.nbVie > -1) tabVie[pacman.nbVie].setImage(null);
 
         if (pacman.nbVie == -1) {
+            // reinitialise les points
+            utilisateur.reinitialiseCompetencesUtilisateur();
+            utilisateur.ecritureUtilisateur();
             // suppression
             updateRender.PACMAN.enVie = false;
             updateRender.update.stop();
@@ -103,7 +107,7 @@ public class ControllerJouer extends Controller {
      * Gère les actions sur le clavier du joueur: déplacement pacman et recommencer la partie (r)
      * @param keyEvent évènement de la touche
      */
-    public void handle(KeyEvent keyEvent) {
+    public void handle(KeyEvent keyEvent) throws IOException {
         KeyCode code = keyEvent.getCode();
         if (code == KeyCode.UP || code == KeyCode.Z) {
             pacman.deplacementFutur = Deplacement.deplacements.HAUT;
@@ -137,7 +141,8 @@ public class ControllerJouer extends Controller {
             if (pacman.score >= pacman.pertePointsFreeze && pacman.competenceFreezePrete && pacman.competenceFreezeDeverouillee) pacman.competenceFreeze();
         } else if (code == KeyCode.SPACE) {
             if (pacman.score >= pacman.pertePointsTirer && pacman.competenceTirerPrete && !pacman.projectileLance && pacman.competenceTirerDeverouillee) pacman.competenceProjectile();
-
+        } else if (code == KeyCode.M) {
+            switchTosceneAmelioration();
         }
     }
 

@@ -128,7 +128,11 @@ public class UpdateRender extends Thread{
             //affichage score
             this.updateScore();
             try {controllerJouer.viePac();} catch (IOException e) {e.printStackTrace();}
-            if (MAP.aGagne())try {controllerJouer.switchTosceneAmelioration();} catch (IOException e) {e.printStackTrace();}
+            if (MAP.aGagne()){
+                UTILISATEUR.pointJoueur=PACMAN.score;
+                UTILISATEUR.ecritureUtilisateur();
+                try {controllerJouer.switchTosceneAmelioration();} catch (IOException e) {e.printStackTrace();}
+            }
             //affichage des compétences
             renderCompetences();
         });
