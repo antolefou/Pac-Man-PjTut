@@ -142,7 +142,7 @@ public class ControllerJouer extends Controller {
         }
 
         else if (code == KeyCode.L) {
-            if (pacman.score >= pacman.pertePointsTeleporte && pacman.competenceTeleporteurPrete && pacman.competenceTirerDeverouillee) pacman.competenceTeleportation();
+            if (pacman.competenceTeleporteurDeverouillee) pacman.competenceTeleportation();
         } else if (code == KeyCode.K) {
             if (pacman.score >= pacman.pertePointsFreeze && pacman.competenceFreezePrete && pacman.competenceFreezeDeverouillee){
                 pacman.competenceFreeze();

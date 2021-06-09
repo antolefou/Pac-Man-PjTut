@@ -56,7 +56,7 @@ public class ControllerAmeliorationCompetence extends Controller {
     }
 
     public void switchToScene(ActionEvent actionEvent) throws IOException {
-        super.switchToScene(actionEvent);
         utilisateur.ecritureUtilisateur();
+        super.switchToScene(actionEvent);
     }
 }

@@ -224,6 +224,11 @@ static String pseudoUtilisateur;
         pointJoueur = 0;
     }
 
+    public void updateFps(int fps) {
+        this.fps = fps;
+        this.threadRender = (int) ((1.0/this.fps)*1000);
+    }
+
     ////// GETTER ET SETTER ////////
 
     public int getFps() {
@@ -232,11 +237,6 @@ static String pseudoUtilisateur;
 
     public void setFps(int fps) {
         this.fps = fps;
-    }
-
-    public void updateFps(int fps) {
-        this.fps = fps;
-        this.threadRender = (int) ((1.0/this.fps)*1000);
     }
 
     public int getSon(){ return son; }
