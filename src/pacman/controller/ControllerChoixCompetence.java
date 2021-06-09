@@ -16,16 +16,17 @@ import pacman.model.Utilisateur;
 import java.io.IOException;
 import java.util.Objects;
 
-public class ControllerCompetence extends Controller{
+public class ControllerChoixCompetence extends Controller{
     @FXML public Text description;
     public Utilisateur utilisateur;
     
-    public ControllerCompetence() {
+    public ControllerChoixCompetence() {
         super();
     }
 
     public void initialize(){
         description.setFont(this.rosemary);
+        description.setText("Veuillez choisir votre compétence");
         utilisateur = new Utilisateur();
     }
 

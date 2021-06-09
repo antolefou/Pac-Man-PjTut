@@ -1,12 +1,17 @@
 package pacman.model.deplacement;
 
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import pacman.controller.Controller;
 import pacman.controller.ControllerJouer;
 import pacman.model.Map;
 import pacman.model.Utilisateur;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class UpdateRender extends Thread{
     private final FantomeGroup fantomeGroup;
@@ -53,7 +58,11 @@ public class UpdateRender extends Thread{
 //        Thred update
         this.update = new Thread(() -> {
             while (PACMAN.enVie) {
-                update();
+                try {
+                    update();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 try {
                     sleep(UTILISATEUR.getTHREAD_UPDATE());
                 } catch (InterruptedException e) {
@@ -79,7 +88,7 @@ public class UpdateRender extends Thread{
         render.start();
     }
 
-    private void update() {
+    private void update() throws IOException {
         for (int i = 0; i< PACMAN.velocityMultiplicator; i++) {  // gère le multiplicateur de pacman
             PACMAN.updateDeplacement();
             PACMAN.updateMapPacman();
@@ -98,15 +107,6 @@ public class UpdateRender extends Thread{
 //                System.out.println(fantome.listeCoordoneDeplacementFant);
                 }
             }
-        }
-        if (MAP.aGagne()) { // réinitialise la map si tout est mangé
-            PACMAN.initPosition(); // il faut rajouter init power
-            PACMAN.deplacementActuel = Deplacement.deplacements.AUCUN;
-            PACMAN.compteurFantomeMange = 0;
-            PACMAN.numNiveau ++;
-            fantomeGroup.reinitialisePosition();
-            PACMAN.reinitialisePowers();
-            Platform.runLater(() -> MAP.creeMapAleatoire(PACMAN.numNiveau));
         }
     }
 
@@ -128,6 +128,7 @@ public class UpdateRender extends Thread{
             //affichage score
             this.updateScore();
             try {controllerJouer.viePac();} catch (IOException e) {e.printStackTrace();}
+            if (MAP.aGagne())try {controllerJouer.switchTosceneAmelioration();} catch (IOException e) {e.printStackTrace();}
             //affichage des compétences
             renderCompetences();
         });

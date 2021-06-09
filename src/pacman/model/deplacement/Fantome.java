@@ -31,7 +31,8 @@ public class Fantome extends Deplacement {
     public ValeurEtat etat;
     // spawn
     private long debutSpawn = 0L;
-    private double tempsSpawn = 0;
+    private double multiplicateurTempsSpawn;
+    private long tempsSpawn = 1500L;
     private boolean immobile;
     public boolean mort;
     public boolean clignote;
@@ -73,7 +74,7 @@ public class Fantome extends Deplacement {
                 if (debutSpawn == 0L && pacman.deplacementActuel != deplacements.AUCUN) {
                     if (mort) {
                         debutSpawn = System.currentTimeMillis();
-                        tempsSpawn = 0.25;
+                        multiplicateurTempsSpawn = 2.0/3;
                         immobile = true;
                         mort = false;
                         listeCoordoneDeplacementFant.clear();
@@ -81,10 +82,10 @@ public class Fantome extends Deplacement {
                         this.positionYFinDeplacement = getPosY();
                     } else {
                         debutSpawn = System.currentTimeMillis();
-                        tempsSpawn = numFantome;
+                        multiplicateurTempsSpawn = numFantome;
                         immobile = true;
                     }
-                } else if (immobile && System.currentTimeMillis() - debutSpawn > 1000L * tempsSpawn) {
+                } else if (immobile && (System.currentTimeMillis() - debutSpawn > (tempsSpawn * multiplicateurTempsSpawn))) {
                     debutSpawn = 0L;
                     etat = ValeurEtat.NORMAL;
                     listeCoordoneDeplacementFant = dijkstra(true, true, this.coordoneeActuel, "12/12");

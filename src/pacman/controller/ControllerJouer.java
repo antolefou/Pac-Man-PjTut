@@ -150,4 +150,16 @@ public class ControllerJouer extends Controller {
         updateRender.render.stop();
         updateRender = null;
     }
+
+    @FXML
+    public void switchTosceneAmelioration() throws IOException {
+        updateRender.update.stop();
+        updateRender.render.stop();
+        updateRender = null;
+        Parent ameliorationView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/ameliorationCompetence.fxml")));
+        primaryStage.setScene(new Scene(ameliorationView));
+        primaryStage.sizeToScene();
+        primaryStage.show();
+        ameliorationView.requestFocus();
+    }
 }
