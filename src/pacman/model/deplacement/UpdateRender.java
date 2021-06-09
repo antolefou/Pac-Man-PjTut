@@ -44,9 +44,9 @@ public class UpdateRender extends Thread{
         addPacmanToFantome();
         fantomeGroup.initNumFantome();
         // competence
-        PACMAN.competenceADeverouillee = this.UTILISATEUR.niveauCompetenceTirer>=0;
-        PACMAN.competenceBDeverouillee = this.UTILISATEUR.niveauCompetenceFreeze >=0;
-        PACMAN.competenceCDeverouillee = this.UTILISATEUR.niveauCompetenceTeleporteur>=0;
+        PACMAN.competenceTeleporteurDeverouillee = this.UTILISATEUR.niveauCompetenceTirer>=0;
+        PACMAN.competenceFreezeDeverouillee = this.UTILISATEUR.niveauCompetenceFreeze >=0;
+        PACMAN.competenceTirerDeverouillee = this.UTILISATEUR.niveauCompetenceTeleporteur>=0;
     }
 
     public void jouer() {
@@ -169,13 +169,32 @@ public class UpdateRender extends Thread{
     }
 
     public void renderCompetences() {
-        if (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceC < 1000 * PACMAN.tempsDeRechargeCompetenceC) {
-            int cooldown = (int) ((1000 * PACMAN.tempsDeRechargeCompetenceC - (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceC))/1000);
+        //tirer
+        if (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceTirer < 1000 * PACMAN.tempsDeRechargeCompetenceTirer) {
+            int cooldown = (int) ((1000 * PACMAN.tempsDeRechargeCompetenceTirer - (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceTirer))/1000);
             controllerJouer.imageCompetenceTirer.setOpacity(0.5);
             controllerJouer.cooldownCompetenceTirer.setText(String.valueOf(cooldown));
         } else {
             controllerJouer.cooldownCompetenceTirer.setText("");
             controllerJouer.imageCompetenceTirer.setOpacity(1);
+        }
+        //freeze
+        if (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceFreeze < 1000 * PACMAN.tempsDeRechargeCompetenceFreeze) {
+            int cooldown = (int) ((1000 * PACMAN.tempsDeRechargeCompetenceFreeze - (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceFreeze))/1000);
+            controllerJouer.imageCompetenceFreeze.setOpacity(0.5);
+            controllerJouer.cooldownCompetenceFreeze.setText(String.valueOf(cooldown));
+        } else {
+            controllerJouer.cooldownCompetenceFreeze.setText("");
+            controllerJouer.imageCompetenceFreeze.setOpacity(1);
+        }
+        //teleporteur
+        if (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceTeleporteur < 1000 * PACMAN.tempsDeRechargeCompetenceTeleporteur) {
+            int cooldown = (int) ((1000 * PACMAN.tempsDeRechargeCompetenceTeleporteur - (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceTeleporteur))/1000);
+            controllerJouer.imageCompetenceTeleporteur.setOpacity(0.5);
+            controllerJouer.cooldownCompetenceTeleporteur.setText(String.valueOf(cooldown));
+        } else {
+            controllerJouer.cooldownCompetenceTeleporteur.setText("");
+            controllerJouer.imageCompetenceTeleporteur.setOpacity(1);
         }
     }
 }

@@ -30,7 +30,7 @@ public class ControllerGameOver extends Controller{
     @FXML
     public void handle(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.ENTER) {
-            Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/jouer.fxml")));
+            Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/choixCompetence.fxml")));
             primaryStage.setScene(new Scene(scoreView));
             primaryStage.sizeToScene();
             primaryStage.show();

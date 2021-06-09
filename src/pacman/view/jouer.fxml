@@ -42,14 +42,19 @@
                            </Group>
 
                            <Group fx:id="groupCompetenceFreeze">
-                              <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="90.0" layoutY="-245" preserveRatio="true">
+                              <ImageView fx:id="imageCompetenceFreeze" fitHeight="68.0" fitWidth="68.0" layoutX="90.0" layoutY="-245" preserveRatio="true">
                                  <image>
                                     <Image url="@../ressources/image/Competence/Freeze/Freeze.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="prixFreeze" graphicTextGap="5.0" layoutX="110.0" layoutY="-175.0" prefHeight="44.0" prefWidth="50.0" text="50" textFill="#faff00">
+                              <Label fx:id="prixCompetenceFreeze" graphicTextGap="5.0" layoutX="110.0" layoutY="-175.0" prefHeight="44.0" prefWidth="50.0" text="50" textFill="#faff00">
                                  <font>
                                     <Font name="utkal medium" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="cooldownCompetenceFreeze" graphicTextGap="5.0" layoutX="98.0" layoutY="-258.0" prefHeight="-50.0" prefWidth="54.0" styleClass="cooldownJouer" text="99" textAlignment="CENTER" textFill="red">
+                                 <font>
+                                    <Font name="utkal medium" size="36.0" />
                                  </font>
                               </Label>
                               <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="90.0" layoutY="-185.0" preserveRatio="true">
@@ -59,12 +64,12 @@
                               </ImageView>
                            </Group>
                            <Group fx:id="groupCompetenceTeleporteur">
-                              <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="180.0" layoutY="-245" preserveRatio="true">
+                              <ImageView fx:id="imageCompetenceTeleporteur" fitHeight="68.0" fitWidth="68.0" layoutX="180.0" layoutY="-245" preserveRatio="true">
                                  <image>
                                     <Image url="@../ressources/image/Competence/Teleport/teleport.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="prixTeleporteur" graphicTextGap="5.0" layoutX="200.0" layoutY="-175.0" prefHeight="44.0" prefWidth="50.0" text="50" textFill="#faff00">
+                              <Label fx:id="prixCompetenceTeleporteur" graphicTextGap="5.0" layoutX="200.0" layoutY="-175.0" prefHeight="44.0" prefWidth="50.0" text="50" textFill="#faff00">
                                  <font>
                                     <Font name="utkal medium" size="18.0" />
                                  </font>
@@ -74,6 +79,11 @@
                                     <Image url="@../ressources/image/Ecran_jouer/scoresvie/ToucheL.png" />
                                  </image>
                               </ImageView>
+                              <Label fx:id="cooldownCompetenceTeleporteur" graphicTextGap="5.0" layoutX="188.0" layoutY="-258.0" prefHeight="-50.0" prefWidth="54.0" styleClass="cooldownJouer" text="99" textAlignment="CENTER" textFill="red">
+                                 <font>
+                                    <Font name="utkal medium" size="36.0" />
+                                 </font>
+                              </Label>
                            </Group>
                            <Label fx:id="labelScore" graphicTextGap="5.0" layoutX="1.0" layoutY="9.0" prefHeight="44.0" prefWidth="160.0" text="0" textFill="#faff00">
                               <font>

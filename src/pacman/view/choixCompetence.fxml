@@ -5,60 +5,59 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controller.ControllerCompetence">
-   <center>
-        <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-            <children>
-                <Button fx:id="menu" layoutX="0" layoutY="12.0" mnemonicParsing="false" onAction="#switchToScene" style="-fx-background-color: black;" styleClass="boutonMenu">
-                    <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../ressources/image/Commun_scenes/BoutonMenu.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../ressources/css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controller.ControllerCompetence">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="800.0">
+         <image>
+            <Image url="@../ressources/image/Ecran_Competence/Background_Cochon.jpg" />
+         </image>
+      </ImageView>
+      <Text fx:id="description" fill="WHITE" layoutX="20.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="216.4347801208496">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Button fx:id="tirer" layoutX="80.0" layoutY="343.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionTirer" prefHeight="105.0" prefWidth="98.0" style="-fx-background-color: transparent;" styleClass="boutonCompetence">
+         <graphic>
+            <ImageView fitHeight="114.0" fitWidth="95.0">
+               <image>
+                  <Image url="@../ressources/image/Competence/Tirer/carteBouleDeFeu.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="freeze" layoutX="342.0" layoutY="356.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionFreeze" style="-fx-background-color: transparent;" styleClass="boutonCompetence">
+         <graphic>
+            <ImageView fitHeight="131.0" fitWidth="110.0">
+               <image>
+                  <Image url="@../ressources/image/Competence/Freeze/carteFreeze.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="teleporteur" layoutX="600.0" layoutY="343.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionTeleporteur" prefHeight="142.0" prefWidth="103.0" style="-fx-background-color: transparent;" styleClass="boutonCompetence">
+         <graphic>
+            <ImageView fitHeight="141.0" fitWidth="109.0">
+               <image>
+                  <Image url="@../ressources/image/Competence/Teleport/carteTeleportation.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ImageView fitHeight="44.0" fitWidth="56.0" layoutX="250.0" layoutY="217.0" rotate="-23.4">
+         <image>
+            <Image url="@../ressources/image/Ecran_Competence/picBulle.png" />
+         </image>
+      </ImageView>
 
-                <Text fill="WHITE" layoutX="180.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choississez votre compétence" textAlignment="CENTER">
-                    <font>
-                        <Font size="29.0" />
-                    </font>
-                </Text>
-
-                <Button fx:id="tirer" layoutX="200.0" layoutY="260.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionTirer" styleClass="boutton-ChoixCompetence" >
-                    <graphic>
-                        <ImageView id="freeze" fitHeight="95.0" fitWidth="95.0" preserveRatio="true">
-                            <image>
-                                <Image url="@../ressources/image/Competence/Tirer/tirer.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button fx:id="freeze" layoutX="350.0" layoutY="260.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionFreeze" styleClass="boutton-ChoixCompetence">
-                    <graphic>
-                    <ImageView id="tirer" fitHeight="95.0" fitWidth="95.0" preserveRatio="true">
-                        <image>
-                            <Image url="@../ressources/image/Competence/Freeze/Freeze.png" />
-                        </image>
-                    </ImageView>
-                    </graphic>
-                </Button>
-                <Button fx:id="teleporteur" layoutX="500.0" layoutY="260.0" mnemonicParsing="false" onAction="#play" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionTeleporteur" styleClass="boutton-ChoixCompetence" >
-                    <graphic>
-                        <ImageView id="teleporteur" fitHeight="95.0" fitWidth="95.0" preserveRatio="true">
-                            <image>
-                                <Image url="@../ressources/image/Competence/Teleport/teleport.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-
-                <Text fx:id="description" fill="WHITE" layoutX="200.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textDescription" text="Description de la compétence" textAlignment="CENTER" wrappingWidth="400.0">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Text>
-            </children>
-        </Pane>
-   </center>
-</BorderPane>
+      <Button fx:id="menu" layoutX="0" layoutY="12.0" mnemonicParsing="false" onAction="#switchToScene" styleClass="boutonRetourMenu">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../ressources/image/Commun_scenes/BoutonMenu.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

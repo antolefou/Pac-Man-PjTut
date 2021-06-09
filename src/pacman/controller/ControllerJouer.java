@@ -38,6 +38,12 @@ public class ControllerJouer extends Controller {
     @FXML public ImageView imageCompetenceTirer;
     @FXML public Label prixCompetenceTirer;
     @FXML public Label cooldownCompetenceTirer;
+    @FXML public ImageView imageCompetenceFreeze;
+    @FXML public Label prixCompetenceFreeze;
+    @FXML public Label cooldownCompetenceFreeze;
+    @FXML public ImageView imageCompetenceTeleporteur;
+    @FXML public Label prixCompetenceTeleporteur;
+    @FXML public Label cooldownCompetenceTeleporteur;
 
     private UpdateRender updateRender;
     public ScoreModel scoreModel;
@@ -65,7 +71,8 @@ public class ControllerJouer extends Controller {
         if (utilisateur.niveauCompetenceFreeze < 0) groupCompetenceFreeze.setVisible(false);
         if (utilisateur.niveauCompetenceTeleporteur < 0) groupCompetenceTeleporteur.setVisible(false);
         cooldownCompetenceTirer.setText("");
-
+        cooldownCompetenceFreeze.setText("");
+        cooldownCompetenceTeleporteur.setText("");
     }
 
     /**
@@ -125,11 +132,11 @@ public class ControllerJouer extends Controller {
         }
 
         else if (code == KeyCode.L) {
-            if (pacman.competenceAPrete && pacman.competenceCDeverouillee) pacman.competenceTeleportation();
+            if (pacman.competenceTeleporteurPrete && pacman.competenceTirerDeverouillee) pacman.competenceTeleportation();
         } else if (code == KeyCode.K) {
-            if (pacman.score >= pacman.pertePointsFreeze && pacman.competenceBPrete && pacman.competenceBDeverouillee) pacman.competenceFreeze();
+            if (pacman.score >= pacman.pertePointsFreeze && pacman.competenceFreezePrete && pacman.competenceFreezeDeverouillee) pacman.competenceFreeze();
         } else if (code == KeyCode.SPACE) {
-            if (pacman.score >= pacman.pertePointsTirer && pacman.competenceCPrete && !pacman.projectileLance && pacman.competenceADeverouillee) pacman.competenceProjectile();
+            if (pacman.score >= pacman.pertePointsTirer && pacman.competenceTirerPrete && !pacman.projectileLance && pacman.competenceTeleporteurDeverouillee) pacman.competenceProjectile();
 
         }
     }

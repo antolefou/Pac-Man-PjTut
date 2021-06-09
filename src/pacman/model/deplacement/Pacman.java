@@ -26,20 +26,20 @@ public class Pacman extends Deplacement {
 
     public deplacements deplacementFutur = deplacements.AUCUN;
 
-    public boolean competenceADeverouillee;
-    public boolean competenceBDeverouillee;
-    public boolean competenceCDeverouillee;
+    public boolean competenceTeleporteurDeverouillee;
+    public boolean competenceFreezeDeverouillee;
+    public boolean competenceTirerDeverouillee;
 
-    public boolean competenceAPrete;
-    public boolean competenceBPrete;
-    public boolean competenceCPrete;
+    public boolean competenceTeleporteurPrete;
+    public boolean competenceFreezePrete;
+    public boolean competenceTirerPrete;
 
-    public double tempsDeRechargeCompetenceA;
-    public double tempsDeRechargeCompetenceB;
-    public double tempsDeRechargeCompetenceC;
-    public double debutTempsDeRechargeCompetenceA;
-    public double debutTempsDeRechargeCompetenceB;
-    public double debutTempsDeRechargeCompetenceC;
+    public double tempsDeRechargeCompetenceTeleporteur;
+    public double tempsDeRechargeCompetenceFreeze;
+    public double tempsDeRechargeCompetenceTirer;
+    public double debutTempsDeRechargeCompetenceTeleporteur;
+    public double debutTempsDeRechargeCompetenceFreeze;
+    public double debutTempsDeRechargeCompetenceTirer;
 
     public Teleporteur teleporteur;
     public boolean teleporteurPose;
@@ -70,16 +70,16 @@ public class Pacman extends Deplacement {
         this.velocityMultiplicator = velocityMultiplicatorInitial;
         Platform.runLater(() -> this.setImageView(imagePacman));
 
-        this.competenceADeverouillee = false;
-        this.competenceBDeverouillee = false;
-        this.competenceCDeverouillee = false;
-        this.competenceAPrete = true;
-        this.competenceBPrete = true;
-        this.competenceCPrete = true;
+        this.competenceTeleporteurDeverouillee = false;
+        this.competenceFreezeDeverouillee = false;
+        this.competenceTirerDeverouillee = false;
+        this.competenceTeleporteurPrete = true;
+        this.competenceFreezePrete = true;
+        this.competenceTirerPrete = true;
 
-        this.tempsDeRechargeCompetenceA = 20;
-        this.tempsDeRechargeCompetenceB = 20;
-        this.tempsDeRechargeCompetenceC = 5;
+        this.tempsDeRechargeCompetenceTeleporteur = 20;
+        this.tempsDeRechargeCompetenceFreeze = 20;
+        this.tempsDeRechargeCompetenceTirer = 5;
 
         this.teleporteurPose = false;
         this.freeze = false;
@@ -305,8 +305,8 @@ public class Pacman extends Deplacement {
 
     public void competenceTeleportation() {
         if (!teleporteurPose && score >= pertePointsTeleporte) {
-            debutTempsDeRechargeCompetenceA = System.currentTimeMillis();
-            competenceAPrete = false;
+            debutTempsDeRechargeCompetenceTeleporteur = System.currentTimeMillis();
+            competenceTeleporteurPrete = false;
             teleporteurPose = true;
             this.teleporteur = new Teleporteur(this, map);
             teleporteur.poseTeleporteur(getPosX(), getPosY());
@@ -319,8 +319,8 @@ public class Pacman extends Deplacement {
     }
 
     public void competenceFreeze() {
-        debutTempsDeRechargeCompetenceB = System.currentTimeMillis();
-        competenceBPrete = false;
+        debutTempsDeRechargeCompetenceFreeze = System.currentTimeMillis();
+        competenceFreezePrete = false;
         this.freeze = true;
         controllerJouer.fantomeGroup.freezeFantomes();
         tempsDebutFreeze = System.currentTimeMillis();
@@ -329,8 +329,8 @@ public class Pacman extends Deplacement {
     }
 
     public void competenceProjectile() {
-        debutTempsDeRechargeCompetenceC = System.currentTimeMillis();
-        competenceCPrete = false;
+        debutTempsDeRechargeCompetenceTirer = System.currentTimeMillis();
+        competenceTirerPrete = false;
         Image imageProjectile= new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/projectile.gif")));
         projectileLance = true;
         projectile = new Deplacement(getPosX(), getPosY());
@@ -472,19 +472,19 @@ public class Pacman extends Deplacement {
 
     public void tempsDeRecharge() {
         long tempsDeRecharge = System.currentTimeMillis();
-        if (!competenceAPrete) {
-            if (tempsDeRecharge-debutTempsDeRechargeCompetenceA > 1000 * tempsDeRechargeCompetenceA) competenceAPrete = true;
-        }if (!competenceBPrete) {
-            if (tempsDeRecharge-debutTempsDeRechargeCompetenceB > 1000 * tempsDeRechargeCompetenceB) competenceBPrete = true;
-        }if (!competenceCPrete) {
-            if (tempsDeRecharge-debutTempsDeRechargeCompetenceC > 1000 * tempsDeRechargeCompetenceC) competenceCPrete = true;
+        if (!competenceTeleporteurPrete) {
+            if (tempsDeRecharge- debutTempsDeRechargeCompetenceTeleporteur > 1000 * tempsDeRechargeCompetenceTeleporteur) competenceTeleporteurPrete = true;
+        }if (!competenceFreezePrete) {
+            if (tempsDeRecharge- debutTempsDeRechargeCompetenceFreeze > 1000 * tempsDeRechargeCompetenceFreeze) competenceFreezePrete = true;
+        }if (!competenceTirerPrete) {
+            if (tempsDeRecharge- debutTempsDeRechargeCompetenceTirer > 1000 * tempsDeRechargeCompetenceTirer) competenceTirerPrete = true;
         }
     }
 
     public void toutesCompetencesPretes() {
-        competenceAPrete = true;
-        competenceBPrete = true;
-        competenceCPrete = true;
+        competenceTeleporteurPrete = true;
+        competenceFreezePrete = true;
+        competenceTirerPrete = true;
     }
 
     public void reinitialisePowers() {
