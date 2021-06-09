@@ -93,11 +93,8 @@ public class Map extends Group  {
      * @param niveau niveau de la map
      */
     public void creeMapAleatoire(int niveau) {
-        BlockCutpointGraph<String,DefaultEdge> test;
-        boolean pointArticulation;
         // crée une nouvelle map et recommence si jamais la map contient des zones isolées
         do {
-            pointArticulation = false;
             mapGenerator = new MapGenerator();
             mapGenerator.initObjet(5, 3, niveau);
             mapGeneree = mapGenerator.getMap();
@@ -105,22 +102,32 @@ public class Map extends Group  {
 
             initialiseMapGeneree();
             initGraph();
-            test = new BlockCutpointGraph<>(g);
-            int x = 0;
-            while (x<NB_CASE_X && !pointArticulation) {
-                int y = 0;
-                while (y < NB_CASE_Y && !pointArticulation){
-                    if(grilleGraph[x][y].equals(x+"/"+y) && test.isCutpoint(grilleGraph[x][y]) && !grilleGraph[x][y].equals(12+"/"+12) && !grilleGraph[x][y].equals(12+"/"+13) && !grilleGraph[x][y].equals(12+"/"+14)) {
-                        pointArticulation = true;
-                        System.out.println(grilleGraph[x][y]);
-                    }
-                    y++;
-                }
-                x++;
-            }
-        } while (!estConnexe() || pointArticulation);
+        } while (!estConnexe() || isArticulationPoint(this.g));
         if (this.caseMap == null) initialiseCaseMap();
         this.afficheMap();
+    }
+
+    /**
+     * Vérifie si la map a un sommet qui quand on l'enlève ajoute une composante connexe
+     * @param g graph à vérifier
+     * @return true si il y en a un, sinon false
+     */
+    public boolean isArticulationPoint(Graph<String, DefaultEdge> g){
+        BlockCutpointGraph<String,DefaultEdge> test = new BlockCutpointGraph<>(g);
+        boolean pointArticulation = false;
+        int x = 0;
+        while (x<NB_CASE_X && !pointArticulation) {
+            int y = 0;
+            while (y < NB_CASE_Y && !pointArticulation){
+                if(grilleGraph[x][y].equals(x+"/"+y) && test.isCutpoint(grilleGraph[x][y]) && !grilleGraph[x][y].equals(12+"/"+12) && !grilleGraph[x][y].equals(12+"/"+13) && !grilleGraph[x][y].equals(12+"/"+14)) {
+                    pointArticulation = true;
+                    System.out.println(grilleGraph[x][y]);
+                }
+                y++;
+            }
+            x++;
+        }
+        return pointArticulation;
     }
 
     /**

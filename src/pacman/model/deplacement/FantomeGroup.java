@@ -29,7 +29,6 @@ public class FantomeGroup extends Group {
         for (Fantome fantome : this.fantomes) {
             fantome.velocityMultiplicator = fantome.velocityMultiplicatorInitial;
             fantome.mort = false;
-            fantome.etat = Fantome.ValeurEtat.SPAWN;
             fantome.listeCoordoneDeplacementFant.clear();
             fantome.compteur = 0;
             fantome.initPosition();

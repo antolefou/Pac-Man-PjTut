@@ -1,5 +1,5 @@
 julien,150000
 antolabos,42160
+pseudoUt,17490
 PLY3,7250
 R3T45D,6780
-,4110

@@ -232,6 +232,7 @@ public class Fantome extends Deplacement {
         this.coordoneePasse = this.INIT_POS_X/20 + "/" + this.INIT_POS_Y/20;
         etat = ValeurEtat.SPAWN;
         debutSpawn = 0L;
+        this.immobile = false;
     }
 
     public void iaRandom() {
