@@ -32,7 +32,7 @@ public class Fantome extends Deplacement {
     // spawn
     private long debutSpawn = 0L;
     private double multiplicateurTempsSpawn;
-    private long tempsSpawn = 1500L;
+    private long tempsSpawn = 2500L;
     private boolean immobile;
     public boolean mort;
     public boolean clignote;
@@ -74,7 +74,7 @@ public class Fantome extends Deplacement {
                 if (debutSpawn == 0L && pacman.deplacementActuel != deplacements.AUCUN) {
                     if (mort) {
                         debutSpawn = System.currentTimeMillis();
-                        multiplicateurTempsSpawn = 2.0/3;
+                        multiplicateurTempsSpawn = 1.0/2;
                         immobile = true;
                         mort = false;
                         listeCoordoneDeplacementFant.clear();
