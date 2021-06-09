@@ -43,7 +43,7 @@ static String pseudoUtilisateur;
 
         // --------- Freeze -----------
         // description
-        tabCompetence[0][4] = "Cette compétence permet de geler/immobiliser les fantômes pendant 2 secondes.";
+        tabCompetence[0][4] = "Cette compétence permet de geler/immobiliser les fantômes pendant 5 secondes.";
         // Coût d'achat
         tabCompetence[0][5] = "10000";
         //Coût d'utilisation

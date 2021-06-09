@@ -52,6 +52,7 @@ public class UpdateRender extends Thread{
         PACMAN.competenceTeleporteurDeverouillee = this.UTILISATEUR.niveauCompetenceTeleporteur>=0;
         PACMAN.competenceFreezeDeverouillee = this.UTILISATEUR.niveauCompetenceFreeze >=0;
         PACMAN.competenceTirerDeverouillee = this.UTILISATEUR.niveauCompetenceTirer>=0;
+        this.PACMAN.initialiseCompetences();
     }
 
     public void jouer() {

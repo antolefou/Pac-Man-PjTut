@@ -70,7 +70,8 @@ public class Pacman extends Deplacement {
     public Pacman() {
         super(241, 321);
         this.velocityMultiplicator = velocityMultiplicatorInitial;
-        Platform.runLater(() -> this.setImageView(imagePacman));
+
+        this.initialisation();
 
         this.competenceTeleporteurDeverouillee = false;
         this.competenceFreezeDeverouillee = false;
@@ -79,10 +80,6 @@ public class Pacman extends Deplacement {
         this.competenceFreezePrete = true;
         this.competenceTirerPrete = true;
 
-        this.tempsDeRechargeCompetenceTeleporteur = 20;
-        this.tempsDeRechargeCompetenceFreeze = 20;
-        this.tempsDeRechargeCompetenceTirer = 5;
-
         this.teleporteurPose = false;
         this.freeze = false;
         tempsDebutFreeze = 0;
@@ -90,15 +87,25 @@ public class Pacman extends Deplacement {
         this.projectileLance = false;
         this.compteurFantomeMange = 0;
 
-//        this.pertePointsTirer = 100;
-//        this.pertePointsFreeze = 250;
-//        this.pertePointsTeleporte = 500;
+        Platform.runLater(() -> {
+            this.setImageView(imagePacman);
+            this.getChildren().add(getImageView());
+        });
+    }
 
-//        setPrixComp();
-
-
-        this.initialisation();
-        Platform.runLater(() -> this.getChildren().add(getImageView()));
+    public void initialiseCompetences() {
+        if (competenceTirerDeverouillee) {
+            this.tempsDeRechargeCompetenceTirer = Double.parseDouble(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceTirer][3]);
+            this.pertePointsTirer = Integer.parseInt(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceTirer][2]);;
+        }
+        if (competenceFreezeDeverouillee) {
+            this.tempsDeRechargeCompetenceFreeze = Double.parseDouble(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceFreeze][7]);
+            this.pertePointsFreeze = Integer.parseInt(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceFreeze][6]);;
+        }
+        if (competenceTeleporteurDeverouillee) {
+            this.tempsDeRechargeCompetenceTeleporteur = Double.parseDouble(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceTeleporteur][11]);
+            this.pertePointsTeleporte = Integer.parseInt(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceTeleporteur][10]);;
+        }
     }
 
     @Override
@@ -307,8 +314,6 @@ public class Pacman extends Deplacement {
         controllerJouer.fantomeGroup.setVulnerable();
     }
 
-
-
     public void competenceTeleportation() {
         if (!teleporteurPose && score >= pertePointsTeleporte && competenceTeleporteurPrete) {
             teleporteurPose = true;
@@ -467,7 +472,7 @@ public class Pacman extends Deplacement {
         }
         if(ralentissement) {
             long tempsRalentissement = System.currentTimeMillis();
-            if (tempsRalentissement-tempsDebutRalentissement > 1000 * 10) {
+            if (tempsRalentissement-tempsDebutRalentissement > 1000 * 8) {
                 ralentissement = false;
                 if(powerBoost) velocityMultiplicator = velocityMultiplicatorInitial * 2;
                 else velocityMultiplicator = velocityMultiplicatorInitial;
