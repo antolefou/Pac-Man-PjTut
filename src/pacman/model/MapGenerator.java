@@ -16,7 +16,7 @@ public class MapGenerator {
 //        long debut = System.currentTimeMillis();
 
         initMap();
-        creerTeleportateur();
+        creerTeleporteur();
         creerCarreMilieu();
         creerConstructeur();
         initConstruction();
@@ -40,7 +40,7 @@ public class MapGenerator {
         }
     }
 
-    private void creerTeleportateur() {
+    private void creerTeleporteur() {
         double nbTeleportateur = Math.random();
         int teleportateur1 = 0;
         int teleportateur2 = 0;
@@ -137,6 +137,7 @@ public class MapGenerator {
 
     private void initConstruction() {
         // nombre de boucles de constructions:
+
         int nbConstructeur = constructorX.size();
         for (int i=0; i<nbConstructeur; i++) {
             int x = constructorX.get(0);
@@ -382,7 +383,7 @@ public class MapGenerator {
 //        }
     }
 
-    private boolean estRemplacable(int[][] mapAAffine,int x , int y){
+    public boolean estRemplacable(int[][] mapAAffine,int x , int y){
         return (
                 // ---------------------- cul de sac ------------------
                 (

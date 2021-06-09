@@ -7,8 +7,7 @@ public class TestMapGenerator {
 
 //    @Test
 //    public void testEstRemplacableCas1A4(){
-//        MapGenerator m = new MapGenerator();
-//        m.map = new int[][]{
+//        int[][] map = new int[][]{
 //                {0, 0, 0, 0, 0},
 //                {0, 0, 1, 0, 0},
 //                {0, 1, 1, 1, 0},
@@ -16,10 +15,10 @@ public class TestMapGenerator {
 //                {0, 0, 0, 0, 0}
 //        };
 //
-//        Assert.assertTrue(m.estRemplacable(2,3)); //cas 1
-//        Assert.assertTrue(m.estRemplacable(2,1)); //cas 2
-//        Assert.assertTrue(m.estRemplacable(1,2)); //cas 3
-//        Assert.assertTrue(m.estRemplacable(3,2)); //cas 4
+//        Assert.assertTrue(estRemplacable(map,2,3)); //cas 1
+//        Assert.assertTrue(estRemplacable(2,1));    //cas 2
+//        Assert.assertTrue(estRemplacable(1,2));   //cas 3
+//        Assert.assertTrue(estRemplacable(3,2));  //cas 4
 //    }
 //
 //    @Test
