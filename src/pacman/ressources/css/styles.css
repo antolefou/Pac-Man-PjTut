@@ -94,3 +94,11 @@
     -fx-text-alignment: center;
     -fx-alignment: center;
 }
+
+.boutonValider {
+    -fx-opacity: 0.75;
+}
+.boutonValider:hover {
+    -fx-cursor: hand;
+    -fx-opacity: 1;
+}
