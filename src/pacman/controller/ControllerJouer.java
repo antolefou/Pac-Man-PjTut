@@ -18,6 +18,8 @@ import java.util.Objects;
 
 import pacman.model.*;
 
+import static java.lang.Integer.parseInt;
+
 public class ControllerJouer extends Controller {
     @FXML public Pacman pacman;
     @FXML public FantomeGroup fantomeGroup;
@@ -73,6 +75,10 @@ public class ControllerJouer extends Controller {
         cooldownCompetenceTirer.setText("");
         cooldownCompetenceFreeze.setText("");
         cooldownCompetenceTeleporteur.setText("");
+
+        setAffichagePrixComp();
+        setPrixCompDansPac();
+
     }
 
     /**
@@ -132,12 +138,55 @@ public class ControllerJouer extends Controller {
         }
 
         else if (code == KeyCode.L) {
-            if (pacman.competenceTeleporteurDeverouillee) pacman.competenceTeleportation();
+            if (pacman.score >= pacman.pertePointsTeleporte && pacman.competenceTeleporteurPrete && pacman.competenceTirerDeverouillee) pacman.competenceTeleportation();
         } else if (code == KeyCode.K) {
-            if (pacman.score >= pacman.pertePointsFreeze && pacman.competenceFreezePrete && pacman.competenceFreezeDeverouillee) pacman.competenceFreeze();
+            if (pacman.score >= pacman.pertePointsFreeze && pacman.competenceFreezePrete && pacman.competenceFreezeDeverouillee){
+                pacman.competenceFreeze();
+                System.out.println(pacman.score +">="+ pacman.pertePointsFreeze );
+                System.out.println(pacman.score >= pacman.pertePointsFreeze );
+            }
         } else if (code == KeyCode.SPACE) {
-            if (pacman.score >= pacman.pertePointsTirer && pacman.competenceTirerPrete && !pacman.projectileLance && pacman.competenceTirerDeverouillee) pacman.competenceProjectile();
+            if (pacman.score >= pacman.pertePointsTirer && pacman.competenceTirerPrete && !pacman.projectileLance && pacman.competenceTeleporteurDeverouillee) {
+                pacman.competenceProjectile();
+                System.out.println(pacman.score +">="+ pacman.pertePointsTirer );
+                System.out.println(pacman.score >= pacman.pertePointsTirer );
+            }
 
+        }
+    }
+
+    public void setAffichagePrixComp(){
+        int niveauTirer = utilisateur.niveauCompetenceTirer;
+        int niveauFreezz = utilisateur.niveauCompetenceFreeze;
+        int niveauTeleporteur = utilisateur.niveauCompetenceTeleporteur;
+        if (niveauTirer > -1){
+            prixCompetenceTirer.setText(utilisateur.tabCompetence[niveauTirer][2]);
+        }
+        if (niveauFreezz > -1){
+            prixCompetenceFreeze.setText(utilisateur.tabCompetence[niveauFreezz][6]);
+
+        }
+        if (niveauTeleporteur > -1){
+            prixCompetenceTeleporteur.setText(utilisateur.tabCompetence[niveauTeleporteur][10]);
+        }
+
+    }
+
+    public void setPrixCompDansPac(){
+        int niveauTirer = utilisateur.niveauCompetenceTirer;
+        int niveauFreezz = utilisateur.niveauCompetenceFreeze;
+        int niveauTeleporteur = utilisateur.niveauCompetenceTeleporteur;
+        if (niveauTirer > -1){
+            System.out.println(this.pacman.pertePointsTirer);
+            this.pacman.pertePointsTirer = Integer.parseInt(utilisateur.tabCompetence[niveauTirer][2]);
+            System.out.println(this.pacman.pertePointsTirer);
+        }
+        if (niveauFreezz > -1){
+            this.pacman.pertePointsFreeze = Integer.parseInt(utilisateur.tabCompetence[niveauFreezz][6]);
+
+        }
+        if (niveauTeleporteur > -1){
+            this.pacman.pertePointsTeleporte = Integer.parseInt(utilisateur.tabCompetence[niveauTeleporteur][10]);
         }
     }
 

@@ -53,7 +53,7 @@ static String pseudoUtilisateur;
 
         // --------- Téléporteur -----------
         tabCompetence[0][8] = "Cette compétence lors de la première utilisation dépose un téléporteur, lors de la deuxième utilisation Pac-Man est téléporté sur le téléporteur.";
-        tabCompetence[0][9] = "10 000";
+        tabCompetence[0][9] = "10000";
         tabCompetence[0][10] = "500";
         tabCompetence[0][11] = "30";
 
@@ -69,7 +69,7 @@ static String pseudoUtilisateur;
         // description
         tabCompetence[1][4] = "Cette amélioration de la compétence freeze réduit le temps de recharge de 2 secondes";
         // Coût d'achat
-        tabCompetence[1][5] = "5 000";
+        tabCompetence[1][5] = "5000";
         //Coût d'utilisation
         tabCompetence[1][6] = "100";
         //Durée de recharge
@@ -95,7 +95,7 @@ static String pseudoUtilisateur;
         // description
         tabCompetence[2][4] = "Cette amélioration de la compétence freeze réduit le temps de recharge de 2 secondes";
         // Coût d'achat
-        tabCompetence[2][5] = "5 000";
+        tabCompetence[2][5] = "5000";
         //Coût d'utilisation
         tabCompetence[2][6] = "100";
         //Durée de recharge
@@ -121,7 +121,7 @@ static String pseudoUtilisateur;
         // description
         tabCompetence[3][4] = "Cette amélioration de la compétence freeze réduit le coût d'utilisation de 20 points";
         // Coût d'achat
-        tabCompetence[3][5] = "5 000";
+        tabCompetence[3][5] = "5000";
         //Coût d'utilisation
         tabCompetence[3][6] = "80";
         //Durée de recharge

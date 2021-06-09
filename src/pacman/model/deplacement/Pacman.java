@@ -7,6 +7,8 @@ import pacman.model.Map;
 
 import java.util.Objects;
 
+import static java.lang.Integer.parseInt;
+
 public class Pacman extends Deplacement {
 
     private ControllerJouer controllerJouer;
@@ -88,9 +90,11 @@ public class Pacman extends Deplacement {
         this.projectileLance = false;
         this.compteurFantomeMange = 0;
 
-        this.pertePointsTirer = 100;
-        this.pertePointsFreeze = 250;
-        this.pertePointsTeleporte = 500;
+//        this.pertePointsTirer = 100;
+//        this.pertePointsFreeze = 250;
+//        this.pertePointsTeleporte = 500;
+
+//        setPrixComp();
 
 
         this.initialisation();
@@ -302,6 +306,8 @@ public class Pacman extends Deplacement {
         powerSuperPacGomme = true;
         controllerJouer.fantomeGroup.setVulnerable();
     }
+
+
 
     public void competenceTeleportation() {
         if (!teleporteurPose && score >= pertePointsTeleporte && competenceTeleporteurPrete) {
