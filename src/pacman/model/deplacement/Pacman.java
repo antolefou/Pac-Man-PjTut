@@ -470,7 +470,9 @@ public class Pacman extends Deplacement {
         if(touchesInversees) {
             long tempsTouchesInversees = System.currentTimeMillis();
             if (tempsTouchesInversees-tempsDebutTouchesInversees > 1000 * 15) {
-                Platform.runLater(() -> this.setImageView(imagePacman));
+                Platform.runLater(() -> {
+                    if(!freeze) this.setImageView(imagePacman);
+                });
                 touchesInversees = false;
             }
         }
@@ -480,7 +482,9 @@ public class Pacman extends Deplacement {
                 ralentissement = false;
                 if(powerBoost) velocityMultiplicator = velocityMultiplicatorInitial * 2;
                 else velocityMultiplicator = velocityMultiplicatorInitial;
-                Platform.runLater(() -> this.setImageView(imagePacman));
+                Platform.runLater(() -> {
+                    if(!touchesInversees) this.setImageView(imagePacman);
+                });
             }
         }
     }
