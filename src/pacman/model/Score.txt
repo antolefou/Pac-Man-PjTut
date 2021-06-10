@@ -1,5 +1,5 @@
 julien,150000
+,42610
 antolabos,42160
+pseudoUt,24560
 ,16380
-,8870
-PLY3,7250

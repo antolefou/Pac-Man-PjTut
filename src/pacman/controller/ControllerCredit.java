@@ -15,6 +15,9 @@ public class ControllerCredit extends Controller{
         super();
     }
 
+    /**
+     * Permet une animation de scroll verticale dans les crédit et la joue indéfiniment.
+     */
     @FXML
     public void initialize() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(60),new KeyValue(scrollPane.vvalueProperty(), 1)));

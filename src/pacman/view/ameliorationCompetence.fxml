@@ -13,7 +13,7 @@
             </image>
         </ImageView>
 
-        <Button fx:id="tirer" layoutX="80.0" layoutY="343.0" mnemonicParsing="false" onAction="#ameliorationPouvoir" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionTirer" prefHeight="105.0" prefWidth="98.0" style="-fx-background-color: transparent;" styleClass="boutonCompetence">
+        <Button fx:id="tirer" layoutX="80.0" layoutY="343.0" mnemonicParsing="false" onAction="#ameliorationPouvoir" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionTirerGlobal" prefHeight="105.0" prefWidth="98.0" style="-fx-background-color: transparent;" styleClass="boutonCompetence">
             <graphic>
                 <ImageView fitHeight="114.0" fitWidth="95.0">
                     <image>
@@ -22,7 +22,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button fx:id="freeze" layoutX="342.0" layoutY="356.0" mnemonicParsing="false" onAction="#ameliorationPouvoir" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionFreeze" style="-fx-background-color: transparent;" styleClass="boutonCompetence">
+        <Button fx:id="freeze" layoutX="342.0" layoutY="356.0" mnemonicParsing="false" onAction="#ameliorationPouvoir" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionFreezeGlobal" style="-fx-background-color: transparent;" styleClass="boutonCompetence">
             <graphic>
                 <ImageView fitHeight="131.0" fitWidth="110.0">
                     <image>
@@ -31,7 +31,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button fx:id="teleporteur" layoutX="600.0" layoutY="343.0" mnemonicParsing="false" onAction="#ameliorationPouvoir" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionTeleporteur" prefHeight="142.0" prefWidth="103.0" style="-fx-background-color: transparent;" styleClass="boutonCompetence">
+        <Button fx:id="teleporteur" layoutX="600.0" layoutY="343.0" mnemonicParsing="false" onAction="#ameliorationPouvoir" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionTeleportGlobal" prefHeight="142.0" prefWidth="103.0" style="-fx-background-color: transparent;" styleClass="boutonCompetence">
             <graphic>
                 <ImageView fitHeight="141.0" fitWidth="109.0">
                     <image>

@@ -24,6 +24,9 @@ public class ControllerChoixCompetence extends Controller{
         super();
     }
 
+    /**
+     * Initialise la police de caractère à rosemary et la description puis crée un Utilisateur.
+     */
     public void initialize(){
         description.setFont(this.rosemary);
         description.setText("Veuillez choisir votre compétence");
@@ -31,24 +34,39 @@ public class ControllerChoixCompetence extends Controller{
     }
 
 
-
-    public void unsetDescription(MouseEvent mouseEvent) {
+    /**
+     * Met la description de base dans le shop
+     */
+    public void unsetDescription() {
         description.setText("Veuillez choisir votre compétence");
     }
 
-    public void setDescriptionTirer(MouseEvent mouseEvent) {
+    /**
+     * Met la description d'explication de la compétence tirer
+     */
+    public void setDescriptionTirer() {
         description.setText(utilisateur.tabCompetence[0][0]);
     }
 
-    public void setDescriptionFreeze(MouseEvent mouseEvent) {
+    /**
+     * Met la description d'explication de la compétence geler
+     */
+    public void setDescriptionFreeze() {
         description.setText(utilisateur.tabCompetence[0][4]);
     }
 
-    public void setDescriptionTeleporteur(MouseEvent mouseEvent) {
+    /**
+     * Met la description d'explication de la compétence de téléportation
+     */
+    public void setDescriptionTeleporteur() {
         description.setText(utilisateur.tabCompetence[0][8]);
     }
 
-
+    /**
+     * Réinitialise les anciennes compétences et confirme la première compétence choisi par l'utilisateur puis charge la scène jouer.
+     * @param actionEvent compétence choisie.
+     * @throws IOException si le fichier fxml n'est pas trouvé renvoie une exception.
+     */
     public void play(ActionEvent actionEvent) throws IOException {
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.reinitialiseCompetencesUtilisateur();

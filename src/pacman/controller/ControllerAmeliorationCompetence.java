@@ -36,6 +36,10 @@ public class ControllerAmeliorationCompetence extends Controller {
         else pointTeleporteur.setImage(null);
     }
 
+    /**
+     * Lorsque l'on clique sur le bouton de compétence dans le shop, améliore la compétence au prochain niveau si il a les points nécessaires.
+     * @param actionEvent Récupère les informations sur le bouton qui est cliqué.
+     */
     public void ameliorationPouvoir(ActionEvent actionEvent) {
         String image;
         switch (((Node) actionEvent.getSource()).getId()) {
@@ -71,37 +75,40 @@ public class ControllerAmeliorationCompetence extends Controller {
         }
     }
 
-    public void unsetDescription(MouseEvent mouseEvent) {
+    /**
+     * Remet la description de base dans le shop.
+     */
+    public void unsetDescription() {
         description.setText("Vous avez " + utilisateur.pointJoueur + " points\n\nVeuillez améliorer vos compétences, ou cliquer sur valider");
     }
 
-    public void setDescriptionTirer(MouseEvent mouseEvent) {
-        setDescriptionTirerGlobal();
-    }
-
-    public void setDescriptionFreeze(MouseEvent mouseEvent) {
-        setDescriptionFreezeGlobal();
-    }
-
-    public void setDescriptionTeleporteur(MouseEvent mouseEvent) {
-        setDescriptionTeleportGlobal();
-    }
-
+    /**
+     * Met la description du sort Tirer dans le shop.
+     */
     public void setDescriptionTirerGlobal(){
         String text = utilisateur.tabCompetence[utilisateur.niveauCompetenceTirer+1][0];
         if (utilisateur.niveauCompetenceTirer < 3) text+= "\n prix : "+utilisateur.tabCompetence[utilisateur.niveauCompetenceTirer+1][1];
         description.setText(text);
     }
+
+    /**
+     * Met la description du sort Geler dans le shop.
+     */
     public void setDescriptionFreezeGlobal(){
         String text = utilisateur.tabCompetence[utilisateur.niveauCompetenceFreeze+1][4];
         if (utilisateur.niveauCompetenceFreeze < 3) text+= "\n prix : "+utilisateur.tabCompetence[utilisateur.niveauCompetenceFreeze+1][5];
         description.setText(text);
     }
+
+    /**
+     * Met la description du sort Teleporteur dans le shop.
+     */
     public void setDescriptionTeleportGlobal(){
         String text = utilisateur.tabCompetence[utilisateur.niveauCompetenceTeleporteur+1][8];
         if (utilisateur.niveauCompetenceTeleporteur < 3) text+= "\n prix : "+utilisateur.tabCompetence[utilisateur.niveauCompetenceTeleporteur+1][9];
         description.setText(text);
     }
+
 
     public void switchToScene(ActionEvent actionEvent) throws IOException {
         utilisateur.ecritureUtilisateur();

@@ -1,17 +1,12 @@
 package pacman.model.deplacement;
 
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import pacman.controller.Controller;
 import pacman.controller.ControllerJouer;
 import pacman.model.Map;
 import pacman.model.Utilisateur;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class UpdateRender extends Thread{
     private final FantomeGroup fantomeGroup;
@@ -132,7 +127,7 @@ public class UpdateRender extends Thread{
             if (MAP.aGagne()){
                 UTILISATEUR.pointJoueur=PACMAN.score;
                 UTILISATEUR.ecritureUtilisateur();
-                try {controllerJouer.switchTosceneAmelioration();} catch (IOException e) {e.printStackTrace();}
+                try {controllerJouer.switchToSceneAmelioration();} catch (IOException e) {e.printStackTrace();}
             }
             //affichage des compétences
             renderCompetences();
@@ -144,15 +139,23 @@ public class UpdateRender extends Thread{
         this.LABEL_SCORE.setText(String.valueOf(PACMAN.score));
     }
 
+    /**
+     * si le fantome est apeuré et sur pacman on le passe en comportement MORT et on augmente les points selon le nombre de fantôme mangé
+     * sinon si le fantôme n'est ni appeuré ni mort, Pacman perd une vie, on reinitialise la postion des fantômes et de Pacman et on joue la musique de mort.
+     */
     public void fantomeSurPacman() {
         for (Fantome fantome : fantomeGroup.fantomes) {
             if (fantome.estSurPacman()) {
                 if (fantome.etat == Fantome.ValeurEtat.APPEURE) {
-                    fantome.mort = false;
                     fantome.etat = Fantome.ValeurEtat.MORT;
                     fantome.velocityMultiplicator = 3;
-                    PACMAN.score += 200 * Math.pow(2.0, PACMAN.compteurFantomeMange);
-                    if(PACMAN.compteurFantomeMange < 4) PACMAN.compteurFantomeMange++;
+                    if(PACMAN.compteurFantomeMange < 4) {
+                        PACMAN.score += 100 * Math.pow(2.0, PACMAN.compteurFantomeMange);
+                        PACMAN.compteurFantomeMange++;
+                    }else{
+                        PACMAN.score += 1000;
+                        PACMAN.compteurFantomeMange = 0;
+                    }
                 } else if (fantome.etat != Fantome.ValeurEtat.MORT){
                     PACMAN.compteurFantomeMange = 0;
                     PACMAN.initPosition();
