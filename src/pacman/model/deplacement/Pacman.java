@@ -318,6 +318,9 @@ public class Pacman extends Deplacement {
         controllerJouer.fantomeGroup.setVulnerable();
     }
 
+    /**
+     * Si un téléporteur est posé, modifie les coordonnees de pacman. Sinon pose un téléporteur
+     */
     public void competenceTeleportation() {
         if (!teleporteurPose && score >= pertePointsTeleporte && competenceTeleporteurPrete) {
             teleporteurPose = true;
@@ -333,6 +336,9 @@ public class Pacman extends Deplacement {
         }
     }
 
+    /**
+     * Active la compétence freeze et lance son temps de recharge
+     */
     public void competenceFreeze() {
         debutTempsDeRechargeCompetenceFreeze = System.currentTimeMillis();
         competenceFreezePrete = false;
@@ -343,6 +349,9 @@ public class Pacman extends Deplacement {
         pertePoints(pertePointsFreeze);
     }
 
+    /**
+     * Créé et affiche le projectile et lance le temps de recharge de la compétence
+     */
     public void competenceProjectile() {
         debutTempsDeRechargeCompetenceTirer = System.currentTimeMillis();
         competenceTirerPrete = false;
@@ -371,6 +380,10 @@ public class Pacman extends Deplacement {
         Platform.runLater(() -> this.getChildren().add(projectile.getImageView()));
     }
 
+    /**
+     * Détecte si le projectile de pacman est sur la même case qu'un fantôme
+     * @return vrai si le projectile est sur la même case qu'un fantôme, sinon return faux
+     */
     public boolean projectileSurFantome() {
         for (Fantome fantome : controllerJouer.fantomeGroup.fantomes) {
             if (!fantome.mort && (fantome.getCoordFantome().equals(projectile.getPosX() / 20 + "/" + projectile.getPosY() / 20) || (((fantome.getPosX() - projectile.getPosX()) < 18) && ((fantome.getPosX() - projectile.getPosX()) >= 0) && ((fantome.getPosY() - projectile.getPosY()) < 18) && ((fantome.getPosY() - projectile.getPosY()) >= 0)))){
@@ -382,6 +395,9 @@ public class Pacman extends Deplacement {
         return false;
     }
 
+    /**
+     * Update les coordonnées du projectile et détecte les collisions
+     */
     public void updateProjectile() {
 
         switch ((int) projectileRotate) {
@@ -414,6 +430,9 @@ public class Pacman extends Deplacement {
         }
     }
 
+    /**
+     * Actualise l'affichage du projectile
+     */
     public void renderProjectile() {
         if(this.projectile.getImageView() != null) {
             projectile.affichage();
@@ -423,12 +442,18 @@ public class Pacman extends Deplacement {
 
     // ---------------------  CONTREPARTIES DES POUVOIRS   ------------------------------------------
 
+    /**
+     * Les touches de pacman sont inversées pendant un certain temps
+     */
     public void touchesInversees() {
         this.touchesInversees = true;
         tempsDebutTouchesInversees = System.currentTimeMillis();
         Platform.runLater(() -> setImageView(imagePacmanEtourdi));
     }
 
+    /**
+     * Pacman se déplace 2x plus lentement et son image est modifiée
+     */
     public void ralentissement() {
         if (powerBoost) this.velocityMultiplicator = velocityMultiplicatorInitial;
         else this.velocityMultiplicator = velocityMultiplicatorInitial/2;
@@ -437,6 +462,10 @@ public class Pacman extends Deplacement {
         Platform.runLater(() -> setImageView(imagePacmanGele));
     }
 
+    /**
+     * Enlève des points au score de pacman
+     * @param pointsPerdus le nombre de points que pacman perd
+     */
     public void pertePoints(int pointsPerdus) {
         this.score -= pointsPerdus;
     }
