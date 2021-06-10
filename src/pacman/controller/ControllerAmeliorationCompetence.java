@@ -40,7 +40,6 @@ public class ControllerAmeliorationCompetence extends Controller {
         String image;
         switch (((Node) actionEvent.getSource()).getId()) {
             case "tirer":
-                System.out.println(utilisateur.pointJoueur);
                 if ((utilisateur.pointJoueur - Integer.parseInt(utilisateur.tabCompetence[utilisateur.niveauCompetenceTirer+1][1]))>=0){
                     if (utilisateur.niveauCompetenceTirer<3) utilisateur.niveauCompetenceTirer ++;
                     setDescriptionTirerGlobal();
@@ -56,14 +55,17 @@ public class ControllerAmeliorationCompetence extends Controller {
                     setDescriptionFreezeGlobal();
                     image = "/pacman/ressources/image/Ecran_Competence/groupePoint" + (utilisateur.niveauCompetenceFreeze) + "Vide.png";
                     if (utilisateur.niveauCompetenceFreeze>-1) pointFreeze.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(image))));
+                    utilisateur.pointJoueur-= Integer.parseInt(utilisateur.tabCompetence[utilisateur.niveauCompetenceFreeze+1][5]);
+
                 }
                 break;
             case "teleporteur":
-                if ((utilisateur.pointJoueur - Integer.parseInt(utilisateur.tabCompetence[utilisateur.niveauCompetenceFreeze+1][9]))>=0){
+                if ((utilisateur.pointJoueur - Integer.parseInt(utilisateur.tabCompetence[utilisateur.niveauCompetenceTeleporteur+1][9]))>=0){
                     if (utilisateur.niveauCompetenceTeleporteur<3) utilisateur.niveauCompetenceTeleporteur ++;
                     setDescriptionTeleportGlobal();
                     image = "/pacman/ressources/image/Ecran_Competence/groupePoint" + (utilisateur.niveauCompetenceTeleporteur) + "Vide.png";
                     if (utilisateur.niveauCompetenceTeleporteur>-1) pointTeleporteur.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(image))));
+                    utilisateur.pointJoueur-= Integer.parseInt(utilisateur.tabCompetence[utilisateur.niveauCompetenceTeleporteur+1][9]);
                 }
                 break;
         }
