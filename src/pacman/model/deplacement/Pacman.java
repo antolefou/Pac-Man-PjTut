@@ -489,6 +489,9 @@ public class Pacman extends Deplacement {
         }
     }
 
+    /**
+     * Met une compétence prête si son temps de recharge est terminé
+     */
     public void tempsDeRecharge() {
         long tempsDeRecharge = System.currentTimeMillis();
         if (!competenceTeleporteurPrete) {
@@ -500,6 +503,22 @@ public class Pacman extends Deplacement {
         }
     }
 
+    /**
+     * Réinitialise le temps de recharge des sorts déverouillés
+     */
+    public void reinitialiseTempsDeRecharge() {
+        if (competenceTirerDeverouillee) competenceTirerPrete = true;
+        if (competenceFreezeDeverouillee) competenceFreezePrete = true;
+        if (competenceTeleporteurDeverouillee) competenceTeleporteurPrete = true;
+
+        debutTempsDeRechargeCompetenceTirer = 0;
+        debutTempsDeRechargeCompetenceFreeze = 0;
+        debutTempsDeRechargeCompetenceTeleporteur = 0;
+    }
+
+    /**
+     * Réinitialise tous les pouvoirs activés
+     */
     public void reinitialisePowers() {
         if (powerBoost) {
             powerBoost = false;

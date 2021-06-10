@@ -165,13 +165,13 @@ public class ControllerJouer extends Controller {
 
     public void setAffichagePrixComp(){
         int niveauTirer = utilisateur.niveauCompetenceTirer;
-        int niveauFreezz = utilisateur.niveauCompetenceFreeze;
+        int niveauFreeze = utilisateur.niveauCompetenceFreeze;
         int niveauTeleporteur = utilisateur.niveauCompetenceTeleporteur;
         if (niveauTirer > -1){
             prixCompetenceTirer.setText(utilisateur.tabCompetence[niveauTirer][2]);
         }
-        if (niveauFreezz > -1){
-            prixCompetenceFreeze.setText(utilisateur.tabCompetence[niveauFreezz][6]);
+        if (niveauFreeze > -1){
+            prixCompetenceFreeze.setText(utilisateur.tabCompetence[niveauFreeze][6]);
 
         }
         if (niveauTeleporteur > -1){
@@ -182,15 +182,15 @@ public class ControllerJouer extends Controller {
 
     public void setPrixCompDansPac(){
         int niveauTirer = utilisateur.niveauCompetenceTirer;
-        int niveauFreezz = utilisateur.niveauCompetenceFreeze;
+        int niveauFreeze = utilisateur.niveauCompetenceFreeze;
         int niveauTeleporteur = utilisateur.niveauCompetenceTeleporteur;
         if (niveauTirer > -1){
             System.out.println(this.pacman.pertePointsTirer);
             this.pacman.pertePointsTirer = Integer.parseInt(utilisateur.tabCompetence[niveauTirer][2]);
             System.out.println(this.pacman.pertePointsTirer);
         }
-        if (niveauFreezz > -1){
-            this.pacman.pertePointsFreeze = Integer.parseInt(utilisateur.tabCompetence[niveauFreezz][6]);
+        if (niveauFreeze > -1){
+            this.pacman.pertePointsFreeze = Integer.parseInt(utilisateur.tabCompetence[niveauFreeze][6]);
 
         }
         if (niveauTeleporteur > -1){

@@ -157,6 +157,7 @@ public class UpdateRender extends Thread{
                     PACMAN.compteurFantomeMange = 0;
                     PACMAN.initPosition();
                     PACMAN.nbVie--;
+                    PACMAN.reinitialiseTempsDeRecharge();
                     PACMAN.reinitialisePowers();
                     this.controllerJouer.playMusic("death", false);
                     fantomeGroup.reinitialisePosition();
