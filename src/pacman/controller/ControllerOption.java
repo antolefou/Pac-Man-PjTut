@@ -3,6 +3,9 @@ package pacman.controller;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 
+import java.awt.dnd.MouseDragGestureRecognizer;
+import java.awt.event.MouseEvent;
+
 public class ControllerOption extends Controller{
     //valeur
     public double valueSon;
@@ -24,7 +27,10 @@ public class ControllerOption extends Controller{
         sliderFPS.setValue(utilisateur.getFps());
     }
 
-    public void valeurSliderSon() {
+    /**
+     * Change la variable du son ou des fps selon la valeur du slider dans le jeu.
+     */
+    public void valeurSliders() {
         valueSon = sliderSon.getValue();
         valueFPS = sliderFPS.getValue();
         utilisateur.setSon((int)valueSon);
