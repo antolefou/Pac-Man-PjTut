@@ -1,4 +1,4 @@
-<h1 align="center">Pacman projet-tut</h1>
+# Pac-Man-PjTut
 
 <!-- TABLE OF CONTENTS -->
 ## Table des matières
@@ -40,6 +40,10 @@ Pour changer les VM options RUN -> EDIT CONFIGURATION :
 ## Contact
 
 En cas de problème ou autre, vous pouvez me contacter à l'adresse mail suivante: Antoine.jean@edu.univ-fcomte.fr.
+
+#### faut être connecté a internet pour lancer le projet
+
+//////////////////////////////////////////////
 
 Programe créer par :
 
