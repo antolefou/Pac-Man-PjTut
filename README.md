@@ -2,7 +2,6 @@
 
 <!-- TABLE OF CONTENTS -->
 ## Table des matières
-* [À propos du projet](#à-propos-du-projet)
 * [Règles du jeu](#règles-du-jeu)
 * [Installation](#installation)
 * [Contact](#contact)
@@ -27,11 +26,17 @@ Pac-Man récupère des pac-gommes et des bonus,
 plus le score du joueur augmente.
 
 ## Installation
-Pour lancer le programme dans INTELIJ IDEA 
+Pour lancer le programme dans INTELLIJ IDEA 
 
-1 - Telecharger la bibliothèque javaFX
+1 - Telecharger les bibliothèque s
+- openjfx-15.0.1_linux-x64_bin-sdk
+- jgrapht-1.5.1
+
+2 - Ajouter les bibliothèques dans File -> Project Structure -> Libraries.
+
+3 - Allez dans File -> Project Structure -> Projet et mettre le JDK par default et mettre une dossier de sortie de compilation.
  
-2 - Ajouter la ligne ci dessous aux VM options
+4 - Ajouter la ligne ci dessous aux VM options
 
 Pour changer les VM options RUN -> EDIT CONFIGURATION : 
 
