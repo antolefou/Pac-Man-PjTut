@@ -20,7 +20,7 @@ public class Controller {
     public static Stage primaryStage;
     public static ModelMusic modelMusic;
     public Utilisateur utilisateur;
-    public Font rosemary;
+    public final Font rosemary;
 
     /**
      * Controller (classe mère)

@@ -1,15 +1,14 @@
 package pacman.model;
 
-import java.util.* ;
 import java.util.ArrayList;
 
 public class MapGenerator {
 
     public int[][] map = new int[13][30];
     public String[][] mapfinal = new String[25][30];
-    public ArrayList<Integer> constructorX = new ArrayList<Integer>();
-    public ArrayList<Integer> constructorY = new ArrayList<Integer>();
-    public ArrayList<String> constructorDir = new ArrayList<String>();
+    public ArrayList<Integer> constructorX = new ArrayList<>();
+    public ArrayList<Integer> constructorY = new ArrayList<>();
+    public ArrayList<String> constructorDir = new ArrayList<>();
 
 
     public MapGenerator() {
@@ -196,71 +195,71 @@ public class MapGenerator {
             int x = constructorX.get(0);
             int y = constructorY.get(0);
             int nbDeplacement = (int) (Math.random()*(6-4+1))+4;
-            switch(constructorDir.get(0)) {
-                case "d":
-                    if (x>11 || map[x+1][y] == 2 || map[x+1][y] == 1)
+            switch (constructorDir.get(0)) {
+                case "d" -> {
+                    if (x > 11 || map[x + 1][y] == 2 || map[x + 1][y] == 1)
                         break;
-                    for (int j=0; j<nbDeplacement; j++) {
-                        if (x<12 && map[x+1][y] != 1) {
-                            map[x+1][y] = 2;
-                            x ++;
+                    for (int j = 0; j < nbDeplacement; j++) {
+                        if (x < 12 && map[x + 1][y] != 1) {
+                            map[x + 1][y] = 2;
+                            x++;
                         }
                     }
                     constructorX.add(x);
                     constructorY.add(y);
-                    if (Math.random() > 0.5 || y>28 || map[x][y+1] == 1)
+                    if (Math.random() > 0.5 || y > 28 || map[x][y + 1] == 1)
                         constructorDir.add("h");
                     else
                         constructorDir.add("b");
-                    break;
-                case "b":
-                    if (map[x][y+1] == 2 || map[x][y+1] == 1)
+                }
+                case "b" -> {
+                    if (map[x][y + 1] == 2 || map[x][y + 1] == 1)
                         break;
-                    for (int j=0; j<nbDeplacement; j++) {
-                        if (y<28 && map[x][y+1] != 1) {
-                            map[x][y+1] = 2;
-                            y ++;
+                    for (int j = 0; j < nbDeplacement; j++) {
+                        if (y < 28 && map[x][y + 1] != 1) {
+                            map[x][y + 1] = 2;
+                            y++;
                         }
                     }
                     constructorX.add(x);
                     constructorY.add(y);
-                    if (Math.random() > 0.5 || x<1 || map[x-1][y] == 1)
+                    if (Math.random() > 0.5 || x < 1 || map[x - 1][y] == 1)
                         constructorDir.add("d");
                     else
                         constructorDir.add("g");
-                    break;
-                case "g":
-                    if (map[x-1][y] == 2 || map[x-1][y] == 1)
+                }
+                case "g" -> {
+                    if (map[x - 1][y] == 2 || map[x - 1][y] == 1)
                         break;
-                    for (int j=0; j<nbDeplacement; j++) {
-                        if (x>1 && map[x-1][y] != 1) {
-                            map[x-1][y] = 2;
-                            x --;
+                    for (int j = 0; j < nbDeplacement; j++) {
+                        if (x > 1 && map[x - 1][y] != 1) {
+                            map[x - 1][y] = 2;
+                            x--;
                         }
                     }
                     constructorX.add(x);
                     constructorY.add(y);
-                    if (Math.random() > 0.5 || y>28 || map[x][y+1] == 1)
+                    if (Math.random() > 0.5 || y > 28 || map[x][y + 1] == 1)
                         constructorDir.add("h");
                     else
                         constructorDir.add("b");
-                    break;
-                case "h":
-                    if (map[x][y-1] == 2 || map[x][y-1] == 1)
+                }
+                case "h" -> {
+                    if (map[x][y - 1] == 2 || map[x][y - 1] == 1)
                         break;
-                    for (int j=0; j<nbDeplacement; j++) {
-                        if (y>1 && map[x][y-1] != 1) {
-                            map[x][y-1] = 2;
-                            y --;
+                    for (int j = 0; j < nbDeplacement; j++) {
+                        if (y > 1 && map[x][y - 1] != 1) {
+                            map[x][y - 1] = 2;
+                            y--;
                         }
                     }
                     constructorX.add(x);
                     constructorY.add(y);
-                    if (Math.random() > 0.5 || x<1 || map[x-1][y] == 1)
+                    if (Math.random() > 0.5 || x < 1 || map[x - 1][y] == 1)
                         constructorDir.add("d");
                     else
                         constructorDir.add("g");
-                    break;
+                }
             }
 
 
@@ -363,7 +362,6 @@ public class MapGenerator {
         for (int i=0; i<13; i++) {
             for (int j = 0; j < 30; j++) {
                 tabAReturn[i][j] = this.map[i][j];
-
             }
 
         }
@@ -394,14 +392,11 @@ public class MapGenerator {
         this.affineMap();
         creerCarreMilieu();
         int[][] mapPourAffine = this.ajouteBordure2D();
-        int count;
-            for (int k = 0 ; k < 60 ; k++){
-                count = 0;
-                for (int i=1; i<mapPourAffine.length-1; i++) {
+        for (int k = 0 ; k < 60 ; k++){
+            for (int i=1; i<mapPourAffine.length-1; i++) {
                     for (int j = 1; j < mapPourAffine[0].length - 1; j++) {
                         if (estRemplacable(mapPourAffine,i,j)) {
                             mapPourAffine[i][j] = 0;
-                            count++;
                         }
                     }
                 }
@@ -717,7 +712,7 @@ public class MapGenerator {
                     mapfinal[x][y] = "B";
                     nbBoost--;
                 }
-            } else  if (nbFruit != 0) {
+            } else {
                 if (mapfinal[x][y].equals("G")) {
                     mapfinal[x][y] = fruit;
                     nbFruit--;
