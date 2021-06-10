@@ -571,7 +571,7 @@ public class Pacman extends Deplacement {
     }
 
     /**
-     * Réinitialise le temps de recharge des sorts déverouillés
+     * Réinitialise le temps de recharge des compétences déverouillées et les met prêtes
      */
     public void reinitialiseTempsDeRecharge() {
         if (competenceTirerDeverouillee) competenceTirerPrete = true;
