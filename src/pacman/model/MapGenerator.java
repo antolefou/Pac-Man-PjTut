@@ -683,14 +683,5 @@ public class MapGenerator {
         return this.mapfinal;
     }
 
-    public void afficheMapPasFini2(){
-        for (int y=0; y<map[0].length; y++) {
-            for (int x=0; x<map.length; x++) {
-                System.out.print(this.map[x][y]);
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
 
 }

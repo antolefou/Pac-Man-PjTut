@@ -32,6 +32,11 @@ public class ModelMusic {
     }
 
 
+    /**
+     * Permet de savoir si un media est en train d'être jouer
+     * @param key
+     * @return true si il joue sinon false
+     */
     public boolean isPlaying(String key) {
         return mediaPlayerHashMap.get(key).getStatus() == MediaPlayer.Status.PLAYING;
     }

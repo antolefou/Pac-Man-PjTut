@@ -20,6 +20,9 @@ public class FantomeBrindille extends Fantome {
         this.initialisation();
     }
 
+    /**
+     * ia fuyarde 1 fois sur 11 sinon génère une liste de coordonnée du chemin entier pour allez vers Pac-man à un instant T.
+     */
     public void ia(){
         if(this.compteur<10) {
             List<String> choixPossible = Graphs.neighborListOf(map.getG(), getCoordFantome());

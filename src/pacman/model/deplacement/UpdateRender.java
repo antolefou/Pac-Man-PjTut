@@ -169,6 +169,9 @@ public class UpdateRender extends Thread{
         }
     }
 
+    /**
+     * donne la classe de pacman à tout les fantômes.
+     */
     public void addPacmanToFantome() {
         for (Fantome fantome : fantomeGroup.fantomes) {
             fantome.setMap(MAP);
@@ -176,6 +179,10 @@ public class UpdateRender extends Thread{
         }
     }
 
+    /**
+     * Permet d'afficher le cooldown des compétences si il en a et grise l'image dans le fond
+     * sinon affiche l'image avec une opacité max.
+     */
     public void renderCompetences() {
         //tirer
         if (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceTirer < 1000 * PACMAN.tempsDeRechargeCompetenceTirer) {

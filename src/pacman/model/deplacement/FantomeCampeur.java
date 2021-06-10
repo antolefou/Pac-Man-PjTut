@@ -16,6 +16,11 @@ public class FantomeCampeur extends Fantome {
         this.initialisation();
         this.deplacementActuel = deplacements.GAUCHE;
     }
+
+    /**
+     * Permet de savoir si il voit pacman
+     * @return
+     */
     public boolean vueSurPacman() {
         for (int i=0; i < 23; i++) {
             String posPacman = Math.round(pacman.getPosX() * 0.0499) + "/" + Math.round(pacman.getPosY() * 0.0499);
@@ -59,6 +64,13 @@ public class FantomeCampeur extends Fantome {
         return false;
     }
 
+    /**
+     * ia qui par ordre de préfèrence va  :
+     * - allez vers pacman si il le voit
+     * - allez dans le coin en haut à gauche si il n'est pas dans sa zone (partie gauche de la map)
+     * - se déplacer aléatoirement
+     * coordonée par cordonnée.
+     */
     public void ia(){
         if (vueSurPacman()) this.listeCoordoneDeplacementFant = dijkstra(false, false, getCoordFantome(), getCoordPacman());
         else if (getPosX() > 247) { //IA mode campeur

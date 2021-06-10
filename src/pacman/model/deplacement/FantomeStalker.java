@@ -18,6 +18,9 @@ public class FantomeStalker extends Fantome {
         this.initialisation();
     }
 
+    /**
+     * Fantôme qui suit pacman 10 fois sur 14 sinon fais des déplacements aléatoires.
+     */
     public void ia() {
         if (compteur < 10) {
             listeCoordoneDeplacementFant = dijkstra(false, false, this.coordoneeActuel, getCoordPacman());
