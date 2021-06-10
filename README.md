@@ -28,7 +28,7 @@ plus le score du joueur augmente.
 ## Installation
 Pour lancer le programme dans INTELLIJ IDEA 
 
-1 - Telecharger les bibliothèque s
+1 - Telecharger les bibliothèques
 - openjfx-15.0.1_linux-x64_bin-sdk
 - jgrapht-1.5.1
 
