@@ -146,7 +146,7 @@ public class UpdateRender extends Thread{
     public void fantomeSurPacman() {
         for (Fantome fantome : fantomeGroup.fantomes) {
             if (fantome.estSurPacman()) {
-                if (fantome.etat == Fantome.ValeurEtat.APPEURE) {
+                if (fantome.etat == Fantome.ValeurEtat.APPEURE && PACMAN.peutManger) {
                     fantome.etat = Fantome.ValeurEtat.MORT;
                     fantome.velocityMultiplicator = 3;
                     if(PACMAN.compteurFantomeMange < 4) {
@@ -156,7 +156,7 @@ public class UpdateRender extends Thread{
                         PACMAN.score += 1000;
                         PACMAN.compteurFantomeMange = 0;
                     }
-                } else if (fantome.etat != Fantome.ValeurEtat.MORT){
+                } else if (fantome.etat != Fantome.ValeurEtat.MORT && fantome.etat!= Fantome.ValeurEtat.APPEURE){
                     PACMAN.compteurFantomeMange = 0;
                     PACMAN.initPosition();
                     PACMAN.nbVie--;

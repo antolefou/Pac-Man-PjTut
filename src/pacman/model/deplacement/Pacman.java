@@ -60,6 +60,8 @@ public class Pacman extends Deplacement {
     public int pertePointsTirer;
     public int pertePointsFreeze;
     public int pertePointsTeleporte;
+    public boolean peutManger;
+    public long debutTempsPeutManger;
 
     public int compteurFantomeMange;
 
@@ -83,6 +85,8 @@ public class Pacman extends Deplacement {
         this.teleporteurPose = false;
         this.freeze = false;
         tempsDebutFreeze = 0;
+
+        this.peutManger = true;
 
         this.projectileLance = false;
         this.compteurFantomeMange = 0;
@@ -251,7 +255,7 @@ public class Pacman extends Deplacement {
                 comparaisonX = 7;
                 break;
         }
-        if (pacmanX % 20 == comparaisonX && pacmanY % 20 == comparaisonY) {
+        if (pacmanX % 20 == comparaisonX && pacmanY % 20 == comparaisonY && peutManger) {
             int x = (((pacmanX / 20) + 25) % 25 + addX)%25;
             int y = pacmanY / 20 + addY;
             if (map.grid[x][y] == Map.ValeurCase.GOMME) {
@@ -355,6 +359,8 @@ public class Pacman extends Deplacement {
     public void competenceProjectile() {
         debutTempsDeRechargeCompetenceTirer = System.currentTimeMillis();
         competenceTirerPrete = false;
+        peutManger = false;
+        debutTempsPeutManger = System.currentTimeMillis();
         Image imageProjectile= new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/projectile.gif")));
         projectileLance = true;
         projectile = new Deplacement(getPosX(), getPosY());
@@ -516,6 +522,12 @@ public class Pacman extends Deplacement {
                 });
             }
         }
+        if (!peutManger) {
+            long tempsNePeutPlusManger = System.currentTimeMillis();
+            if (tempsNePeutPlusManger-debutTempsPeutManger > 1000 * 2) {
+                peutManger = true;
+            }
+        }
     }
 
     /**
@@ -565,6 +577,8 @@ public class Pacman extends Deplacement {
         }
         if(ralentissement) ralentissement = false;
         velocityMultiplicator = velocityMultiplicatorInitial;
+
+        peutManger = true;
 
         Platform.runLater(() -> this.setImageView(imagePacman));
     }
