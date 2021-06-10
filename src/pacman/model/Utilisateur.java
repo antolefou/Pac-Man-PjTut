@@ -53,7 +53,7 @@ static String pseudoUtilisateur;
         tabCompetence[0][7] = "15";
 
         // --------- Téléporteur -----------
-        tabCompetence[0][8] = "Cette compétence lors de la première utilisation dépose un téléporteur, lors de la deuxième utilisation Pac-Man est téléporté sur le téléporteur.";
+        tabCompetence[0][8] = "Cette compétence donne a pacman la possibilité de se teleporter, il pose une stelle et peut y retourner quand il veux.";
         tabCompetence[0][9] = "10000";
         tabCompetence[0][10] = "500";
         tabCompetence[0][11] = "30";
