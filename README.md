@@ -26,7 +26,7 @@ fantômes en récupérant des super pac-gommes. Plus
 Pac-Man récupère des pac-gommes et des bonus,
 plus le score du joueur augmente.
 
-## Instalation
+## Installation
 Pour lancer le programme dans INTELIJ IDEA 
 
 1 - Telecharger la bibliothèque javaFX
@@ -37,13 +37,14 @@ Pour changer les VM options RUN -> EDIT CONFIGURATION :
 
     --module-path ${PATH_TO_FX} --add-modules javafx.controls,javafx.fxml,javafx.media
 
+#### Il faut être connecté a internet pour lancer le projet
+
 ## Contact
 
 En cas de problème ou autre, vous pouvez me contacter à l'adresse mail suivante: Antoine.jean@edu.univ-fcomte.fr.
 
-#### faut être connecté a internet pour lancer le projet
 
-//////////////////////////////////////////////
+
 
 Programe créer par :
 
