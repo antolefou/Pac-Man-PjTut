@@ -34,7 +34,7 @@ Pour lancer le programme dans INTELLIJ IDEA
 
 2 - Ajouter les bibliothèques dans File -> Project Structure -> Libraries.
 
-3 - Allez dans File -> Project Structure -> Projet et mettre le JDK par default et mettre une dossier de sortie de compilation.
+3 - Allez dans File -> Project Structure -> Projet et mettre le JDK par default et mettre un dossier de sortie de compilation.
  
 4 - Ajouter la ligne ci dessous aux VM options
 
@@ -42,7 +42,7 @@ Pour changer les VM options RUN -> EDIT CONFIGURATION :
 
     --module-path ${PATH_TO_FX} --add-modules javafx.controls,javafx.fxml,javafx.media
 
-#### Il faut être connecté a internet pour lancer le projet
+#### Il faut être connecté à internet pour lancer le projet
 
 ## Contact
 
