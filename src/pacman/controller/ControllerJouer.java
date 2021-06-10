@@ -151,6 +151,8 @@ public class ControllerJouer extends Controller {
         } else if (code == KeyCode.SPACE) {
             if (pacman.score >= pacman.pertePointsTirer && pacman.competenceTirerPrete && !pacman.projectileLance && pacman.competenceTirerDeverouillee) pacman.competenceProjectile();
         } else if (code == KeyCode.M) {
+            utilisateur.pointJoueur = pacman.score;
+            utilisateur.ecritureUtilisateur();
             switchTosceneAmelioration();
             if (pacman.score >= pacman.pertePointsTirer && pacman.competenceTirerPrete && !pacman.projectileLance && pacman.competenceTeleporteurDeverouillee) {
                 pacman.competenceProjectile();
