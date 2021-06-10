@@ -18,8 +18,6 @@ import java.util.Objects;
 
 import pacman.model.*;
 
-import static java.lang.Integer.parseInt;
-
 public class ControllerJouer extends Controller {
     @FXML public Pacman pacman;
     @FXML public FantomeGroup fantomeGroup;
@@ -160,6 +158,8 @@ public class ControllerJouer extends Controller {
                 System.out.println(pacman.score >= pacman.pertePointsTirer );
             }
 
+        } else if (code == KeyCode.I) {
+            pacman.score += 10000;
         }
     }
 

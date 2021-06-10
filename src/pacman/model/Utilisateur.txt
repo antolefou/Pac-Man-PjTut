@@ -1,7 +1,7 @@
 fps,60
 son,0
-niveauCompetenceTirer,0
-niveauCompetenceFreeze,-1
+niveauCompetenceTirer,-1
+niveauCompetenceFreeze,0
 niveauCompetenceTeleporteur,-1
-pointJoueur,20
-niveauUtilisateur,3
+pointJoueur,10
+niveauUtilisateur,2
