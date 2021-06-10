@@ -37,23 +37,24 @@ public class ControllerAmeliorationCompetence extends Controller {
     }
 
     public void ameliorationPouvoir(ActionEvent actionEvent) {
+        String text;
         String image;
         switch (((Node) actionEvent.getSource()).getId()) {
             case "tirer":
                 if (utilisateur.niveauCompetenceTirer<3) utilisateur.niveauCompetenceTirer ++;
-                description.setText(utilisateur.tabCompetence[utilisateur.niveauCompetenceTirer+1][0]);
+                setDescriptionTirerGlobal();
                 image = "/pacman/ressources/image/Ecran_Competence/groupePoint" + (utilisateur.niveauCompetenceTirer) + "Vide.png";
                 if (utilisateur.niveauCompetenceTirer>-1) pointTirer.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(image))));
                 break;
             case "freeze":
                 if (utilisateur.niveauCompetenceFreeze<3) utilisateur.niveauCompetenceFreeze ++;
-                description.setText(utilisateur.tabCompetence[utilisateur.niveauCompetenceFreeze+1][4]);
+                setDescriptionFreezeGlobal();
                 image = "/pacman/ressources/image/Ecran_Competence/groupePoint" + (utilisateur.niveauCompetenceFreeze) + "Vide.png";
                 if (utilisateur.niveauCompetenceFreeze>-1) pointFreeze.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(image))));
                 break;
             case "teleporteur":
                 if (utilisateur.niveauCompetenceTeleporteur<3) utilisateur.niveauCompetenceTeleporteur ++;
-                description.setText(utilisateur.tabCompetence[utilisateur.niveauCompetenceTeleporteur+1][8]);
+                setDescriptionTeleportGlobal();
                 image = "/pacman/ressources/image/Ecran_Competence/groupePoint" + (utilisateur.niveauCompetenceTeleporteur) + "Vide.png";
                 if (utilisateur.niveauCompetenceTeleporteur>-1) pointTeleporteur.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(image))));
                 break;
@@ -65,15 +66,31 @@ public class ControllerAmeliorationCompetence extends Controller {
     }
 
     public void setDescriptionTirer(MouseEvent mouseEvent) {
-        description.setText(utilisateur.tabCompetence[utilisateur.niveauCompetenceTirer+1][0]);
+        setDescriptionTirerGlobal();
     }
 
     public void setDescriptionFreeze(MouseEvent mouseEvent) {
-        description.setText(utilisateur.tabCompetence[utilisateur.niveauCompetenceFreeze+1][4]);
+        setDescriptionFreezeGlobal();
     }
 
     public void setDescriptionTeleporteur(MouseEvent mouseEvent) {
-        description.setText(utilisateur.tabCompetence[utilisateur.niveauCompetenceTeleporteur+1][8]);
+        setDescriptionTeleportGlobal();
+    }
+
+    public void setDescriptionTirerGlobal(){
+        String text = utilisateur.tabCompetence[utilisateur.niveauCompetenceTirer+1][0];
+        if (utilisateur.niveauCompetenceTirer < 3) text+= "\n prix : "+utilisateur.tabCompetence[utilisateur.niveauCompetenceTirer+1][1];
+        description.setText(text);
+    }
+    public void setDescriptionFreezeGlobal(){
+        String text = utilisateur.tabCompetence[utilisateur.niveauCompetenceFreeze+1][4];
+        if (utilisateur.niveauCompetenceFreeze < 3) text+= "\n prix : "+utilisateur.tabCompetence[utilisateur.niveauCompetenceFreeze+1][5];
+        description.setText(text);
+    }
+    public void setDescriptionTeleportGlobal(){
+        String text = utilisateur.tabCompetence[utilisateur.niveauCompetenceTeleporteur+1][8];
+        if (utilisateur.niveauCompetenceTeleporteur < 3) text+= "\n prix : "+utilisateur.tabCompetence[utilisateur.niveauCompetenceTeleporteur+1][9];
+        description.setText(text);
     }
 
     public void switchToScene(ActionEvent actionEvent) throws IOException {

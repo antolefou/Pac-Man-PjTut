@@ -3,5 +3,5 @@ son,0
 niveauCompetenceTirer,3
 niveauCompetenceFreeze,3
 niveauCompetenceTeleporteur,3
-pointJoueur,2500
-niveauUtilisateur,3
+pointJoueur,0
+niveauUtilisateur,1

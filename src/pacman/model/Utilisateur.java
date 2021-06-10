@@ -146,7 +146,7 @@ static String pseudoUtilisateur;
         // description
         tabCompetence[4][4] = "Cette amélioration est au niveau maximum";
         // Coût d'achat
-        tabCompetence[4][5] = "5 000";
+        tabCompetence[4][5] = "5000";
         //Coût d'utilisation
         tabCompetence[4][6] = "80";
         //Durée de recharge
