@@ -3,7 +3,6 @@ package pacman.model.deplacement;
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
-
 import java.util.Objects;
 
 public class FantomeGroup extends Group {
@@ -19,7 +18,7 @@ public class FantomeGroup extends Group {
         fantomes[1] = new FantomeSprinteur();
         fantomes[2] = new FantomeBrindille();
         fantomes[3] = new FantomeCampeur();
-        addFantomeToScene();
+        this.addFantomeToScene();
     }
 
     /**

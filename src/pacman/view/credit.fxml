@@ -5,9 +5,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 
 
@@ -19,9 +16,6 @@
                     <BorderPane prefHeight="1000" prefWidth="800.0" style="-fx-background-color: black;" >
                         <center>
                             <Pane maxHeight="2500" maxWidth="800" minHeight="3000" minWidth="800" prefWidth="800.0">
-
-
-
                                 <ImageView fx:id="credit" fitHeight="70.0" fitWidth="140.0" layoutX="335.0" layoutY="600" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../ressources/image/Credit/Crédits.png" />

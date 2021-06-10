@@ -7,13 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import pacman.model.ScoreModel;
-
 import java.io.IOException;
 import java.util.Objects;
 
+import pacman.model.ScoreModel;
+
 public class ControllerGameOver extends Controller{
-    public TextField txtpseudo;
+    @FXML public TextField txtpseudo;
     public ScoreModel scoreModel = new ScoreModel();
 
     public ControllerGameOver() {
@@ -35,31 +35,29 @@ public class ControllerGameOver extends Controller{
             primaryStage.sizeToScene();
             primaryStage.show();
             scoreView.requestFocus();
-            scoreModel.lectureTxt();
-            utilisateur.setPseudoUtilisateur(txtpseudo.getText());
-            for(int i =0; i<scoreModel.tab.length; i++){
-                if (scoreModel.tab[i][0].equals("pseudoUt") ){
-                    scoreModel.tab[i][0] = utilisateur.getPseudoUtilisateur();
-                    scoreModel.reecritureTxt();
-                }
-            }
-
+            ecritureScore();
         } else if (event.getCode() == KeyCode.ALT) {
             Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/menu.fxml")));
             primaryStage.setScene(new Scene(scoreView));
             primaryStage.sizeToScene();
             primaryStage.show();
-            scoreModel.lectureTxt();
-            utilisateur.setPseudoUtilisateur(txtpseudo.getText());
-            for(int i =0; i<scoreModel.tab.length; i++){
-                if (scoreModel.tab[i][0].equals("pseudoUt") ){
-                    scoreModel.tab[i][0] = utilisateur.getPseudoUtilisateur();
-                    scoreModel.reecritureTxt();
-                }
-            }
-
             scoreView.requestFocus();
+            ecritureScore();
+        }
+    }
 
+    /**
+     * Écrit le score en fonction du pseudo dans le fichier score.txt
+     * @throws IOException Retourne une exception si on a pas les droits d'écriture ou si le fichier est absent
+     */
+    private void ecritureScore() throws IOException {
+        scoreModel.lectureTxt();
+        utilisateur.setPseudoUtilisateur(txtpseudo.getText());
+        for(int i =0; i<scoreModel.tab.length; i++){
+            if (scoreModel.tab[i][0].equals("pseudoUt") ){
+                scoreModel.tab[i][0] = utilisateur.getPseudoUtilisateur();
+                scoreModel.reecritureTxt();
+            }
         }
     }
 }

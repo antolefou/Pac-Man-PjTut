@@ -5,10 +5,8 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.jgrapht.Graph;
-import org.jgrapht.GraphPath;
 import org.jgrapht.alg.connectivity.BlockCutpointGraph;
 import org.jgrapht.alg.connectivity.ConnectivityInspector;
-import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
@@ -61,7 +59,7 @@ public class Map extends Group  {
         initListeThemeMap();
         shuffleTheme();
         String src = "/pacman/ressources/image/Ecran_jouer/labyrinthe/";
-        this.imageMur = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src + theme.get(1))));
+        this.imageMur = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src + theme.get(0))));
         this.imageGomme = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "Gomme.png")));
         this.imageSuperGomme = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "SuperGomme.png")));
         this.imageBoost = new Image(Objects.requireNonNull(getClass().getResourceAsStream(src +  "boost.png")));
@@ -84,27 +82,20 @@ public class Map extends Group  {
 
     /**
      * Crée une map aléatoire et recommence si jamais la map contient des zones isolées
-     */
-    private void creeMapAleatoire() {
-        this.creeMapAleatoire(1);
-    }
-
-    /**
-     * Crée une map aléatoire et recommence si jamais la map contient des zones isolées
      * @param niveau niveau de la map
      */
     public void creeMapAleatoire(int niveau) {
         // crée une nouvelle map et recommence si jamais la map contient des zones isolées
         do {
-            mapGenerator = new MapGenerator();
-            mapGenerator.initObjet(5, 3, niveau);
-            mapGeneree = mapGenerator.getMap();
-            mapGenerator = null; // Vide mapGeneree
+            this.mapGenerator = new MapGenerator();
+            this.mapGenerator.initObjet(5, 3, niveau);
+            this.mapGeneree = this.mapGenerator.getMap();
+            this.mapGenerator = null; // Vide mapGeneree
 
-            initialiseMapGeneree();
-            initGraph();
-        } while (!estConnexe() || isArticulationPoint(this.g));
-        if (this.caseMap == null) initialiseCaseMap();
+            this.initialiseMapGeneree();
+            this.initGraph();
+        } while (!this.estConnexe() || this.isArticulationPoint(this.g));
+        if (this.caseMap == null) this.initialiseCaseMap();
         this.afficheMap();
     }
 
@@ -117,10 +108,10 @@ public class Map extends Group  {
         BlockCutpointGraph<String,DefaultEdge> test = new BlockCutpointGraph<>(g);
         boolean pointArticulation = false;
         int x = 0;
-        while (x<NB_CASE_X && !pointArticulation) {
+        while (x<this.NB_CASE_X && !pointArticulation) {
             int y = 0;
-            while (y < NB_CASE_Y && !pointArticulation){
-                if(grilleGraph[x][y].equals(x+"/"+y) && test.isCutpoint(grilleGraph[x][y]) && !grilleGraph[x][y].equals(12+"/"+12) && !grilleGraph[x][y].equals(12+"/"+13) && !grilleGraph[x][y].equals(12+"/"+14)) {
+            while (y < this.NB_CASE_Y && !pointArticulation){
+                if(this.grilleGraph[x][y].equals(x+"/"+y) && test.isCutpoint(this.grilleGraph[x][y]) && !this.grilleGraph[x][y].equals(12+"/"+12) && !this.grilleGraph[x][y].equals(12+"/"+13) && !this.grilleGraph[x][y].equals(12+"/"+14)) {
                     pointArticulation = true;
                 }
                 y++;
@@ -136,7 +127,7 @@ public class Map extends Group  {
     private void initialiseMapGeneree() {
         for (int x=0; x<this.NB_CASE_X; x++) {
             for (int y=0; y<this.NB_CASE_Y; y++) {
-                switch (mapGeneree[x][y]) {
+                switch (this.mapGeneree[x][y]) {
                     case "V":
                         this.grid[x][y] = ValeurCase.VIDE;
                         break;
@@ -195,21 +186,21 @@ public class Map extends Group  {
         this.grilleGraph = new String[this.NB_CASE_X][this.NB_CASE_Y];
         for (int x=0; x<this.NB_CASE_X; x++) {
             for (int y=0; y<this.NB_CASE_Y; y++) {
-                if (grid[x][y] != ValeurCase.MUR) {
-                    grilleGraph[x][y] = x+"/"+y;
+                if (this.grid[x][y] != ValeurCase.MUR) {
+                    this.grilleGraph[x][y] = x+"/"+y;
                 }else{
-                    grilleGraph[x][y] = "Mur"+x+"/"+y;
+                    this.grilleGraph[x][y] = "Mur"+x+"/"+y;
                 }
-                g.addVertex(grilleGraph[x][y]);
+                this.g.addVertex(grilleGraph[x][y]);
             }
         }
         for (int x=0; x<this.NB_CASE_X; x++) {
             for (int y=0; y<this.NB_CASE_Y; y++) {
-                if (grilleGraph[x][y].equals(x + "/" + y) && grilleGraph[(x + 1) % this.NB_CASE_X][y].equals((x + 1) % this.NB_CASE_X + "/" + y)) {
-                    g.addEdge(grilleGraph[x][y], grilleGraph[((x+1)%this.NB_CASE_X)][y]);
+                if (this.grilleGraph[x][y].equals(x + "/" + y) && this.grilleGraph[(x + 1) % this.NB_CASE_X][y].equals((x + 1) % this.NB_CASE_X + "/" + y)) {
+                    this.g.addEdge(this.grilleGraph[x][y], this.grilleGraph[((x+1)%this.NB_CASE_X)][y]);
                 }
-                if (grilleGraph[x][y].equals(x + "/" + y) && grilleGraph[x][(y + 1) % this.NB_CASE_Y].equals(x + "/" + (y + 1) % this.NB_CASE_Y)) {
-                    g.addEdge(grilleGraph[x][y], grilleGraph[x][(y+1)%this.NB_CASE_Y]);
+                if (this.grilleGraph[x][y].equals(x + "/" + y) && this.grilleGraph[x][(y + 1) % this.NB_CASE_Y].equals(x + "/" + (y + 1) % this.NB_CASE_Y)) {
+                    this.g.addEdge(this.grilleGraph[x][y], this.grilleGraph[x][(y+1)%this.NB_CASE_Y]);
                 }
             }
         }
@@ -315,6 +306,21 @@ public class Map extends Group  {
         return true;
     }
 
+    /**
+     * initialise les différents thème de la map
+     */
+    public static void initListeThemeMap(){
+        theme = new ArrayList<>();
+        theme.add("wall.png");
+        theme.add("illusion.gif");  // autre theme (assez difficile de jouer)
+    }
+
+    /**
+     *  Mélange les thèmes de fond aléatoirement.
+     */
+    public static void shuffleTheme(){
+        Collections.shuffle(theme);
+    }
 
     ////////////////////////////
     /*    GETTER ET SETTER    */
@@ -325,19 +331,6 @@ public class Map extends Group  {
 
     public String[][] getGrilleGraph() {
         return grilleGraph;
-    }
-
-    public static void initListeThemeMap(){
-        theme = new ArrayList<>();
-        theme.add("wall.png");
-        theme.add("illusion.gif");
-    }
-
-    /**
-     *  Mélange les thèmes de fond aléatoirement.
-     */
-    public static void shuffleTheme(){
-        Collections.shuffle(theme);
     }
 }
 

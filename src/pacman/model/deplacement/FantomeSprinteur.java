@@ -12,8 +12,8 @@ public class FantomeSprinteur extends Fantome {
         this.velocityMultiplicatorInitial = 3;
         this.velocityMultiplicator = velocityMultiplicatorInitial;
         this.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost2.gif"))));
-        imageBlueGhost = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghost.gif")));
-        imageMort = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/yeux.gif")));
+        this.imageBlueGhost = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghost.gif")));
+        this.imageMort = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/yeux.gif")));
         this.initialisation();
     }
 
@@ -24,17 +24,15 @@ public class FantomeSprinteur extends Fantome {
         if (System.currentTimeMillis() - temps > 2000 && System.currentTimeMillis() - temps <= 4000 ) {
             this.velocityMultiplicator = 1;
         } else if (System.currentTimeMillis() - temps > 4000) {
-            temps = System.currentTimeMillis();
+            this.temps = System.currentTimeMillis();
             this.velocityMultiplicator = velocityMultiplicatorInitial;
         }
         if (compteur < 6) {
-            listeCoordoneDeplacementFant = dijkstra(false, false, this.coordoneeActuel, getCoordPacman());
-            compteur++;
+            this.listeCoordoneDeplacementFant = dijkstra(false, false, this.coordoneeActuel, getCoordPacman());
+            this.compteur++;
         } else {
-            compteur = 0;
+            this.compteur = 0;
             iaRandom();
         }
     }
-
-
 }

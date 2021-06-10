@@ -9,12 +9,12 @@ import javafx.scene.Scene;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import java.io.IOException;
+import java.util.Objects;
+
 import pacman.Main;
 import pacman.model.ModelMusic;
 import pacman.model.Utilisateur;
-
-import java.io.IOException;
-import java.util.Objects;
 
 public class Controller {
     public static Stage primaryStage;
@@ -28,7 +28,7 @@ public class Controller {
     public Controller() {
         this.utilisateur = new Utilisateur();
         if(Controller.modelMusic == null)  Controller.modelMusic = new ModelMusic();
-        rosemary = Font.loadFont(Main.class.getResource("ressources/police/Rosemary_Roman.ttf").toExternalForm(),24);
+        this.rosemary = Font.loadFont(Objects.requireNonNull(Main.class.getResource("ressources/police/Rosemary_Roman.ttf")).toExternalForm(),24);
     }
 
     /**
@@ -44,7 +44,6 @@ public class Controller {
         primaryStage.sizeToScene();
         primaryStage.show();
         scoreView.requestFocus();
-
 //        suppressions classes
         this.utilisateur = null;
     }
@@ -60,11 +59,8 @@ public class Controller {
             if (loop) {
                 modelMusic.music(key).setCycleCount(MediaPlayer.INDEFINITE);
             }
-//            mediaPlayer.setRate(0.5);
-//            mediaPlayer.setBalance(50);
             modelMusic.music(key).play();
             modelMusic.music(key).setVolume((float)utilisateur.getSon()/100);
-
         } catch (Exception e) {
             System.out.println("Erreur de Fichier");
         }

@@ -32,7 +32,7 @@ public class Fantome extends Deplacement {
     // spawn
     private long debutSpawn = 0L;
     private double multiplicateurTempsSpawn;
-    private long tempsSpawn = 2500L;
+    private final long tempsSpawn;
     private boolean immobile;
     public boolean mort;
     public boolean clignote;
@@ -64,7 +64,7 @@ public class Fantome extends Deplacement {
         this.mort = false;
         this.clignote = false;
         this.compteur = 0;
-
+        this.tempsSpawn = 2500L;
     }
 
     /**
@@ -74,69 +74,70 @@ public class Fantome extends Deplacement {
         switch (etat) {
             case SPAWN:
                 this.estVulnerable = false;
-                if (debutSpawn == 0L && pacman.deplacementActuel != deplacements.AUCUN) {
-                    if (mort) {
-                        debutSpawn = System.currentTimeMillis();
-                        multiplicateurTempsSpawn = 1.0/2;
-                        immobile = true;
-                        mort = false;
-                        listeCoordoneDeplacementFant.clear();
+                if (this.debutSpawn == 0L && this.pacman.deplacementActuel != deplacements.AUCUN) {
+                    if (this.mort) {
+                        this.debutSpawn = System.currentTimeMillis();
+                        this.multiplicateurTempsSpawn = 1.0/2;
+                        this.immobile = true;
+                        this.mort = false;
+                        this.listeCoordoneDeplacementFant.clear();
                         this.positionXFinDeplacement = getPosX();
                         this.positionYFinDeplacement = getPosY();
                     } else {
-                        debutSpawn = System.currentTimeMillis();
-                        multiplicateurTempsSpawn = numFantome;
-                        immobile = true;
+                        this.debutSpawn = System.currentTimeMillis();
+                        this.multiplicateurTempsSpawn = this.numFantome;
+                        this.immobile = true;
                     }
-                } else if (immobile && (System.currentTimeMillis() - debutSpawn > (tempsSpawn * multiplicateurTempsSpawn))) {
-                    debutSpawn = 0L;
-                    etat = ValeurEtat.NORMAL;
-                    listeCoordoneDeplacementFant = dijkstra(true, true, this.coordoneeActuel, "12/12");
-                    immobile = false;
+                } else if (this.immobile && (System.currentTimeMillis() - this.debutSpawn > (this.tempsSpawn * this.multiplicateurTempsSpawn))) {
+                    this.debutSpawn = 0L;
+                    this.etat = ValeurEtat.NORMAL;
+                    this.listeCoordoneDeplacementFant = dijkstra(true, true, this.coordoneeActuel, "12/12");
+                    this.immobile = false;
                 }
                 break;
             case NORMAL:
                 if (this.estVulnerable) {
-                    if(listeCoordoneDeplacementFant.size()>1) {
-                        String tmp = listeCoordoneDeplacementFant.get(0);
-                        listeCoordoneDeplacementFant.clear();
-                        listeCoordoneDeplacementFant.add(tmp);
+                    if(this.listeCoordoneDeplacementFant.size()>1) {
+                        String tmp = this.listeCoordoneDeplacementFant.get(0);
+                        this.listeCoordoneDeplacementFant.clear();
+                        this.listeCoordoneDeplacementFant.add(tmp);
                     }
-                    estVulnerable = false;
+                    this.estVulnerable = false;
                 }
                 deplaceFantome();
                 break;
             case APPEURE:
-                if(!estVulnerable) {
-                    if(listeCoordoneDeplacementFant.size()>1) {
-                        String tmp = listeCoordoneDeplacementFant.get(0);
-                        listeCoordoneDeplacementFant.clear();
-                        listeCoordoneDeplacementFant.add(tmp);
+                if(!this.estVulnerable) {
+                    if(this.listeCoordoneDeplacementFant.size()>1) {
+                        String tmp = this.listeCoordoneDeplacementFant.get(0);
+                        this.listeCoordoneDeplacementFant.clear();
+                        this.listeCoordoneDeplacementFant.add(tmp);
                     }
                     this.estVulnerable = true;
                 }
-                deplaceFantome();
+                this.deplaceFantome();
                 break;
             case MORT:
                 this.estVulnerable = false;
                 if (!this.mort) {
-                    listeCoordoneDeplacementFant.clear();
-                    mort = true;
+                    this.listeCoordoneDeplacementFant.clear();
+                    this.mort = true;
                     String coordSpawn = INIT_POS_X / 20 + "/" + INIT_POS_Y / 20;
-                    List<String> dijkstra = dijkstra(true, true, getCoordFantome(), coordSpawn);
-                    listeCoordoneDeplacementFant.addAll(dijkstra);
-                } else if (getPosX() == INIT_POS_X && getPosY() == INIT_POS_Y) {
-                    etat = ValeurEtat.SPAWN;
-                    velocityMultiplicator = velocityMultiplicatorInitial;
+                    List<String> dijkstra = dijkstra(true, true, this.getCoordFantome(), coordSpawn);
+                    this.listeCoordoneDeplacementFant.addAll(dijkstra);
+                } else if (getPosX() == this.INIT_POS_X && getPosY() == this.INIT_POS_Y) {
+                    this.etat = ValeurEtat.SPAWN;
+                    this.velocityMultiplicator = this.velocityMultiplicatorInitial;
                 }
-                deplaceFantome();
+                this.deplaceFantome();
                 break;
         }
     }
 
-    public void ia() {
-
-    }
+    /**
+     * Cette methode est redéfini dans chaque fantomes
+     */
+    public void ia() {}
 
     /**
      * Renvoie le chemin de coordonnée le plus rapide pour aller de départ à arrivé avec quelques précisions selon les boolean.
@@ -149,9 +150,9 @@ public class Fantome extends Deplacement {
      */
     public List<String> dijkstra(boolean isDemiTourAutorise, boolean cheminEntier, String coordoneeDepart, String coordoneeArrive) {
         Graph<String, DefaultEdge> graphCopie = new SimpleGraph<>(DefaultEdge.class);
-        Graphs.addAllVertices(graphCopie, map.getG().vertexSet());
-        Graphs.addAllEdges(graphCopie, map.getG(), map.getG().edgeSet());
-        if (!coordoneeActuel.equals(coordoneePasse) && graphCopie.containsEdge(this.coordoneePasse, this.coordoneeActuel) && !isDemiTourAutorise) {
+        Graphs.addAllVertices(graphCopie, this.map.getG().vertexSet());
+        Graphs.addAllEdges(graphCopie, this.map.getG(), this.map.getG().edgeSet());
+        if (!this.coordoneeActuel.equals(this.coordoneePasse) && graphCopie.containsEdge(this.coordoneePasse, this.coordoneeActuel) && !isDemiTourAutorise) {
             graphCopie.removeEdge(this.coordoneePasse, this.coordoneeActuel);
         }
         List<String> dijkstra = DijkstraShortestPath.findPathBetween(graphCopie, coordoneeDepart, coordoneeArrive).getVertexList();
@@ -173,8 +174,8 @@ public class Fantome extends Deplacement {
             if (this.estVulnerable) this.iaRandom();
             else this.ia();
         }
-        getNextFinalPos();
-        avancePos();
+        this.getNextFinalPos();
+        this.avancePos();
     }
 
     /**
@@ -182,21 +183,21 @@ public class Fantome extends Deplacement {
      */
     public void avancePos() {
         if (doitRechargerNextPos()) {
-            updateCoordonnees();
+            this.updateCoordonnees();
             this.listeCoordoneDeplacementFant.remove(0);
-        } else if (positionXFinDeplacement != this.getPosX() || positionYFinDeplacement != this.getPosY()) {
+        } else if (this.positionXFinDeplacement != this.getPosX() || this.positionYFinDeplacement != this.getPosY()) {
             switch (this.deplacementActuel) {
                 case HAUT:
-                    if (peutAvancerVerticalement(map, -1)) this.avanceHaut();
+                    if (this.peutAvancerVerticalement(-1)) this.avanceHaut();
                     break;
                 case DROITE:
-                    if (peutAvancerHorizontalement(map, 1)) this.avanceDroite();
+                    if (this.peutAvancerHorizontalement(1)) this.avanceDroite();
                     break;
                 case BAS:
-                    if (peutAvancerVerticalement(map, 1)) this.avanceBas();
+                    if (this.peutAvancerVerticalement(1)) this.avanceBas();
                     break;
                 case GAUCHE:
-                    if (peutAvancerHorizontalement(map, -1)) this.avanceGauche();
+                    if (this.peutAvancerHorizontalement(-1)) this.avanceGauche();
                     break;
                 default:
                     break;
@@ -205,7 +206,7 @@ public class Fantome extends Deplacement {
     }
 
     /**
-     *
+     *  Retourne true si le fantome doit recharger la prochaine position
      * @return true si il a atteint la coordonnée où il doit aller au pixel près sinon c'est false.
      */
     public boolean doitRechargerNextPos() {
@@ -216,15 +217,14 @@ public class Fantome extends Deplacement {
      * Renvoie vrai si il ne peut pas avoir atteint un mur.
      * Renvoie vrai si la prochaine case n'est pas un mur.
      * Sinon renvoie faux.
-     * @param map
      * @param i -1 pour la gauche et 1 pour la droite
-     * @return
+     * @return retourne true s'il peut avancer horizontalement
      */
-    public boolean peutAvancerHorizontalement(Map map, int i) {
-        if (getPosY() % 20 == 1) {
-            if (getPosX() % 20 != 1) {
+    public boolean peutAvancerHorizontalement(int i) {
+        if (this.getPosY() % 20 == 1) {
+            if (this.getPosX() % 20 != 1) {
                 return true;
-            } else return (map.grid[((getPosX() / 20) + i + 25) % 25][getPosY() / 20] != Map.ValeurCase.MUR);
+            } else return (this.map.grid[((this.getPosX() / 20) + i + 25) % 25][this.getPosY() / 20] != Map.ValeurCase.MUR);
         }
         return false;
     }
@@ -234,26 +234,25 @@ public class Fantome extends Deplacement {
      * Renvoie vrai si il ne peut pas avoir atteint un mur.
      * Renvoie vrai si la prochaine case n'est pas un mur et que la prochaine case n'est pas interdite.
      * Pour être plus exact sur l'interdit : on vérifie si il est sur une case non interdite et que sa prochaine case est interdite dans ce cas on return false.
-     * @param map
      * @param i -1 pour le haut et 1 pour le bas
-     * @return
+     * @return retourne true s'il peut avancer verticalement
      */
-    public boolean peutAvancerVerticalement(Map map, int i) {
-        if (getPosX() % 20 == 1 && getPosX() > 1 && getPosX() < 500) {
-            if(getPosY() % 20 != 1) return true;
-            if((map.grid[getPosX()/20][(getPosY()/20)+i] == Map.ValeurCase.MUR)) return false;
-            else return !(!this.mort && (map.grid[getPosX() / 20][(getPosY() / 20)] != Map.ValeurCase.INTERDIT && map.grid[getPosX() / 20][(getPosY() / 20) + i] == Map.ValeurCase.INTERDIT));
+    public boolean peutAvancerVerticalement(int i) {
+        if (this.getPosX() % 20 == 1 && this.getPosX() > 1 && this.getPosX() < 500) {
+            if(this.getPosY() % 20 != 1) return true;
+            if((this.map.grid[this.getPosX()/20][(this.getPosY()/20)+i] == Map.ValeurCase.MUR)) return false;
+            else return !(!this.mort && (this.map.grid[this.getPosX() / 20][(this.getPosY() / 20)] != Map.ValeurCase.INTERDIT && map.grid[this.getPosX() / 20][(this.getPosY() / 20) + i] == Map.ValeurCase.INTERDIT));
         }
         return false;
     }
 
     /**
      * Renvoie vrai si un fantôme est sur pac-man sinon faux
-     * @return
+     * @return retourne true si le fantome est sur pacman
      */
     public boolean estSurPacman() {
-        if (getCoordPacman().equals(getCoordFantome())) return true;
-        else return (((pacman.getPosX() - getPosX()) < 18) && ((pacman.getPosX() - getPosX()) >= 0) && ((pacman.getPosY() -  getPosY()) < 18) && ((pacman.getPosY() -  getPosY()) >= 0));
+        if (this.getCoordPacman().equals(this.getCoordFantome())) return true;
+        else return (((this.pacman.getPosX() - this.getPosX()) < 18) && ((this.pacman.getPosX() - this.getPosX()) >= 0) && ((this.pacman.getPosY() -  this.getPosY()) < 18) && ((this.pacman.getPosY() -  this.getPosY()) >= 0));
     }
 
     /**
@@ -262,11 +261,11 @@ public class Fantome extends Deplacement {
     @Override
     public void initPosition() {
         super.initPosition();
-        deplacementActuel = deplacements.AUCUN;
+        this.deplacementActuel = deplacements.AUCUN;
         this.coordoneeActuel= this.INIT_POS_X/20 + "/" + this.INIT_POS_Y/20;
         this.coordoneePasse = this.INIT_POS_X/20 + "/" + this.INIT_POS_Y/20;
-        etat = ValeurEtat.SPAWN;
-        debutSpawn = 0L;
+        this.etat = ValeurEtat.SPAWN;
+        this.debutSpawn = 0L;
         this.immobile = false;
     }
 
@@ -274,11 +273,11 @@ public class Fantome extends Deplacement {
      * ia random en enlevant la coordonée passée du fantôme.
      */
     public void iaRandom() {
-        List<String> choixPossible = Graphs.neighborListOf(map.getG(), getCoordFantome());
+        List<String> choixPossible = Graphs.neighborListOf(this.map.getG(), this.getCoordFantome());
         choixPossible.remove(coordoneePasse);
         choixPossible.remove("12/13");
         Random rand = new Random();
-        listeCoordoneDeplacementFant = dijkstra(false, true, getCoordFantome(), choixPossible.get(rand.nextInt(choixPossible.size())));
+        this.listeCoordoneDeplacementFant = dijkstra(false, true, this.getCoordFantome(), choixPossible.get(rand.nextInt(choixPossible.size())));
     }
 
     /**
@@ -301,10 +300,10 @@ public class Fantome extends Deplacement {
      */
     public void setOrientation(){
         if(this.getPosX()>20 && this.getPosX()<480){
-            if (positionXFinDeplacement - this.getPosX() < 0) this.deplacementActuel = deplacements.GAUCHE;
-            else if (positionXFinDeplacement - this.getPosX() > 0) this.deplacementActuel = deplacements.DROITE;
-            else if (positionYFinDeplacement - this.getPosY() < 0) this.deplacementActuel = deplacements.HAUT;
-            else if (positionYFinDeplacement - this.getPosY() > 0) this.deplacementActuel = deplacements.BAS;
+            if (this.positionXFinDeplacement - this.getPosX() < 0) this.deplacementActuel = deplacements.GAUCHE;
+            else if (this.positionXFinDeplacement - this.getPosX() > 0) this.deplacementActuel = deplacements.DROITE;
+            else if (this.positionYFinDeplacement - this.getPosY() < 0) this.deplacementActuel = deplacements.HAUT;
+            else if (this.positionYFinDeplacement - this.getPosY() > 0) this.deplacementActuel = deplacements.BAS;
         }
     }
 
@@ -318,7 +317,7 @@ public class Fantome extends Deplacement {
 
     /**
      * Permet de savoir si le fantôme est dans sa base.
-     * @return
+     * @return retourne true si le fantome est au spawn
      */
     public boolean estAuSpawn() {
         int x = this.getPosX()/20;
@@ -333,16 +332,16 @@ public class Fantome extends Deplacement {
         super.affichage();
         switch (this.etat) {
             case APPEURE:
-                if (pacman.freeze) this.setImageView(this.imageBlueGhostGele);
+                if (this.pacman.freeze) this.setImageView(this.imageBlueGhostGele);
                 else if(this.clignote) this.setImageView(this.imageBlueGhostClignote);
                 else this.setImageView(this.imageBlueGhost);
                 break;
             case MORT:
-                if (pacman.freeze) this.setImageView(this.imageYeuxGeles);
+                if (this.pacman.freeze) this.setImageView(this.imageYeuxGeles);
                 else this.setImageView(this.imageMort);
                 break;
             default:
-                if (pacman.freeze) this.setImageView(this.imageFantomeGele);
+                if (this.pacman.freeze) this.setImageView(this.imageFantomeGele);
                 else this.setImageView(this.getImage());
                 break;
         }
@@ -352,9 +351,9 @@ public class Fantome extends Deplacement {
      * Fais faire au fantôme sur lequel on la méthode est utilisée un demi-tour.
      */
     public void faisDemiTour(){
-        coordoneeActuel = getCoordFantome();
-        coordoneePasse = getCoordFantome();
-        listeCoordoneDeplacementFant.clear();
+        this.coordoneeActuel = getCoordFantome();
+        this.coordoneePasse = getCoordFantome();
+        this.listeCoordoneDeplacementFant.clear();
         List<String> choixPossible = Graphs.neighborListOf(map.getG(), getCoordFantome());
         String coordGauche = ((getPosX()/20)-1) + "/" + (getPosY()/20);
         String coordBas = (getPosX()/20) + "/" + ((getPosY()/20)+1);
@@ -362,48 +361,24 @@ public class Fantome extends Deplacement {
         String coordHaut = (getPosX()/20) + "/" + ((getPosY()/20)-1);
         switch (this.deplacementActuel){
             case BAS:
-                if(choixPossible.contains(coordHaut)) {
-                    listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), coordHaut);
-                }
-                else if (choixPossible.contains( coordGauche)){
-                    listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(),  coordGauche);
-                }
-                else {
-                    listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), coordDroite);
-                }
+                if(choixPossible.contains(coordHaut)) this.listeCoordoneDeplacementFant = dijkstra(true, true, this.getCoordFantome(), coordHaut);
+                else if (choixPossible.contains( coordGauche)) this.listeCoordoneDeplacementFant = dijkstra(true, true, this.getCoordFantome(),  coordGauche);
+                else  this.listeCoordoneDeplacementFant = dijkstra(true, true, this.getCoordFantome(), coordDroite);
                 break;
             case HAUT:
-                if(choixPossible.contains(coordBas)) {
-                    listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(),  coordBas);
-                }
-                else if (choixPossible.contains(coordGauche)) {
-                    listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), coordGauche);
-                }
-                else {
-                    listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), coordDroite);
-                }
+                if(choixPossible.contains(coordBas))  this.listeCoordoneDeplacementFant = dijkstra(true, true, this.getCoordFantome(),  coordBas);
+                else if (choixPossible.contains(coordGauche)) this.listeCoordoneDeplacementFant = dijkstra(true, true, this.getCoordFantome(), coordGauche);
+                else  this.listeCoordoneDeplacementFant = dijkstra(true, true, this.getCoordFantome(), coordDroite);
                 break;
             case DROITE:
-                if(choixPossible.contains(coordGauche)) {
-                    listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), coordGauche);
-                }
-                else if (choixPossible.contains(coordHaut)) {
-                    listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(),  coordHaut);
-                }
-                else {
-                    listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(),  coordBas);
-                }
+                if(choixPossible.contains(coordGauche)) this.listeCoordoneDeplacementFant = dijkstra(true, true, this.getCoordFantome(), coordGauche);
+                else if (choixPossible.contains(coordHaut)) this.listeCoordoneDeplacementFant = dijkstra(true, true, this.getCoordFantome(),  coordHaut);
+                else this.listeCoordoneDeplacementFant = dijkstra(true, true, this.getCoordFantome(),  coordBas);
                 break;
             case GAUCHE:
-                if(choixPossible.contains(coordDroite)) {
-                    listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(), coordDroite);
-                }
-                else if (choixPossible.contains(coordHaut)) {
-                    listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(),  coordHaut);
-                }
-                else {
-                    listeCoordoneDeplacementFant = dijkstra(true, true, getCoordFantome(),  coordBas);
-                }
+                if(choixPossible.contains(coordDroite)) this.listeCoordoneDeplacementFant = dijkstra(true, true, this.getCoordFantome(), coordDroite);
+                else if (choixPossible.contains(coordHaut)) this.listeCoordoneDeplacementFant = dijkstra(true, true, this.getCoordFantome(),  coordHaut);
+                else this.listeCoordoneDeplacementFant = dijkstra(true, true, this.getCoordFantome(),  coordBas);
                 break;
             default:
                 break;
@@ -414,13 +389,13 @@ public class Fantome extends Deplacement {
      * @return la coordonnee de Pac-man
      */
     public String getCoordPacman(){
-        return (pacman.getPosX() / 20) + "/" + (pacman.getPosY() / 20);
+        return (this.pacman.getPosX() / 20) + "/" + (this.pacman.getPosY() / 20);
     }
 
     /**
      * @return la coordonnée du fantôme
      */
     public String getCoordFantome(){
-        return (getPosX() / 20) + "/" + (getPosY() / 20);
+        return (this.getPosX() / 20) + "/" + (this.getPosY() / 20);
     }
 }

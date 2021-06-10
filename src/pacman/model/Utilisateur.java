@@ -1,7 +1,5 @@
 package pacman.model;
 
-import pacman.controller.ControllerOption;
-
 import java.io.*;
 import java.util.Scanner;
 
@@ -12,9 +10,7 @@ static String pseudoUtilisateur;
 //    vitesse de pacman
     private int fps = 60;
     private int threadRender  = (int) ((1.0/this.fps)*1000);
-//     Vitesse de Jeu
-    private final int THREAD_UPDATE = (int) ((1.0/50)*1000);
-//    Volume son
+    //    Volume son
     public int son;
 //    Competence du joueur
     public int niveauCompetenceTirer;
@@ -27,135 +23,135 @@ static String pseudoUtilisateur;
 
 
     public Utilisateur() {
-        lectureUtilisateur();
-        initTabCompetence();
+        this.lectureUtilisateur();
+        this.initTabCompetence();
     }
 
     public void initTabCompetence() {
-        tabCompetence = new String[5][12];
+        this.tabCompetence = new String[5][12];
 
         /* -- Niveau 0 -- */
 
         // --------- Projectile -----------
-        tabCompetence[0][0] = "Cette compétence permet de tirer sur un fantôme pour qu'il se retourne.";
-        tabCompetence[0][1] = "10000";
-        tabCompetence[0][2] = "20";
-        tabCompetence[0][3] = "10";
+        this.tabCompetence[0][0] = "Cette compétence permet de tirer sur un fantôme pour qu'il se retourne.";
+        this.tabCompetence[0][1] = "10000";
+        this.tabCompetence[0][2] = "20";
+        this.tabCompetence[0][3] = "10";
 
         // --------- Freeze -----------
         // description
-        tabCompetence[0][4] = "Cette compétence permet de geler/immobiliser les fantômes pendant 5 secondes.";
+        this.tabCompetence[0][4] = "Cette compétence permet de geler/immobiliser les fantômes pendant 5 secondes.";
         // Coût d'achat
-        tabCompetence[0][5] = "10000";
+        this.tabCompetence[0][5] = "10000";
         //Coût d'utilisation
-        tabCompetence[0][6] = "100";
+        this.tabCompetence[0][6] = "100";
         //Durée de recharge
-        tabCompetence[0][7] = "15";
+        this.tabCompetence[0][7] = "15";
 
         // --------- Téléporteur -----------
-        tabCompetence[0][8] = "Cette compétence donne a pacman la possibilité de se teleporter, il pose une stelle et peut y retourner quand il veux.";
-        tabCompetence[0][9] = "10000";
-        tabCompetence[0][10] = "500";
-        tabCompetence[0][11] = "30";
+        this.tabCompetence[0][8] = "Cette compétence donne a pacman la possibilité de se teleporter, il pose une stelle et peut y retourner quand il veux.";
+        this.tabCompetence[0][9] = "10000";
+        this.tabCompetence[0][10] = "500";
+        this.tabCompetence[0][11] = "30";
 
         /* -- Niveau 1 -- */
 
         // --------- Projectile -----------
-        tabCompetence[1][0] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
-        tabCompetence[1][1] = "4000";
-        tabCompetence[1][2] = "25";
-        tabCompetence[1][3] = "8";
+        this.tabCompetence[1][0] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
+        this.tabCompetence[1][1] = "4000";
+        this.tabCompetence[1][2] = "25";
+        this.tabCompetence[1][3] = "8";
 
         // --------- Freeze -----------
         // description
-        tabCompetence[1][4] = "Cette amélioration de la compétence freeze réduit le temps de recharge de 2 secondes";
+        this.tabCompetence[1][4] = "Cette amélioration de la compétence freeze réduit le temps de recharge de 2 secondes";
         // Coût d'achat
-        tabCompetence[1][5] = "5000";
+        this.tabCompetence[1][5] = "5000";
         //Coût d'utilisation
-        tabCompetence[1][6] = "100";
+        this.tabCompetence[1][6] = "100";
         //Durée de recharge
-        tabCompetence[1][7] = "13";
+        this.tabCompetence[1][7] = "13";
 
 
 
         // --------- Téléporteur -----------
-        tabCompetence[1][8] = "Cette amélioration de la compétence téléporteur réduit le coût d'utilisation de 50 points";
-        tabCompetence[1][9] = "3000";
-        tabCompetence[1][10] = "450";
-        tabCompetence[1][11] = "30";
+        this.tabCompetence[1][8] = "Cette amélioration de la compétence téléporteur réduit le coût d'utilisation de 50 points";
+        this.tabCompetence[1][9] = "3000";
+        this.tabCompetence[1][10] = "450";
+        this.tabCompetence[1][11] = "30";
 
         /* -- Niveau 2 -- */
 
         // --------- Projectile -----------
-        tabCompetence[2][0] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
-        tabCompetence[2][1] = "4000";
-        tabCompetence[2][2] = "20";
-        tabCompetence[2][3] = "6";
+        this.tabCompetence[2][0] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
+        this.tabCompetence[2][1] = "4000";
+        this.tabCompetence[2][2] = "20";
+        this.tabCompetence[2][3] = "6";
 
         // --------- Freeze -----------
         // description
-        tabCompetence[2][4] = "Cette amélioration de la compétence freeze réduit le temps de recharge de 2 secondes";
+        this.tabCompetence[2][4] = "Cette amélioration de la compétence freeze réduit le temps de recharge de 2 secondes";
         // Coût d'achat
-        tabCompetence[2][5] = "5000";
+        this.tabCompetence[2][5] = "5000";
         //Coût d'utilisation
-        tabCompetence[2][6] = "100";
+        this.tabCompetence[2][6] = "100";
         //Durée de recharge
-        tabCompetence[2][7] = "13";
+        this.tabCompetence[2][7] = "13";
 
 
 
         // --------- Téléporteur -----------
-        tabCompetence[2][8] = "Cette amélioration de la compétence téléporteur réduit le coût d'utilisation de 50 points";
-        tabCompetence[2][9] = "3000";
-        tabCompetence[2][10] = "450";
-        tabCompetence[2][11] = "30";
+        this.tabCompetence[2][8] = "Cette amélioration de la compétence téléporteur réduit le coût d'utilisation de 50 points";
+        this.tabCompetence[2][9] = "3000";
+        this.tabCompetence[2][10] = "450";
+        this.tabCompetence[2][11] = "30";
 
         /* -- Niveau 3 -- */
 
         // --------- Projectile -----------
-        tabCompetence[3][0] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
-        tabCompetence[3][1] = "4000";
-        tabCompetence[3][2] = "20";
-        tabCompetence[3][3] = "5";
+        this.tabCompetence[3][0] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
+        this.tabCompetence[3][1] = "4000";
+        this.tabCompetence[3][2] = "20";
+        this.tabCompetence[3][3] = "5";
 
         // --------- Freeze -----------
         // description
-        tabCompetence[3][4] = "Cette amélioration de la compétence freeze réduit le coût d'utilisation de 20 points";
+        this.tabCompetence[3][4] = "Cette amélioration de la compétence freeze réduit le coût d'utilisation de 20 points";
         // Coût d'achat
-        tabCompetence[3][5] = "5000";
+        this.tabCompetence[3][5] = "5000";
         //Coût d'utilisation
-        tabCompetence[3][6] = "80";
+        this.tabCompetence[3][6] = "80";
         //Durée de recharge
-        tabCompetence[3][7] = "13";
+        this.tabCompetence[3][7] = "13";
 
 
 
         // --------- Téléporteur -----------
-        tabCompetence[3][8] = "Cette amélioration de la compétence téléporteur réduit le coût d'utilisation de 8 secondes";
-        tabCompetence[3][9] = "7000";
-        tabCompetence[3][10] = "450";
-        tabCompetence[3][11] = "22";
+        this.tabCompetence[3][8] = "Cette amélioration de la compétence téléporteur réduit le coût d'utilisation de 8 secondes";
+        this.tabCompetence[3][9] = "7000";
+        this.tabCompetence[3][10] = "450";
+        this.tabCompetence[3][11] = "22";
 
         // fin d'amelioration
         // --------- Projectile -----------
-        tabCompetence[4][0] = "Cette amélioration est au niveau maximum";
-        tabCompetence[4][1] = "4000";
-        tabCompetence[4][2] = "20";
-        tabCompetence[4][3] = "4";
+        this.tabCompetence[4][0] = "Cette amélioration est au niveau maximum";
+        this.tabCompetence[4][1] = "4000";
+        this.tabCompetence[4][2] = "20";
+        this.tabCompetence[4][3] = "4";
         // --------- Freeze -----------
         // description
-        tabCompetence[4][4] = "Cette amélioration est au niveau maximum";
+        this.tabCompetence[4][4] = "Cette amélioration est au niveau maximum";
         // Coût d'achat
-        tabCompetence[4][5] = "5000";
+        this.tabCompetence[4][5] = "5000";
         //Coût d'utilisation
-        tabCompetence[4][6] = "80";
+        this.tabCompetence[4][6] = "80";
         //Durée de recharge
-        tabCompetence[4][7] = "13";
+        this.tabCompetence[4][7] = "13";
         // --------- Téléporteur -----------
-        tabCompetence[4][8] = "Cette amélioration est au niveau maximum";
-        tabCompetence[4][9] = "7000";
-        tabCompetence[4][10] = "450";
-        tabCompetence[4][11] = "22";
+        this.tabCompetence[4][8] = "Cette amélioration est au niveau maximum";
+        this.tabCompetence[4][9] = "7000";
+        this.tabCompetence[4][10] = "450";
+        this.tabCompetence[4][11] = "22";
 
     }
 
@@ -223,11 +219,11 @@ static String pseudoUtilisateur;
     }
 
     public void reinitialiseCompetencesUtilisateur() {
-        niveauCompetenceTirer = -1;
-        niveauCompetenceFreeze = -1;
-        niveauCompetenceTeleporteur = -1;
-        pointJoueur = 0;
-        niveauUtilisateur = 1;
+        this.niveauCompetenceTirer = -1;
+        this.niveauCompetenceFreeze = -1;
+        this.niveauCompetenceTeleporteur = -1;
+        this.pointJoueur = 0;
+        this.niveauUtilisateur = 1;
     }
 
     public void updateFps(int fps) {
@@ -253,12 +249,9 @@ static String pseudoUtilisateur;
         return threadRender;
     }
 
-    public void setThreadRender(int threadRender) {
-        this.threadRender = threadRender;
-    }
-
     public int getTHREAD_UPDATE() {
-        return THREAD_UPDATE;
+        //     Vitesse de Jeu
+        return (int) ((1.0 / 50) * 1000);
     }
 
     public String getPseudoUtilisateur(){

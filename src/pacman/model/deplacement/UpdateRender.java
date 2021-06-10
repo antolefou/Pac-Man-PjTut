@@ -35,68 +35,68 @@ public class UpdateRender extends Thread{
         this.MAP = map;
         this.PACMAN = pacman;
         this.fantomeGroup = fantomeGroup;
-        initialize();
+        this.initialize();
     }
 
     public void initialize() {
         this.PACMAN.setControllerJouer(controllerJouer);
         this.PACMAN.setMap(MAP);
-        addPacmanToFantome();
-        fantomeGroup.initNumFantome();
+        this.addPacmanToFantome();
+        this.fantomeGroup.initNumFantome();
         // competence
-        PACMAN.competenceTeleporteurDeverouillee = this.UTILISATEUR.niveauCompetenceTeleporteur>=0;
-        PACMAN.competenceFreezeDeverouillee = this.UTILISATEUR.niveauCompetenceFreeze >=0;
-        PACMAN.competenceTirerDeverouillee = this.UTILISATEUR.niveauCompetenceTirer>=0;
+        this.PACMAN.competenceTeleporteurDeverouillee = this.UTILISATEUR.niveauCompetenceTeleporteur>=0;
+        this.PACMAN.competenceFreezeDeverouillee = this.UTILISATEUR.niveauCompetenceFreeze >=0;
+        this.PACMAN.competenceTirerDeverouillee = this.UTILISATEUR.niveauCompetenceTirer>=0;
         this.PACMAN.initialiseCompetences();
     }
 
     public void jouer() {
 //        Thred update
         this.update = new Thread(() -> {
-            while (PACMAN.enVie) {
+            while (this.PACMAN.enVie) {
                 try {
-                    update();
+                    this.update();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 try {
-                    sleep(UTILISATEUR.getTHREAD_UPDATE());
+                    sleep(this.UTILISATEUR.getTHREAD_UPDATE());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         });
-        update.setDaemon(true);
-        update.start();
+        this.update.setDaemon(true);
+        this.update.start();
 //        Thread render
-        UTILISATEUR.updateFps(UTILISATEUR.getFps());
+        this.UTILISATEUR.updateFps(UTILISATEUR.getFps());
         this.render = new Thread(() -> {
-            while (PACMAN.enVie){
-                render();
+            while (this.PACMAN.enVie){
+                this.render();
                 try {
-                    sleep(UTILISATEUR.getThreadRender());
+                    sleep(this.UTILISATEUR.getThreadRender());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         });
-        render.setDaemon(true);
-        render.start();
+        this.render.setDaemon(true);
+        this.render.start();
     }
 
     private void update() throws IOException {
-        for (int i = 0; i< PACMAN.velocityMultiplicator; i++) {  // gère le multiplicateur de pacman
-            PACMAN.updateDeplacement();
-            PACMAN.updateMapPacman();
+        for (int i = 0; i< this.PACMAN.velocityMultiplicator; i++) {  // gère le multiplicateur de pacman
+            this.PACMAN.updateDeplacement();
+            this.PACMAN.updateMapPacman();
             fantomeSurPacman();
         }
-        if(PACMAN.projectileLance) {
-            for (int i = 0; i< PACMAN.projectile.velocityMultiplicator; i++) {
-                PACMAN.updateProjectile();
+        if(this.PACMAN.projectileLance) {
+            for (int i = 0; i< this.PACMAN.projectile.velocityMultiplicator; i++) {
+                this.PACMAN.updateProjectile();
             }
         }
-        if (!PACMAN.freeze) {
-            for (Fantome fantome : fantomeGroup.fantomes) {
+        if (!this.PACMAN.freeze) {
+            for (Fantome fantome : this.fantomeGroup.fantomes) {
                 for (int i = 0; i < fantome.velocityMultiplicator; i++) {
                     fantome.updateDeplacement();
                     fantomeSurPacman();
@@ -109,34 +109,34 @@ public class UpdateRender extends Thread{
     private void render() {
         Platform.runLater(() -> {
             //affichage pacman
-            PACMAN.affichage();
+            this.PACMAN.affichage();
             //affichage projectile
-            if (PACMAN.projectileLance) {
-                PACMAN.renderProjectile();
+            if (this.PACMAN.projectileLance) {
+                this.PACMAN.renderProjectile();
             }
-            if (!PACMAN.projectileLance && PACMAN.projectile != null) PACMAN.projectile.setImageView(null);
+            if (!this.PACMAN.projectileLance && this.PACMAN.projectile != null) this.PACMAN.projectile.setImageView(null);
             //affichage fantomes
-            for (Fantome fantome : fantomeGroup.fantomes) {
+            for (Fantome fantome : this.fantomeGroup.fantomes) {
                 fantome.affichage();
             }
             // mise à jour de la map
-            MAP.miseAJourMap();
+            this.MAP.miseAJourMap();
             //affichage score
             this.updateScore();
-            try {controllerJouer.viePac();} catch (IOException e) {e.printStackTrace();}
-            if (MAP.aGagne()){
-                UTILISATEUR.pointJoueur=PACMAN.score;
-                UTILISATEUR.ecritureUtilisateur();
-                try {controllerJouer.switchToSceneAmelioration();} catch (IOException e) {e.printStackTrace();}
+            try {this.controllerJouer.viePac();} catch (IOException e) {e.printStackTrace();}
+            if (this.MAP.aGagne()){
+                this.UTILISATEUR.pointJoueur=this.PACMAN.score;
+                this.UTILISATEUR.ecritureUtilisateur();
+                try {this.controllerJouer.switchToSceneAmelioration();} catch (IOException e) {e.printStackTrace();}
             }
             //affichage des compétences
-            renderCompetences();
+            this.renderCompetences();
         });
     }
 
     // ------------------- UPDATE SCORE -------------------------
     public void updateScore() {
-        this.LABEL_SCORE.setText(String.valueOf(PACMAN.score));
+        this.LABEL_SCORE.setText(String.valueOf(this.PACMAN.score));
     }
 
     /**
@@ -144,26 +144,26 @@ public class UpdateRender extends Thread{
      * sinon si le fantôme n'est ni appeuré ni mort, Pacman perd une vie, on reinitialise la postion des fantômes et de Pacman et on joue la musique de mort.
      */
     public void fantomeSurPacman() {
-        for (Fantome fantome : fantomeGroup.fantomes) {
+        for (Fantome fantome : this.fantomeGroup.fantomes) {
             if (fantome.estSurPacman()) {
-                if (fantome.etat == Fantome.ValeurEtat.APPEURE && PACMAN.peutManger) {
+                if (fantome.etat == Fantome.ValeurEtat.APPEURE && this.PACMAN.peutManger) {
                     fantome.etat = Fantome.ValeurEtat.MORT;
                     fantome.velocityMultiplicator = 3;
-                    if(PACMAN.compteurFantomeMange < 4) {
-                        PACMAN.score += 100 * Math.pow(2.0, PACMAN.compteurFantomeMange);
-                        PACMAN.compteurFantomeMange++;
+                    if(this.PACMAN.compteurFantomeMange < 4) {
+                        this.PACMAN.score += 100 * Math.pow(2.0, this.PACMAN.compteurFantomeMange);
+                        this.PACMAN.compteurFantomeMange++;
                     }else{
-                        PACMAN.score += 1000;
-                        PACMAN.compteurFantomeMange = 0;
+                        this.PACMAN.score += 1000;
+                        this.PACMAN.compteurFantomeMange = 0;
                     }
                 } else if (fantome.etat != Fantome.ValeurEtat.MORT && fantome.etat!= Fantome.ValeurEtat.APPEURE){
-                    PACMAN.compteurFantomeMange = 0;
-                    PACMAN.initPosition();
-                    PACMAN.nbVie--;
-                    PACMAN.reinitialiseTempsDeRecharge();
-                    PACMAN.reinitialisePowers();
+                    this.PACMAN.compteurFantomeMange = 0;
+                    this.PACMAN.initPosition();
+                    this.PACMAN.nbVie--;
+                    this.PACMAN.reinitialiseTempsDeRecharge();
+                    this.PACMAN.reinitialisePowers();
                     this.controllerJouer.playMusic("death", false);
-                    fantomeGroup.reinitialisePosition();
+                    this.fantomeGroup.reinitialisePosition();
                 }
             }
         }
@@ -173,7 +173,7 @@ public class UpdateRender extends Thread{
      * donne la classe de pacman à tout les fantômes.
      */
     public void addPacmanToFantome() {
-        for (Fantome fantome : fantomeGroup.fantomes) {
+        for (Fantome fantome : this.fantomeGroup.fantomes) {
             fantome.setMap(MAP);
             fantome.pacman = PACMAN;
         }
@@ -185,31 +185,31 @@ public class UpdateRender extends Thread{
      */
     public void renderCompetences() {
         //tirer
-        if (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceTirer < 1000 * PACMAN.tempsDeRechargeCompetenceTirer) {
-            int cooldown = (int) ((1000 * PACMAN.tempsDeRechargeCompetenceTirer - (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceTirer))/1000);
-            controllerJouer.imageCompetenceTirer.setOpacity(0.5);
-            controllerJouer.cooldownCompetenceTirer.setText(String.valueOf(cooldown));
+        if (System.currentTimeMillis()-this.PACMAN.debutTempsDeRechargeCompetenceTirer < 1000 * this.PACMAN.tempsDeRechargeCompetenceTirer) {
+            int cooldown = (int) ((1000 * this.PACMAN.tempsDeRechargeCompetenceTirer - (System.currentTimeMillis()-this.PACMAN.debutTempsDeRechargeCompetenceTirer))/1000);
+            this.controllerJouer.imageCompetenceTirer.setOpacity(0.5);
+            this.controllerJouer.cooldownCompetenceTirer.setText(String.valueOf(cooldown));
         } else {
-            controllerJouer.cooldownCompetenceTirer.setText("");
-            controllerJouer.imageCompetenceTirer.setOpacity(1);
+            this.controllerJouer.cooldownCompetenceTirer.setText("");
+            this.controllerJouer.imageCompetenceTirer.setOpacity(1);
         }
         //freeze
-        if (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceFreeze < 1000 * PACMAN.tempsDeRechargeCompetenceFreeze) {
-            int cooldown = (int) ((1000 * PACMAN.tempsDeRechargeCompetenceFreeze - (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceFreeze))/1000);
-            controllerJouer.imageCompetenceFreeze.setOpacity(0.5);
-            controllerJouer.cooldownCompetenceFreeze.setText(String.valueOf(cooldown));
+        if (System.currentTimeMillis()-this.PACMAN.debutTempsDeRechargeCompetenceFreeze < 1000 * this.PACMAN.tempsDeRechargeCompetenceFreeze) {
+            int cooldown = (int) ((1000 * this.PACMAN.tempsDeRechargeCompetenceFreeze - (System.currentTimeMillis()-this.PACMAN.debutTempsDeRechargeCompetenceFreeze))/1000);
+            this.controllerJouer.imageCompetenceFreeze.setOpacity(0.5);
+            this.controllerJouer.cooldownCompetenceFreeze.setText(String.valueOf(cooldown));
         } else {
-            controllerJouer.cooldownCompetenceFreeze.setText("");
-            controllerJouer.imageCompetenceFreeze.setOpacity(1);
+            this.controllerJouer.cooldownCompetenceFreeze.setText("");
+            this.controllerJouer.imageCompetenceFreeze.setOpacity(1);
         }
         //teleporteur
-        if (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceTeleporteur < 1000 * PACMAN.tempsDeRechargeCompetenceTeleporteur) {
-            int cooldown = (int) ((1000 * PACMAN.tempsDeRechargeCompetenceTeleporteur - (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceTeleporteur))/1000);
-            controllerJouer.imageCompetenceTeleporteur.setOpacity(0.5);
-            controllerJouer.cooldownCompetenceTeleporteur.setText(String.valueOf(cooldown));
+        if (System.currentTimeMillis()-this.PACMAN.debutTempsDeRechargeCompetenceTeleporteur < 1000 * this.PACMAN.tempsDeRechargeCompetenceTeleporteur) {
+            int cooldown = (int) ((1000 * this.PACMAN.tempsDeRechargeCompetenceTeleporteur - (System.currentTimeMillis()-this.PACMAN.debutTempsDeRechargeCompetenceTeleporteur))/1000);
+            this.controllerJouer.imageCompetenceTeleporteur.setOpacity(0.5);
+            this.controllerJouer.cooldownCompetenceTeleporteur.setText(String.valueOf(cooldown));
         } else {
-            controllerJouer.cooldownCompetenceTeleporteur.setText("");
-            controllerJouer.imageCompetenceTeleporteur.setOpacity(1);
+            this.controllerJouer.cooldownCompetenceTeleporteur.setText("");
+            this.controllerJouer.imageCompetenceTeleporteur.setOpacity(1);
         }
     }
 }

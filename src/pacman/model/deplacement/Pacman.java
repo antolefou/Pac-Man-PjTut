@@ -84,7 +84,7 @@ public class Pacman extends Deplacement {
 
         this.teleporteurPose = false;
         this.freeze = false;
-        tempsDebutFreeze = 0;
+        this.tempsDebutFreeze = 0;
 
         this.peutManger = true;
 
@@ -102,16 +102,16 @@ public class Pacman extends Deplacement {
      */
     public void initialiseCompetences() {
         if (competenceTirerDeverouillee) {
-            this.tempsDeRechargeCompetenceTirer = Double.parseDouble(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceTirer][3]);
-            this.pertePointsTirer = Integer.parseInt(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceTirer][2]);
+            this.tempsDeRechargeCompetenceTirer = Double.parseDouble(this.controllerJouer.utilisateur.tabCompetence[this.controllerJouer.utilisateur.niveauCompetenceTirer][3]);
+            this.pertePointsTirer = Integer.parseInt(this.controllerJouer.utilisateur.tabCompetence[this.controllerJouer.utilisateur.niveauCompetenceTirer][2]);
         }
         if (competenceFreezeDeverouillee) {
-            this.tempsDeRechargeCompetenceFreeze = Double.parseDouble(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceFreeze][7]);
-            this.pertePointsFreeze = Integer.parseInt(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceFreeze][6]);
+            this.tempsDeRechargeCompetenceFreeze = Double.parseDouble(this.controllerJouer.utilisateur.tabCompetence[this.controllerJouer.utilisateur.niveauCompetenceFreeze][7]);
+            this.pertePointsFreeze = Integer.parseInt(this.controllerJouer.utilisateur.tabCompetence[this.controllerJouer.utilisateur.niveauCompetenceFreeze][6]);
         }
         if (competenceTeleporteurDeverouillee) {
-            this.tempsDeRechargeCompetenceTeleporteur = Double.parseDouble(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceTeleporteur][11]);
-            this.pertePointsTeleporte = Integer.parseInt(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceTeleporteur][10]);
+            this.tempsDeRechargeCompetenceTeleporteur = Double.parseDouble(this.controllerJouer.utilisateur.tabCompetence[this.controllerJouer.utilisateur.niveauCompetenceTeleporteur][11]);
+            this.pertePointsTeleporte = Integer.parseInt(this.controllerJouer.utilisateur.tabCompetence[this.controllerJouer.utilisateur.niveauCompetenceTeleporteur][10]);
         }
     }
 
@@ -121,8 +121,8 @@ public class Pacman extends Deplacement {
     @Override
     public void initPosition() {
         super.initPosition();
-        deplacementFutur = deplacements.AUCUN;
-        deplacementActuel = deplacements.AUCUN;
+        this.deplacementFutur = deplacements.AUCUN;
+        this.deplacementActuel = deplacements.AUCUN;
     }
 
     /**
@@ -134,7 +134,7 @@ public class Pacman extends Deplacement {
         double pacmanX = this.getPosX();
         double pacmanY = this.getPosY();
         if (pacmanX % 20 == 1) {
-            return (pacmanY % 20 != 1) || ((map.grid[((int) pacmanX / 20) % 25][(((int) pacmanY / 20) + i) % 30] != Map.ValeurCase.MUR) && (map.grid[((int) pacmanX / 20)][((int) pacmanY / 20) + i] != Map.ValeurCase.INTERDIT));
+            return (pacmanY % 20 != 1) || ((this.map.grid[((int) pacmanX / 20) % 25][(((int) pacmanY / 20) + i) % 30] != Map.ValeurCase.MUR) && (map.grid[((int) pacmanX / 20)][((int) pacmanY / 20) + i] != Map.ValeurCase.INTERDIT));
         }
         return false;
     }
@@ -148,7 +148,7 @@ public class Pacman extends Deplacement {
         double pacmanX = this.getPosX();
         double pacmanY = this.getPosY();
         if (pacmanY % 20 == 1) {
-            return (pacmanX % 20 != 1) || (map.grid[((((int) pacmanX / 20) + i) + 25) % 25][((int) pacmanY / 20)] != Map.ValeurCase.MUR);
+            return (pacmanX % 20 != 1) || (this.map.grid[((((int) pacmanX / 20) + i) + 25) % 25][((int) pacmanY / 20)] != Map.ValeurCase.MUR);
         }
         return false;
     }
@@ -159,7 +159,7 @@ public class Pacman extends Deplacement {
     @Override
     public void affichage() {
         super.affichage();
-        switch (deplacementActuel) {
+        switch (this.deplacementActuel) {
             case HAUT:
                 this.getImageView().setRotate(0);
                 break;
@@ -180,74 +180,74 @@ public class Pacman extends Deplacement {
      */
     public void updateDeplacement() {
         boolean peutAvancer = false;
-        if (deplacementFutur != Deplacement.deplacements.AUCUN) {
-            switch (deplacementFutur) {
+        if (this.deplacementFutur != Deplacement.deplacements.AUCUN) {
+            switch (this.deplacementFutur) {
                 case HAUT:
-                    if (peutAvancerVerticalement(-1) && !touchesInversees) {
-                        avanceHaut();
+                    if (this.peutAvancerVerticalement(-1) && !this.touchesInversees) {
+                        this.avanceHaut();
                         peutAvancer = true;
-                    }else if (peutAvancerVerticalement(1) && touchesInversees) {
-                        avanceBas();
+                    }else if (this.peutAvancerVerticalement(1) && this.touchesInversees) {
+                        this.avanceBas();
                         peutAvancer = true;
                     }
                     break;
                 case DROITE:
-                    if (peutAvancerHorizontalement(1) && !touchesInversees) {
-                        avanceDroite();
+                    if (this.peutAvancerHorizontalement(1) && !this.touchesInversees) {
+                        this.avanceDroite();
                         peutAvancer = true;
-                    }else if (peutAvancerHorizontalement(-1) && touchesInversees) {
-                        avanceGauche();
+                    }else if (this.peutAvancerHorizontalement(-1) && this.touchesInversees) {
+                        this.avanceGauche();
                         peutAvancer = true;
                     }
                     break;
                 case BAS:
-                    if (peutAvancerVerticalement(1) && !touchesInversees) {
-                        avanceBas();
+                    if (this.peutAvancerVerticalement(1) && !this.touchesInversees) {
+                        this.avanceBas();
                         peutAvancer = true;
-                    }else if (peutAvancerVerticalement(-1) && touchesInversees) {
-                        avanceHaut();
+                    }else if (this.peutAvancerVerticalement(-1) && this.touchesInversees) {
+                        this.avanceHaut();
                         peutAvancer = true;
                     }
                     break;
                 case GAUCHE:
-                    if (peutAvancerHorizontalement(-1) && !touchesInversees) {
-                        avanceGauche();
+                    if (this.peutAvancerHorizontalement(-1) && !this.touchesInversees) {
+                        this.avanceGauche();
                         peutAvancer = true;
-                    } else if (peutAvancerHorizontalement(1) && touchesInversees) {
-                        avanceDroite();
+                    } else if (this.peutAvancerHorizontalement(1) && this.touchesInversees) {
+                        this.avanceDroite();
                         peutAvancer = true;
                     }
                     break;
             }
         }
         if (peutAvancer) {
-            deplacementActuel = deplacementFutur;
-            deplacementFutur = deplacements.AUCUN;
+            this.deplacementActuel = this.deplacementFutur;
+            this.deplacementFutur = deplacements.AUCUN;
         } else {
-            switch (deplacementActuel) {
+            switch (this.deplacementActuel) {
                 case HAUT:
-                    if (peutAvancerVerticalement(-1) && !touchesInversees)
-                        avanceHaut();
-                    else if (peutAvancerVerticalement(1) && touchesInversees)
-                        avanceBas();
+                    if (this.peutAvancerVerticalement(-1) && !this.touchesInversees)
+                        this.avanceHaut();
+                    else if (this.peutAvancerVerticalement(1) && this.touchesInversees)
+                        this.avanceBas();
                     break;
                 case DROITE:
-                    if (peutAvancerHorizontalement(1) && !touchesInversees)
-                        avanceDroite();
-                    else if (peutAvancerHorizontalement(-1) && touchesInversees)
-                        avanceGauche();
+                    if (this.peutAvancerHorizontalement(1) && !this.touchesInversees)
+                        this.avanceDroite();
+                    else if (this.peutAvancerHorizontalement(-1) && this.touchesInversees)
+                        this.avanceGauche();
                     break;
                 case BAS:
-                    if (peutAvancerVerticalement(1) && !touchesInversees)
-                        avanceBas();
-                    else if (peutAvancerVerticalement(-1) && touchesInversees)
-                        avanceHaut();
+                    if (this.peutAvancerVerticalement(1) && !this.touchesInversees)
+                        this.avanceBas();
+                    else if (this.peutAvancerVerticalement(-1) && this.touchesInversees)
+                        this.avanceHaut();
                     break;
                 case GAUCHE:
-                    if (peutAvancerHorizontalement(-1) && !touchesInversees)
-                        avanceGauche();
-                    else if (peutAvancerHorizontalement(1) && touchesInversees)
-                        avanceDroite();
+                    if (this.peutAvancerHorizontalement(-1) && !this.touchesInversees)
+                        this.avanceGauche();
+                    else if (this.peutAvancerHorizontalement(1) && this.touchesInversees)
+                        this.avanceDroite();
                     break;
             }
         }
@@ -265,7 +265,7 @@ public class Pacman extends Deplacement {
         int addX = 0;
         int addY = 0;
         int comparaisonY = 1;
-        switch (deplacementActuel) {
+        switch (this.deplacementActuel) {
             case HAUT:
                 comparaisonY = 7;
                 break;
@@ -284,44 +284,43 @@ public class Pacman extends Deplacement {
         if (pacmanX % 20 == comparaisonX && pacmanY % 20 == comparaisonY && peutManger) {
             int x = (((pacmanX / 20) + 25) % 25 + addX)%25;
             int y = pacmanY / 20 + addY;
-            if (map.grid[x][y] == Map.ValeurCase.GOMME) {
-                map.grid[x][y] = Map.ValeurCase.VIDE;
-                score += 10;
-            } else if (map.grid[x][y] == Map.ValeurCase.SUPERGOMME) {
-                map.grid[x][y] = Map.ValeurCase.VIDE;
-                score += 50;
+            if (this.map.grid[x][y] == Map.ValeurCase.GOMME) {
+                this.map.grid[x][y] = Map.ValeurCase.VIDE;
+                this.score += 10;
+            } else if (this.map.grid[x][y] == Map.ValeurCase.SUPERGOMME) {
+                this.map.grid[x][y] = Map.ValeurCase.VIDE;
+                this.score += 50;
                 this.initSuperPacGomme();
-            } else if (map.grid[x][y] == Map.ValeurCase.BOOST) {
-                map.grid[x][y] = Map.ValeurCase.VIDE;
-                score += 50;
+            } else if (this.map.grid[x][y] == Map.ValeurCase.BOOST) {
+                this.map.grid[x][y] = Map.ValeurCase.VIDE;
+                this.score += 50;
                 this.initPowerBoost();
-
-            }else if (map.grid[x][y] == Map.ValeurCase.CERISE) {
-                map.grid[x][y] = Map.ValeurCase.VIDE;
-                score += 100;
-            }else if (map.grid[x][y] == Map.ValeurCase.FRAISE) {
-                map.grid[x][y] = Map.ValeurCase.VIDE;
-                score += 300;
-            }else if (map.grid[x][y] == Map.ValeurCase.ORANGE) {
-                map.grid[x][y] = Map.ValeurCase.VIDE;
-                score += 500;
-            }else if (map.grid[x][y] == Map.ValeurCase.POMME) {
-                map.grid[x][y] = Map.ValeurCase.VIDE;
-                score += 700;
-            }else if (map.grid[x][y] == Map.ValeurCase.MELON) {
-                map.grid[x][y] = Map.ValeurCase.VIDE;
-                score += 1000;
-            }else if (map.grid[x][y] == Map.ValeurCase.VAISSEAU) {
-                map.grid[x][y] = Map.ValeurCase.VIDE;
-                score += 2000;
-            }else if (map.grid[x][y] == Map.ValeurCase.CLOCHE) {
-                map.grid[x][y] = Map.ValeurCase.VIDE;
-                score += 3000;
-            }else if (map.grid[x][y] == Map.ValeurCase.CLEF) {
-                map.grid[x][y] = Map.ValeurCase.VIDE;
-                score += 5000;
-            }else if (map.grid[x][y] == null) {
-                map.grid[x][y] = Map.ValeurCase.VIDE;
+            }else if (this.map.grid[x][y] == Map.ValeurCase.CERISE) {
+                this.map.grid[x][y] = Map.ValeurCase.VIDE;
+                this.score += 100;
+            }else if (this.map.grid[x][y] == Map.ValeurCase.FRAISE) {
+                this.map.grid[x][y] = Map.ValeurCase.VIDE;
+                this.score += 300;
+            }else if (this.map.grid[x][y] == Map.ValeurCase.ORANGE) {
+                this.map.grid[x][y] = Map.ValeurCase.VIDE;
+                this.score += 500;
+            }else if (this.map.grid[x][y] == Map.ValeurCase.POMME) {
+                this.map.grid[x][y] = Map.ValeurCase.VIDE;
+                this.score += 700;
+            }else if (this.map.grid[x][y] == Map.ValeurCase.MELON) {
+                this.map.grid[x][y] = Map.ValeurCase.VIDE;
+                this.score += 1000;
+            }else if (this.map.grid[x][y] == Map.ValeurCase.VAISSEAU) {
+                this.map.grid[x][y] = Map.ValeurCase.VIDE;
+                this.score += 2000;
+            }else if (this.map.grid[x][y] == Map.ValeurCase.CLOCHE) {
+                this.map.grid[x][y] = Map.ValeurCase.VIDE;
+                this.score += 3000;
+            }else if (this.map.grid[x][y] == Map.ValeurCase.CLEF) {
+                this.map.grid[x][y] = Map.ValeurCase.VIDE;
+                this.score += 5000;
+            }else if (this.map.grid[x][y] == null) {
+                this.map.grid[x][y] = Map.ValeurCase.VIDE;
             }
         }
         this.stopPower();
@@ -334,35 +333,35 @@ public class Pacman extends Deplacement {
      */
     public void initPowerBoost() {
         if (!ralentissement)
-            this.velocityMultiplicator = velocityMultiplicatorInitial * 2;
-        else this.velocityMultiplicator = velocityMultiplicatorInitial;
-        debutPowerBoost = System.currentTimeMillis();
-        powerBoost = true;
+            this.velocityMultiplicator = this.velocityMultiplicatorInitial * 2;
+        else this.velocityMultiplicator = this.velocityMultiplicatorInitial;
+        this.debutPowerBoost = System.currentTimeMillis();
+        this.powerBoost = true;
     }
     /**
      * Initialise pacman avec les attributs de l'objet bonus: super pac-gomme
      */
     public void initSuperPacGomme() {
-        debutSuperPacGomme = System.currentTimeMillis();
-        powerSuperPacGomme = true;
-        controllerJouer.fantomeGroup.setVulnerable();
+        this.debutSuperPacGomme = System.currentTimeMillis();
+        this.powerSuperPacGomme = true;
+        this.controllerJouer.fantomeGroup.setVulnerable();
     }
 
     /**
      * Si un téléporteur est posé, modifie les coordonnees de pacman. Sinon pose un téléporteur
      */
     public void competenceTeleportation() {
-        if (!teleporteurPose && score >= pertePointsTeleporte && competenceTeleporteurPrete) {
-            teleporteurPose = true;
+        if (!this.teleporteurPose && this.score >= this.pertePointsTeleporte && this.competenceTeleporteurPrete) {
+            this.teleporteurPose = true;
             this.teleporteur = new Teleporteur(this, map);
-            teleporteur.poseTeleporteur(getPosX(), getPosY());
-            pertePoints(pertePointsTeleporte);
+            this.teleporteur.poseTeleporteur(getPosX(), getPosY());
+            this.pertePoints(pertePointsTeleporte);
         }
-        else if (teleporteurPose){
-            debutTempsDeRechargeCompetenceTeleporteur = System.currentTimeMillis();
-            competenceTeleporteurPrete = false;
-            teleporteur.teleporte();
-            touchesInversees();
+        else if (this.teleporteurPose){
+            this.debutTempsDeRechargeCompetenceTeleporteur = System.currentTimeMillis();
+            this.competenceTeleporteurPrete = false;
+            this.teleporteur.teleporte();
+            this.touchesInversees();
         }
     }
 
@@ -370,29 +369,29 @@ public class Pacman extends Deplacement {
      * Active la compétence freeze et lance son temps de recharge
      */
     public void competenceFreeze() {
-        debutTempsDeRechargeCompetenceFreeze = System.currentTimeMillis();
-        competenceFreezePrete = false;
+        this.debutTempsDeRechargeCompetenceFreeze = System.currentTimeMillis();
+        this.competenceFreezePrete = false;
         this.freeze = true;
-        controllerJouer.fantomeGroup.freezeFantomes();
-        tempsDebutFreeze = System.currentTimeMillis();
-        ralentissement();
-        pertePoints(pertePointsFreeze);
+        this.controllerJouer.fantomeGroup.freezeFantomes();
+        this.tempsDebutFreeze = System.currentTimeMillis();
+        this.ralentissement();
+        this.pertePoints(this.pertePointsFreeze);
     }
 
     /**
      * Créé et affiche le projectile et lance le temps de recharge de la compétence
      */
     public void competenceProjectile() {
-        debutTempsDeRechargeCompetenceTirer = System.currentTimeMillis();
-        competenceTirerPrete = false;
-        peutManger = false;
-        debutTempsPeutManger = System.currentTimeMillis();
+        this.debutTempsDeRechargeCompetenceTirer = System.currentTimeMillis();
+        this.competenceTirerPrete = false;
+        this.peutManger = false;
+        this.debutTempsPeutManger = System.currentTimeMillis();
         Image imageProjectile= new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/projectile.gif")));
-        projectileLance = true;
-        projectile = new Deplacement(getPosX(), getPosY());
-        projectile.setImage(imageProjectile);
-        projectile.initialisation();
-        projectile.velocityMultiplicator = 5;
+        this.projectileLance = true;
+        this.projectile = new Deplacement(getPosX(), getPosY());
+        this.projectile.setImage(imageProjectile);
+        this.projectile.initialisation();
+        this.projectile.velocityMultiplicator = 5;
 
         switch (this.deplacementActuel) {
             case DROITE:
@@ -408,8 +407,8 @@ public class Pacman extends Deplacement {
                 this.projectileRotate = -90;
                 break;
         }
-        pertePoints(pertePointsTirer);
-        Platform.runLater(() -> this.getChildren().add(projectile.getImageView()));
+        this.pertePoints(this.pertePointsTirer);
+        Platform.runLater(() -> this.getChildren().add(this.projectile.getImageView()));
     }
 
     /**
@@ -417,8 +416,8 @@ public class Pacman extends Deplacement {
      * @return vrai si le projectile est sur la même case qu'un fantôme, sinon return faux
      */
     public boolean projectileSurFantome() {
-        for (Fantome fantome : controllerJouer.fantomeGroup.fantomes) {
-            if (!fantome.mort && (fantome.getCoordFantome().equals(projectile.getPosX() / 20 + "/" + projectile.getPosY() / 20) || (((fantome.getPosX() - projectile.getPosX()) < 18) && ((fantome.getPosX() - projectile.getPosX()) >= 0) && ((fantome.getPosY() - projectile.getPosY()) < 18) && ((fantome.getPosY() - projectile.getPosY()) >= 0)))){
+        for (Fantome fantome : this.controllerJouer.fantomeGroup.fantomes) {
+            if (!fantome.mort && (fantome.getCoordFantome().equals(this.projectile.getPosX() / 20 + "/" + this.projectile.getPosY() / 20) || (((fantome.getPosX() - this.projectile.getPosX()) < 18) && ((fantome.getPosX() - this.projectile.getPosX()) >= 0) && ((fantome.getPosY() - this.projectile.getPosY()) < 18) && ((fantome.getPosY() - this.projectile.getPosY()) >= 0)))){
                 fantome.faisDemiTour();
                 return true;
             }
@@ -432,33 +431,33 @@ public class Pacman extends Deplacement {
      */
     public void updateProjectile() {
 
-        switch ((int) projectileRotate) {
+        switch ((int) this.projectileRotate) {
             case -90 :
-                if (map.grid[projectile.getPosX()/20][(projectile.getPosY()/20)] == Map.ValeurCase.MUR || projectileSurFantome()) {
-                    projectileLance = false;
+                if (this.map.grid[this.projectile.getPosX()/20][(this.projectile.getPosY()/20)] == Map.ValeurCase.MUR || this.projectileSurFantome()) {
+                    this.projectileLance = false;
                 }
-                else projectile.avanceHaut();
+                else this.projectile.avanceHaut();
                 break;
             case 0 :
-                if (map.grid[((projectile.getPosX()/20)+1)%25][projectile.getPosY()/20] == Map.ValeurCase.MUR || (projectile.getPosX()/20) +1  >= 24 || projectileSurFantome()) {
-                    projectileLance = false;
+                if (this.map.grid[((this.projectile.getPosX()/20)+1)%25][this.projectile.getPosY()/20] == Map.ValeurCase.MUR || (this.projectile.getPosX()/20) +1  >= 24 || this.projectileSurFantome()) {
+                    this.projectileLance = false;
                 }
-                else projectile.avanceDroite();
+                else this.projectile.avanceDroite();
                 break;
             case 90 :
-                if (map.grid[projectile.getPosX()/20][(projectile.getPosY()/20)+1] == Map.ValeurCase.MUR || projectileSurFantome()) {
-                    projectileLance = false;
+                if (this.map.grid[this.projectile.getPosX()/20][(this.projectile.getPosY()/20)+1] == Map.ValeurCase.MUR || this.projectileSurFantome()) {
+                    this.projectileLance = false;
                 }
-                else projectile.avanceBas();
+                else this.projectile.avanceBas();
                 break;
             case 180 :
-                if (map.grid[(projectile.getPosX()/20)%25][projectile.getPosY()/20] == Map.ValeurCase.MUR || (projectile.getPosX()/20) -1  <= -1 || projectileSurFantome()) {
-                    projectileLance = false;
+                if (this.map.grid[(this.projectile.getPosX()/20)%25][this.projectile.getPosY()/20] == Map.ValeurCase.MUR || (this.projectile.getPosX()/20) -1  <= -1 || this.projectileSurFantome()) {
+                    this.projectileLance = false;
                 }
-                else projectile.avanceGauche();
+                else this.projectile.avanceGauche();
                 break;
             default:
-                projectileLance = false;
+                this.projectileLance = false;
         }
     }
 
@@ -467,7 +466,7 @@ public class Pacman extends Deplacement {
      */
     public void renderProjectile() {
         if(this.projectile.getImageView() != null) {
-            projectile.affichage();
+            this.projectile.affichage();
             this.projectile.getImageView().setRotate(this.projectileRotate);
         }
     }
@@ -479,19 +478,19 @@ public class Pacman extends Deplacement {
      */
     public void touchesInversees() {
         this.touchesInversees = true;
-        tempsDebutTouchesInversees = System.currentTimeMillis();
-        Platform.runLater(() -> setImageView(imagePacmanEtourdi));
+        this.tempsDebutTouchesInversees = System.currentTimeMillis();
+        Platform.runLater(() -> setImageView(this.imagePacmanEtourdi));
     }
 
     /**
      * Pacman se déplace 2x plus lentement et son image est modifiée
      */
     public void ralentissement() {
-        if (powerBoost) this.velocityMultiplicator = velocityMultiplicatorInitial;
-        else this.velocityMultiplicator = velocityMultiplicatorInitial/2;
-        ralentissement = true;
-        tempsDebutRalentissement = System.currentTimeMillis();
-        Platform.runLater(() -> setImageView(imagePacmanGele));
+        if (powerBoost) this.velocityMultiplicator = this.velocityMultiplicatorInitial;
+        else this.velocityMultiplicator = this.velocityMultiplicatorInitial/2;
+        this.ralentissement = true;
+        this.tempsDebutRalentissement = System.currentTimeMillis();
+        Platform.runLater(() -> setImageView(this.imagePacmanGele));
     }
 
     /**
@@ -506,52 +505,52 @@ public class Pacman extends Deplacement {
      * Stoppe tous les objets bonus qui ont atteint le temps d'effet
      */
     public void stopPower() {
-        if (powerBoost) {
+        if (this.powerBoost) {
             long tempsPowerBoost = System.currentTimeMillis();
-            if (tempsPowerBoost-debutPowerBoost > 1000 * 5) {  // durée 5 sec
-                if(ralentissement) velocityMultiplicator = velocityMultiplicatorInitial/2;
-                else velocityMultiplicator = velocityMultiplicatorInitial;
-                powerBoost = false;
+            if (tempsPowerBoost-this.debutPowerBoost > 1000 * 5) {  // durée 5 sec
+                if(this.ralentissement) this.velocityMultiplicator = this.velocityMultiplicatorInitial/2;
+                else this.velocityMultiplicator = this.velocityMultiplicatorInitial;
+                this.powerBoost = false;
             }
         }
-        if(freeze) {
+        if(this.freeze) {
             long tempsFreeze = System.currentTimeMillis();
-            if (tempsFreeze - tempsDebutFreeze > 5000) {
-                controllerJouer.fantomeGroup.unfreezeFantomes();
+            if (tempsFreeze - this.tempsDebutFreeze > 5000) {
+                this.controllerJouer.fantomeGroup.unfreezeFantomes();
             }
         }
-        else if (powerSuperPacGomme) {
+        else if (this.powerSuperPacGomme) {
             long tempsPacGomme = System.currentTimeMillis();
-            if (tempsPacGomme-debutSuperPacGomme > 1000 * 10) {  // durée 10 sec
-                powerSuperPacGomme = false;
-                controllerJouer.fantomeGroup.stopVulnerable();
+            if (tempsPacGomme-this.debutSuperPacGomme > 1000 * 10) {  // durée 10 sec
+                this.powerSuperPacGomme = false;
+                this.controllerJouer.fantomeGroup.stopVulnerable();
             }
-            else controllerJouer.fantomeGroup.setClignotant(tempsPacGomme - debutSuperPacGomme > 1000 * 7.5);
+            else this.controllerJouer.fantomeGroup.setClignotant(tempsPacGomme - this.debutSuperPacGomme > 1000 * 7.5);
         }
-        if(touchesInversees) {
+        if(this.touchesInversees) {
             long tempsTouchesInversees = System.currentTimeMillis();
-            if (tempsTouchesInversees-tempsDebutTouchesInversees > 1000 * 15) {
+            if (tempsTouchesInversees-this.tempsDebutTouchesInversees > 1000 * 15) {
                 Platform.runLater(() -> {
-                    if(!freeze) this.setImageView(imagePacman);
+                    if(!this.freeze) this.setImageView(this.imagePacman);
                 });
-                touchesInversees = false;
+                this.touchesInversees = false;
             }
         }
-        if(ralentissement) {
+        if(this.ralentissement) {
             long tempsRalentissement = System.currentTimeMillis();
-            if (tempsRalentissement-tempsDebutRalentissement > 1000 * 8) {
-                ralentissement = false;
-                if(powerBoost) velocityMultiplicator = velocityMultiplicatorInitial * 2;
-                else velocityMultiplicator = velocityMultiplicatorInitial;
+            if (tempsRalentissement-this.tempsDebutRalentissement > 1000 * 8) {
+                this.ralentissement = false;
+                if(this.powerBoost) this.velocityMultiplicator = this.velocityMultiplicatorInitial * 2;
+                else this.velocityMultiplicator = this.velocityMultiplicatorInitial;
                 Platform.runLater(() -> {
-                    if(!touchesInversees) this.setImageView(imagePacman);
+                    if(!this.touchesInversees) this.setImageView(this.imagePacman);
                 });
             }
         }
-        if (!peutManger) {
+        if (!this.peutManger) {
             long tempsNePeutPlusManger = System.currentTimeMillis();
-            if (tempsNePeutPlusManger-debutTempsPeutManger > 1000 * 2) {
-                peutManger = true;
+            if (tempsNePeutPlusManger-this.debutTempsPeutManger > 1000 * 2) {
+                this.peutManger = true;
             }
         }
     }
@@ -561,12 +560,12 @@ public class Pacman extends Deplacement {
      */
     public void tempsDeRecharge() {
         long tempsDeRecharge = System.currentTimeMillis();
-        if (!competenceTeleporteurPrete) {
-            if (tempsDeRecharge- debutTempsDeRechargeCompetenceTeleporteur > 1000 * tempsDeRechargeCompetenceTeleporteur) competenceTeleporteurPrete = true;
-        }if (!competenceFreezePrete) {
-            if (tempsDeRecharge- debutTempsDeRechargeCompetenceFreeze > 1000 * tempsDeRechargeCompetenceFreeze) competenceFreezePrete = true;
-        }if (!competenceTirerPrete) {
-            if (tempsDeRecharge- debutTempsDeRechargeCompetenceTirer > 1000 * tempsDeRechargeCompetenceTirer) competenceTirerPrete = true;
+        if (!this.competenceTeleporteurPrete) {
+            if (tempsDeRecharge- this.debutTempsDeRechargeCompetenceTeleporteur > 1000 * this.tempsDeRechargeCompetenceTeleporteur) this.competenceTeleporteurPrete = true;
+        }if (!this.competenceFreezePrete) {
+            if (tempsDeRecharge- this.debutTempsDeRechargeCompetenceFreeze > 1000 * this.tempsDeRechargeCompetenceFreeze) this.competenceFreezePrete = true;
+        }if (!this.competenceTirerPrete) {
+            if (tempsDeRecharge- this.debutTempsDeRechargeCompetenceTirer > 1000 * this.tempsDeRechargeCompetenceTirer) this.competenceTirerPrete = true;
         }
     }
 
@@ -574,39 +573,39 @@ public class Pacman extends Deplacement {
      * Réinitialise le temps de recharge des compétences déverouillées et les met prêtes
      */
     public void reinitialiseTempsDeRecharge() {
-        if (competenceTirerDeverouillee) competenceTirerPrete = true;
-        if (competenceFreezeDeverouillee) competenceFreezePrete = true;
-        if (competenceTeleporteurDeverouillee) competenceTeleporteurPrete = true;
+        if (this.competenceTirerDeverouillee) this.competenceTirerPrete = true;
+        if (this.competenceFreezeDeverouillee) this.competenceFreezePrete = true;
+        if (this.competenceTeleporteurDeverouillee) this.competenceTeleporteurPrete = true;
 
-        debutTempsDeRechargeCompetenceTirer = 0;
-        debutTempsDeRechargeCompetenceFreeze = 0;
-        debutTempsDeRechargeCompetenceTeleporteur = 0;
+        this.debutTempsDeRechargeCompetenceTirer = 0;
+        this.debutTempsDeRechargeCompetenceFreeze = 0;
+        this.debutTempsDeRechargeCompetenceTeleporteur = 0;
     }
 
     /**
      * Réinitialise tous les pouvoirs activés
      */
     public void reinitialisePowers() {
-        if (powerBoost) {
-            powerBoost = false;
+        if (this.powerBoost) {
+            this.powerBoost = false;
         }
-        if (teleporteurPose) teleporteur.supprimeTeleporteur();
+        if (this.teleporteurPose) this.teleporteur.supprimeTeleporteur();
 
-        if (projectileLance) {
-            projectileLance = false;
-            projectile.setImageView(null);
+        if (this.projectileLance) {
+            this.projectileLance = false;
+            this.projectile.setImageView(null);
         }
-        controllerJouer.fantomeGroup.unfreezeFantomes();
+        this.controllerJouer.fantomeGroup.unfreezeFantomes();
 
-        if(touchesInversees) {
-            touchesInversees = false;
+        if(this.touchesInversees) {
+            this.touchesInversees = false;
         }
-        if(ralentissement) ralentissement = false;
-        velocityMultiplicator = velocityMultiplicatorInitial;
+        if(this.ralentissement) this.ralentissement = false;
+        this.velocityMultiplicator = this.velocityMultiplicatorInitial;
 
-        peutManger = true;
+        this.peutManger = true;
 
-        Platform.runLater(() -> this.setImageView(imagePacman));
+        Platform.runLater(() -> this.setImageView(this.imagePacman));
     }
 
     /**

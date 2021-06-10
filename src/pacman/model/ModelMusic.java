@@ -15,15 +15,15 @@ public class ModelMusic {
         // String system = "/" + System.getProperty("user.dir").replaceAll("\\\\", "/");
         //              A mettre si vous êtes sur Linux
         String system = System.getProperty("user.dir");
-        mediaPlayerHashMap = new HashMap<>();
-        mediaPlayerHashMap.put("theme", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/ace.mp3")));
-        mediaPlayerHashMap.put("menu", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/dancin.mp3")));
-        mediaPlayerHashMap.put("chomp", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/pacman_chomp.wav")));
-        mediaPlayerHashMap.put("gameOver", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/gameOver.mp3")));
-        mediaPlayerHashMap.put("death", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/pacman_death.wav")));
-        mediaPlayerHashMap.put("eatfruit", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/pacman_eatfruit.wav")));
-        mediaPlayerHashMap.put("eatghost", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/pacman_eatghost.wav")));
-        mediaPlayerHashMap.put("extrapac", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/pacman_extrapac.wav")));
+        this.mediaPlayerHashMap = new HashMap<>();
+        this.mediaPlayerHashMap.put("theme", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/ace.mp3")));
+        this.mediaPlayerHashMap.put("menu", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/dancin.mp3")));
+        this.mediaPlayerHashMap.put("chomp", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/pacman_chomp.wav")));
+        this.mediaPlayerHashMap.put("gameOver", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/gameOver.mp3")));
+        this.mediaPlayerHashMap.put("death", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/pacman_death.wav")));
+        this.mediaPlayerHashMap.put("eatfruit", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/pacman_eatfruit.wav")));
+        this.mediaPlayerHashMap.put("eatghost", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/pacman_eatghost.wav")));
+        this.mediaPlayerHashMap.put("extrapac", new MediaPlayer(new Media("file://" + system + "/src/pacman/ressources/music/pacman_extrapac.wav")));
     }
 
 
@@ -31,18 +31,17 @@ public class ModelMusic {
         return mediaPlayerHashMap.get(key);
     }
 
-
     /**
      * Permet de savoir si un media est en train d'être jouer
-     * @param key
+     * @param key nom de la music
      * @return true si il joue sinon false
      */
     public boolean isPlaying(String key) {
-        return mediaPlayerHashMap.get(key).getStatus() == MediaPlayer.Status.PLAYING;
+        return this.mediaPlayerHashMap.get(key).getStatus() == MediaPlayer.Status.PLAYING;
     }
 
     public HashMap<String, MediaPlayer> getMediaPlayerHashMap() {
-        return mediaPlayerHashMap;
+        return this.mediaPlayerHashMap;
     }
 }
 

@@ -26,7 +26,7 @@ public class Teleporteur {
         this.pacman.setPosX((this.posX*20)+1);
         this.pacman.setPosY((this.posY*20)+1);
 
-        supprimeTeleporteur();
+        this.supprimeTeleporteur();
     }
 
     /**
@@ -38,7 +38,7 @@ public class Teleporteur {
         this.posX = posX/20;
         this.posY = posY/20;
 
-        map.grid[this.posX][this.posY] = Map.ValeurCase.TELEPORTEUR;
+        this.map.grid[this.posX][this.posY] = Map.ValeurCase.TELEPORTEUR;
 
     }
 
@@ -46,9 +46,8 @@ public class Teleporteur {
      * Supprime le téléporteur de la map
      */
     protected void supprimeTeleporteur() {
-        map.grid[posX][posY] = Map.ValeurCase.VIDE;
-        pacman.teleporteurPose = false;
+        this.map.grid[posX][posY] = Map.ValeurCase.VIDE;
+        this.pacman.teleporteurPose = false;
 
     }
-
 }

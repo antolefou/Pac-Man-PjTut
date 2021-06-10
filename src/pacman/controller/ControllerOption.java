@@ -1,48 +1,41 @@
 package pacman.controller;
 
-import javafx.scene.control.Button;
+import javafx.fxml.FXML;
 import javafx.scene.control.Slider;
 
-import java.awt.dnd.MouseDragGestureRecognizer;
-import java.awt.event.MouseEvent;
-
 public class ControllerOption extends Controller{
-    //valeur
+//    valeur du son et des fps
     public double valueSon;
     public double valueFPS;
-    //slider
+//    slider
     public Slider sliderSon;
     public Slider sliderFPS;
-    //bouton
-    public Button valider;
-
 
     public ControllerOption() {
         super();
-
     }
 
     /**
      * Initialise les options son et fps
      */
+    @FXML
     public void initialize(){
-        utilisateur.lectureUtilisateur();
-        sliderSon.setValue(utilisateur.getSon());
-        sliderFPS.setValue(utilisateur.getFps());
+        this.utilisateur.lectureUtilisateur();
+        this.sliderSon.setValue(this.utilisateur.getSon());
+        this.sliderFPS.setValue(this.utilisateur.getFps());
     }
 
     /**
      * Change la variable du son ou des fps selon la valeur du slider dans le jeu.
      */
+    @FXML
     public void valeurSliders() {
-        valueSon = sliderSon.getValue();
-        valueFPS = sliderFPS.getValue();
-        utilisateur.setSon((int)valueSon);
-        utilisateur.setFps((int)valueFPS);
-        utilisateur.updateFps(utilisateur.getFps());
-        utilisateur.ecritureUtilisateur();
-        modelMusic.music("menu").setVolume((float)utilisateur.getSon()/100);
+        this.valueSon = this.sliderSon.getValue();
+        this.valueFPS = this.sliderFPS.getValue();
+        this.utilisateur.setSon((int)this.valueSon);
+        this.utilisateur.setFps((int)this.valueFPS);
+        this.utilisateur.updateFps(this.utilisateur.getFps());
+        this.utilisateur.ecritureUtilisateur();
+        modelMusic.music("menu").setVolume((float)this.utilisateur.getSon()/100);
     }
 }
-
-

@@ -42,8 +42,8 @@ public class Deplacement extends Group {
         // ajoute les gifs au imageView puis l'ajoute à la scène
         this.imageView = new ImageView();
         this.imageView.setImage(this.image);
-        this.imageView.setX(INIT_POS_X);
-        this.imageView.setY(INIT_POS_Y);
+        this.imageView.setX(this.INIT_POS_X);
+        this.imageView.setY(this.INIT_POS_Y);
         this.imageView.setFitWidth(Map.TAILLE_CASE-2);
         this.imageView.setFitHeight(Map.TAILLE_CASE-2);
         this.imageView.toFront();
@@ -91,8 +91,8 @@ public class Deplacement extends Group {
      * Initialise la position
      */
     public void initPosition() {
-        posX = INIT_POS_X;
-        posY = INIT_POS_Y;
+        this.posX = this.INIT_POS_X;
+        this.posY = this.INIT_POS_Y;
     }
 
 

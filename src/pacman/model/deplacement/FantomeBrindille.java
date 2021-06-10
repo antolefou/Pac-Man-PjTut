@@ -13,10 +13,10 @@ public class FantomeBrindille extends Fantome {
 
     public FantomeBrindille() {
         super(221, 281);
-        this.velocityMultiplicator = velocityMultiplicatorInitial;
+        this.velocityMultiplicator = this.velocityMultiplicatorInitial;
         this.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost3.gif"))));
-        imageBlueGhost = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghost.gif")));
-        imageMort = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/yeux.gif")));
+        this.imageBlueGhost = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghost.gif")));
+        this.imageMort = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/yeux.gif")));
         this.initialisation();
     }
 
@@ -31,11 +31,11 @@ public class FantomeBrindille extends Fantome {
             if (choixPossible.size() > 1) {
                 choixPossible.remove(dijkstra(false, false, getCoordFantome(), getCoordPacman()).get(0));
             }
-            listeCoordoneDeplacementFant = dijkstra(false, true, getCoordFantome(), choixPossible.get(rand.nextInt(choixPossible.size())));
+            this.listeCoordoneDeplacementFant = dijkstra(false, true, this.getCoordFantome(), choixPossible.get(rand.nextInt(choixPossible.size())));
             this.compteur++;
         }
         else{
-            listeCoordoneDeplacementFant = dijkstra(false, true, this.coordoneeActuel, getCoordPacman());
+            this.listeCoordoneDeplacementFant = dijkstra(false, true, this.coordoneeActuel, this.getCoordPacman());
             this.compteur = 0;
         }
     }

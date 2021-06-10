@@ -11,8 +11,8 @@ public class FantomeCampeur extends Fantome {
         super(261, 281);
         this.velocityMultiplicator = velocityMultiplicatorInitial;
         this.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost4.gif"))));
-        imageBlueGhost = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghost.gif")));
-        imageMort = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/yeux.gif")));
+        this.imageBlueGhost = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghost.gif")));
+        this.imageMort = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/yeux.gif")));
         this.initialisation();
         this.deplacementActuel = deplacements.GAUCHE;
     }
@@ -23,37 +23,37 @@ public class FantomeCampeur extends Fantome {
      */
     public boolean vueSurPacman() {
         for (int i=0; i < 23; i++) {
-            String posPacman = Math.round(pacman.getPosX() * 0.0499) + "/" + Math.round(pacman.getPosY() * 0.0499);
-            switch (deplacementActuel) {
+            String posPacman = Math.round(this.pacman.getPosX() * 0.0499) + "/" + Math.round(this.pacman.getPosY() * 0.0499);
+            switch (this.deplacementActuel) {
                 case HAUT:
-                    if (map.grid[(int) (Math.round(getPosX()) * 0.0499)][(int) (Math.round(getPosY()) * 0.0499)-i] == Map.ValeurCase.MUR){
+                    if (this.map.grid[(int) (Math.round(getPosX()) * 0.0499)][(int) (Math.round(getPosY()) * 0.0499)-i] == Map.ValeurCase.MUR){
                         return false;
                     }
-                    else if (map.grilleGraph[(int) (Math.round(getPosX()) * 0.0499)][(int) (Math.round(getPosY()) * 0.0499)-i].equals(posPacman)) {
+                    else if (this.map.grilleGraph[(int) (Math.round(getPosX()) * 0.0499)][(int) (Math.round(getPosY()) * 0.0499)-i].equals(posPacman)) {
                         return true;
                     }
                     break;
                 case GAUCHE:
-                    if (map.grid[(int) ((Math.round(getPosX()) * 0.0499)-i+25)%25][(int) (Math.round(getPosY()) * 0.0499)] == Map.ValeurCase.MUR) {
+                    if (this.map.grid[(int) ((Math.round(getPosX()) * 0.0499)-i+25)%25][(int) (Math.round(getPosY()) * 0.0499)] == Map.ValeurCase.MUR) {
                         return false;
                     }
-                    else if (map.grilleGraph[((int) (Math.round(getPosX()) * 0.0499)-i+25)%25][(int) (Math.round(getPosY()) * 0.0499)].equals(posPacman)) {
+                    else if (this.map.grilleGraph[((int) (Math.round(getPosX()) * 0.0499)-i+25)%25][(int) (Math.round(getPosY()) * 0.0499)].equals(posPacman)) {
                         return true;
                     }
                     break;
                 case DROITE:
-                    if (map.grid[(int) ((Math.round(getPosX()) * 0.0499)+i+25)%25][(int) (Math.round(getPosY()) * 0.0499)] == Map.ValeurCase.MUR || (Math.round(getPosX() * 0.0499)+i)%25 == 0.0) {
+                    if (this.map.grid[(int) ((Math.round(getPosX()) * 0.0499)+i+25)%25][(int) (Math.round(getPosY()) * 0.0499)] == Map.ValeurCase.MUR || (Math.round(getPosX() * 0.0499)+i)%25 == 0.0) {
                         return false;
                     }
-                    else if (map.grilleGraph[((int) (Math.round(getPosX()) * 0.0499)+i+25)%25][(int) (Math.round(getPosY()) * 0.0499)].equals(posPacman)) {
+                    else if (this.map.grilleGraph[((int) (Math.round(getPosX()) * 0.0499)+i+25)%25][(int) (Math.round(getPosY()) * 0.0499)].equals(posPacman)) {
                         return true;
                     }
                     break;
                 case BAS:
-                    if (map.grid[(int) (Math.round(getPosX()) * 0.0499)][(int) (Math.round(getPosY()) * 0.0499)+i] == Map.ValeurCase.MUR){
+                    if (this.map.grid[(int) (Math.round(getPosX()) * 0.0499)][(int) (Math.round(getPosY()) * 0.0499)+i] == Map.ValeurCase.MUR){
                         return false;
                     }
-                    else if (map.grilleGraph[(int) (Math.round(getPosX()) * 0.0499)][(int) (Math.round(getPosY()) * 0.0499)+i].equals(posPacman)) {
+                    else if (this.map.grilleGraph[(int) (Math.round(getPosX()) * 0.0499)][(int) (Math.round(getPosY()) * 0.0499)+i].equals(posPacman)) {
                         return true;
                     }
                     break;
@@ -72,15 +72,19 @@ public class FantomeCampeur extends Fantome {
      * coordonée par cordonnée.
      */
     public void ia(){
-        if (vueSurPacman()) this.listeCoordoneDeplacementFant = dijkstra(false, false, getCoordFantome(), getCoordPacman());
-        else if (getPosX() > 247) { //IA mode campeur
-            this.listeCoordoneDeplacementFant = dijkstra(false, false, getCoordFantome(), coinGaucheHaut());
+        if (this.vueSurPacman()) this.listeCoordoneDeplacementFant = dijkstra(false, false, this.getCoordFantome(), this.getCoordPacman());
+        else if (this.getPosX() > 247) { //IA mode campeur
+            this.listeCoordoneDeplacementFant = dijkstra(false, false, this.getCoordFantome(), this.coinGaucheHaut());
             if(this.listeCoordoneDeplacementFant.isEmpty()) System.out.println("ia Campeur renvoie liste vide");
         } else {
             iaRandom();
         }
     }
 
+    /**
+     * Cherche le coin en haut à gauche le plus haut de la map
+     * @return
+     */
     private String coinGaucheHaut() {
         for (int y=0; y<8; y++) {
             for (int x=0; x<8; x++) {
@@ -89,7 +93,4 @@ public class FantomeCampeur extends Fantome {
         }
         return "";
     }
-
-
-
 }

@@ -150,7 +150,6 @@
                            <Image url="@../ressources/image/Ecran_jouer/scoresvie/vie.png" />
                         </image>
                      </ImageView>
-
                   </AnchorPane>
                </children>
             </VBox>

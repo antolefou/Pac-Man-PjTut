@@ -22,7 +22,7 @@
             </graphic>
          </Button>
             <Group fx:id="commande">
-                <Label fx:id="commandes" text="Commandes" layoutX="160" layoutY="100" textFill="#f9ff00"></Label>
+                <Label fx:id="commandes" text="Commandes" layoutX="160" layoutY="100" textFill="#f9ff00"/>
                 <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="100.0" layoutY="350" preserveRatio="true">
                     <image>
                         <Image url="@../ressources/image/Competence/Teleport/teleport.png" />
@@ -33,7 +33,7 @@
                         <Image url="@../ressources/image/Ecran_jouer/scoresvie/ToucheL.png" />
                     </image>
                 </ImageView>
-                <Label text="Touche L " layoutX="185" layoutY="370" textFill="#48ff05" style="-fx-font-size: 20"></Label>
+                <Label text="Touche L " layoutX="185" layoutY="370" textFill="#48ff05" style="-fx-font-size: 20"/>
                 <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="100.0" layoutY="250" preserveRatio="true">
                     <image>
                         <Image url="@../ressources/image/Competence/Freeze/Freeze.png" />
@@ -44,7 +44,7 @@
                         <Image url="@../ressources/image/Ecran_jouer/scoresvie/ToucheK.png" />
                     </image>
                 </ImageView>
-                <Label text="Touche K " layoutX="185" layoutY="270" textFill="#ff12df" style="-fx-font-size: 20"></Label>
+                <Label text="Touche K " layoutX="185" layoutY="270" textFill="#ff12df" style="-fx-font-size: 20"/>
                 <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="100.0" layoutY="150" preserveRatio="true">
                     <image>
                         <Image url="@../ressources/image/Competence/Tirer/tirer.png" />
@@ -55,18 +55,18 @@
                         <Image url="@../ressources/image/Ecran_jouer/scoresvie/ToucheSpace.png" />
                     </image>
                 </ImageView>
-                <Label text="Touche Espace" layoutX="185" layoutY="170" textFill="#ffd106" style="-fx-font-size: 20"></Label>
+                <Label text="Touche Espace" layoutX="185" layoutY="170" textFill="#ffd106" style="-fx-font-size: 20"/>
             </Group>
 
 
-            <Group fx:id="commandesDeplacement">
-                <Label text="Déplacements" layoutX="500" layoutY="100" textFill="#f9ff00" style="-fx-font-size: 24"></Label>
+            <Group >
+                <Label text="Déplacements" layoutX="500" layoutY="100" textFill="#f9ff00" style="-fx-font-size: 24"/>
                 <ImageView fitHeight="120" layoutX="500" layoutY="150" preserveRatio="true">
                     <image>
                         <Image url="@../ressources/image/Option/Deplacement.png" />
                     </image>
                 </ImageView>
-                <Label text="ou" layoutX="575" layoutY="270" textFill="#f9ff00" style="-fx-font-size: 20"></Label>
+                <Label text="ou" layoutX="575" layoutY="270" textFill="#f9ff00" style="-fx-font-size: 20"/>
                 <ImageView fitHeight="120" layoutX="500" layoutY="300" preserveRatio="true">
                     <image>
                         <Image url="@../ressources/image/Option/DeplacementT.png" />
@@ -74,17 +74,15 @@
                 </ImageView>
             </Group>
 
-            <Group fx:id="reglages">
-                <Label fx:id="reglage" text="Réglages" layoutX="340" layoutY="460" textFill="#f9ff00"></Label>
-                <Label text="Son" layoutY="505" layoutX="80" textFill="#ffffff" style="-fx-font-size: 20"></Label>
+            <Group>
+                <Label fx:id="reglage" text="Réglages" layoutX="340" layoutY="460" textFill="#f9ff00"/>
+                <Label text="Son" layoutY="505" layoutX="80" textFill="#ffffff" style="-fx-font-size: 20"/>
                 <Slider fx:id="sliderSon"  value="60" showTickLabels="true" showTickMarks="true" layoutY="505"
                         layoutX="130" min="0" max="100" prefHeight="50" prefWidth="200" onMouseClicked="#valeurSliders" onMouseDragged="#valeurSliders"/>
-                <Label text="Fps"  layoutY="505" layoutX="450" textFill="#ffffff" style="-fx-font-size: 20"></Label>
+                <Label text="Fps" layoutY="505" layoutX="450" textFill="#ffffff" style="-fx-font-size: 20"/>
                 <Slider fx:id="sliderFPS"  showTickLabels="true" showTickMarks="true" layoutY="505" value="80" layoutX="500" min="10" max="60" prefHeight="50"
                         prefWidth="200" onMouseClicked="#valeurSliders" onMouseDragged="#valeurSliders"/>
             </Group>
-
-
         </Pane>
     </center>
 </BorderPane>

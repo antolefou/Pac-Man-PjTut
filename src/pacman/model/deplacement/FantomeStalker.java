@@ -13,8 +13,8 @@ public class FantomeStalker extends Fantome {
         super(241, 261);
         this.velocityMultiplicator = velocityMultiplicatorInitial;
         this.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost1.gif"))));
-        imageBlueGhost = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghost.gif")));
-        imageMort = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/yeux.gif")));
+        this.imageBlueGhost = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/blueghost.gif")));
+        this.imageMort = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/yeux.gif")));
         this.initialisation();
     }
 
@@ -22,15 +22,15 @@ public class FantomeStalker extends Fantome {
      * Fantôme qui suit pacman 10 fois sur 14 sinon fais des déplacements aléatoires.
      */
     public void ia() {
-        if (compteur < 10) {
-            listeCoordoneDeplacementFant = dijkstra(false, false, this.coordoneeActuel, getCoordPacman());
-            compteur++;
+        if (this.compteur < 10) {
+            this.listeCoordoneDeplacementFant = dijkstra(false, false, this.coordoneeActuel, this.getCoordPacman());
+            this.compteur++;
         } else if (compteur <= 13){
-            iaRandom();
-            compteur++;
+            this.iaRandom();
+            this.compteur++;
         }else{
-            compteur = 0;
-            iaRandom();
+            this.compteur = 0;
+            this.iaRandom();
         }
     }
 }
