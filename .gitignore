@@ -3,6 +3,8 @@ Pac-Man-PjTut.iml
 out/
 src/pacman/model/Score.txt
 /src/pacman/model/Score.txt
+src/pacman/model/Utilisateur.txt
+/src/pacman/model/Utilisateur.txt
 .scannerwork
 .DS_Store
 src/.DS_Store
