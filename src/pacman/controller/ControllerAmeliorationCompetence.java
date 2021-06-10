@@ -25,6 +25,7 @@ public class ControllerAmeliorationCompetence extends Controller {
 
     @FXML
     public void initialize() {
+        description.setFont(this.rosemary);
         description.setText("Veuillez améliorer vos compétences, ou cliquer sur valider");
         description.setFont(rosemary);
         if (utilisateur.niveauCompetenceTirer>-1) pointTirer.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_Competence/groupePoint" + utilisateur.niveauCompetenceTirer + "Vide.png"))));

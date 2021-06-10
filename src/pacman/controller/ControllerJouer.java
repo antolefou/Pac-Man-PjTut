@@ -70,6 +70,7 @@ public class ControllerJouer extends Controller {
         //vie
         tabVie = new ImageView[]{vie1, vie2, vie3, vie4, vie5};
         //affichage competence
+        utilisateur.niveauUtilisateur ++;
         if (utilisateur.niveauCompetenceTirer < 0) groupCompetenceTirer.setVisible(false);
         if (utilisateur.niveauCompetenceFreeze < 0) groupCompetenceFreeze.setVisible(false);
         if (utilisateur.niveauCompetenceTeleporteur < 0) groupCompetenceTeleporteur.setVisible(false);
@@ -210,10 +211,18 @@ public class ControllerJouer extends Controller {
         updateRender.update.stop();
         updateRender.render.stop();
         updateRender = null;
-        Parent ameliorationView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/ameliorationCompetence.fxml")));
-        primaryStage.setScene(new Scene(ameliorationView));
-        primaryStage.sizeToScene();
-        primaryStage.show();
-        ameliorationView.requestFocus();
+        if (!(utilisateur.niveauCompetenceTirer ==3 && utilisateur.niveauCompetenceFreeze ==3 && utilisateur.niveauCompetenceTeleporteur ==3)) {
+            Parent ameliorationView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/ameliorationCompetence.fxml")));
+            primaryStage.setScene(new Scene(ameliorationView));
+            primaryStage.sizeToScene();
+            primaryStage.show();
+            ameliorationView.requestFocus();
+        } else {
+            Parent jouerView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/jouer.fxml")));
+            primaryStage.setScene(new Scene(jouerView));
+            primaryStage.sizeToScene();
+            primaryStage.show();
+            jouerView.requestFocus();
+        }
     }
 }

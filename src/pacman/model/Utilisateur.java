@@ -21,6 +21,7 @@ static String pseudoUtilisateur;
     public int niveauCompetenceFreeze;
     public int niveauCompetenceTeleporteur;
     public int pointJoueur;
+    public int niveauUtilisateur;
 //    tableau de competences
     public String[][] tabCompetence;
 
@@ -190,6 +191,9 @@ static String pseudoUtilisateur;
                     case "pointJoueur":
                         this.pointJoueur = Integer.parseInt(ligne[1]);
                         break;
+                    case "niveauUtilisateur":
+                        this.niveauUtilisateur = Integer.parseInt(ligne[1]);
+                        break;
                     default:
                         System.out.println("Erreur dans fichier utilisateur :");
                         break;
@@ -210,6 +214,7 @@ static String pseudoUtilisateur;
             writer.println("niveauCompetenceFreeze," + niveauCompetenceFreeze);
             writer.println("niveauCompetenceTeleporteur," + niveauCompetenceTeleporteur);
             writer.println("pointJoueur," + pointJoueur);
+            writer.println("niveauUtilisateur," + niveauUtilisateur);
 
             writer.close();
         } catch (IOException e) {
@@ -222,6 +227,7 @@ static String pseudoUtilisateur;
         niveauCompetenceFreeze = -1;
         niveauCompetenceTeleporteur = -1;
         pointJoueur = 0;
+        niveauUtilisateur = 1;
     }
 
     public void updateFps(int fps) {

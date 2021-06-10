@@ -46,7 +46,7 @@
                 <Image url="@../ressources/image/Ecran_Competence/picBulle.png" />
             </image>
         </ImageView>
-        <Text fx:id="description" fill="WHITE" layoutX="20.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="216.4347801208496">
+        <Text fx:id="description" fill="WHITE" layoutX="25.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="216.4347801208496">
             <font>
                 <Font size="24.0" />
             </font>
@@ -60,17 +60,17 @@
             </ImageView>
          </graphic>
       </Button>
-        <ImageView fx:id="pointTirer" fitHeight="18.0" fitWidth="70.0" layoutX="98.0" layoutY="459.0">
+        <ImageView fx:id="pointTirer" fitHeight="12.0" fitWidth="45.0" layoutX="114.0" layoutY="461.0">
             <image>
                 <Image url="@../ressources/image/Ecran_Competence/groupePoint0Vide.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="pointFreeze" fitHeight="18.0" fitWidth="70.0" layoutX="371.0" layoutY="488.0">
+        <ImageView fx:id="pointFreeze" fitHeight="12.0" fitWidth="45.0" layoutX="384.0" layoutY="491.0">
             <image>
                 <Image url="@../ressources/image/Ecran_Competence/groupePoint0Vide.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="pointTeleporteur" fitHeight="18.0" fitWidth="70.0" layoutX="629.0" layoutY="485.0">
+        <ImageView fx:id="pointTeleporteur" fitHeight="12.0" fitWidth="45.0" layoutX="641.0" layoutY="488.0">
             <image>
                 <Image url="@../ressources/image/Ecran_Competence/groupePoint0Vide.png" />
             </image>

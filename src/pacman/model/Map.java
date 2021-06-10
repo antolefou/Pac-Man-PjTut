@@ -78,7 +78,8 @@ public class Map extends Group  {
 //        init
         this.grid = new ValeurCase[this.NB_CASE_X][this.NB_CASE_Y];
 //         crée et affiche la map
-        Platform.runLater(this::creeMapAleatoire);
+        Utilisateur utilisateur = new Utilisateur();
+        Platform.runLater(() -> creeMapAleatoire(utilisateur.niveauUtilisateur));
     }
 
     /**
