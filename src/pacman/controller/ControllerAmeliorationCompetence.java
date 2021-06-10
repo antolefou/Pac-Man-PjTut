@@ -37,26 +37,34 @@ public class ControllerAmeliorationCompetence extends Controller {
     }
 
     public void ameliorationPouvoir(ActionEvent actionEvent) {
-        String text;
         String image;
         switch (((Node) actionEvent.getSource()).getId()) {
             case "tirer":
-                if (utilisateur.niveauCompetenceTirer<3) utilisateur.niveauCompetenceTirer ++;
-                setDescriptionTirerGlobal();
-                image = "/pacman/ressources/image/Ecran_Competence/groupePoint" + (utilisateur.niveauCompetenceTirer) + "Vide.png";
-                if (utilisateur.niveauCompetenceTirer>-1) pointTirer.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(image))));
+                System.out.println(utilisateur.pointJoueur);
+                if ((utilisateur.pointJoueur - Integer.parseInt(utilisateur.tabCompetence[utilisateur.niveauCompetenceTirer+1][1]))>=0){
+                    if (utilisateur.niveauCompetenceTirer<3) utilisateur.niveauCompetenceTirer ++;
+                    setDescriptionTirerGlobal();
+                    image = "/pacman/ressources/image/Ecran_Competence/groupePoint" + (utilisateur.niveauCompetenceTirer) + "Vide.png";
+                    if (utilisateur.niveauCompetenceTirer>-1) pointTirer.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(image))));
+                    utilisateur.pointJoueur-= Integer.parseInt(utilisateur.tabCompetence[utilisateur.niveauCompetenceTirer+1][1]);
+
+                }
                 break;
             case "freeze":
-                if (utilisateur.niveauCompetenceFreeze<3) utilisateur.niveauCompetenceFreeze ++;
-                setDescriptionFreezeGlobal();
-                image = "/pacman/ressources/image/Ecran_Competence/groupePoint" + (utilisateur.niveauCompetenceFreeze) + "Vide.png";
-                if (utilisateur.niveauCompetenceFreeze>-1) pointFreeze.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(image))));
+                if ((utilisateur.pointJoueur - Integer.parseInt(utilisateur.tabCompetence[utilisateur.niveauCompetenceFreeze+1][5]))>=0){
+                    if (utilisateur.niveauCompetenceFreeze<3) utilisateur.niveauCompetenceFreeze ++;
+                    setDescriptionFreezeGlobal();
+                    image = "/pacman/ressources/image/Ecran_Competence/groupePoint" + (utilisateur.niveauCompetenceFreeze) + "Vide.png";
+                    if (utilisateur.niveauCompetenceFreeze>-1) pointFreeze.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(image))));
+                }
                 break;
             case "teleporteur":
-                if (utilisateur.niveauCompetenceTeleporteur<3) utilisateur.niveauCompetenceTeleporteur ++;
-                setDescriptionTeleportGlobal();
-                image = "/pacman/ressources/image/Ecran_Competence/groupePoint" + (utilisateur.niveauCompetenceTeleporteur) + "Vide.png";
-                if (utilisateur.niveauCompetenceTeleporteur>-1) pointTeleporteur.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(image))));
+                if ((utilisateur.pointJoueur - Integer.parseInt(utilisateur.tabCompetence[utilisateur.niveauCompetenceFreeze+1][9]))>=0){
+                    if (utilisateur.niveauCompetenceTeleporteur<3) utilisateur.niveauCompetenceTeleporteur ++;
+                    setDescriptionTeleportGlobal();
+                    image = "/pacman/ressources/image/Ecran_Competence/groupePoint" + (utilisateur.niveauCompetenceTeleporteur) + "Vide.png";
+                    if (utilisateur.niveauCompetenceTeleporteur>-1) pointTeleporteur.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(image))));
+                }
                 break;
         }
     }

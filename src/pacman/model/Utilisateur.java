@@ -63,7 +63,7 @@ static String pseudoUtilisateur;
         // --------- Projectile -----------
         tabCompetence[1][0] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
         tabCompetence[1][1] = "4000";
-        tabCompetence[1][2] = "20";
+        tabCompetence[1][2] = "25";
         tabCompetence[1][3] = "8";
 
         // --------- Freeze -----------
@@ -90,7 +90,7 @@ static String pseudoUtilisateur;
         tabCompetence[2][0] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
         tabCompetence[2][1] = "4000";
         tabCompetence[2][2] = "20";
-        tabCompetence[2][3] = "8";
+        tabCompetence[2][3] = "6";
 
         // --------- Freeze -----------
         // description
@@ -116,7 +116,7 @@ static String pseudoUtilisateur;
         tabCompetence[3][0] = "Cette amélioration de la compétence projectile réduit le temps de recharge de 2 secondes";
         tabCompetence[3][1] = "4000";
         tabCompetence[3][2] = "20";
-        tabCompetence[3][3] = "6";
+        tabCompetence[3][3] = "5";
 
         // --------- Freeze -----------
         // description
@@ -141,7 +141,7 @@ static String pseudoUtilisateur;
         tabCompetence[4][0] = "Cette amélioration est au niveau maximum";
         tabCompetence[4][1] = "4000";
         tabCompetence[4][2] = "20";
-        tabCompetence[4][3] = "6";
+        tabCompetence[4][3] = "4";
         // --------- Freeze -----------
         // description
         tabCompetence[4][4] = "Cette amélioration est au niveau maximum";
