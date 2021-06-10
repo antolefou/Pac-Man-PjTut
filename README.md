@@ -12,6 +12,9 @@ Pour changer les VM options RUN -> EDIT CONFIGURATION :
 
     --module-path ${PATH_TO_FX} --add-modules javafx.controls,javafx.fxml,javafx.media
 
+
+#### faut être connecté a internet pour lancer le projet
+
 //////////////////////////////////////////////
 
 Programe créer par :
