@@ -13,7 +13,6 @@ public class MapGenerator {
 
 
     public MapGenerator() {
-//        long debut = System.currentTimeMillis();
 
         initMap();
         creerTeleporteur();
@@ -21,14 +20,17 @@ public class MapGenerator {
         creerConstructeur();
         initConstruction();
 
-
         while(constructorX.size() != 0) construction();
+
         affineMapV4();
+
         creerMapFinal();
-        
-//        System.out.println(System.currentTimeMillis()- debut);
     }
 
+
+    /**
+     * initialise une carte de 13
+     */
     private void initMap() {
         for (int i=0; i<map.length; i++) {
             for (int j=0; j<map[0].length; j++) {
@@ -40,6 +42,9 @@ public class MapGenerator {
         }
     }
 
+    /**
+     * ajoute les sorties des teleporteurs a la carte
+     */
     private void creerTeleporteur() {
         double nbTeleportateur = Math.random();
         int teleportateur1 = 0;
@@ -71,6 +76,10 @@ public class MapGenerator {
 
     }
 
+
+    /**
+     * creer la base des fantomes
+     */
     private void creerCarreMilieu() {
         map[10][12] = 2;
         map[11][12] = 2;
@@ -95,6 +104,9 @@ public class MapGenerator {
     }
 
 
+    /**
+     * ajoute des constructeurs qui permette la création de case vide sur la carte
+     */
     private void creerConstructeur() {
         int x,y;
         //ajour manuel de constructeur
@@ -135,6 +147,9 @@ public class MapGenerator {
         constructorDir.add("none");
     }
 
+    /**
+     * Création de case vide autour des constructeurs
+     */
     private void initConstruction() {
         // nombre de boucles de constructions:
 
@@ -172,6 +187,9 @@ public class MapGenerator {
         }
     }
 
+    /**
+     * Construction de ville dans la continuité des constructeurs
+     */
     private void construction() {
         // nombre de boucles de constructions:
         int nbConstructeur = constructorX.size();
@@ -253,6 +271,9 @@ public class MapGenerator {
         }
     }
 
+    /**
+     * initialise la variable map finale a partir de map avec des caractères
+     */
     private void creerMapFinal() {
         for (int i=0; i<map.length; i++) {
             for (int j=0; j<map[0].length; j++) {
@@ -274,13 +295,14 @@ public class MapGenerator {
         mapfinal[12][13] = "I";
     }
 
-
+    /**
+     *
+     */
     private void affineMap(){
         int k ;
         int emplacemenHorizontal;
         int emplacemenVertical;
         for (int m = 0 ; m<3 ;m++){
-//            affiche();
             for (int i=0; i<map.length-1; i++) {
                 for (int j = 0; j < map[0].length - 1; j++) {
                     k = 0;
@@ -332,6 +354,10 @@ public class MapGenerator {
         }
     }
 
+    /**
+     * ajoute des bordures aux murs est de la carte, nécessaire pour affineMapV4
+     * @return retourne un tableau représentant la carte
+     */
     private int[][] ajouteBordure2D(){
         int[][] tabAReturn = new int[14][30]; // tableau
 
@@ -348,6 +374,10 @@ public class MapGenerator {
         return tabAReturn;
     }
 
+    /**
+     * enlève la bordure ajouté par ajouteBordure2D()
+     * @param tabAReturn retourne un tableau représentant la carte
+     */
     private void enleveBordure2D(int[][] tabAReturn){
         for (int i=0; i<13; i++) {
             for (int j = 0; j < 30; j++) {
@@ -357,16 +387,16 @@ public class MapGenerator {
         }
     }
 
+    /**
+     * ajoute dans la carte des murs quand un case se trouve dans un des cas de estRemplacable(int[][] mapAAffine,int x , int y)
+     */
     private void affineMapV4(){
 
-        this.affineMap();
+//        this.affineMap();
         creerCarreMilieu();
         int[][] mapPourAffine = this.ajouteBordure2D();
-        int count = 1;
-        int lastCount = 0;
-//        while (count != lastCount){
+        int count;
             for (int k = 0 ; k < 60 ; k++){
-                lastCount = count;
                 count = 0;
                 for (int i=1; i<mapPourAffine.length-1; i++) {
                     for (int j = 1; j < mapPourAffine[0].length - 1; j++) {
@@ -380,9 +410,15 @@ public class MapGenerator {
                 creerCarreMilieu();
             }
 
-//        }
     }
 
+    /**
+     * Verifie une case et dit si elle est remplaçable ou non
+     * @param mapAAffine la map a affiner
+     * @param x position x
+     * @param y position Y
+     * @return true si on doit mettre un mur sur la case X,Y de mapAAfine
+     */
     public boolean estRemplacable(int[][] mapAAffine,int x , int y){
         return (
                 // ---------------------- cul de sac ------------------
@@ -536,6 +572,12 @@ public class MapGenerator {
         );
     }
 
+    /**
+     * Verifie verticalement une case et dit si elle est remplaçable ou non
+     * @param y position Y
+     * @param x position x
+     * @return true si on doit mettre un mur sur la case X,Y
+     */
     private boolean estRemplacableVerticalement(int y , int x){
         return (
                 (
@@ -587,6 +629,12 @@ public class MapGenerator {
         );
     }
 
+    /**
+     * Verifie horizontalement une case et dit si elle est remplaçable ou non
+     * @param y position Y
+     * @param x position x
+     * @return true si on doit mettre un mur sur la case X,Y
+     */
     private boolean estRemplacableHorizontalement(int y , int x){
         return (
                 (
@@ -679,18 +727,9 @@ public class MapGenerator {
         }
     }
 
+
     public String[][] getMap() {
         return this.mapfinal;
-    }
-
-    public void afficheMapPasFini2(){
-        for (int y=0; y<map[0].length; y++) {
-            for (int x=0; x<map.length; x++) {
-                System.out.print(this.map[x][y]);
-            }
-            System.out.println();
-        }
-        System.out.println();
     }
 
 }
