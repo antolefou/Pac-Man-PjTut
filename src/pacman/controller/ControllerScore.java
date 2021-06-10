@@ -51,6 +51,11 @@ public class ControllerScore extends Controller {
         Nom5.setText(String.valueOf(scoreModel.tab[4][0]));
     }
 
+    /**
+     * Change la scène suivant l'évènement du bouton
+     * @param event évènement du bouton
+     * @throws IOException
+     */
     @Override
     public void switchToScene(ActionEvent event) throws IOException {
         super.switchToScene(event);

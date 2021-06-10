@@ -45,7 +45,7 @@ public class FantomeGroup extends Group {
     }
 
     /**
-     * Met les fantômes qui ne sont pas morts ou dans le spawn en mode vulnérables
+     * Met les fantômes qui ne sont pas morts ou dans le spawn en mode vulnérable
      */
     public void setVulnerable() {
         for (Fantome fantome : this.fantomes) {
