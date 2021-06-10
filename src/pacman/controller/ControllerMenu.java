@@ -29,52 +29,69 @@ public class ControllerMenu extends Controller{
         initUtilisateur();
     }
 
+    /**
+     * initialise l'utilisateur
+     */
     private void initUtilisateur() {
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.reinitialiseCompetencesUtilisateur();
         utilisateur.ecritureUtilisateur();
     }
 
+    /**
+     * Affiche la flèche du premier élèment du menu
+     */
     public void affiche_fleche1() {
         Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Menu/pacman_fleche.png")));
         fleche1.setImage(image);
     }
-    public void enlever_fleche1() {
+
+    /**
+     * Enlève toutes les flèches
+     */
+    public void enlever_fleches() {
         fleche1.setImage(null);
+        fleche2.setImage(null);
+        fleche3.setImage(null);
+        fleche4.setImage(null);
+        fleche5.setImage(null);
     }
 
+    /**
+     * Affiche la flèche du deuxième élèment du menu
+     */
     public void affiche_fleche2() {
         Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Menu/pacman_fleche.png")));
         fleche2.setImage(image);
     }
-    public void enlever_fleche2() {
-        fleche2.setImage(null);
-    }
 
+    /**
+     * Affiche la flèche du troisième élèment du menu
+     */
     public void affiche_fleche3() {
         Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Menu/pacman_fleche.png")));
         fleche3.setImage(image);
     }
-    public void enlever_fleche3() {
-        fleche3.setImage(null);
-    }
 
+    /**
+     * Affiche la flèche du quatrième élèment du menu
+     */
     public void affiche_fleche4() {
         Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Menu/pacman_fleche.png")));
         fleche4.setImage(image);
     }
-    public void enlever_fleche4() {
-        fleche4.setImage(null);
-    }
 
+    /**
+     * Affiche la flèche du cinquième élèment du menu
+     */
     public void affiche_fleche5() {
         Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Menu/pacman_fleche.png")));
         fleche5.setImage(image);
     }
-    public void enlever_fleche5() {
-        fleche5.setImage(null);
-    }
 
+    /**
+     * Quitte l'application.
+     */
     public void quitter() {
         Platform.exit();
         System.exit(0);

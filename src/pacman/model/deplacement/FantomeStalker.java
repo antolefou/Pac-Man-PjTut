@@ -4,9 +4,12 @@ import javafx.scene.image.Image;
 
 import java.util.Objects;
 
-public class FantomeSardoche extends Fantome {
+public class FantomeStalker extends Fantome {
 
-    public FantomeSardoche() {
+    /**
+     * Créé et initialise un fantôme stalker
+     */
+    public FantomeStalker() {
         super(241, 261);
         this.velocityMultiplicator = velocityMultiplicatorInitial;
         this.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/ghost1.gif"))));
@@ -15,6 +18,9 @@ public class FantomeSardoche extends Fantome {
         this.initialisation();
     }
 
+    /**
+     * Fantôme qui suit pacman 10 fois sur 14 sinon fais des déplacements aléatoires.
+     */
     public void ia() {
         if (compteur < 10) {
             listeCoordoneDeplacementFant = dijkstra(false, false, this.coordoneeActuel, getCoordPacman());

@@ -23,12 +23,19 @@ public class Deplacement extends Group {
     public deplacements deplacementActuel = deplacements.AUCUN;
 
 
-
+    /**
+     * Créé un déplacement
+     * @param init_pos_x position horizontale initiale
+     * @param init_pos_y position verticale initiale
+     */
     public Deplacement(int init_pos_x, int init_pos_y) {
         this.INIT_POS_X = init_pos_x;
         this.INIT_POS_Y = init_pos_y;
     }
 
+    /**
+     * Initialise l'image du déplacement
+     */
     protected void initialisation() {
         this.setPosX(INIT_POS_X);
         this.setPosY(INIT_POS_Y);
@@ -42,30 +49,47 @@ public class Deplacement extends Group {
         this.imageView.toFront();
     }
 
-
+    /**
+     * déplace la position vers le haut
+     */
     public void avanceHaut() {
         this.posY -= this.VELOCITY;
     }
 
+    /**
+     * déplace la position vers la droite
+     */
     public void avanceDroite() {
         if (posX == 499) posX = -1;
         this.posX += this.VELOCITY;
     }
 
+    /**
+     * déplace la position vers le bas
+     */
     public void avanceBas() {
         this.posY += this.VELOCITY;
     }
 
+    /**
+     * déplace la position vers la gauche
+     */
     public void avanceGauche() {
         if (posX == 1) posX = 501;
         this.posX -= this.VELOCITY;
     }
 
+    /**
+     * Actualise la position de l'image
+     */
     public void affichage() {
         this.imageView.setX(this.getPosX());
         this.imageView.setY(this.getPosY());
     }
 
+    /**
+     * Initialise la position
+     */
     public void initPosition() {
         posX = INIT_POS_X;
         posY = INIT_POS_Y;

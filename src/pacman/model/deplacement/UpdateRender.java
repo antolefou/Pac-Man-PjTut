@@ -1,17 +1,12 @@
 package pacman.model.deplacement;
 
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import pacman.controller.Controller;
 import pacman.controller.ControllerJouer;
 import pacman.model.Map;
 import pacman.model.Utilisateur;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class UpdateRender extends Thread{
     private final FantomeGroup fantomeGroup;
@@ -132,7 +127,7 @@ public class UpdateRender extends Thread{
             if (MAP.aGagne()){
                 UTILISATEUR.pointJoueur=PACMAN.score;
                 UTILISATEUR.ecritureUtilisateur();
-                try {controllerJouer.switchTosceneAmelioration();} catch (IOException e) {e.printStackTrace();}
+                try {controllerJouer.switchToSceneAmelioration();} catch (IOException e) {e.printStackTrace();}
             }
             //affichage des compétences
             renderCompetences();
@@ -144,19 +139,28 @@ public class UpdateRender extends Thread{
         this.LABEL_SCORE.setText(String.valueOf(PACMAN.score));
     }
 
+    /**
+     * si le fantome est apeuré et sur pacman on le passe en comportement MORT et on augmente les points selon le nombre de fantôme mangé
+     * sinon si le fantôme n'est ni appeuré ni mort, Pacman perd une vie, on reinitialise la postion des fantômes et de Pacman et on joue la musique de mort.
+     */
     public void fantomeSurPacman() {
         for (Fantome fantome : fantomeGroup.fantomes) {
             if (fantome.estSurPacman()) {
-                if (fantome.etat == Fantome.ValeurEtat.APPEURE) {
-                    fantome.mort = false;
+                if (fantome.etat == Fantome.ValeurEtat.APPEURE && PACMAN.peutManger) {
                     fantome.etat = Fantome.ValeurEtat.MORT;
                     fantome.velocityMultiplicator = 3;
-                    PACMAN.score += 200 * Math.pow(2.0, PACMAN.compteurFantomeMange);
-                    if(PACMAN.compteurFantomeMange < 4) PACMAN.compteurFantomeMange++;
-                } else if (fantome.etat != Fantome.ValeurEtat.MORT){
+                    if(PACMAN.compteurFantomeMange < 4) {
+                        PACMAN.score += 100 * Math.pow(2.0, PACMAN.compteurFantomeMange);
+                        PACMAN.compteurFantomeMange++;
+                    }else{
+                        PACMAN.score += 1000;
+                        PACMAN.compteurFantomeMange = 0;
+                    }
+                } else if (fantome.etat != Fantome.ValeurEtat.MORT && fantome.etat!= Fantome.ValeurEtat.APPEURE){
                     PACMAN.compteurFantomeMange = 0;
                     PACMAN.initPosition();
                     PACMAN.nbVie--;
+                    PACMAN.reinitialiseTempsDeRecharge();
                     PACMAN.reinitialisePowers();
                     this.controllerJouer.playMusic("death", false);
                     fantomeGroup.reinitialisePosition();
@@ -165,6 +169,9 @@ public class UpdateRender extends Thread{
         }
     }
 
+    /**
+     * donne la classe de pacman à tout les fantômes.
+     */
     public void addPacmanToFantome() {
         for (Fantome fantome : fantomeGroup.fantomes) {
             fantome.setMap(MAP);
@@ -172,6 +179,10 @@ public class UpdateRender extends Thread{
         }
     }
 
+    /**
+     * Permet d'afficher le cooldown des compétences si il en a et grise l'image dans le fond
+     * sinon affiche l'image avec une opacité max.
+     */
     public void renderCompetences() {
         //tirer
         if (System.currentTimeMillis()-PACMAN.debutTempsDeRechargeCompetenceTirer < 1000 * PACMAN.tempsDeRechargeCompetenceTirer) {

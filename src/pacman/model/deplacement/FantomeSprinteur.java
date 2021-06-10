@@ -17,6 +17,9 @@ public class FantomeSprinteur extends Fantome {
         this.initialisation();
     }
 
+    /**
+     * ia qui coordonnee par coordonnee va allez rapidement pendant 2s puis lentement pendant 2s vers pacman 6 fois sur 7 sinon fais un déplacement aléatoire
+     */
     public void ia(){
         if (System.currentTimeMillis() - temps > 2000 && System.currentTimeMillis() - temps <= 4000 ) {
             this.velocityMultiplicator = 1;

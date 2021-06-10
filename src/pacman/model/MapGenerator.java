@@ -20,10 +20,9 @@ public class MapGenerator {
         creerConstructeur();
         initConstruction();
 
+
         while(constructorX.size() != 0) construction();
-
         affineMapV4();
-
         creerMapFinal();
     }
 
@@ -296,7 +295,7 @@ public class MapGenerator {
     }
 
     /**
-     *
+     * affine une première fois la carte
      */
     private void affineMap(){
         int k ;
@@ -392,7 +391,7 @@ public class MapGenerator {
      */
     private void affineMapV4(){
 
-//        this.affineMap();
+        this.affineMap();
         creerCarreMilieu();
         int[][] mapPourAffine = this.ajouteBordure2D();
         int count;
@@ -727,9 +726,9 @@ public class MapGenerator {
         }
     }
 
-
     public String[][] getMap() {
         return this.mapfinal;
     }
+
 
 }

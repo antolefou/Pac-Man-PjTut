@@ -7,13 +7,10 @@ import pacman.model.Map;
 
 import java.util.Objects;
 
-import static java.lang.Integer.parseInt;
-
 public class Pacman extends Deplacement {
 
     private ControllerJouer controllerJouer;
     public boolean enVie = true;
-    public int numNiveau = 1;
     // Score de pacman
     public int score = 0;
     // Nombre de vie de pacman
@@ -60,6 +57,8 @@ public class Pacman extends Deplacement {
     public int pertePointsTirer;
     public int pertePointsFreeze;
     public int pertePointsTeleporte;
+    public boolean peutManger;
+    public long debutTempsPeutManger;
 
     public int compteurFantomeMange;
 
@@ -67,6 +66,9 @@ public class Pacman extends Deplacement {
     private final Image imagePacmanEtourdi = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanEtourdi.gif")));
     private final Image imagePacmanGele = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/pacmanGele.gif")));
 
+    /**
+     * Créé un nouveau pacman et initialise ses variables
+     */
     public Pacman() {
         super(241, 321);
         this.velocityMultiplicator = velocityMultiplicatorInitial;
@@ -84,6 +86,8 @@ public class Pacman extends Deplacement {
         this.freeze = false;
         tempsDebutFreeze = 0;
 
+        this.peutManger = true;
+
         this.projectileLance = false;
         this.compteurFantomeMange = 0;
 
@@ -93,21 +97,27 @@ public class Pacman extends Deplacement {
         });
     }
 
+    /**
+     * Récupère les données de l'utilisateur pour initialiser les variables des compétences de pacman
+     */
     public void initialiseCompetences() {
         if (competenceTirerDeverouillee) {
             this.tempsDeRechargeCompetenceTirer = Double.parseDouble(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceTirer][3]);
-            this.pertePointsTirer = Integer.parseInt(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceTirer][2]);;
+            this.pertePointsTirer = Integer.parseInt(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceTirer][2]);
         }
         if (competenceFreezeDeverouillee) {
             this.tempsDeRechargeCompetenceFreeze = Double.parseDouble(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceFreeze][7]);
-            this.pertePointsFreeze = Integer.parseInt(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceFreeze][6]);;
+            this.pertePointsFreeze = Integer.parseInt(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceFreeze][6]);
         }
         if (competenceTeleporteurDeverouillee) {
             this.tempsDeRechargeCompetenceTeleporteur = Double.parseDouble(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceTeleporteur][11]);
-            this.pertePointsTeleporte = Integer.parseInt(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceTeleporteur][10]);;
+            this.pertePointsTeleporte = Integer.parseInt(controllerJouer.utilisateur.tabCompetence[controllerJouer.utilisateur.niveauCompetenceTeleporteur][10]);
         }
     }
 
+    /**
+     * Initialise la position de pacman
+     */
     @Override
     public void initPosition() {
         super.initPosition();
@@ -115,6 +125,11 @@ public class Pacman extends Deplacement {
         deplacementActuel = deplacements.AUCUN;
     }
 
+    /**
+     * Détecte si un mur ou une barrière se trouve dans la direction verticale demandée
+     * @param i La direction : -1 pour le haut et 1 pour le bas
+     * @return true si il n'y a pas de mur ou  de barrière sur la case devant pacman dans la direction demandée
+     */
     boolean peutAvancerVerticalement(int i) { //haut -> -1 bas -> 1
         double pacmanX = this.getPosX();
         double pacmanY = this.getPosY();
@@ -124,6 +139,11 @@ public class Pacman extends Deplacement {
         return false;
     }
 
+    /**
+     * Détecte si un mur ou une barrière se trouve dans la direction horizontale demandée
+     * @param i La direction : -1 pour la gauche et 1 pour la droite
+     * @return true si il n'y a pas de mur ou  de barrière sur la case devant pacman dans la direction demandée
+     */
     boolean peutAvancerHorizontalement(int i) {
         double pacmanX = this.getPosX();
         double pacmanY = this.getPosY();
@@ -133,6 +153,9 @@ public class Pacman extends Deplacement {
         return false;
     }
 
+    /**
+     * Actualise la position de l'image et l'oriente selon la direction de pacman
+     */
     @Override
     public void affichage() {
         super.affichage();
@@ -152,6 +175,9 @@ public class Pacman extends Deplacement {
         }
     }
 
+    /**
+     * Actualise les coordonnées de pacman selon où il se déplace
+     */
     public void updateDeplacement() {
         boolean peutAvancer = false;
         if (deplacementFutur != Deplacement.deplacements.AUCUN) {
@@ -227,6 +253,10 @@ public class Pacman extends Deplacement {
         }
     }
 
+    /**
+     * Détecte ce qui se trouve sur la case de pacman et l'enlève de la map
+     * en ajoutant la valeur correspondante au score si pacman peut manger
+     */
     public void updateMapPacman() {
         // ---------------------------- interractions de pacman ------------------------
         int pacmanX = this.getPosX();
@@ -251,7 +281,7 @@ public class Pacman extends Deplacement {
                 comparaisonX = 7;
                 break;
         }
-        if (pacmanX % 20 == comparaisonX && pacmanY % 20 == comparaisonY) {
+        if (pacmanX % 20 == comparaisonX && pacmanY % 20 == comparaisonY && peutManger) {
             int x = (((pacmanX / 20) + 25) % 25 + addX)%25;
             int y = pacmanY / 20 + addY;
             if (map.grid[x][y] == Map.ValeurCase.GOMME) {
@@ -318,6 +348,9 @@ public class Pacman extends Deplacement {
         controllerJouer.fantomeGroup.setVulnerable();
     }
 
+    /**
+     * Si un téléporteur est posé, modifie les coordonnees de pacman. Sinon pose un téléporteur
+     */
     public void competenceTeleportation() {
         if (!teleporteurPose && score >= pertePointsTeleporte && competenceTeleporteurPrete) {
             teleporteurPose = true;
@@ -333,6 +366,9 @@ public class Pacman extends Deplacement {
         }
     }
 
+    /**
+     * Active la compétence freeze et lance son temps de recharge
+     */
     public void competenceFreeze() {
         debutTempsDeRechargeCompetenceFreeze = System.currentTimeMillis();
         competenceFreezePrete = false;
@@ -343,9 +379,14 @@ public class Pacman extends Deplacement {
         pertePoints(pertePointsFreeze);
     }
 
+    /**
+     * Créé et affiche le projectile et lance le temps de recharge de la compétence
+     */
     public void competenceProjectile() {
         debutTempsDeRechargeCompetenceTirer = System.currentTimeMillis();
         competenceTirerPrete = false;
+        peutManger = false;
+        debutTempsPeutManger = System.currentTimeMillis();
         Image imageProjectile= new Image(Objects.requireNonNull(getClass().getResourceAsStream("/pacman/ressources/image/Ecran_jouer/labyrinthe/projectile.gif")));
         projectileLance = true;
         projectile = new Deplacement(getPosX(), getPosY());
@@ -371,6 +412,10 @@ public class Pacman extends Deplacement {
         Platform.runLater(() -> this.getChildren().add(projectile.getImageView()));
     }
 
+    /**
+     * Détecte si le projectile de pacman est sur la même case qu'un fantôme
+     * @return vrai si le projectile est sur la même case qu'un fantôme, sinon return faux
+     */
     public boolean projectileSurFantome() {
         for (Fantome fantome : controllerJouer.fantomeGroup.fantomes) {
             if (!fantome.mort && (fantome.getCoordFantome().equals(projectile.getPosX() / 20 + "/" + projectile.getPosY() / 20) || (((fantome.getPosX() - projectile.getPosX()) < 18) && ((fantome.getPosX() - projectile.getPosX()) >= 0) && ((fantome.getPosY() - projectile.getPosY()) < 18) && ((fantome.getPosY() - projectile.getPosY()) >= 0)))){
@@ -382,6 +427,9 @@ public class Pacman extends Deplacement {
         return false;
     }
 
+    /**
+     * Actualise les coordonnées du projectile et détecte les collisions
+     */
     public void updateProjectile() {
 
         switch ((int) projectileRotate) {
@@ -414,6 +462,9 @@ public class Pacman extends Deplacement {
         }
     }
 
+    /**
+     * Actualise l'affichage du projectile
+     */
     public void renderProjectile() {
         if(this.projectile.getImageView() != null) {
             projectile.affichage();
@@ -423,12 +474,18 @@ public class Pacman extends Deplacement {
 
     // ---------------------  CONTREPARTIES DES POUVOIRS   ------------------------------------------
 
+    /**
+     * Les touches de pacman sont inversées pendant un certain temps
+     */
     public void touchesInversees() {
         this.touchesInversees = true;
         tempsDebutTouchesInversees = System.currentTimeMillis();
         Platform.runLater(() -> setImageView(imagePacmanEtourdi));
     }
 
+    /**
+     * Pacman se déplace 2x plus lentement et son image est modifiée
+     */
     public void ralentissement() {
         if (powerBoost) this.velocityMultiplicator = velocityMultiplicatorInitial;
         else this.velocityMultiplicator = velocityMultiplicatorInitial/2;
@@ -437,6 +494,10 @@ public class Pacman extends Deplacement {
         Platform.runLater(() -> setImageView(imagePacmanGele));
     }
 
+    /**
+     * Enlève des points au score de pacman
+     * @param pointsPerdus le nombre de points que pacman perd
+     */
     public void pertePoints(int pointsPerdus) {
         this.score -= pointsPerdus;
     }
@@ -487,8 +548,17 @@ public class Pacman extends Deplacement {
                 });
             }
         }
+        if (!peutManger) {
+            long tempsNePeutPlusManger = System.currentTimeMillis();
+            if (tempsNePeutPlusManger-debutTempsPeutManger > 1000 * 2) {
+                peutManger = true;
+            }
+        }
     }
 
+    /**
+     * Met une compétence prête si son temps de recharge est terminé
+     */
     public void tempsDeRecharge() {
         long tempsDeRecharge = System.currentTimeMillis();
         if (!competenceTeleporteurPrete) {
@@ -500,6 +570,22 @@ public class Pacman extends Deplacement {
         }
     }
 
+    /**
+     * Réinitialise le temps de recharge des compétences déverouillées et les met prêtes
+     */
+    public void reinitialiseTempsDeRecharge() {
+        if (competenceTirerDeverouillee) competenceTirerPrete = true;
+        if (competenceFreezeDeverouillee) competenceFreezePrete = true;
+        if (competenceTeleporteurDeverouillee) competenceTeleporteurPrete = true;
+
+        debutTempsDeRechargeCompetenceTirer = 0;
+        debutTempsDeRechargeCompetenceFreeze = 0;
+        debutTempsDeRechargeCompetenceTeleporteur = 0;
+    }
+
+    /**
+     * Réinitialise tous les pouvoirs activés
+     */
     public void reinitialisePowers() {
         if (powerBoost) {
             powerBoost = false;
@@ -518,9 +604,15 @@ public class Pacman extends Deplacement {
         if(ralentissement) ralentissement = false;
         velocityMultiplicator = velocityMultiplicatorInitial;
 
+        peutManger = true;
+
         Platform.runLater(() -> this.setImageView(imagePacman));
     }
 
+    /**
+     * Défini le controllerJouer de pacman
+     * @param controllerJouer le controllerJouer
+     */
     public void setControllerJouer(ControllerJouer controllerJouer) {
         this.controllerJouer = controllerJouer;
     }

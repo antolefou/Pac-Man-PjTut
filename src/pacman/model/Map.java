@@ -287,6 +287,9 @@ public class Map extends Group  {
         this.caseMap[12][13].setImage(this.imageMurFantome);
     }
 
+    /**
+     * Met la map à jour en temps réel
+     */
     public void miseAJourMap() {
         for (int i = 0; i < this.NB_CASE_X; i++) {
             for (int j = 0; j < this.NB_CASE_Y; j++) {
@@ -323,11 +326,16 @@ public class Map extends Group  {
     public String[][] getGrilleGraph() {
         return grilleGraph;
     }
+
     public static void initListeThemeMap(){
         theme = new ArrayList<>();
         theme.add("wall.png");
         theme.add("illusion.gif");
     }
+
+    /**
+     *  Mélange les thèmes de fond aléatoirement.
+     */
     public static void shuffleTheme(){
         Collections.shuffle(theme);
     }

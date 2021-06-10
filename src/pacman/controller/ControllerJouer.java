@@ -151,7 +151,7 @@ public class ControllerJouer extends Controller {
         } else if (code == KeyCode.M) {
             utilisateur.pointJoueur = pacman.score;
             utilisateur.ecritureUtilisateur();
-            switchTosceneAmelioration();
+            switchToSceneAmelioration();
             if (pacman.score >= pacman.pertePointsTirer && pacman.competenceTirerPrete && !pacman.projectileLance && pacman.competenceTeleporteurDeverouillee) {
                 pacman.competenceProjectile();
                 System.out.println(pacman.score +">="+ pacman.pertePointsTirer );
@@ -163,15 +163,18 @@ public class ControllerJouer extends Controller {
         }
     }
 
+    /**
+     * Affiche le prix de la compétence dans le jeu (graphiquement)
+     */
     public void setAffichagePrixComp(){
         int niveauTirer = utilisateur.niveauCompetenceTirer;
-        int niveauFreezz = utilisateur.niveauCompetenceFreeze;
+        int niveauFreeze = utilisateur.niveauCompetenceFreeze;
         int niveauTeleporteur = utilisateur.niveauCompetenceTeleporteur;
         if (niveauTirer > -1){
             prixCompetenceTirer.setText(utilisateur.tabCompetence[niveauTirer][2]);
         }
-        if (niveauFreezz > -1){
-            prixCompetenceFreeze.setText(utilisateur.tabCompetence[niveauFreezz][6]);
+        if (niveauFreeze > -1){
+            prixCompetenceFreeze.setText(utilisateur.tabCompetence[niveauFreeze][6]);
 
         }
         if (niveauTeleporteur > -1){
@@ -180,17 +183,18 @@ public class ControllerJouer extends Controller {
 
     }
 
+    /**
+     * Change le prix des compétences dans les variables d'instances de pacman.
+     */
     public void setPrixCompDansPac(){
         int niveauTirer = utilisateur.niveauCompetenceTirer;
-        int niveauFreezz = utilisateur.niveauCompetenceFreeze;
+        int niveauFreeze = utilisateur.niveauCompetenceFreeze;
         int niveauTeleporteur = utilisateur.niveauCompetenceTeleporteur;
         if (niveauTirer > -1){
-            System.out.println(this.pacman.pertePointsTirer);
             this.pacman.pertePointsTirer = Integer.parseInt(utilisateur.tabCompetence[niveauTirer][2]);
-            System.out.println(this.pacman.pertePointsTirer);
         }
-        if (niveauFreezz > -1){
-            this.pacman.pertePointsFreeze = Integer.parseInt(utilisateur.tabCompetence[niveauFreezz][6]);
+        if (niveauFreeze > -1){
+            this.pacman.pertePointsFreeze = Integer.parseInt(utilisateur.tabCompetence[niveauFreeze][6]);
 
         }
         if (niveauTeleporteur > -1){
@@ -199,6 +203,11 @@ public class ControllerJouer extends Controller {
     }
 
 
+    /**
+     * Change la scène suivant le bouton qui est pressé
+     * @param event évènement du bouton
+     * @throws IOException
+     */
     @Override
     public void switchToScene(ActionEvent event) throws IOException {
         super.switchToScene(event);
@@ -208,8 +217,12 @@ public class ControllerJouer extends Controller {
         updateRender = null;
     }
 
+    /**
+     * Si l'utilisateur a déjà amélioré toutes ces compétences n'affiche pas le shop et change de niveau sinon affiche le shop d'amélioration.
+     * @throws IOException
+     */
     @FXML
-    public void switchTosceneAmelioration() throws IOException {
+    public void switchToSceneAmelioration() throws IOException {
         updateRender.update.stop();
         updateRender.render.stop();
         updateRender = null;

@@ -67,6 +67,9 @@ public class Fantome extends Deplacement {
 
     }
 
+    /**
+     * Selon les états du fantômes qui peuvent être SPAWN, MORT, APPEURE, NORMAL change l'IA et le comportement de ce que doivent faire les fantômes lors de leurs déplacements.
+     */
     public void updateDeplacement() {
         switch (etat) {
             case SPAWN:
@@ -101,7 +104,7 @@ public class Fantome extends Deplacement {
                     }
                     estVulnerable = false;
                 }
-                updateDeplacements();
+                deplaceFantome();
                 break;
             case APPEURE:
                 if(!estVulnerable) {
@@ -112,7 +115,7 @@ public class Fantome extends Deplacement {
                     }
                     this.estVulnerable = true;
                 }
-                updateDeplacements();
+                deplaceFantome();
                 break;
             case MORT:
                 this.estVulnerable = false;
@@ -126,7 +129,7 @@ public class Fantome extends Deplacement {
                     etat = ValeurEtat.SPAWN;
                     velocityMultiplicator = velocityMultiplicatorInitial;
                 }
-                updateDeplacements();
+                deplaceFantome();
                 break;
         }
     }
@@ -161,7 +164,11 @@ public class Fantome extends Deplacement {
         return dijkstra;
     }
 
-    private void updateDeplacements() {
+    /**
+     * Fais déplacer les fantômes selon leur première coordonnée dans leur liste de déplacement.
+     * Si la liste est est vide appelle l'IA associé à son état pour recharger sa liste.
+     */
+    private void deplaceFantome() {
         if (this.listeCoordoneDeplacementFant.isEmpty()) {
             if (this.estVulnerable) this.iaRandom();
             else this.ia();
@@ -170,6 +177,9 @@ public class Fantome extends Deplacement {
         avancePos();
     }
 
+    /**
+     * Permet de déplacer le fantôme selon la direction où il va.
+     */
     public void avancePos() {
         if (doitRechargerNextPos()) {
             updateCoordonnees();
@@ -194,10 +204,22 @@ public class Fantome extends Deplacement {
         }
     }
 
+    /**
+     *
+     * @return true si il a atteint la coordonnée où il doit aller au pixel près sinon c'est false.
+     */
     public boolean doitRechargerNextPos() {
         return (this.positionXFinDeplacement == this.getPosX() && this.positionYFinDeplacement == this.getPosY());
     }
 
+    /**
+     * Renvoie vrai si il ne peut pas avoir atteint un mur.
+     * Renvoie vrai si la prochaine case n'est pas un mur.
+     * Sinon renvoie faux.
+     * @param map
+     * @param i -1 pour la gauche et 1 pour la droite
+     * @return
+     */
     public boolean peutAvancerHorizontalement(Map map, int i) {
         if (getPosY() % 20 == 1) {
             if (getPosX() % 20 != 1) {
@@ -207,12 +229,17 @@ public class Fantome extends Deplacement {
         return false;
     }
 
+    /**
+     * Renvoie vrai si le fantome est mort.
+     * Renvoie vrai si il ne peut pas avoir atteint un mur.
+     * Renvoie vrai si la prochaine case n'est pas un mur et que la prochaine case n'est pas interdite.
+     * Pour être plus exact sur l'interdit : on vérifie si il est sur une case non interdite et que sa prochaine case est interdite dans ce cas on return false.
+     * @param map
+     * @param i -1 pour le haut et 1 pour le bas
+     * @return
+     */
     public boolean peutAvancerVerticalement(Map map, int i) {
         if (getPosX() % 20 == 1 && getPosX() > 1 && getPosX() < 500) {
-            // Renvoie vrai si le fantome est mort.
-            // Renvoie vrai si il ne peut pas avoir atteint un mur.
-            // Renvoie vrai si la prochaine case n'est pas un mur et que la prochaine case n'est pas interdite.
-            // Pour être plus exact sur l'interdit : on vérifie si il est sur une case non interdite et que sa prochaine case est interdite dans ce cas on return false.
             if(getPosY() % 20 != 1) return true;
             if((map.grid[getPosX()/20][(getPosY()/20)+i] == Map.ValeurCase.MUR)) return false;
             else return !(!this.mort && (map.grid[getPosX() / 20][(getPosY() / 20)] != Map.ValeurCase.INTERDIT && map.grid[getPosX() / 20][(getPosY() / 20) + i] == Map.ValeurCase.INTERDIT));
@@ -220,11 +247,18 @@ public class Fantome extends Deplacement {
         return false;
     }
 
+    /**
+     * Renvoie vrai si un fantôme est sur pac-man sinon faux
+     * @return
+     */
     public boolean estSurPacman() {
         if (getCoordPacman().equals(getCoordFantome())) return true;
         else return (((pacman.getPosX() - getPosX()) < 18) && ((pacman.getPosX() - getPosX()) >= 0) && ((pacman.getPosY() -  getPosY()) < 18) && ((pacman.getPosY() -  getPosY()) >= 0));
     }
 
+    /**
+     * initialise les fantômes en le mettant dans ces conditions de début de jeu.
+     */
     @Override
     public void initPosition() {
         super.initPosition();
@@ -236,6 +270,9 @@ public class Fantome extends Deplacement {
         this.immobile = false;
     }
 
+    /**
+     * ia random en enlevant la coordonée passée du fantôme.
+     */
     public void iaRandom() {
         List<String> choixPossible = Graphs.neighborListOf(map.getG(), getCoordFantome());
         choixPossible.remove(coordoneePasse);
@@ -244,6 +281,9 @@ public class Fantome extends Deplacement {
         listeCoordoneDeplacementFant = dijkstra(false, true, getCoordFantome(), choixPossible.get(rand.nextInt(choixPossible.size())));
     }
 
+    /**
+     * Regarde la première coordonnée de la liste du fantôme et la traduit en pixel de fin de déplacement.
+     */
     public void getNextFinalPos(){
         String coord = this.listeCoordoneDeplacementFant.get(0);
         String[] coorXY = coord.split("/");
@@ -256,6 +296,9 @@ public class Fantome extends Deplacement {
         this.setOrientation();
     }
 
+    /**
+     * La prochaine coordonnée est adjacente à la sienne donc suivant la différence en pixel oriente le fantôme.
+     */
     public void setOrientation(){
         if(this.getPosX()>20 && this.getPosX()<480){
             if (positionXFinDeplacement - this.getPosX() < 0) this.deplacementActuel = deplacements.GAUCHE;
@@ -264,18 +307,28 @@ public class Fantome extends Deplacement {
             else if (positionYFinDeplacement - this.getPosY() > 0) this.deplacementActuel = deplacements.BAS;
         }
     }
+
+    /**
+     * Change la coordonnée actuelle en coordonnée passée et actualise la coordonnee actuelle avec sa coordonnée
+     */
     public void updateCoordonnees(){
-        String tmp = this.coordoneeActuel;
+        this.coordoneePasse = this.coordoneeActuel;
         this.coordoneeActuel = this.getCoordFantome();
-        this.coordoneePasse = tmp;
     }
 
+    /**
+     * Permet de savoir si le fantôme est dans sa base.
+     * @return
+     */
     public boolean estAuSpawn() {
         int x = this.getPosX()/20;
         int y = this.getPosY()/20 ;
         return x>9 && x<15 && y>12 && y<16;
     }
 
+    /**
+     * Change le gif du fantôme selon son etat
+     */
     public void affichage() {
         super.affichage();
         switch (this.etat) {
@@ -295,6 +348,9 @@ public class Fantome extends Deplacement {
         }
     }
 
+    /**
+     * Fais faire au fantôme sur lequel on la méthode est utilisée un demi-tour.
+     */
     public void faisDemiTour(){
         coordoneeActuel = getCoordFantome();
         coordoneePasse = getCoordFantome();
@@ -354,12 +410,16 @@ public class Fantome extends Deplacement {
         }
     }
 
-
-
+    /**
+     * @return la coordonnee de Pac-man
+     */
     public String getCoordPacman(){
         return (pacman.getPosX() / 20) + "/" + (pacman.getPosY() / 20);
     }
 
+    /**
+     * @return la coordonnée du fantôme
+     */
     public String getCoordFantome(){
         return (getPosX() / 20) + "/" + (getPosY() / 20);
     }

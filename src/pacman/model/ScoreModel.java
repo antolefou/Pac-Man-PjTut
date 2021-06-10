@@ -14,7 +14,9 @@ public class ScoreModel {
     public int meilleurScore;
     public int scoreActuel;
 
-
+    /**
+     * Lis le fichier des scores
+     */
     public void lectureTxt() {
         try {
             FileInputStream file = new FileInputStream("src/pacman/model/Score.txt");
@@ -39,6 +41,9 @@ public class ScoreModel {
         }
     }
 
+    /**
+     * trie le tableau des scores dans l'ordre décroissant des scores
+     */
     public void triTab() {
         int t = 0;
         String n;
@@ -61,6 +66,10 @@ public class ScoreModel {
 
     }
 
+    /**
+     * Réecris les lignes du scores
+     * @throws IOException
+     */
     public void reecritureTxt() throws IOException {
 
         try {
@@ -80,6 +89,11 @@ public class ScoreModel {
         }
     }
 
+    /**
+     * Permet de savoir quelle ligne est à remplacer
+     * @param pac
+     * @return l'élèment à remplacer
+     */
     public int Trouverindice(Pacman pac){
         scoreActuel = pac.score;
         for (int k = 0; k< tab.length-1;k++){
@@ -90,6 +104,11 @@ public class ScoreModel {
         return -1;
     }
 
+    /**
+     * Prend en compte l'indice du score de pacman et rentre le score et le nom associé dans le tableau
+     * @param pac
+     * @throws IOException
+     */
     public void TriScore(Pacman pac) throws IOException {
         lectureTxt();
         triTab();
@@ -110,19 +129,14 @@ public class ScoreModel {
         reecritureTxt();
     }
 
+    /**
+     * Associe le meilleur score et la première ligne du tableau
+     * @param
+     * @return meilleur score
+     */
     public int getMeilleurScore() {
         meilleurScore = (int) tab[0][1];
         return meilleurScore;
     }
 
-    public void finDePartieReecriture(ScoreModel scoreModel, Utilisateur utilisateur, TextField txtpseudo) throws IOException {
-        scoreModel.lectureTxt();
-        utilisateur.setPseudoUtilisateur(txtpseudo.getText());
-        for(int i =0; i<scoreModel.tab.length; i++){
-            if (scoreModel.tab[i][0].equals("pseudoUt") ){
-                scoreModel.tab[i][0] = utilisateur.getPseudoUtilisateur();
-                scoreModel.reecritureTxt();
-            }
-        }
-    }
 }
