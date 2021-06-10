@@ -184,7 +184,7 @@ public class ControllerJouer extends Controller {
     }
 
     /**
-     * Change le prix des compétences dans les variables d'instance de pacman.
+     * Change le prix des compétences dans les variables d'instances de pacman.
      */
     public void setPrixCompDansPac(){
         int niveauTirer = utilisateur.niveauCompetenceTirer;
@@ -217,6 +217,10 @@ public class ControllerJouer extends Controller {
         updateRender = null;
     }
 
+    /**
+     * Si l'utilisateur a déjà amélioré toutes ces compétences n'affiche pas le shop et change de niveau sinon affiche le shop d'amélioration.
+     * @throws IOException
+     */
     @FXML
     public void switchToSceneAmelioration() throws IOException {
         updateRender.update.stop();

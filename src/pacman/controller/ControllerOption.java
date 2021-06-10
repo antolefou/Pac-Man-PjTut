@@ -21,6 +21,10 @@ public class ControllerOption extends Controller{
         super();
 
     }
+
+    /**
+     * Initialise les options son et fps
+     */
     public void initialize(){
         utilisateur.lectureUtilisateur();
         sliderSon.setValue(utilisateur.getSon());

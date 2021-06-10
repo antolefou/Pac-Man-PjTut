@@ -25,6 +25,10 @@ public class ControllerScore extends Controller {
         super();
     }
 
+    /**
+     * tri le tableau et affiche les 5 meilleurs scores
+     * @throws IOException
+     */
     @FXML
     public void initialize() throws IOException {
         scoreModel = new ScoreModel();
