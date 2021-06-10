@@ -88,7 +88,7 @@ public class Deplacement extends Group {
     }
 
     /**
-     * réinitialise la position
+     * Initialise la position
      */
     public void initPosition() {
         posX = INIT_POS_X;
