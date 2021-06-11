@@ -29,6 +29,7 @@ plus le score du joueur augmente.
 Pour lancer le programme dans INTELLIJ IDEA 
 
 1 - Telecharger les bibliothèques
+
 - openjfx-15.0.1_linux-x64_bin-sdk
 - jgrapht-1.5.1
 
@@ -42,7 +43,8 @@ Pour changer les VM options RUN -> EDIT CONFIGURATION :
 
     --module-path ${PATH_TO_FX} --add-modules javafx.controls,javafx.fxml,javafx.media
 
-#### Il faut être connecté à internet pour lancer le projet
+#### Il faut être connecté à internet pour lancer le projet 
+#### La version 15 ou ultérieur de openJDK est nécessaire
 
 ## Contact
 
