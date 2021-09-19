@@ -48,7 +48,7 @@ Pour changer les VM options RUN -> EDIT CONFIGURATION :
 
 ## Contact
 
-En cas de problème ou autre, vous pouvez me contacter à l'adresse mail suivante: Antoine.jean@edu.univ-fcomte.fr.
+En cas de problème ou autre, vous pouvez me contacter à l'adresse mail suivante: julien.erhard@edu.univ-fcomte.fr.
 
 
 
