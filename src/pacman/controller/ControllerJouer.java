@@ -140,7 +140,7 @@ public class ControllerJouer extends Controller {
             this.updateRender = null;
             Parent scoreView = null;
             try {
-                this.scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/jouer.fxml")));
+                scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/jouer.fxml")));
             } catch (IOException e) {
                 e.printStackTrace();
             }
