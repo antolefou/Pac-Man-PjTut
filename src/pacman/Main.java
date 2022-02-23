@@ -24,7 +24,7 @@ public class Main extends Application {
         );
 //         Affichage de la vue
         View view = new View();
-        Utilisateur utilisateur = new Utilisateur(); // à ne pas supprimer même si il n'est pas utilisé
+        Utilisateur utilisateur = new Utilisateur();
 //         Création d'une scène sans initialiser la vue
         Scene scene = new Scene(view);
         primaryStage.setTitle("Pacman");
