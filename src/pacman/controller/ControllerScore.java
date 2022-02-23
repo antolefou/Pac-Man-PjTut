@@ -35,9 +35,8 @@ public class ControllerScore extends Controller {
     public void initialize() throws IOException {
         this.scoreModel = new ScoreModel();
 
-        this.scoreModel.lectureTxt();
-        this.scoreModel.triTab();
-        this.scoreModel.reecritureTxt();
+        this.scoreModel.lectureScore();
+        this.scoreModel.EcritureScore(utilisateur.getPseudoUtilisateur(), utilisateur.pointJoueur);
 
         //Affichage des 5 meilleurs scores
         this.Labscore1.setText(String.valueOf(this.scoreModel.tab[0][1]));

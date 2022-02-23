@@ -64,8 +64,7 @@ public class ControllerJouer extends Controller {
         this.pacman.score = this.utilisateur.pointJoueur;
         // affichage meileur score
         this.scoreModel = new ScoreModel();
-        this.scoreModel.lectureTxt();
-        this.meilleurscore.setText(String.valueOf(this.scoreModel.getMeilleurScore()));
+        this.scoreModel.lectureScore();
         //vie
         this.tabVie = new ImageView[]{this.vie1, this.vie2, this.vie3, this.vie4, this.vie5};
         //affichage competence
@@ -96,8 +95,6 @@ public class ControllerJouer extends Controller {
             this.updateRender.update.stop();
             this.updateRender.render.stop();
             this.updateRender = null;
-            // affichage game over
-            this.scoreModel.TriScore(this.pacman);
 //            changement de scène vers game over
             Parent scoreView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/gameOver.fxml")));
             primaryStage.setScene(new Scene(scoreView));
@@ -112,7 +109,7 @@ public class ControllerJouer extends Controller {
      * @param keyEvent évènement de la touche
      */
     @FXML
-    public void handle(KeyEvent keyEvent) {
+    public void handle(KeyEvent keyEvent) throws IOException {
         KeyCode code = keyEvent.getCode();
         if (code == KeyCode.UP || code == KeyCode.Z) {
             this.pacman.deplacementFutur = Deplacement.deplacements.HAUT;
@@ -127,13 +124,9 @@ public class ControllerJouer extends Controller {
         } else if (code == KeyCode.K) {                   // touche competence freeze
             if (this.pacman.score >= this.pacman.pertePointsFreeze && this.pacman.competenceFreezePrete && this.pacman.competenceFreezeDeverouillee) this.pacman.competenceFreeze();
         } else if (code == KeyCode.SPACE) {               // touche competence tirer
-            if (this.pacman.score >= this.pacman.pertePointsTirer && this.pacman.competenceTirerPrete && !this.pacman.projectileLance && this.pacman.competenceTirerDeverouillee) this.pacman.competenceProjectile();
-        }
-        /*/***********************************************************
-         *     MODE  DEV -> pour tester plus facilement              *
-         *     mettre sur la methode handle -> throws IOException    *
-         * ***********************************************************
-        }else if (code == KeyCode.R){               // regénère la map
+            if (this.pacman.score >= this.pacman.pertePointsTirer && this.pacman.competenceTirerPrete && !this.pacman.projectileLance && this.pacman.competenceTirerDeverouillee)
+                this.pacman.competenceProjectile();
+        } else if (code == KeyCode.R){               // regénère la map
             this.updateRender.PACMAN.enVie = false;
             this.updateRender.update.stop();
             this.updateRender.render.stop();
@@ -157,7 +150,7 @@ public class ControllerJouer extends Controller {
             }
         } else if (code == KeyCode.I) {
             this.pacman.score += 10000;
-        }*/
+        }
     }
 
     /**
