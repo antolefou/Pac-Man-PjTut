@@ -9,7 +9,7 @@ import pacman.model.ScoreModel;
 
 public class ControllerScore extends Controller {
 
-//     Label du score et du nom du joueur 
+//     Label du score et du nom du joueur
     public Label Labscore1;
     public Label Labscore2;
     public Label Labscore3;
