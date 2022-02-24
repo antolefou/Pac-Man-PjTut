@@ -1,6 +1,6 @@
 /.idea/
 Pac-Man-PjTut.iml
-out/
+target/
 src/pacman/model/Score.txt
 /src/pacman/model/Score.txt
 src/pacman/model/Utilisateur.txt

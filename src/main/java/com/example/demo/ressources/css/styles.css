@@ -1,0 +1,104 @@
+.boutonRetourMenu {
+    -fx-background-radius: none;
+    -fx-background-color: none;
+}
+
+.boutonRetourMenu:hover {
+    -fx-cursor: hand;
+}
+
+.boutonMenu {
+    -fx-text-fill: white;
+    -fx-font-size: 25;
+    -fx-background-color: none;
+    -fx-cursor: hand;
+}
+
+.boutonScore {
+    -fx-text-fill: white;
+    -fx-font-size: 25;
+    -fx-background-color: none;
+    -fx-cursor: hand;
+}
+
+.text-field {
+    -fx-border-width: 1;
+    -fx-border-color: yellow;
+    -fx-background-color: black;
+    -fx-text-inner-color: yellow;
+}
+
+.boutton-ChoixCompetence {
+    -fx-min-height: 100;
+    -fx-max-height: 100;
+    -fx-min-width: 100;
+    -fx-max-width: 100;
+    -fx-border-radius: 1;
+    -fx-background-color: black;
+    -fx-background-radius: 100;
+}
+
+.boutton-ChoixCompetence:hover {
+    -fx-background-color: yellow;
+    -fx-background-radius: 100;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+.textDescription {
+    -fx-alignment: center;
+}
+
+#reglage{
+    -fx-font-size: 24;
+}
+
+#commandes{
+    -fx-font-size: 24;
+}
+
+
+.boutonCompetence:hover {
+    -fx-background-radius: none;
+    -fx-translate-y: -2px;
+    -fx-translate-x: -2px;
+    -fx-border-width: 2px;
+    -fx-border-color: white;
+    -fx-border-style: solid;
+    -fx-cursor: hand;
+}
+
+
+
+.boutonOption {
+    -fx-background-color: black;
+    -fx-border-color: yellow;
+    -fx-border-width: 1;
+    -fx-border-radius: 30;
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+    -fx-background-radius: 30;
+}
+
+.boutonOption:hover {
+    -fx-cursor: hand;
+    -fx-background-color: yellow;
+    -fx-text-fill: black;
+    -fx-border-width: 1;
+    -fx-border-radius: 30;
+    -fx-font-size: 16;
+    -fx-background-radius: 30;
+}
+
+.cooldownJouer {
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.boutonValider {
+    -fx-opacity: 0.75;
+}
+.boutonValider:hover {
+    -fx-cursor: hand;
+    -fx-opacity: 1;
+}

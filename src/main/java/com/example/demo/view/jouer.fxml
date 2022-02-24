@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import com.example.demo.model.Map?>
+<?import com.example.demo.model.deplacement.FantomeGroup?>
+<?import com.example.demo.model.deplacement.Pacman?>
+<BorderPane onKeyPressed="#handle" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.ControllerJouer">
+   <center>
+      <BorderPane maxHeight="600.0" maxWidth="800" minHeight="600" minWidth="800" prefWidth="800.0">
+         <left>
+            <VBox prefHeight="600.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171">
+               <children>
+                  <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: black;" VBox.vgrow="ALWAYS">
+                     <Group layoutX="14.0" layoutY="330.0">
+                        <children>
+
+                           <Group fx:id="groupCompetenceTirer">
+                              <ImageView fx:id="imageCompetenceTirer" fitHeight="68.0" fitWidth="68.0" layoutX="0.0" layoutY="-245" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../ressources/image/Competence/Tirer/tirer.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="prixCompetenceTirer" graphicTextGap="5.0" layoutX="20.0" layoutY="-175.0" prefHeight="44.0" prefWidth="50.0" text="50" textFill="#faff00">
+                                 <font>
+                                    <Font name="utkal medium" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="cooldownCompetenceTirer" graphicTextGap="5.0" layoutX="8.0" layoutY="-258.0" prefHeight="-50.0" prefWidth="54.0" styleClass="cooldownJouer" text="99" textAlignment="CENTER" textFill="red">
+                                 <font>
+                                    <Font name="utkal medium" size="36.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="40.0" fitWidth="35.0" layoutX="0.0" layoutY="-195.0" preserveRatio="true">
+                              <image>
+                                 <Image url="@../ressources/image/Ecran_jouer/scoresvie/ToucheSpace.png" />
+                              </image>
+                           </ImageView>
+                           </Group>
+
+                           <Group fx:id="groupCompetenceFreeze">
+                              <ImageView fx:id="imageCompetenceFreeze" fitHeight="68.0" fitWidth="68.0" layoutX="90.0" layoutY="-245" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../ressources/image/Competence/Freeze/Freeze.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="prixCompetenceFreeze" graphicTextGap="5.0" layoutX="110.0" layoutY="-175.0" prefHeight="44.0" prefWidth="50.0" text="50" textFill="#faff00">
+                                 <font>
+                                    <Font name="utkal medium" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="cooldownCompetenceFreeze" graphicTextGap="5.0" layoutX="98.0" layoutY="-258.0" prefHeight="-50.0" prefWidth="54.0" styleClass="cooldownJouer" text="99" textAlignment="CENTER" textFill="red">
+                                 <font>
+                                    <Font name="utkal medium" size="36.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="90.0" layoutY="-185.0" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../ressources/image/Ecran_jouer/scoresvie/ToucheK.png" />
+                                 </image>
+                              </ImageView>
+                           </Group>
+                           <Group fx:id="groupCompetenceTeleporteur">
+                              <ImageView fx:id="imageCompetenceTeleporteur" fitHeight="68.0" fitWidth="68.0" layoutX="180.0" layoutY="-245" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../ressources/image/Competence/Teleport/teleport.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="prixCompetenceTeleporteur" graphicTextGap="5.0" layoutX="200.0" layoutY="-175.0" prefHeight="44.0" prefWidth="50.0" text="50" textFill="#faff00">
+                                 <font>
+                                    <Font name="utkal medium" size="18.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="36.0" fitWidth="29.0" layoutX="180.0" layoutY="-185.0" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../ressources/image/Ecran_jouer/scoresvie/ToucheL.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="cooldownCompetenceTeleporteur" graphicTextGap="5.0" layoutX="188.0" layoutY="-258.0" prefHeight="-50.0" prefWidth="54.0" styleClass="cooldownJouer" text="99" textAlignment="CENTER" textFill="red">
+                                 <font>
+                                    <Font name="utkal medium" size="36.0" />
+                                 </font>
+                              </Label>
+                           </Group>
+                           <Label fx:id="labelScore" graphicTextGap="5.0" layoutX="1.0" layoutY="9.0" prefHeight="44.0" prefWidth="160.0" text="0" textFill="#faff00">
+                              <font>
+                                 <Font name="utkal medium" size="18.0" />
+                              </font>
+                           </Label>
+                           <ImageView fitHeight="30.0" fitWidth="130.0" preserveRatio="true">
+                              <image>
+                                 <Image url="@../ressources/image/Ecran_jouer/scoresvie/texteScore.png" />
+                              </image>
+                           </ImageView>
+                        </children>
+                     </Group>
+                     <Button fx:id="menu" layoutX="12.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToScene" style="-fx-background-color: black;" styleClass="boutonMenu">
+                        <graphic>
+                           <ImageView fitHeight="40.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../ressources/image/Commun_scenes/BoutonMenu.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                     </Button>
+                     <ImageView fitHeight="65.0" fitWidth="69.0" layoutX="230.0" layoutY="520.0" preserveRatio="true">
+                        <image>
+                           <Image url="@../ressources/image/Ecran_jouer/scoresvie/pac_thumbs.png" />
+                        </image>
+                     </ImageView>
+                     <Group layoutX="15.0" layoutY="230.0">
+                        <children>
+                           <ImageView fitHeight="45.0" fitWidth="150.0" preserveRatio="true">
+                              <image>
+                                 <Image url="@../ressources/image/Ecran_jouer/scoresvie/texteMeilleurScore.png" />
+                              </image>
+                           </ImageView>
+                           <Label fx:id="meilleurscore" graphicTextGap="5.0" layoutY="9.0" prefHeight="10.0" prefWidth="200.0" text="000" textFill="#faff00">
+                              <font>
+                                 <Font name="utkal medium" size="18.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </Group>
+                     <ImageView fx:id="vie1" fitHeight="28.0" fitWidth="69.0" layoutX="15.0" layoutY="430.0" preserveRatio="true">
+                        <image>
+                           <Image url="@../ressources/image/Ecran_jouer/scoresvie/vie.png" />
+                        </image>
+                     </ImageView>
+                     <ImageView fx:id="vie2" fitHeight="28.0" fitWidth="69.0" layoutX="50.0" layoutY="430.0" preserveRatio="true">
+                        <image>
+                           <Image url="@../ressources/image/Ecran_jouer/scoresvie/vie.png" />
+                        </image>
+                     </ImageView>
+                     <ImageView fx:id="vie3" fitHeight="28.0" fitWidth="69.0" layoutX="85.0" layoutY="430.0" preserveRatio="true">
+                        <image>
+                           <Image url="@../ressources/image/Ecran_jouer/scoresvie/vie.png" />
+                        </image>
+                     </ImageView>
+                     <ImageView fx:id="vie4" fitHeight="28.0" fitWidth="69.0" layoutX="120.0" layoutY="430.0" preserveRatio="true">
+                        <image>
+                           <Image url="@../ressources/image/Ecran_jouer/scoresvie/vie.png" />
+                        </image>
+                     </ImageView>
+                     <ImageView fx:id="vie5" fitHeight="28.0" fitWidth="69.0" layoutX="155.0" layoutY="430.0" preserveRatio="true">
+                        <image>
+                           <Image url="@../ressources/image/Ecran_jouer/scoresvie/vie.png" />
+                        </image>
+                     </ImageView>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </left>
+         <right>
+            <Pane maxHeight="600" maxWidth="500">
+               <Map fx:id="map" />
+               <FantomeGroup fx:id="fantomeGroup" />
+               <Pacman fx:id="pacman" />
+            </Pane>
+         </right>
+      </BorderPane>
+   </center>
+</BorderPane>

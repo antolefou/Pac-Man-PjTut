@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.ControllerMenu">
+    <center>
+        <BorderPane maxHeight="600.0" maxWidth="800" minHeight="600" minWidth="800" prefWidth="800.0">
+            <top>
+               <Pane maxHeight="600.0" maxWidth="800" minHeight="600" minWidth="800" prefWidth="800.0" BorderPane.alignment="CENTER">
+                <ImageView fx:id="pacman_image" fitHeight="354.0" fitWidth="400.0" layoutX="200.5" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../ressources/image/Menu/image_pac_fantome.png" />
+                    </image>
+                </ImageView>
+
+                <ImageView fx:id="pacman_logo" fitHeight="354.0" fitWidth="537.0" layoutX="131.5" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                       <Image url="@../ressources/image/Commun_scenes/pacman_logo.png" />
+                    </image>
+                 </ImageView>
+
+                <Button fx:id="choixCompetence" layoutX="341.0" layoutY="278.0" onAction="#switchToScene" onMouseExited="#enlever_fleches" onMouseMoved="#affiche_fleche1" styleClass="boutonMenu" text="Jouer" />
+                <Button fx:id="option" layoutX="341.0" layoutY="338.0" onAction="#switchToScene" onMouseExited="#enlever_fleches" onMouseMoved="#affiche_fleche2" styleClass="boutonMenu" text="Options" />
+                <Button fx:id="score" layoutX="341.0" layoutY="398.0" onAction="#switchToScene" onMouseExited="#enlever_fleches" onMouseMoved="#affiche_fleche3" styleClass="boutonMenu" text="Scores" />
+                <Button fx:id="credit" layoutX="341.0" layoutY="458.0" onAction="#switchToScene" onMouseExited="#enlever_fleches" onMouseMoved="#affiche_fleche4" styleClass="boutonMenu" text="Crédit" />
+                <Button layoutX="341.0" layoutY="518.0" onAction="#quitter" onMouseExited="#enlever_fleches" onMouseMoved="#affiche_fleche5" styleClass="boutonMenu" text="Quitter" />
+
+                 <ImageView fx:id="fleche1" fitHeight="37.0" fitWidth="65.0" layoutX="275.0" layoutY="282.0" pickOnBounds="true" preserveRatio="true" />
+                 <ImageView fx:id="fleche2" fitHeight="37.0" fitWidth="65.0" layoutX="275.0" layoutY="342.0" pickOnBounds="true" preserveRatio="true" />
+                 <ImageView fx:id="fleche3" fitHeight="37.0" fitWidth="65.0" layoutX="275.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true" />
+                 <ImageView fx:id="fleche4" fitHeight="37.0" fitWidth="65.0" layoutX="275.0" layoutY="462.0" pickOnBounds="true" preserveRatio="true" />
+                 <ImageView fx:id="fleche5" fitHeight="37.0" fitWidth="65.0" layoutX="275.0" layoutY="522.0" pickOnBounds="true" preserveRatio="true" />
+            </Pane>
+            </top>
+        </BorderPane>
+    </center>
+</BorderPane>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" stylesheets="@../ressources/css/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.ControllerAmeliorationCompetence">
+    <center>
+        <AnchorPane maxHeight="600.0" maxWidth="800" minHeight="600" minWidth="800" prefWidth="800.0">
+            <children>
+                <ImageView fitHeight="600.0" fitWidth="800.0">
+                    <image>
+                        <Image url="@../ressources/image/Ecran_Competence/Background_Cochon.jpg" />
+                    </image>
+                </ImageView>
+
+                <Button fx:id="tirer" layoutX="80.0" layoutY="343.0" mnemonicParsing="false" onAction="#ameliorationPouvoir" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionTirerGlobal" prefHeight="105.0" prefWidth="98.0" style="-fx-background-color: transparent;" styleClass="boutonCompetence">
+                    <graphic>
+                        <ImageView fitHeight="114.0" fitWidth="95.0">
+                            <image>
+                                <Image url="@../ressources/image/Competence/Tirer/carteBouleDeFeu.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="freeze" layoutX="342.0" layoutY="356.0" mnemonicParsing="false" onAction="#ameliorationPouvoir" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionFreezeGlobal" style="-fx-background-color: transparent;" styleClass="boutonCompetence">
+                    <graphic>
+                        <ImageView fitHeight="131.0" fitWidth="110.0">
+                            <image>
+                                <Image url="@../ressources/image/Competence/Freeze/carteFreeze.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="teleporteur" layoutX="600.0" layoutY="343.0" mnemonicParsing="false" onAction="#ameliorationPouvoir" onMouseExited="#unsetDescription" onMouseMoved="#setDescriptionTeleportGlobal" prefHeight="142.0" prefWidth="103.0" style="-fx-background-color: transparent;" styleClass="boutonCompetence">
+                    <graphic>
+                        <ImageView fitHeight="141.0" fitWidth="109.0">
+                            <image>
+                                <Image url="@../ressources/image/Competence/Teleport/carteTeleportation.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <ImageView fitHeight="44.0" fitWidth="56.0" layoutX="240.0" layoutY="207.0" rotate="-22.3">
+                    <image>
+                        <Image url="@../ressources/image/Ecran_Competence/picBulle.png" />
+                    </image>
+                </ImageView>
+                <Text fx:id="description" fill="WHITE" layoutX="25.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="216.4347801208496">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Text>
+              <Button fx:id="jouer" layoutX="608.0" layoutY="146.0" mnemonicParsing="false" onAction="#switchToScene" style="-fx-background-color: transparent;" styleClass="boutonValider">
+                 <graphic>
+                    <ImageView fitHeight="50.0" fitWidth="142.0">
+                       <image>
+                          <Image url="@../ressources/image/Ecran_Competence/BoutonValide.png" />
+                       </image>
+                    </ImageView>
+                 </graphic>
+              </Button>
+                <ImageView fx:id="pointTirer" fitHeight="12.0" fitWidth="45.0" layoutX="114.0" layoutY="461.0">
+                    <image>
+                        <Image url="@../ressources/image/Ecran_Competence/groupePoint0Vide.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="pointFreeze" fitHeight="12.0" fitWidth="45.0" layoutX="384.0" layoutY="491.0">
+                    <image>
+                        <Image url="@../ressources/image/Ecran_Competence/groupePoint0Vide.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="pointTeleporteur" fitHeight="12.0" fitWidth="45.0" layoutX="641.0" layoutY="488.0">
+                    <image>
+                        <Image url="@../ressources/image/Ecran_Competence/groupePoint0Vide.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>
